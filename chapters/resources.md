@@ -10,14 +10,14 @@ Please review our complete [Risk Disclosure](disclaimer.md) before using any of 
 ### Portfolio Management
 ```
 Asset Tracking:
-- Portfolio Visualizer: portfoliovisualizer.com
-- Yahoo Finance: finance.yahoo.com
-- Google Finance: google.com/finance
+- [Portfolio Visualizer](https://www.portfoliovisualizer.com)
+- [Yahoo Finance](https://finance.yahoo.com)
+- [Google Finance](https://www.google.com/finance)
 
 Performance Analysis:
-- Morningstar: morningstar.com
-- ETF.com: etf.com
-- TradingView: tradingview.com
+- [Morningstar](https://www.morningstar.com)
+- [ETF.com](https://www.etf.com)
+- [TradingView](https://www.tradingview.com)
 
 Risk Management:
 - Risk Metrics Calculator
@@ -28,19 +28,19 @@ Risk Management:
 ### Market Research
 ```
 ETF Research:
-- ETF Database: etfdb.com
-- VettaFi: vettafi.com
-- ETF Trends: etftrends.com
+- [ETF Database](https://www.etfdb.com)
+- [VettaFi](https://www.vettafi.com)
+- [ETF Trends](https://www.etftrends.com)
 
 Crypto Research:
-- CoinGecko: coingecko.com
-- CryptoCompare: cryptocompare.com
-- Messari: messari.io
+- [CoinGecko](https://www.coingecko.com)
+- [CryptoCompare](https://www.cryptocompare.com)
+- [Messari](https://www.messari.io)
 
 Fixed Income:
-- Treasury Direct: treasurydirect.gov
-- FRED Economic Data: fred.stlouisfed.org
-- Bond Screener: finra.org/bonds
+- [Treasury Direct](https://www.treasurydirect.gov)
+- [FRED Economic Data](https://fred.stlouisfed.org)
+- [Bond Screener](https://www.finra.org/bonds)
 ```
 
 ## Phase-Specific Resources
@@ -48,9 +48,9 @@ Fixed Income:
 ### Phase 1: Foundation (Years 1-2)
 ```
 Education:
-- Investopedia: investopedia.com
-- Khan Academy Finance: khanacademy.org/economics-finance-domain
-- MIT OpenCourseWare: ocw.mit.edu/courses/finance
+- [Investopedia](https://www.investopedia.com)
+- [Khan Academy Finance](https://www.khanacademy.org/economics-finance-domain)
+- [MIT OpenCourseWare](https://ocw.mit.edu/courses/finance)
 
 Setup Guides:
 - Security Best Practices
@@ -154,9 +154,9 @@ Security:
 ### DeFi
 ```
 Protocol Analysis:
-- DeFi Pulse: defipulse.com
-- DeFi Llama: defillama.com
-- DeFi Rate: defirate.com
+- [DeFi Pulse](https://www.defipulse.com)
+- [DeFi Llama](https://www.defillama.com)
+- [DeFi Rate](https://www.defirate.com)
 
 Security Tools:
 - Smart Contract Audits
@@ -197,9 +197,9 @@ Asset Security:
 ### Market Education
 ```
 Online Courses:
-- Coursera Finance
-- edX Investment
-- Udemy Trading
+- [Coursera Finance](https://www.coursera.org/browse/business/finance)
+- [edX Investment](https://www.edx.org/learn/investing)
+- [Udemy Trading](https://www.udemy.com/topic/stock-trading)
 
 Books:
 - Investment Classics
