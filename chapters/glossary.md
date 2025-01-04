@@ -6,19 +6,31 @@ This glossary provides clear definitions and real examples based on our $100k po
 ## Investment Terms
 
 ### Basic Concepts
-1. DCA (Dollar Cost Averaging)
+1. ETF (Exchange-Traded Fund)
+   - Definition: Investment fund traded on stock exchanges, tracking an index, sector, or asset
+   - Example: VGT tracking technology sector with $10,000 allocation
+   - Usage: "Core ETF holdings provide market exposure with low fees"
+   - See: [ETF Strategy](etfs.md#core-etf-holdings)
+
+2. DCA (Dollar Cost Averaging)
    - Definition: Regular investment of fixed amounts at set intervals
    - Example: Our $2,000 monthly contribution
    - Usage: "Monthly DCA split: ETFs ($700), Crypto ($700), Term Deposits ($300), Bonds ($200), DeFi ($100)"
    - See: [Implementation](implementation.md#monthly-dca)
 
-2. APY (Annual Percentage Yield)
+3. Expense Ratio
+   - Definition: Annual fee charged by investment funds as a percentage of assets
+   - Example: VGT charges 0.10% ($10 per $10,000 invested)
+   - Usage: "Low-cost ETFs with expense ratios under 0.20%"
+   - See: [ETF Strategy](etfs.md#core-etf-holdings)
+
+4. APY (Annual Percentage Yield)
    - Definition: Actual return rate including compound interest
    - Example: Term deposit offering 4% APY on $15,000 allocation
    - Usage: "Compare 4% term deposit APY vs 3.5% bond yield"
    - See: [Fixed Income](fixed_income.md#yield-comparison)
 
-3. TVL (Total Value Locked)
+5. TVL (Total Value Locked)
    - Definition: Total assets deposited in a protocol
    - Example: Minimum $1B TVL requirement for DeFi platforms
    - Usage: "Aave has $5B TVL, meeting our security threshold"
@@ -89,9 +101,10 @@ This glossary provides clear definitions and real examples based on our $100k po
    - Usage: "Stop loss triggers at $65,000 portfolio value"
 
 3. Beta
-   - Definition: Volatility compared to market
-   - Example: ETF portfolio beta of 1.2 vs S&P 500
-   - Usage: "Higher beta for aggressive growth target"
+   - Definition: Measure of volatility compared to the overall market
+   - Example: ETF portfolio beta of 1.2 means 20% more volatile than market
+   - Usage: "Higher beta for growth phase, lower for preservation"
+   - See: [Risk Management](risk_management.md#volatility-management)
 
 ## DeFi Concepts
 
@@ -178,6 +191,36 @@ This glossary provides clear definitions and real examples based on our $100k po
    - Definition: Ease of buying/selling
    - Example: Daily volume > $100M requirement
    - Rule: "Position size < 1% of asset's daily volume"
+
+4. Beta
+   - Definition: Measure of volatility compared to the overall market
+   - Example: ETF portfolio beta of 1.2 means 20% more volatile than market
+   - Usage: "Higher beta for growth phase, lower for preservation"
+   - See: [Risk Management](risk_management.md#volatility-management)
+
+5. R-squared
+   - Definition: Percentage of price movements explained by benchmark
+   - Example: R-squared of 0.95 means 95% correlation with index
+   - Usage: "High R-squared indicates good index tracking"
+   - See: [ETF Strategy](etfs.md#performance-metrics)
+
+6. Technical Analysis
+   - Definition: Study of price patterns and market indicators
+   - Example: Using moving averages for entry/exit points
+   - Usage: "Technical analysis for timing rebalancing"
+   - See: [Monitoring](monitoring.md#technical-indicators)
+
+7. Market Depth
+   - Definition: Volume of orders to buy or sell at various prices
+   - Example: ETF showing strong buy orders at support levels
+   - Usage: "Check market depth before large trades"
+   - See: [Implementation](implementation.md#execution-strategy)
+
+8. Volume Analysis
+   - Definition: Study of trading volume patterns
+   - Example: Spike in volume during breakout moves
+   - Usage: "Volume confirms price trend changes"
+   - See: [Monitoring](monitoring.md#volume-patterns)
 
 ### Emergency Procedures
 1. Circuit Breaker

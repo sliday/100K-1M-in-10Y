@@ -18,7 +18,7 @@ The challenge? $100k is both a lot and not enough:
 - Inflation will eat away at it if left in cash
 - Traditional advice often stops at "buy index funds"
 
-## Task: Growing Wealth Systematically
+## Task: Growing to $1M Systematically
 
 Our goal is clear but challenging: turn $100,000 into $1,000,000 in about 10 years. This means:
 - Starting with $100,000 in capital
