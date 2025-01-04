@@ -1,181 +1,149 @@
-# From $100k to $1M in 10 Years
+# From $100k to $1M: A Practical Investment Journey
 
-Hey there! 👋
+## Situation: The $100k Milestone
 
-This project started from a simple thought: what happens after you achieve your first financial milestone? Once you've saved up your first $100k through hard work and smart financial choices, the next challenge becomes making that money work for you. Should you buy property? Invest in stocks? Try crypto? Move to a tax-friendly country? Buy gold?
+Congratulations! You've reached a significant milestone - your first $100,000. Whether through building a business, saving from your salary, or a combination of both, you've proven you can build wealth. But now comes the harder question: how do you make that money work for you?
 
-*Inspired by [this Twitter thread](https://x.com/stas_kulesh/status/1875537324576317887) about the need for a practical investment guide after reaching initial financial independence.*
+You might be:
+- A professional who's been saving diligently for years
+- An entrepreneur who's had a successful exit
+- Someone who's inherited or received a windfall
+- A couple combining their savings for a better future
 
-The goal here is to provide a practical, honest investment blueprint that could help grow $100k into $1M over about 10 years. It's the guide I wish existed when I first faced these questions. We'll explore everything from traditional ETFs to modern crypto investments, with a strong focus on risk management and practical implementation.
+The challenge? $100k is both a lot and not enough:
+- It's more than 70% of Americans have in savings
+- Yet it's not enough to retire on (1-4 years of expenses in most places)
+- Inflation will eat away at it if left in cash
+- Traditional advice often stops at "buy index funds"
 
-This isn't about get-rich-quick schemes or complex financial instruments. Instead, it's a systematic approach combining proven investment strategies with newer opportunities, all explained in plain English with real examples.
+## Task: Growing Wealth Systematically
 
-> **IMPORTANT DISCLAIMER**: This document and its contents are for educational and informational purposes only. This is NOT financial advice. The information provided does not constitute investment advice, financial advice, trading advice, or any other sort of advice. You should conduct your own research and consult with a qualified licensed financial advisor before making any investment decisions. By using this information, you agree that you are solely responsible for any investment decisions you make. The authors make no representations as to accuracy, completeness, currentness, suitability, or validity of any information and will not be liable for any errors, omissions, or delays in this information or any losses, injuries, or damages arising from its use.
+Our goal is clear but challenging: turn $100,000 into $1,000,000 in about 10 years. This means:
+- Starting with $100,000 in capital
+- Contributing $2,000 monthly from income
+- Achieving roughly 17% annual returns
+- Managing risks to protect your capital
 
-## The Journey from $100k to $1M
+Why $1M? It's not "never work again" money, but it is:
+- A foundation for real financial security
+- Enough to generate meaningful passive income ($40-50k/year)
+- Proof that you understand wealth building
+- A springboard to even greater wealth
 
-Let's talk about where you are and where you're going. You've built a business or saved diligently, and now you have $100,000 in cash. That's a significant achievement, but it's also a crossroads. Here's the reality:
+Most importantly, the journey teaches you everything about growing wealth:
+- Risk management
+- Market cycles
+- Investment psychology
+- Financial independence
 
-- $100k is not enough to retire on. Depending on your location, it might give you 1-4 years of runway without work.
-- You have limited time - typically 20-30 years of peak productive adult life.
-- Time is working against your cash - inflation will eat away at its value if you don't put it to work.
+## Action: The Implementation Blueprint
 
-Why $1M as a target? Let's be clear: one million dollars is not "FU money". It's not extreme wealth in today's world. But it is:
-- A solid foundation for financial security
-- More capital than most people ever accumulate
-- Enough to generate meaningful passive income
-- A proof that you understand wealth building
-
-Most importantly, the journey from $100k to $1M teaches you everything you need to know about growing wealth. By the time you reach $1M, you'll have:
-- Mastered risk management
-- Understood market cycles
-- Built strong investment habits
-- Developed financial intuition
-
-This guide stops at $1M because the path from $1M to $10M (true "FU money") is a different game entirely. But here's the thing: if you can turn $100k into $1M, you'll have all the skills needed to reach $10M on your own. We genuinely believe that.
-
-## The Plan: Step by Step
-
-### 1. What You Have
-You start with:
-- $100,000 in cash
-- Monthly ability to invest $2,000
-- 10-year timeline
-- Basic understanding of finance
-
-### 2. The 10-Year Journey
+### 1. Foundation Phase (Years 1-2)
+Start with security and infrastructure:
 ```
-Years 1-2: Foundation Phase ($100k → $130k)
-- Focus: Setting up infrastructure
-- Risk: Higher
-- Goal: 30% growth while building systems
+Month 1: Security Setup
+- Hardware wallets for crypto
+- Brokerage accounts for ETFs
+- Documentation system
+- Emergency procedures
 
-Years 3-4: Growth Phase ($130k → $250k)
-- Focus: Expanding positions
-- Risk: Medium-High
-- Goal: 92% growth with proven strategies
+Month 2: Initial Deployment ($100,000)
+ETFs:         35% ($35,000) - Growth focus
+Crypto:       35% ($35,000) - BTC & ETH
+Term Deps:    15% ($15,000) - Fixed-rate
+Bonds:        10% ($10,000) - Government
+DeFi:          5% ($5,000)  - Yield farming
 
-Years 5-6: Scaling Phase ($250k → $450k)
-- Focus: Optimizing performance
-- Risk: Medium
-- Goal: 80% growth with refined approach
-
-Years 7-8: Stabilization Phase ($450k → $700k)
-- Focus: Risk management
-- Risk: Medium-Low
-- Goal: 56% growth with increased safety
-
-Years 9-10: Security Phase ($700k → $1M+)
-- Focus: Wealth preservation
-- Risk: Lower
-- Goal: 43% growth with conservative approach
+Monthly: $2,000 additional investment
 ```
 
-### 3. Portfolio Structure
-Your investments will be split into five main components:
-```
-Core Portfolio ($100,000):
-ETFs:         35% ($35,000) - Growth and dividend focus
-Crypto:       35% ($35,000) - Bitcoin and Ethereum
-Term Deposits: 15% ($15,000) - Fixed-rate savings
-Fixed Income:  10% ($10,000) - Government and corporate bonds
-[DeFi](chapters/glossary.md#defi): 5% ($5,000)  - Decentralized Finance yield strategies
+### 2. Core Strategy Chapters
+Each component has detailed implementation:
+- [ETF Strategy](chapters/etfs.md) - Market exposure
+- [Crypto Core](chapters/crypto.md) - Digital assets
+- [Fixed Income](chapters/fixed_income.md) - Stability
+- [DeFi Yield](chapters/defi.md) - Extra returns
 
-Monthly Contribution:
-$2,000 split proportionally across these components
-```
+### 3. Risk Management Framework
+Protection is priority:
+- Position limits (max 20% per asset)
+- Stop-loss levels (-20% portfolio-wide)
+- Monthly rebalancing (±5% drift)
+- Emergency cash buffer (5%)
 
-### 4. Phase-by-Phase Implementation
-
-#### Foundation Phase (Years 1-2)
-1. First Month: [Security & Setup](chapters/implementation.md)
-   - Set up hardware wallets
-   - Create exchange accounts
-   - Open term deposit accounts
-   - Document everything
-
-2. Second Month: Core Investments
-   - Deploy ETF portion ($35,000)
-   - Set up crypto storage ($35,000)
-   - Establish term deposits ($15,000)
-   - Start bond ladder ($10,000)
-
-3. Third Month: Growth Layer
-   - Start [DeFi](chapters/glossary.md#defi) positions ($5,000)
-   - Set up monitoring systems
-   - Implement risk management
-
-#### Growth Phase (Years 3-4)
-- Expand successful positions
-- Add new ETF sectors
-- Increase yield-generating assets
-- Regular rebalancing
-
-#### Scaling Phase (Years 5-6)
-- Optimize tax efficiency
-- Diversify geographically
-- Add institutional products
-- Focus on compound growth
-
-#### Stabilization Phase (Years 7-8)
-- Reduce high-risk exposure
-- Increase fixed income
-- Focus on capital preservation
-- Strengthen security measures
-
-#### Security Phase (Years 9-10)
-- Conservative position sizing
-- Higher cash reserves
-- Focus on steady yields
-- Prepare for wealth preservation
-
-### 5. Risk Management
-Your guardrails:
-```
-Portfolio-wide stop loss: -20%
-Rebalancing trigger: ±5% drift
-Emergency cash: 5% buffer
-Asset correlation: Keep under 0.7
-```
-
-### 6. Detailed Guides
-Each component has its own detailed chapter:
-- [ETF Strategy](chapters/etfs.md) - Core market exposure
-- [Crypto Strategy](chapters/crypto.md) - Digital assets
-- [DeFi Strategy](chapters/defi.md) - Yield generation
-- [Fixed Income](chapters/fixed_income.md) - Stability layer
-
-### 7. Support Tools
-To help you execute:
-- [Templates](chapters/templates.md) - Track everything
-- [Resources](chapters/resources.md) - Tools you'll need
-- [Glossary](chapters/glossary.md) - Key terms explained
+### 4. Support Systems
+Tools for success:
+- [Implementation Guide](chapters/implementation.md) - Step by step
+- [Monitoring System](chapters/monitoring.md) - Track progress
+- [Tax Strategy](chapters/tax_optimization.md) - Optimize returns
 - [Emergency Plan](chapters/emergency.md) - When things go wrong
+
+## Results: The Growth Journey
+
+### Phase 1: $100k → $130k (Years 1-2)
+- Focus: Building infrastructure
+- Risk: Higher but controlled
+- Goal: 30% growth while learning
+
+### Phase 2: $130k → $250k (Years 3-4)
+- Focus: Proven strategies
+- Risk: Medium-high
+- Goal: 92% growth with system
+
+### Phase 3: $250k → $450k (Years 5-6)
+- Focus: Optimization
+- Risk: Medium
+- Goal: 80% growth refined
+
+### Phase 4: $450k → $700k (Years 7-8)
+- Focus: Preservation
+- Risk: Medium-low
+- Goal: 56% balanced growth
+
+### Phase 5: $700k → $1M+ (Years 9-10)
+- Focus: Security
+- Risk: Lower
+- Goal: 43% conservative growth
+
+## Getting Started
+
+1. Read the [Implementation Guide](chapters/implementation.md)
+2. Review the [Risk Management](chapters/risk_management.md) chapter
+3. Set up your [Security Infrastructure](chapters/implementation.md#security-setup)
+4. Follow the [Monitoring System](chapters/monitoring.md)
+5. Use our [Templates](chapters/templates.md) to track everything
+
+## Resources for Your Journey
+- [Glossary](chapters/glossary.md) - Key terms explained
+- [Resources](chapters/resources.md) - Tools and platforms
+- [Templates](chapters/templates.md) - Portfolio tracking
+- [Rebalancing](chapters/rebalancing.md) - Maintain balance
 
 ## Contributing
 
-Rules are simple:
-1. No bullshit. If you can't explain it simply, you don't understand it well enough
-2. Everything must be based on the original $100k portfolio example
-3. All strategies must be actionable - no theoretical stuff
-4. Include real numbers, concrete steps, and specific examples
-5. Focus on risk management first, gains second
-6. Keep it practical - if you haven't done it yourself, don't recommend it
-7. No affiliate links, no promotions, no shilling
+Help improve this guide:
+1. Keep it practical - no theory without practice
+2. Use the $100k portfolio as example
+3. Focus on risk management
+4. Include specific steps and numbers
+5. Maintain simplicity and clarity
 
-Submit a PR if you have:
-- Found errors or outdated information
-- Actually tested a strategy and can prove it works
-- Have specific improvements to risk management
-- Can simplify existing explanations
+Submit improvements if you:
+- Found errors or outdated info
+- Tested strategies successfully
+- Have specific risk improvements
+- Can simplify explanations
 
-## Risk Warning
-This investment strategy involves substantial risk, including:
-- Market volatility and potential loss of principal
-- Technical vulnerabilities in crypto/DeFi protocols
-- Regulatory changes affecting asset classes
-- Platform/protocol security risks
+## Important Disclaimer
+
+This is an educational resource, not financial advice. The investment strategy involves substantial risks:
+- Market volatility and potential losses
+- Technical vulnerabilities in crypto/DeFi
+- Regulatory changes
+- Platform/protocol risks
 - Tax law changes
-- Economic and geopolitical events
+- Economic events
 
-**FINAL REMINDER**: This is NOT financial advice. Use at your own risk. Always do your own research and consult with qualified professionals before investing.
+**Always do your own research and consult qualified professionals before investing.**
+
+*Inspired by [this discussion](https://x.com/stas_kulesh/status/1875537324576317887) about practical investment guidance after reaching initial financial independence.*
