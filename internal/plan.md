@@ -238,105 +238,13 @@ Monitoring Framework:
 ```
 
 ## Resources
-See [Resources Chapter](chapters/resources.md) for detailed information about tools and platforms.
+See [Resources Chapter](../chapters/resources.md) for detailed information about tools and platforms.
 
 ## Templates
-See [Templates Chapter](chapters/templates.md) for portfolio tracking and monitoring templates.
+See [Templates Chapter](../chapters/templates.md) for portfolio tracking and monitoring templates.
 
 ## Disclaimer
 This investment plan is for educational purposes only. It does not constitute financial advice. Always conduct your own research and consider consulting with financial professionals before making investment decisions. Cryptocurrency and DeFi investments carry significant risks including but not limited to:
 - Market volatility
 - Technical vulnerabilities
-- Regulatory changes
-- Platform/protocol risks
-
-Never invest more than you can afford to lose. 
-
-## Chapter Dependencies
-```
-Core Strategy Flow:
-
-1. Foundation (Month 1)
-   ETF Strategy    ────┐
-   Crypto Core    ────┼──> Risk Management
-   Fixed Income   ────┘    │
-                          v
-2. Growth Layer         Implementation ───> Templates
-   DeFi Strategy  ────┐    │               │
-   Alt L1 Setup   ────┘    v               v
-                       Monitoring ────> Resources
-3. Protection                │
-   Tax Strategy   ────┐     v
-   Rebalancing    ────┼──> Performance
-   Emergency      ────┘     │
-                           v
-4. Optimization           Glossary
-   Daily:    See Monitoring.md
-   Weekly:   See Risk_Management.md
-   Monthly:  See Rebalancing.md
-   Quarterly: See Tax_Optimization.md
-``` 
-
-## Entry Strategy
-```
-Initial Deployment ($100,000):
-
-Phase 1: Security Setup (Week 1)
-[x] Hardware wallets purchased
-[x] 2FA enabled on all accounts
-[x] Backup procedures documented
-[x] Emergency contacts listed
-
-Phase 2: Core ETFs ($40,000 - Week 2)
-[x] US Market:     $20,000 (VTI, VOO)
-[x] International: $10,000 (VXUS)
-[x] Sectors:       $10,000 (VGT, SOXX)
-Entry Method: Dollar-cost averaging over 5 days
-
-Phase 3: Crypto Core ($40,000 - Week 3)
-[x] Bitcoin:  $20,000 (cold storage)
-[x] Ethereum: $20,000 (cold storage)
-Entry Method: 4 tranches of $10,000 each
-
-Phase 4: Growth Layer ($20,000 - Week 4)
-[x] Alt L1s: $12,000 (SOL, AVAX, DOT)
-[x] DeFi:    $8,000 (AAVE, CRV, UNI)
-Entry Method: Limit orders at support levels
-
-Phase 5: Fixed Income ($20,000 - Week 5)
-[x] Safety:  $8,000 (Short-term bonds)
-[x] Core:    $4,000 (Treasury ETFs)
-[x] Growth:  $8,000 (High-yield bonds)
-Entry Method: Ladder approach over 2 weeks
-``` 
-
-## Key Success Factors
-```
-Critical Requirements:
-Factor          | Impact     | Chapter Reference
-Security       | Critical   | Implementation.md
-Monitoring     | High       | Monitoring.md
-Documentation  | High       | Templates.md
-Rebalancing    | Medium     | Rebalancing.md
-
-Success Metrics ($100k Portfolio):
-Stage     | Target    | Monthly Return | Quarterly Review
-$100-140k | Growth    | $1,420 (1.42%) | Risk tolerance high
-$140-250k | Scaling   | $2,130 (1.52%) | Add yield strategies
-$250-415k | Balance   | $3,530 (1.41%) | Reduce risk exposure
-$415k-1M  | Protection| $5,830 (1.41%) | Conservative shift
-
-Risk Management Priorities:
-Portfolio Size | Primary Risk        | Mitigation Strategy
-$100-140k     | Market timing       | DCA + limit orders
-$140-250k     | Concentration       | Regular rebalancing
-$250-415k     | Correlation         | Asset diversification
-$415k-1M      | Drawdown           | Hedging + cash buffer
-
-Common Pitfalls:
-Phase     | Mistake              | Impact          | Prevention
-Entry    | FOMO buying         | Poor entry      | Stick to DCA plan
-Growth   | Over-leveraging     | Forced selling  | Position limits
-Scaling  | Yield chasing       | Protocol risks  | Due diligence
-Mature   | Risk complacency    | Large drawdown  | Regular review
-``` 
+- Regulatory changes 
