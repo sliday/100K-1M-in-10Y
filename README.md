@@ -13,7 +13,7 @@ You might be:
 - A couple combining their savings for a better future
 
 The challenge? $100k is both a lot and not enough:
-- It's more than 70% of Americans have in savings
+- It's more than what most people globally manage to save in their lifetime. It's more than 70% of Americans have in savings
 - Yet it's not enough to retire on (1-4 years of expenses in most places)
 - Inflation will eat away at it if left in cash
 - Traditional advice often stops at "buy index funds"
