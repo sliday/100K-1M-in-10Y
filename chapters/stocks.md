@@ -1,26 +1,30 @@
 # Stock Investment Strategy
 
-## Overview
-Total Allocation: 30% of portfolio ($30,000 initial + $600 monthly)
+> **Important Note**: While this document outlines a potential approach to individual stock investing, our main portfolio strategy focuses on broad market index funds like the S&P 500. Historical evidence shows that over long periods, index funds tend to outperform actively managed portfolios and individual stock picks. The S&P 500 has delivered approximately 10% average annual returns (before inflation) over the long term while requiring minimal management and research.
+>
+> This document is kept as a reference for those interested in individual stock investing, but we recommend most investors stick to low-cost index funds for their equity exposure. If you do choose to invest in individual stocks, consider limiting it to a small portion of your portfolio (e.g., 5-10%) and maintaining index funds as your core equity holding.
 
-Our stock investment strategy focuses on a balanced approach between growth and stability, emphasizing quality companies with strong fundamentals, sustainable competitive advantages, and solid financials. The strategy combines individual stock picks with ETF holdings to provide both targeted exposure to high-conviction positions and broad market diversification.
+## Overview
+Total Allocation: 15% of portfolio ($15,000 initial + $300 monthly), representing approximately half of the ETF allocation (35% total)
+
+Our stock investment strategy complements our ETF holdings, focusing on a balanced approach between growth and stability. While ETFs provide broad market exposure, our individual stock picks target quality companies with strong fundamentals, sustainable competitive advantages, and solid financials. This hybrid approach within our ETF allocation combines the benefits of diversification with opportunities for enhanced returns through carefully selected individual positions.
 
 ## Core Holdings (70% of Stock Portfolio)
 ```
-Blue-Chip Allocation ($21,000):
+Blue-Chip Allocation ($10,500):
 
-Technology Leaders ($9,000 - 30%):
-[████] AAPL    │ Growth + Value │ $3,000
-[████] MSFT    │ Cloud + AI     │ $3,000
-[████] GOOGL   │ Digital Ads    │ $3,000
+Technology Leaders ($4,500 - 30%):
+[████] AAPL    │ Growth + Value │ $1,500
+[████] MSFT    │ Cloud + AI     │ $1,500
+[████] GOOGL   │ Digital Ads    │ $1,500
 
-Financial Strength ($6,000 - 20%):
-[████] BRK.B   │ Conglomerate   │ $3,000
-[████] JPM     │ Banking        │ $3,000
+Financial Strength ($3,000 - 20%):
+[████] BRK.B   │ Conglomerate   │ $1,500
+[████] JPM     │ Banking        │ $1,500
 
-Consumer Leaders ($6,000 - 20%):
-[████] AMZN    │ E-commerce     │ $3,000
-[████] COST    │ Retail         │ $3,000
+Consumer Leaders ($3,000 - 20%):
+[████] AMZN    │ E-commerce     │ $1,500
+[████] COST    │ Retail         │ $1,500
 
 Risk-Return Profile:
 Tech      [███] Risk     [███████] Growth
@@ -30,19 +34,19 @@ Consumer  [███] Risk     [███████] Growth
 
 ## Growth Positions (30% of Stock Portfolio)
 ```
-Growth Allocation ($9,000):
+Growth Allocation ($4,500):
 
-AI & Automation ($3,000 - 10%):
-[████] NVDA    │ AI Chips       │ $1,500
-[████] AMD     │ Semiconductors │ $1,500
+AI & Automation ($1,500 - 10%):
+[████] NVDA    │ AI Chips       │ $750
+[████] AMD     │ Semiconductors │ $750
 
-Healthcare Innovation ($3,000 - 10%):
-[████] UNH     │ Healthcare     │ $1,500
-[████] ISRG    │ Med Devices    │ $1,500
+Healthcare Innovation ($1,500 - 10%):
+[████] UNH     │ Healthcare     │ $750
+[████] ISRG    │ Med Devices    │ $750
 
-Future Tech ($3,000 - 10%):
-[████] TSM     │ Semiconductors │ $1,500
-[████] ASML    │ Chip Equipment │ $1,500
+Future Tech ($1,500 - 10%):
+[████] TSM     │ Semiconductors │ $750
+[████] ASML    │ Chip Equipment │ $750
 
 Risk-Return Profile:
 AI        [████] Risk    [████████] Growth
@@ -53,24 +57,24 @@ Semis     [████] Risk    [████████] Growth
 ## Position Management
 
 ### Entry Strategy
-1. Initial Deployment ($30,000)
-   - Week 1: Core positions ($15,000)
-   - Week 2: Additional core ($6,000)
-   - Week 3-4: Growth positions ($9,000)
+1. Initial Deployment ($15,000)
+   - Week 1: Core positions ($7,500)
+   - Week 2: Additional core ($3,000)
+   - Week 3-4: Growth positions ($4,500)
    - Use dollar-cost averaging
    - Monitor market conditions
 
-2. Monthly Investment ($600)
-   - Core positions: $420 (70%)
-   - Growth positions: $180 (30%)
+2. Monthly Investment ($300)
+   - Core positions: $210 (70%)
+   - Growth positions: $90 (30%)
    - Regular rebalancing
    - Dividend reinvestment
 
 ### Position Limits
 1. Individual Stock Limits
-   - Core position: Max $3,000 (10%)
-   - Growth position: Max $1,500 (5%)
-   - New position: Start at $1,000
+   - Core position: Max $1,500 (10%)
+   - Growth position: Max $750 (5%)
+   - New position: Start at $500
    - Sector exposure: Max 30%
 
 2. Risk Management

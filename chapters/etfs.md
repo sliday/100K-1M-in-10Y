@@ -3,101 +3,88 @@
 An [ETF (Exchange-Traded Fund)](../chapters/glossary.md#etf) is a type of investment fund that tracks an index, sector, commodity, or other asset, but can be purchased or sold on a stock exchange the same way a regular stock can. Learn more about ETFs on [Wikipedia](https://en.wikipedia.org/wiki/Exchange-traded_fund).
 
 ## Overview
-Total Allocation: 30% of portfolio ($30,000 initial + $600 monthly [DCA](../chapters/glossary.md#dca))
+Total Allocation: 35% of portfolio ($35,000 initial + $700 monthly [DCA](../chapters/glossary.md#dca))
 
-## Core ETF Holdings
+Our ETF strategy emphasizes broad market index funds, particularly the S&P 500, which has historically delivered strong returns while minimizing individual stock risk and management overhead. While sector ETFs can be added for targeted exposure, we recommend keeping them as smaller satellite positions.
 
-The following allocation table shows our core ETF strategy. Each ETF is selected based on specific criteria including [liquidity](../chapters/glossary.md#liquidity), [expense ratio](../chapters/glossary.md#expense-ratio), and historical performance.
+## Core ETF Holdings (85% of ETF Portfolio)
 
-### Technology Sector (20%)
-
-1. VGT - Vanguard Information Technology ETF
-   - Allocation: 10% ($10,000)
-   - Monthly [DCA](../chapters/glossary.md#dca): $200
+### Broad Market Index Funds ($29,750)
+1. VOO - Vanguard S&P 500 ETF
+   - Allocation: 60% ($21,000)
+   - Monthly [DCA](../chapters/glossary.md#dca): $420
    - Key Stats:
-     * [Expense Ratio](../chapters/glossary.md#expense-ratio): 0.10%
-     * Holdings: 315
-     * Top: AAPL, MSFT, NVDA
-     * 5Y Return: ~25%
+     * [Expense Ratio](../chapters/glossary.md#expense-ratio): 0.03%
+     * Holdings: ~500
+     * Broad market exposure
+     * 10Y Return: ~12%
    - Why:
-     * Broad tech exposure
-     * Low fees
-     * High [liquidity](../chapters/glossary.md#liquidity)
-     * Quality companies
+     * Market benchmark
+     * Ultra-low fees
+     * Maximum diversification
+     * Proven long-term performance
 
-2. QQQ - Invesco QQQ Trust
-   - Allocation: 10% ($10,000)
-   - Monthly [DCA](../chapters/glossary.md#dca): $200
+2. VTI - Vanguard Total Stock Market ETF
+   - Allocation: 25% ($8,750)
+   - Monthly [DCA](../chapters/glossary.md#dca): $175
    - Key Stats:
-     * [Expense Ratio](../chapters/glossary.md#expense-ratio): 0.20%
-     * Holdings: 100
-     * Focus: Large-cap tech
-     * 5Y Return: ~20%
+     * [Expense Ratio](../chapters/glossary.md#expense-ratio): 0.03%
+     * Holdings: ~3,500
+     * Includes mid and small caps
+     * Similar returns to S&P 500
    - Why:
-     * Tech-heavy growth
-     * High [volume](../chapters/glossary.md#volume-analysis)
-     * Options available
-     * Good for swing trading
+     * Broader diversification
+     * Small-cap exposure
+     * Low correlation benefit
+     * Tax efficiency
 
-### Specialized Sectors (10%)
+## Optional Sector Positions (15% of ETF Portfolio)
 
-1. SOXX - iShares Semiconductor ETF
-   - Allocation: 5% ($5,000)
-   - Monthly [DCA](../chapters/glossary.md#dca): $100
-   - Key Stats:
-     * [Expense Ratio](../chapters/glossary.md#expense-ratio): 0.35%
-     * Holdings: 30
-     * Focus: Semiconductors
-     * Top: NVDA, AVGO, AMD
-   - Why:
-     * AI/ML exposure
-     * Critical industry
-     * High growth potential
-     * Concentrated bets
+If you choose to add sector exposure, consider limiting it to 15% ($5,250) of your ETF allocation:
 
-2. ARKK - ARK Innovation ETF
-   - Allocation: 5% ($5,000)
-   - Monthly [DCA](../chapters/glossary.md#dca): $100
-   - Key Stats:
-     * [Expense Ratio](../chapters/glossary.md#expense-ratio): 0.75%
-     * Holdings: 30-50
-     * Focus: Disruptive tech
-     * Active management
-   - Why:
-     * Emerging tech exposure
-     * Active management
-     * High risk/reward
-     * Unique holdings
+1. QQQ - Invesco QQQ Trust
+   - Allocation: 10% ($3,500)
+   - Monthly [DCA](../chapters/glossary.md#dca): $70
+   - Focus: Large-cap tech
+   - Higher volatility
+
+2. SOXX - iShares Semiconductor ETF
+   - Allocation: 5% ($1,750)
+   - Monthly [DCA](../chapters/glossary.md#dca): $35
+   - Focus: Semiconductors
+   - Concentrated sector bet
+
+> Note: Sector ETFs are optional and increase portfolio risk. Most investors can achieve their goals with just broad market index funds.
 
 ## Entry Strategy
 
 Our entry strategy is designed to minimize [market impact](../chapters/glossary.md#market-depth) and take advantage of market volatility. Learn more about dollar-cost averaging on [Investopedia](https://www.investopedia.com/terms/d/dollarcostaveraging.asp).
 
-### Initial Investment ($30,000)
-1. First Wave (40%: $12,000)
-   - VGT: $4,000
-   - QQQ: $4,000
-   - SOXX: $2,000
-   - ARKK: $2,000
+### Initial Investment ($35,000)
+1. First Wave (40%: $14,000)
+   - VOO: $4,200
+   - VTI: $4,200
+   - QQQ: $3,500
+   - SOXX: $1,750
 
-2. Second Wave (30%: $9,000)
+2. Second Wave (30%: $10,500)
    - Buy on 5% market dip
    - Equal proportions
    - 30-day window
    - Use [limit orders](../chapters/glossary.md#limit-order)
 
-3. Final Wave (30%: $9,000)
+3. Final Wave (30%: $10,500)
    - Buy on 10% market dip
    - Equal proportions
    - 60-day window
    - Use [limit orders](../chapters/glossary.md#limit-order)
 
-### Monthly [DCA](../chapters/glossary.md#dca) ($600)
+### Monthly [DCA](../chapters/glossary.md#dca) ($700)
 Weekly distribution helps minimize timing risk and takes advantage of market volatility:
-- Week 1: $150
-- Week 2: $150
-- Week 3: $150
-- Week 4: $150
+- Week 1: $175
+- Week 2: $175
+- Week 3: $175
+- Week 4: $175
 - Split proportionally across ETFs
 
 ## Risk Management
@@ -111,13 +98,13 @@ Our risk management framework uses multiple metrics to protect capital. Learn mo
 - New ETFs: Start at 2%
 
 ### [Stop Loss](../chapters/glossary.md#stop-loss) Strategy
-1. Core Holdings (VGT, QQQ)
+1. Core Holdings (VOO, VTI)
    - [Trailing stop](../chapters/glossary.md#trailing-stop): 10%
    - Review at 15% drop
    - Reset after 30 days
    - Keep tax impact in mind
 
-2. Specialized (SOXX, ARKK)
+2. Specialized (QQQ, SOXX)
    - [Trailing stop](../chapters/glossary.md#trailing-stop): 15%
    - Review at 20% drop
    - Higher volatility tolerance
@@ -240,29 +227,29 @@ Understanding common pitfalls helps avoid costly errors. Learn more about invest
 
 ### Core Investment Mistakes
 1. Over-diversification
-   - Example: Splitting $30,000 ETF allocation across 15 different ETFs
-   - Impact: Each position too small to matter ($2,000 each)
-   - Better Approach: Focus on core 4 ETFs (VGT, QQQ, SOXX, ARKK)
-   - Real Numbers: 10% position ($10,000) in VGT can grow to $40,000 in 5 years at 25% [CAGR](../chapters/glossary.md#cagr)
+   - Example: Splitting $35,000 ETF allocation across 15 different ETFs
+   - Impact: Each position too small to matter ($2,333 each)
+   - Better Approach: Focus on core 4 ETFs (VOO, VTI, QQQ, SOXX)
+   - Real Numbers: 10% position ($10,500) in VOO can grow to $42,000 in 5 years at 12% [CAGR](../chapters/glossary.md#cagr)
 
 2. Chasing Performance
-   - Example: Selling VGT ($10,000) to buy ARKK after seeing 150% yearly return
+   - Example: Selling VOO ($21,000) to buy ARKK after seeing 150% yearly return
    - Impact: Buying high, selling low cycle
-   - Better Approach: Stick to [DCA](../chapters/glossary.md#dca) plan ($200/month into VGT)
-   - Real Numbers: Missing just 10 best days could reduce $10,000 to $6,500 over 5 years
+   - Better Approach: Stick to [DCA](../chapters/glossary.md#dca) plan ($420/month into VOO)
+   - Real Numbers: Missing just 10 best days could reduce $21,000 to $14,700 over 5 years
 
 3. Ignoring Expenses
-   - Example: Choosing 3x leveraged ETFs (TQQQ) for full $30,000 allocation
-   - Impact: 1% [expense ratio](../chapters/glossary.md#expense-ratio) = $300/year vs $30/year for VGT
-   - Better Approach: Keep 90% in low-cost ETFs (VGT 0.10%)
-   - Real Numbers: $300 saved yearly in fees = $1,932 extra in 5 years (at 10% growth)
+   - Example: Choosing 3x leveraged ETFs (TQQQ) for full $35,000 allocation
+   - Impact: 1% [expense ratio](../chapters/glossary.md#expense-ratio) = $350/year vs $35/year for VOO
+   - Better Approach: Keep 90% in low-cost ETFs (VOO 0.03%)
+   - Real Numbers: $350 saved yearly in fees = $1,960 extra in 5 years (at 10% growth)
 
 ### Trading Mistakes
 1. Emotional Trading
-   - Example: Panic selling QQQ ($10,000) during 20% correction
-   - Impact: Locking in $2,000 loss instead of recovery
+   - Example: Panic selling QQQ ($3,500) during 20% correction
+   - Impact: Locking in $700 loss instead of recovery
    - Better Approach: Follow [stop-loss](../chapters/glossary.md#stop-loss) rules (10% trailing)
-   - Real Numbers: $10,000 QQQ position recovers to $12,000 in typical bounce
+   - Real Numbers: $3,500 QQQ position recovers to $4,200 in typical bounce
 
 2. Poor Position Sizing
    - Example: Putting $20,000 (67%) of ETF allocation in ARKK
@@ -272,29 +259,29 @@ Understanding common pitfalls helps avoid costly errors. Learn more about invest
 
 ### Strategic Mistakes
 1. Poor Tax Planning
-   - Example: Trading SOXX weekly with $5,000 position
+   - Example: Trading SOXX weekly with $1,750 position
    - Impact: Short-term gains taxed at 32% vs 15% long-term
    - Better Approach: Hold core positions >1 year
    - Real Numbers: $1,000 gain = $320 tax vs $150 tax
 
 2. Insufficient Monitoring
    - Example: Not checking ARKK position for 3 months
-   - Impact: Missing -30% drop on $5,000 = $1,500 loss
+   - Impact: Missing -30% drop on $1,750 = $525 loss
    - Better Approach: Weekly reviews of volatile positions
    - Real Numbers: 15% stop loss limits downside to $750
 
 ### Implementation Mistakes
 1. Poor Entry Timing
-   - Example: Investing full $30,000 ETF allocation in one day
+   - Example: Investing full $35,000 ETF allocation in one day
    - Impact: No dry powder for dips, higher average cost
    - Better Approach: 3-wave entry over 60 days
-   - Real Numbers: Average 5% better entry = $1,500 saved
+   - Real Numbers: Average 5% better entry = $1,750 saved
 
 2. Improper Rebalancing
-   - Example: Not rebalancing when VGT grows to $15,000 (50% of ETF allocation)
+   - Example: Not rebalancing when VOO grows to $21,000 (60% of ETF allocation)
    - Impact: Over-concentration risk
    - Better Approach: Rebalance when position exceeds 15% ($4,500)
-   - Real Numbers: Selling $5,000 to reinvest maintains risk profile
+   - Real Numbers: Selling $5,250 to reinvest maintains risk profile
 
 ### Recovery Strategies
 1. From Over-diversification
