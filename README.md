@@ -1,99 +1,73 @@
-# Investment Strategy: $100k to $1M in 10 Years
+# From $100k to $1M in 10 Years
 
 > **IMPORTANT DISCLAIMER**: This document and its contents are for educational and informational purposes only. This is NOT financial advice. The information provided does not constitute investment advice, financial advice, trading advice, or any other sort of advice. You should conduct your own research and consult with a qualified licensed financial advisor before making any investment decisions. By using this information, you agree that you are solely responsible for any investment decisions you make. The authors make no representations as to accuracy, completeness, currentness, suitability, or validity of any information and will not be liable for any errors, omissions, or delays in this information or any losses, injuries, or damages arising from its use.
 
-A systematic investment strategy designed to grow $100,000 to $1,000,000 over 10 years through a balanced portfolio of ETFs, cryptocurrencies, and fixed income instruments. The plan includes monthly contributions of $2,000 and follows a risk-adjusted approach that evolves from aggressive growth to wealth preservation.
-
-## Core Strategy
-```
-Initial Capital:    $100,000
-Monthly Input:     $2,000
-Total Input:       $340,000 ($100k + $2k × 120 months)
-Target Value:      $1,000,000
-Required Growth:   $660,000 (after contributions)
-Timeline:          10 years
-Required CAGR:     ~17%
-Risk Profile:      Aggressive → Conservative
-```
+An investment strategy targeting 10x growth over 10 years through a balanced portfolio of ETFs, cryptocurrencies, DeFi, and fixed income.
 
 ## Portfolio Allocation
+
 ```
-Current Portfolio Structure ($100,000):
+Core Portfolio ($100,000):
+ETFs:        40% ($40,000) - Growth and dividend focus
+Crypto:      40% ($40,000) - BTC, ETH, and select L1s
+Fixed Income: 10% ($10,000) - Bonds and stable yields
+DeFi:        10% ($10,000) - Yield farming and staking
 
-Core ETFs:        [████████] $40,000  40%
-│ US Market       [████] $20,000      20%
-│ International   [██] $10,000        10%
-│ Sectors         [██] $10,000        10%
-
-Crypto Core:      [████████] $40,000  40%
-│ Bitcoin         [████] $20,000      20%
-│ Ethereum        [████] $20,000      20%
-
-Alternative L1s:  [██] $12,000        12%
-DeFi:            [█] $8,000           8%
-
-Fixed Income:     [████] $20,000      20%
-│ Safety Anchor   [██] $8,000         8%
-│ Core Position   [█] $4,000          4%
-│ Growth Engine   [██] $8,000         8%
-
-Monthly Contributions: $2,000
-│ ETFs:          [████] $800         40%
-│ Crypto:        [████] $800         40%
-│ Alt L1s:       [██] $240          12%
-│ DeFi:          [█] $160           8%
-│ Fixed Income:  [████] $400         20%
+Monthly Contribution:
+Amount: $2,000
+Split: Proportional to core allocation
 ```
 
 ## Core Chapters
-1. [ETF Strategy](chapters/etfs.md) - Core market exposure through index funds
-2. [Crypto Strategy](chapters/crypto.md) - Bitcoin and Ethereum allocation
-3. [DeFi Strategy](chapters/defi.md) - Decentralized finance opportunities
-4. [Fixed Income](chapters/fixed_income.md) - Barbell strategy for stability
+1. [ETFs](chapters/etfs.md) - Index funds and sector ETFs
+2. [Crypto](chapters/crypto.md) - Digital assets strategy
+3. [DeFi](chapters/defi.md) - Decentralized finance yields
+4. [Fixed Income](chapters/fixed_income.md) - Bonds and stable yields
+
+## Strategy Chapters
+1. [Implementation](chapters/implementation.md) - Getting started
+2. [Monitoring](chapters/monitoring.md) - Tracking progress
+3. [Risk Management](chapters/risk_management.md) - Protection strategy
+4. [Rebalancing](chapters/rebalancing.md) - Portfolio maintenance
+5. [Tax Optimization](chapters/tax_optimization.md) - Tax efficiency
+6. [Emergency Response](chapters/emergency.md) - Crisis management
 
 ## Support Chapters
-1. [Implementation](chapters/implementation.md) - Step-by-step deployment guide
-2. [Risk Management](chapters/risk_management.md) - Position sizing and hedging
-3. [Tax Optimization](chapters/tax_optimization.md) - Tax efficiency strategies
-4. [Rebalancing](chapters/rebalancing.md) - Portfolio maintenance rules
-5. [Monitoring](chapters/monitoring.md) - Performance tracking system
-6. [Emergency](chapters/emergency.md) - Crisis response procedures
-
-## Reference Chapters
-1. [Resources](chapters/resources.md) - Tools and platforms
-2. [Templates](chapters/templates.md) - Portfolio tracking sheets
-3. [Glossary](chapters/glossary.md) - Key terms and concepts
-
-## Success Metrics
-```
-Growth Milestones:
-
-Phase 1: $100k → $140k (Years 1-2)
-[████████] Portfolio Growth   │ +40%
-[██████] Risk Tolerance     │ High
-[████] Monthly Return      │ $1,420
-
-Phase 2: $140k → $250k (Years 3-5)
-[██████████] Portfolio Growth │ +79%
-[████] Risk Tolerance       │ Med-High
-[██████] Monthly Return    │ $2,130
-
-Phase 3: $250k → $415k (Years 6-8)
-[████████████] Portfolio Growth │ +66%
-[███] Risk Tolerance         │ Medium
-[████████] Monthly Return    │ $3,530
-
-Phase 4: $415k → $1M (Years 9-10)
-[██████████████] Portfolio Growth │ +141%
-[██] Risk Tolerance           │ Med-Low
-[██████████] Monthly Return   │ $5,830
-```
+1. [Resources](chapters/resources.md) - Tools and links
+2. [Templates](chapters/templates.md) - Portfolio tracking
+3. [Glossary](chapters/glossary.md) - Key terms
 
 ## Getting Started
-1. Review the [Investment Plan](plan.md) for strategy overview
-2. Follow the [Implementation](chapters/implementation.md) guide
-3. Set up [Monitoring](chapters/monitoring.md) systems
-4. Regular review of [Risk Management](chapters/risk_management.md)
+1. Read the [Implementation](chapters/implementation.md) chapter
+2. Set up security using the [Emergency](chapters/emergency.md) guide
+3. Start with ETFs following the [ETFs](chapters/etfs.md) strategy
+4. Add crypto per the [Crypto](chapters/crypto.md) chapter
+5. Explore DeFi using the [DeFi](chapters/defi.md) guide
+6. Add fixed income per the [Fixed Income](chapters/fixed_income.md) chapter
+
+## Performance Targets
+```
+Year 1: $100k → $130k (30% growth)
+Year 3: $130k → $250k (92% growth)
+Year 5: $250k → $450k (80% growth)
+Year 7: $450k → $700k (56% growth)
+Year 10: $700k → $1M+ (43% growth)
+
+Monthly: $2,000 contribution
+Total: $240,000 contributed
+Returns: $660,000 generated
+```
+
+## Risk Management
+```
+Stop Loss: -20% portfolio wide
+Rebalance: ±5% allocation drift
+Reserve: 5% cash buffer
+Correlation: <0.7 between assets
+```
+
+## Disclaimer
+This is an investment strategy, not financial advice. All investments carry risk. Do your own research and consult financial professionals.
 
 ## Risk Warning
 This investment strategy involves substantial risk, including:

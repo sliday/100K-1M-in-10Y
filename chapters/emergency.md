@@ -1,238 +1,177 @@
 # Emergency Response Plan
 
-## Overview
-Total Portfolio: $100,000 initial + $2,000 monthly
-Goal: Protect assets during emergencies and recover safely
+## Quick Response Matrix
+```
+Severity Levels:
+LOW:    [█] Monitor closely
+MEDIUM: [██] Take action within 24h
+HIGH:   [███] Immediate response
+SEVERE: [████] Emergency protocol
 
-## Market Emergencies
+Emergency Contacts:
+1. Hardware Wallet Support
+   - Ledger: support.ledger.com
+   - Trezor: trezor.io/support
+   - Response time: 24-48h
 
-### Severe Market Crash
-1. First Response (Within 1 Hour)
-   - Check all positions
-   - Review stop losses
-   - Calculate total exposure
-   - Have $15,000 cash ready
+2. Exchange Support (Priority)
+   - Coinbase: 1-888-908-7930
+   - Binance: binance.com/support
+   - Kraken: support.kraken.com
+   - Response time: 2-24h
 
-2. Action Steps
-   - Don't panic sell
-   - Check news sources
-   - Monitor correlations
-   - Document everything
+3. Legal Support
+   - Crypto lawyer: TBD
+   - Tax advisor: TBD
+   - Response time: 24-72h
 
-### Portfolio Crashes
-1. -20% Drop ($20,000 loss)
-   - Review all positions
-   - Check stop losses
-   - Prepare cash reserves
-   - Document positions
+4. Technical Support
+   - IT security: TBD
+   - Data recovery: TBD
+   - Response time: 4-24h
+```
 
-2. -30% Drop ($30,000 loss)
-   - Move to defensive mode
-   - Increase stable allocation
-   - Review strategy
-   - Plan recovery steps
+## Emergency Scenarios
 
-3. -40% Drop ($40,000 loss)
-   - Emergency meeting
-   - Consider safe havens
-   - Evaluate exit points
-   - Document decisions
+### Market Crashes
+```
+1. -20% Portfolio Drop ($20,000 loss)
+   □ Check portfolio correlation
+   □ Review stop losses
+   □ Assess market conditions
+   □ Prepare rebalancing plan
+   Timeline: 2-4 hours
 
-## Technical Emergencies
+2. -35% Portfolio Drop ($35,000 loss)
+   □ Halt all new investments
+   □ Move to defensive positions
+   □ Review all positions
+   □ Document situation
+   Timeline: Immediate
 
-### Exchange Issues
-1. Major Exchange Problems
-   - Use backup exchange
-   - Check withdrawal limits
-   - Have support contacts
-   - Document attempts
+3. -50% Portfolio Drop ($50,000 loss)
+   □ Activate crisis protocol
+   □ Move to 60% cash position
+   □ Emergency team meeting
+   □ Full strategy review
+   Timeline: Immediate
+```
 
-2. Recovery Steps
-   - Contact support
-   - Document tickets
-   - Use alternative paths
-   - Keep records
+### Security Breaches
+```
+1. Account Compromise
+   □ Lock all accounts
+   □ Change all passwords
+   □ Contact support
+   □ Document timeline
+   Timeline: 15 minutes
 
-### Wallet Problems
+2. Wallet Compromise
+   □ Freeze affected wallets
+   □ Emergency fund transfer
+   □ Contact support
+   □ Create new wallets
+   Timeline: 30 minutes
+
+3. Exchange Issues
+   □ Halt all trading
+   □ Document positions
+   □ Contact support
+   □ Prepare alternatives
+   Timeline: 1 hour
+```
+
+### Technical Problems
+```
 1. Hardware Wallet Issues
-   - Use backup device
-   - Check recovery phrase
-   - Contact support
-   - Stay calm
+   □ Use backup device
+   □ Verify seed phrase
+   □ Contact support
+   □ Document steps
+   Timeline: 2 hours
 
 2. Software Wallet Issues
-   - Check backup phrase
-   - Use alternative wallet
-   - Verify addresses
-   - Document steps
+   □ Check backup phrase
+   □ Use alternative wallet
+   □ Verify addresses
+   □ Document process
+   Timeline: 1 hour
 
-## Security Emergencies
+3. Network Problems
+   □ Use backup internet
+   □ Check status pages
+   □ Contact provider
+   □ Document outage
+   Timeline: 30 minutes
+```
 
-### Account Compromise
-1. Exchange Account
-   - Lock account immediately
-   - Contact support
-   - Document timeline
-   - Check other accounts
+### Recovery Procedures
+```
+1. From Market Crash
+   Step 1: Assess damage
+   Step 2: Document losses
+   Step 3: Review strategy
+   Step 4: Adjust positions
+   Timeline: 24-48 hours
 
-2. Recovery Steps
-   - Change all passwords
-   - New 2FA setup
-   - Review permissions
-   - Document changes
+2. From Security Breach
+   Step 1: Secure accounts
+   Step 2: Document incident
+   Step 3: Contact support
+   Step 4: Create new setup
+   Timeline: 4-12 hours
 
-### Wallet Compromise
-1. Hot Wallet ($8,000 max)
-   - Move funds if possible
-   - Create new wallet
-   - Document incident
-   - Contact support
-
-2. Cold Storage
-   - Check backup device
-   - Create new wallet
-   - Move funds safely
-   - Document process
-
-## DeFi Emergencies
-
-### Protocol Issues
-1. Smart Contract Risk
-   - Check health factors
-   - Prepare exit tx
-   - Monitor gas
-   - Have stables ready
-
-2. Recovery Steps
-   - Exit affected protocol
-   - Document losses
-   - Review similar exposure
-   - Update strategy
-
-### Liquidation Risk
-1. Lending Positions
-   - Monitor health factor
-   - Add collateral
-   - Reduce debt
-   - Document actions
-
-2. Recovery Steps
-   - Stabilize position
-   - Review leverage
-   - Adjust strategy
-   - Document lessons
-
-## Communication Plan
-
-### Key Contacts
-1. Emergency Numbers
-   - Exchange support
-   - Wallet support
-   - Tax advisor
-   - Legal counsel
-
-2. Documentation
-   - Keep contact list
-   - Note response times
-   - Track ticket numbers
-   - Save all emails
-
-### Information Sharing
-1. Need to Know
-   - Never share keys
-   - No screenshots
-   - Use secure channels
-   - Verify contacts
-
-2. Documentation
-   - Keep incident log
-   - Note all actions
-   - Save responses
-   - Track timeline
-
-## Recovery Procedures
-
-### Asset Recovery
-1. Lost Access
-   - Use recovery phrase
-   - Contact support
-   - Document attempts
-   - Keep timeline
-
-2. Compromised Accounts
-   - Lock accounts
-   - New secure device
-   - Reset passwords
-   - Document process
-
-### Position Recovery
-1. After Crashes
-   - Review positions
-   - Calculate losses
-   - Plan recovery
-   - Document steps
-
-2. After Technical Issues
-   - Verify balances
-   - Check transactions
-   - Update security
-   - Document changes
-
-## Common Mistakes
-
-### Response Mistakes
-1. Panic Selling
-   - Example: Selling entire $40,000 crypto position in market crash
-   - Impact: Locked in 30% loss ($12,000)
-   - Better Approach: Follow stop loss plan, sell in stages
-   - Real Numbers: Limit loss to $6,000 (15%)
-
-2. Delayed Action
-   - Example: Ignoring DeFi health factor warnings on $4,500 position
-   - Impact: Full liquidation with 10% penalty ($450)
-   - Better Approach: Add collateral at first warning
-   - Real Numbers: $100 gas fee vs $450 liquidation
-
-### Security Mistakes
-1. Poor Key Management
-   - Example: Losing seed phrase for wallet with $8,000
-   - Impact: Complete loss of funds
-   - Better Approach: Multiple secure backups
-   - Real Numbers: $50 for proper backup solutions
-
-2. Rushed Recovery
-   - Example: Using unsafe computer to recover $20,000 BTC wallet
-   - Impact: Funds stolen during recovery
-   - Better Approach: Use clean, secure device
-   - Real Numbers: $200 for secure hardware vs total loss
-
-### Recovery Strategies
-1. From Market Crashes
-   - Step 1: Document current state
-   - Step 2: Review stop losses
-   - Step 3: Plan recovery steps
-   - Timeline: Act within 24 hours
-
-2. From Technical Issues
-   - Step 1: Secure remaining assets
-   - Step 2: Document the problem
-   - Step 3: Contact support
-   - Timeline: Resolve within 48 hours
+3. From Technical Issues
+   Step 1: Try alternatives
+   Step 2: Contact support
+   Step 3: Document problem
+   Step 4: Test solutions
+   Timeline: 2-6 hours
+```
 
 ### Prevention Framework
+```
 1. Security Rules
-   - Regular backups
-   - Test recovery
-   - Update passwords
-   - Check devices
+   □ Weekly backup check
+   □ Monthly security audit
+   □ Quarterly drill
+   □ Annual review
 
-2. Market Rules
-   - Set stop losses
-   - Keep cash ready
-   - Know exit points
-   - Stay prepared
+2. Documentation Rules
+   □ Keep emergency contacts updated
+   □ Maintain procedure docs
+   □ Update recovery steps
+   □ Test all procedures
 
-Remember: The best emergency response is good preparation. Always have a plan ready before you need it.
+3. Testing Schedule
+   □ Monthly: Basic recovery
+   □ Quarterly: Full backup
+   □ Semi-annual: Crisis drill
+   □ Annual: Complete audit
+```
+
+## Emergency Kit
+```
+1. Physical Items
+   □ Hardware wallets (2x)
+   □ Backup devices (2x)
+   □ Seed phrases (secure)
+   □ Emergency contacts
+
+2. Digital Access
+   □ Password manager
+   □ 2FA backup codes
+   □ Recovery emails
+   □ Support tickets
+
+3. Documentation
+   □ Account list
+   □ Position details
+   □ Recovery steps
+   □ Contact numbers
+```
+
+Remember: In emergencies, stay calm and follow procedures. Better to act methodically than rush and make mistakes.
 
 ## Resources
 
