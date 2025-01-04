@@ -43,51 +43,91 @@ You start with:
 - 10-year timeline
 - Basic understanding of finance
 
-### 2. Where You're Going
-Target milestones:
+### 2. The 10-Year Journey
 ```
-Year 1: $100k → $130k (30% growth)
-Year 3: $130k → $250k (92% growth)
-Year 5: $250k → $450k (80% growth)
-Year 7: $450k → $700k (56% growth)
-Year 10: $700k → $1M+ (43% growth)
+Years 1-2: Foundation Phase ($100k → $130k)
+- Focus: Setting up infrastructure
+- Risk: Higher
+- Goal: 30% growth while building systems
+
+Years 3-4: Growth Phase ($130k → $250k)
+- Focus: Expanding positions
+- Risk: Medium-High
+- Goal: 92% growth with proven strategies
+
+Years 5-6: Scaling Phase ($250k → $450k)
+- Focus: Optimizing performance
+- Risk: Medium
+- Goal: 80% growth with refined approach
+
+Years 7-8: Stabilization Phase ($450k → $700k)
+- Focus: Risk management
+- Risk: Medium-Low
+- Goal: 56% growth with increased safety
+
+Years 9-10: Security Phase ($700k → $1M+)
+- Focus: Wealth preservation
+- Risk: Lower
+- Goal: 43% growth with conservative approach
 ```
 
-### 3. How to Get There
-Your portfolio will be split into four main components:
+### 3. Portfolio Structure
+Your investments will be split into five main components:
 ```
 Core Portfolio ($100,000):
-ETFs:        40% ($40,000) - Growth and dividend focus
-Crypto:      40% ($40,000) - BTC, ETH, and select L1s
-Fixed Income: 10% ($10,000) - Bonds and stable yields
-DeFi:        10% ($10,000) - Yield farming and staking
+ETFs:         35% ($35,000) - Growth and dividend focus
+Crypto:       35% ($35,000) - Bitcoin and Ethereum
+Term Deposits: 15% ($15,000) - Fixed-rate savings
+Fixed Income:  10% ($10,000) - Government and corporate bonds
+[DeFi](chapters/glossary.md#defi): 5% ($5,000)  - Decentralized Finance yield strategies
 
 Monthly Contribution:
 $2,000 split proportionally across these components
 ```
 
-### 4. Implementation Order
+### 4. Phase-by-Phase Implementation
+
+#### Foundation Phase (Years 1-2)
 1. First Month: [Security & Setup](chapters/implementation.md)
    - Set up hardware wallets
    - Create exchange accounts
-   - Establish backup procedures
+   - Open term deposit accounts
    - Document everything
 
-2. Second Month: [Core Investments](chapters/etfs.md)
-   - Deploy ETF portion ($40,000)
-   - Set up crypto storage ($40,000)
-   - Establish fixed income base ($10,000)
+2. Second Month: Core Investments
+   - Deploy ETF portion ($35,000)
+   - Set up crypto storage ($35,000)
+   - Establish term deposits ($15,000)
+   - Start bond ladder ($10,000)
 
-3. Third Month: [Growth Layer](chapters/defi.md)
-   - Start DeFi positions ($10,000)
+3. Third Month: Growth Layer
+   - Start [DeFi](chapters/glossary.md#defi) positions ($5,000)
    - Set up monitoring systems
    - Implement risk management
 
-4. Ongoing Management:
-   - [Daily/Weekly Monitoring](chapters/monitoring.md)
-   - [Monthly Rebalancing](chapters/rebalancing.md)
-   - [Quarterly Tax Planning](chapters/tax_optimization.md)
-   - [Annual Strategy Review](chapters/risk_management.md)
+#### Growth Phase (Years 3-4)
+- Expand successful positions
+- Add new ETF sectors
+- Increase yield-generating assets
+- Regular rebalancing
+
+#### Scaling Phase (Years 5-6)
+- Optimize tax efficiency
+- Diversify geographically
+- Add institutional products
+- Focus on compound growth
+
+#### Stabilization Phase (Years 7-8)
+- Reduce high-risk exposure
+- Increase fixed income
+- Focus on capital preservation
+- Strengthen security measures
+
+#### Security Phase (Years 9-10)
+- Conservative position sizing
+- Higher cash reserves
+- Focus on steady yields
+- Prepare for wealth preservation
 
 ### 5. Risk Management
 Your guardrails:
