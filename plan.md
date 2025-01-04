@@ -1,5 +1,29 @@
 # Investment Master Plan
 
+> **IMPORTANT**: This is the master playbook for the "$100k to $1M in 10 Years" investment strategy. It provides a high-level overview and references detailed chapters for specific aspects of the plan. All examples and numbers are based on the original $100k portfolio.
+
+## Guide Structure
+```
+Core Chapters:
+[x] ETF Strategy    - Core market exposure
+[x] Crypto Strategy - BTC and ETH allocation
+[x] DeFi Strategy   - Yield opportunities
+[x] Fixed Income    - Barbell approach
+
+Support Chapters:
+[x] Implementation  - Deployment guide
+[x] Risk Management - Position sizing
+[x] Tax Strategy    - Optimization
+[x] Rebalancing    - Portfolio maintenance
+[x] Monitoring     - Performance tracking
+[x] Emergency      - Crisis procedures
+
+Reference Chapters:
+[x] Resources      - Tools and platforms
+[x] Templates      - Tracking sheets
+[x] Glossary       - Key terms
+```
+
 ## Core Strategy
 ```
 10-Year Growth Framework:
@@ -11,10 +35,10 @@ Timeline:         10 years
 Required CAGR:    ~17%
 
 Risk Evolution:
-Phase 1: [████████] High Risk     │ Years 1-2
-Phase 2: [██████] Growth         │ Years 3-5
-Phase 3: [████] Balanced        │ Years 6-8
-Phase 4: [██] Conservative     │ Years 9-10
+Phase 1: [████████] High Risk     │ Years 1-2  │ See Risk Management
+Phase 2: [██████] Growth         │ Years 3-5  │ See Rebalancing
+Phase 3: [████] Balanced        │ Years 6-8  │ See Tax Strategy
+Phase 4: [██] Conservative     │ Years 9-10 │ See Fixed Income
 ```
 
 ## Portfolio Allocation
@@ -200,3 +224,28 @@ This investment plan is for educational purposes only. It does not constitute fi
 - Platform/protocol risks
 
 Never invest more than you can afford to lose. 
+
+## Chapter Dependencies
+```
+Implementation Flow:
+
+1. Core Setup (Month 1)
+   ETF Strategy  ──────┐
+   Crypto Core   ──────┼──> Risk Management
+   Fixed Income  ──────┘    │
+                            v
+2. Growth Layer (Month 2)   Implementation
+   DeFi Strategy ──────┐    │
+   Alt L1 Setup  ──────┘    v
+                         Monitoring
+3. Optimization (Month 3)    │
+   Tax Strategy  ──────┐     v
+   Rebalancing   ──────┼──> Performance
+   Emergency     ──────┘
+
+4. Ongoing Management
+   Daily:    Monitoring Chapter
+   Weekly:   Risk Management Chapter
+   Monthly:  Rebalancing Chapter
+   Quarterly: Tax Strategy Chapter
+``` 

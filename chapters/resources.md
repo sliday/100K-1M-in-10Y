@@ -1,4 +1,38 @@
-# Investment Resources
+# Investment Resources and Tools
+
+## Essential Tools
+
+### Portfolio Management ($250-300/year)
+1. Tracking Software
+   - CoinGecko Portfolio (Free)
+   - Delta App (Pro $60/year)
+   - Custom Google Sheets (Free)
+   - TradingView (Pro $180/year)
+
+2. Analysis Tools
+   - Glassnode (Basic free)
+   - Token Terminal (Free)
+   - ETF Database (Free)
+   - Bloomberg Terminal (Optional)
+
+3. Tax & Accounting
+   - Koinly ($99/year)
+   - CoinTracking ($120/year)
+   - Custom spreadsheet templates
+   - Local tax software
+
+### Security Tools ($150/year)
+1. Password Management
+   - 1Password ($36/year)
+   - Yubikey 2FA ($45-60)
+   - Secure email (ProtonMail $48/year)
+   - Backup solutions
+
+2. Mobile Apps
+   - Portfolio tracking
+   - Authentication apps
+   - Exchange apps
+   - News aggregators
 
 ## Overview
 Total Portfolio: $100,000 initial + $2,000 monthly
