@@ -1,5 +1,8 @@
 # Risk Management Framework
 
+## Overview
+This framework outlines our comprehensive approach to managing portfolio risks across all asset classes. Using a barbell strategy, we balance growth potential with capital preservation through careful position sizing, stop-loss implementation, continuous monitoring, and clear emergency procedures. The framework is designed to protect against both systematic market risks and asset-specific risks while maintaining the portfolio's long-term growth objectives.
+
 ## Barbell Strategy Risk Profile
 ```
 Portfolio Risk Distribution:

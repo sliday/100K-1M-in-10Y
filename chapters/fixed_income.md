@@ -1,5 +1,10 @@
 # Fixed Income Strategy
 
+## Overview
+Total Allocation: 20% of portfolio ($24,000 initial + $500 monthly)
+
+The fixed income portion of our portfolio serves as a stability anchor, providing steady income and capital preservation. This strategy employs a barbell approach, balancing safety and yield through a mix of government securities, term deposits, and high-yield savings. The allocation is structured to maintain liquidity while capturing favorable interest rates across different durations.
+
 ## Barbell Strategy Overview
 ```
 Portfolio Structure:
