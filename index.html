@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>100k to 1M Portfolio Calculator</title>
+    <title>"100k → 1M in 10Y" Investment Portfolio Calculator</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -95,7 +95,10 @@
 
 <body class="bg-base-300 p-4">
     <div class="max-w-7xl mx-auto">
-        <h1 class="text-4xl font-bold mb-4 text-center">100k to 1M Portfolio Calculator</h1>
+        <a class="m-4" href="https://github.com/sliday/100K-1M-in-10Y">
+            <h1 class="text-4xl font-bold text-center">100k → 1M in 10Y</h1>
+            <h3 class="text-center font-bold">Investment Portfolio Calculator</h2>
+        </a>
 
         <!-- Asset Allocation Chart -->
         <div class="card bg-base-100 shadow-xl mb-4">
@@ -124,12 +127,13 @@
 
                     <div class="form-control">
                         <label class="label">
-                            <span class="flex items-center gap-2">
+                            <span class="flex items-center justify-between w-full">
+                                <span>Contribution</span>
                                 <select id="contributionFrequency" class="select select-ghost select-xs" onchange="recalculate()">
                                     <option value="monthly">Monthly</option>
                                     <option value="weekly">Weekly</option>
                                 </select>
-                                Contribution <span class="opacity-70" id="monthlyContributionLabel">($2,000)</span>
+                                <span class="opacity-70" id="monthlyContributionLabel">($2,000)</span>
                             </span>
                         </label>
                         <input id="monthlyContribution" type="range" min="0" max="10000" value="2000" class="range"
@@ -316,7 +320,7 @@
                     <div id="targetReached" class="alert alert-success shadow-lg mt-4 hidden">
                         <div class="flex items-center justify-between w-full">
                             <div class="flex items-center">
-                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-8 h-8 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                                 <div>
@@ -324,16 +328,15 @@
                                     <div class="text-sm flex items-center gap-2">
                                         <button onclick="copyLink()" class="btn btn-ghost btn-xs">
                                             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                                    d="M20 12H4m0 0l6-6m-6 6l6 6" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
                                             </svg>
-                                            Exit Strategy
+                                            Share
                                         </button>
-                                        <button onclick="copyLink()" class="btn btn-ghost btn-xs">
+                                        <button onclick="window.location.href='https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/exit.md'" class="btn btn-ghost btn-xs">
                                             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                                             </svg>
-                                            Copy Link
+                                            Exit Gracefully
                                         </button>
                                     </div>
                                 </div>
@@ -363,16 +366,20 @@
         function updateAllocationChart() {
             // Prepare data
             const years = [];
-            const seriesData = Object.entries(portfolioData).map(([key, asset]) => ({
-                name: key.charAt(0).toUpperCase() + key.slice(1),
-                data: []
-            }));
+            const seriesData = Object.entries(portfolioData)
+                .filter(([key, asset]) => asset.allocation > 0)  // Only include non-zero allocations
+                .map(([key, asset]) => ({
+                    name: key.charAt(0).toUpperCase() + key.slice(1),
+                    data: []
+                }));
 
             for (let i = 0; i < results.length; i++) {
                 years.push(`Year ${i}`);
-                Object.entries(portfolioData).forEach(([key, asset], index) => {
-                    seriesData[index].data.push(Math.round(results[i] * asset.allocation));
-                });
+                Object.entries(portfolioData)
+                    .filter(([key, asset]) => asset.allocation > 0)  // Only include non-zero allocations
+                    .forEach(([key, asset], index) => {
+                        seriesData[index].data.push(Math.round(results[i] * asset.allocation));
+                    });
             }
 
             const options = {
@@ -419,20 +426,11 @@
                         }
                     }
                 },
-                colors: Object.values(portfolioData).map(asset => 
-                    `rgb(${asset.color.join(',')})`
-                ),
+                colors: Object.entries(portfolioData)
+                    .filter(([key, asset]) => asset.allocation > 0)  // Only include non-zero allocations
+                    .map(([key, asset]) => `rgb(${asset.color.join(',')})`),
                 dataLabels: {
-                    enabled: true,
-                    formatter: function (val, opts) {
-                        if (val > 0) {
-                            return '$' + val.toLocaleString();
-                        }
-                        return '';
-                    },
-                    style: {
-                        colors: ['#fff']
-                    }
+                    enabled: false  // Disable individual bar labels for cleaner look
                 },
                 series: seriesData,
                 xaxis: {
@@ -487,10 +485,10 @@
                 },
                 annotations: {
                     yaxis: [{
-                        y: 1000000,
+                        y: parseInt(document.getElementById('targetValue').value),
                         borderColor: '#ff4444',
                         label: {
-                            text: 'Target: $1M',
+                            text: 'Target: $' + parseInt(document.getElementById('targetValue').value).toLocaleString(),
                             style: {
                                 color: '#fff',
                                 background: '#ff4444'
@@ -911,6 +909,75 @@
             loadFromURL();
             recalculate();
         };
+
+        // Store initial values when page loads
+        const initialValues = {
+            initialCapital: '100000',
+            monthlyContribution: '2000',
+            years: '10',
+            contributionFrequency: 'monthly',
+            etfAllocation: '35',
+            stocksAllocation: '0',
+            cryptoAllocation: '35',
+            termDepositAllocation: '15',
+            bondAllocation: '10',
+            defiAllocation: '5',
+            targetValue: '1000000'
+        };
+
+        // Function to reset a slider to its initial value
+        function resetSlider(event) {
+            const slider = event.target;
+            const initialValue = initialValues[slider.id];
+            if (initialValue) {
+                slider.value = initialValue;
+                if (slider.id === 'targetValue') {
+                    document.getElementById('targetLabel').textContent = '$' + parseInt(initialValue).toLocaleString();
+                } else if (slider.id.includes('Allocation')) {
+                    updateLabel(slider, slider.id.replace('Allocation', 'Label'));
+                } else {
+                    const labelId = slider.id + 'Label';
+                    updateSliderLabel(slider, labelId, slider.id === 'initialCapital' || slider.id === 'monthlyContribution' ? '$' : '');
+                }
+                recalculate();
+            }
+        }
+
+        // Add double-click listeners to all sliders
+        document.querySelectorAll('input[type="range"]').forEach(slider => {
+            slider.addEventListener('dblclick', resetSlider);
+        });
+
+        // Update target chart immediately when target changes
+        document.getElementById('targetValue').addEventListener('input', function() {
+            const target = parseInt(this.value);
+            document.getElementById('targetLabel').textContent = '$' + target.toLocaleString();
+            
+            // Update target line in chart
+            if (stackedChart) {
+                stackedChart.updateOptions({
+                    annotations: {
+                        yaxis: [{
+                            y: target,
+                            borderColor: '#ff4444',
+                            label: {
+                                text: 'Target: $' + target.toLocaleString(),
+                                style: {
+                                    color: '#fff',
+                                    background: '#ff4444'
+                                }
+                            }
+                        }]
+                    }
+                }, false, true);
+            }
+            
+            // Update target reached indicator
+            document.getElementById('targetReached').classList.toggle(
+                'hidden', 
+                results[results.length - 1] < target
+            );
+        });
     </script>
 
 </body>
