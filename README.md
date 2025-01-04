@@ -1,4 +1,6 @@
-# From $100k to $1M: A Practical Investment Journey
+# $100k → $1M in 10Y: A Practical Investment Journey
+
+*This guide was inspired by [this discussion](https://x.com/stas_kulesh/status/1875537324576317887) about the need for practical investment guidance after reaching initial financial independence.*
 
 ## Situation: The $100k Milestone
 
@@ -145,5 +147,3 @@ This is an educational resource, not financial advice. The investment strategy i
 - Economic events
 
 **Always do your own research and consult qualified professionals before investing.**
-
-*Inspired by [this discussion](https://x.com/stas_kulesh/status/1875537324576317887) about practical investment guidance after reaching initial financial independence.*
