@@ -98,8 +98,22 @@ Reserve: 5% cash buffer
 Correlation: <0.7 between assets
 ```
 
-## Disclaimer
-This is an investment strategy, not financial advice. All investments carry risk. Do your own research and consult financial professionals.
+## Contributing
+
+Rules are simple:
+1. No bullshit. If you can't explain it simply, you don't understand it well enough
+2. Everything must be based on the original $100k portfolio example
+3. All strategies must be actionable - no theoretical stuff
+4. Include real numbers, concrete steps, and specific examples
+5. Focus on risk management first, gains second
+6. Keep it practical - if you haven't done it yourself, don't recommend it
+7. No affiliate links, no promotions, no shilling
+
+Submit a PR if you have:
+- Found errors or outdated information
+- Actually tested a strategy and can prove it works
+- Have specific improvements to risk management
+- Can simplify existing explanations
 
 ## Risk Warning
 This investment strategy involves substantial risk, including:
