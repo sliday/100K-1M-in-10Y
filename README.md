@@ -12,6 +12,28 @@ This isn't about get-rich-quick schemes or complex financial instruments. Instea
 
 > **IMPORTANT DISCLAIMER**: This document and its contents are for educational and informational purposes only. This is NOT financial advice. The information provided does not constitute investment advice, financial advice, trading advice, or any other sort of advice. You should conduct your own research and consult with a qualified licensed financial advisor before making any investment decisions. By using this information, you agree that you are solely responsible for any investment decisions you make. The authors make no representations as to accuracy, completeness, currentness, suitability, or validity of any information and will not be liable for any errors, omissions, or delays in this information or any losses, injuries, or damages arising from its use.
 
+## The Journey from $100k to $1M
+
+Let's talk about where you are and where you're going. You've built a business or saved diligently, and now you have $100,000 in cash. That's a significant achievement, but it's also a crossroads. Here's the reality:
+
+- $100k is not enough to retire on. Depending on your location, it might give you 1-4 years of runway without work.
+- You have limited time - typically 20-30 years of peak productive adult life.
+- Time is working against your cash - inflation will eat away at its value if you don't put it to work.
+
+Why $1M as a target? Let's be clear: one million dollars is not "FU money". It's not extreme wealth in today's world. But it is:
+- A solid foundation for financial security
+- More capital than most people ever accumulate
+- Enough to generate meaningful passive income
+- A proof that you understand wealth building
+
+Most importantly, the journey from $100k to $1M teaches you everything you need to know about growing wealth. By the time you reach $1M, you'll have:
+- Mastered risk management
+- Understood market cycles
+- Built strong investment habits
+- Developed financial intuition
+
+This guide stops at $1M because the path from $1M to $10M (true "FU money") is a different game entirely. But here's the thing: if you can turn $100k into $1M, you'll have all the skills needed to reach $10M on your own. We genuinely believe that.
+
 An investment strategy targeting 10x growth over 10 years through a balanced portfolio of ETFs, cryptocurrencies, DeFi, and fixed income.
 
 ## Portfolio Allocation
