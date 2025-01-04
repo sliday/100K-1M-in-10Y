@@ -1,6 +1,9 @@
 # $100k → $1M in 10Y: A Practical Investment Journey
 
-*This guide was inspired by [this discussion](https://x.com/stas_kulesh/status/1875537324576317887) about the need for practical investment guidance after reaching initial financial independence.*
+*This guide was inspired by [this discussion](https://x.com/stas_kulesh/status/1875537324576317887) about the need for practical investment guidance after reaching initial financial independence. Not financial advice.*
+
+[Try live calculator now →](https://100k1m.com)
+![CleanShot 2025-01-04 at 23 14 45@2x](https://github.com/user-attachments/assets/6c1aaf3f-54b2-4d2f-8fa2-82f44742095c)
 
 ## Situation: The $100k Milestone
 
