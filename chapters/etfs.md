@@ -10,7 +10,7 @@ Our ETF strategy emphasizes broad market index funds, particularly the S&P 500, 
 ## Core ETF Holdings (85% of ETF Portfolio)
 
 ### Broad Market Index Funds ($29,750)
-1. VOO - Vanguard S&P 500 ETF
+1. [VOO](https://www.google.com/finance/quote/VOO:NYSEARCA) - Vanguard S&P 500 ETF
    - Allocation: 60% ($21,000)
    - Monthly [DCA](../chapters/glossary.md#dca): $420
    - Key Stats:
@@ -24,7 +24,7 @@ Our ETF strategy emphasizes broad market index funds, particularly the S&P 500, 
      * Maximum diversification
      * Proven long-term performance
 
-2. VTI - Vanguard Total Stock Market ETF
+2. [VTI](https://www.google.com/finance/quote/VTI:NYSEARCA) - Vanguard Total Stock Market ETF
    - Allocation: 25% ($8,750)
    - Monthly [DCA](../chapters/glossary.md#dca): $175
    - Key Stats:
@@ -42,13 +42,13 @@ Our ETF strategy emphasizes broad market index funds, particularly the S&P 500, 
 
 If you choose to add sector exposure, consider limiting it to 15% ($5,250) of your ETF allocation:
 
-1. QQQ - Invesco QQQ Trust
+1. [QQQ](https://www.google.com/finance/quote/QQQ:NASDAQ) - Invesco QQQ Trust
    - Allocation: 10% ($3,500)
    - Monthly [DCA](../chapters/glossary.md#dca): $70
    - Focus: Large-cap tech
    - Higher volatility
 
-2. SOXX - iShares Semiconductor ETF
+2. [SOXX](https://www.google.com/finance/quote/SOXX:NASDAQ) - iShares Semiconductor ETF
    - Allocation: 5% ($1,750)
    - Monthly [DCA](../chapters/glossary.md#dca): $35
    - Focus: Semiconductors
@@ -137,13 +137,13 @@ Our monitoring system combines [technical analysis](../chapters/glossary.md#tech
 Understanding leveraged ETFs and their risks is crucial. Learn more about leveraged ETFs on [FINRA](https://www.finra.org/investors/insights/leveraged-and-inverse-etfs-complex-investment-instruments).
 
 ### Leveraged Consideration
-1. TQQQ (3x QQQ)
+1. [TQQQ](https://www.google.com/finance/quote/TQQQ:NASDAQ) (3x QQQ)
    - Max allocation: 3%
    - Entry: Only in uptrends
    - Strict [stop loss](../chapters/glossary.md#stop-loss): 20%
    - Daily monitoring
 
-2. SOXL (3x Semiconductors)
+2. [SOXL](https://www.google.com/finance/quote/SOXL:NYSEARCA) (3x Semiconductors)
    - Max allocation: 2%
    - Entry: [Technical](../chapters/glossary.md#technical-analysis) setups
    - Strict [stop loss](../chapters/glossary.md#stop-loss): 20%
@@ -151,9 +151,9 @@ Understanding leveraged ETFs and their risks is crucial. Learn more about levera
 
 ### International Exposure
 1. Future Additions
-   - KWEB (China tech)
-   - EWT (Taiwan tech)
-   - EUFN (EU finance)
+   - [KWEB](https://www.google.com/finance/quote/KWEB:NYSEARCA) (China tech)
+   - [EWT](https://www.google.com/finance/quote/EWT:NYSEARCA) (Taiwan tech)
+   - [EUFN](https://www.google.com/finance/quote/EUFN:NASDAQ) (EU finance)
    - Start at 2% each
 
 ## Tax Efficiency
