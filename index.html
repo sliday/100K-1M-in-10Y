@@ -1,249 +1,918 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Calculator | 100k to 1M</title>
-    
-    <!-- Tailwind CSS and DaisyUI -->
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css" rel="stylesheet">
+    <title>100k to 1M Portfolio Calculator</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- P5.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
-    
-    <!-- Custom Styles -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markdown-it@13.0.1/dist/markdown-it.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+        // Auto-detect system theme
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+            // Redraw charts when theme changes
+            if (growthSketch) growthSketch.redraw();
+            if (stackedBarsSketch) stackedBarsSketch.redraw();
+        });
+
+        tailwind.config = {
+            theme: {
+                extend: {
+                    typography: {
+                        DEFAULT: {
+                            css: {
+                                maxWidth: 'none',
+                                color: 'inherit',
+                                a: {
+                                    color: '#3182ce',
+                                    '&:hover': {
+                                        color: '#2c5282',
+                                    },
+                                },
+                                h1: { color: 'inherit' },
+                                h2: { color: 'inherit' },
+                                h3: { color: 'inherit' },
+                                h4: { color: 'inherit' },
+                                code: {
+                                    color: 'inherit',
+                                    backgroundColor: '#f0f0f0',
+                                    padding: '0.2em 0.4em',
+                                    borderRadius: '3px',
+                                },
+                                'code::before': { content: '""' },
+                                'code::after': { content: '""' },
+                                pre: {
+                                    backgroundColor: '#f0f0f0',
+                                    padding: '1em',
+                                    borderRadius: '8px',
+                                    overflow: 'auto',
+                                },
+                                'pre code': {
+                                    backgroundColor: 'transparent',
+                                    padding: '0',
+                                    borderRadius: '0',
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+            plugins: [], // Remove require statement
+        }
+
+        // Theme helper function
+        function isDarkMode() {
+            return document.documentElement.getAttribute('data-theme') === 'dark';
+        }
+    </script>
     <style>
-        canvas {
-            border-radius: 8px;
+        .markdown-body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+        @media (max-width: 767px) {
+            .markdown-body {
+                padding: 15px;
+            }
         }
     </style>
 </head>
-<body class="bg-base-200 min-h-screen">
-    <div class="container mx-auto p-4">
-        <!-- Header -->
-        <div class="text-center mb-8">
-            <h1 class="text-4xl font-bold mb-2">Portfolio Calculator</h1>
-            <p class="text-xl">$100k to $1M in 10 Years</p>
-        </div>
 
-        <!-- Main Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <!-- Input Section -->
-            <div class="card bg-base-100 shadow-xl">
-                <div class="card-body">
-                    <h2 class="card-title">Portfolio Settings</h2>
-                    
-                    <!-- Initial Investment -->
-                    <div class="form-control">
-                        <label class="label">
-                            <span class="label-text">Initial Investment</span>
-                            <span class="label-text-alt">$100,000</span>
-                        </label>
-                        <input type="range" min="10000" max="200000" value="100000" step="1000" class="range" id="initialInvestment" />
-                    </div>
+<body class="bg-base-300 p-4">
+    <div class="max-w-7xl mx-auto">
+        <h1 class="text-4xl font-bold mb-4 text-center">100k to 1M Portfolio Calculator</h1>
 
-                    <!-- Monthly Contribution -->
-                    <div class="form-control">
-                        <label class="label">
-                            <span class="label-text">Monthly Contribution</span>
-                            <span class="label-text-alt">$2,000</span>
-                        </label>
-                        <input type="range" min="0" max="5000" value="2000" step="100" class="range" id="monthlyContribution" />
-                    </div>
-
-                    <!-- Asset Allocation -->
-                    <div class="divider">Asset Allocation</div>
-
-                    <!-- Core Growth -->
-                    <div class="form-control">
-                        <label class="label">
-                            <span class="label-text">ETFs (35%)</span>
-                            <span class="label-text-alt">$35,000 + $700/mo</span>
-                        </label>
-                        <progress class="progress progress-primary" value="35" max="100"></progress>
-                    </div>
-
-                    <div class="form-control">
-                        <label class="label">
-                            <span class="label-text">Crypto (35%)</span>
-                            <span class="label-text-alt">$35,000 + $700/mo</span>
-                        </label>
-                        <progress class="progress progress-secondary" value="35" max="100"></progress>
-                    </div>
-
-                    <!-- Stability -->
-                    <div class="form-control">
-                        <label class="label">
-                            <span class="label-text">Term Deposits (15%)</span>
-                            <span class="label-text-alt">$15,000 + $300/mo</span>
-                        </label>
-                        <progress class="progress progress-accent" value="15" max="100"></progress>
-                    </div>
-
-                    <div class="form-control">
-                        <label class="label">
-                            <span class="label-text">Bonds (10%)</span>
-                            <span class="label-text-alt">$10,000 + $200/mo</span>
-                        </label>
-                        <progress class="progress progress-info" value="10" max="100"></progress>
-                    </div>
-
-                    <!-- Yield -->
-                    <div class="form-control">
-                        <label class="label">
-                            <span class="label-text">DeFi (5%)</span>
-                            <span class="label-text-alt">$5,000 + $100/mo</span>
-                        </label>
-                        <progress class="progress progress-success" value="5" max="100"></progress>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Visualization Section -->
-            <div class="card bg-base-100 shadow-xl">
-                <div class="card-body">
-                    <h2 class="card-title">Portfolio Visualization</h2>
-                    <div id="portfolioViz"></div>
-                </div>
-            </div>
-
-            <!-- Projection Section -->
-            <div class="card bg-base-100 shadow-xl col-span-1 md:col-span-2">
-                <div class="card-body">
-                    <h2 class="card-title">Growth Projection</h2>
-                    <div id="projectionViz"></div>
-                </div>
+        <!-- Asset Allocation Chart -->
+        <div class="card bg-base-100 shadow-xl mb-4">
+            <div class="card-body p-2">
+                <div id="allocationChart" style="width: 100%; height: 400px;"></div>
             </div>
         </div>
 
-        <!-- Risk Metrics -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-            <div class="stat bg-base-100 rounded-box">
-                <div class="stat-title">Expected Return</div>
-                <div class="stat-value" id="expectedReturn">12.5%</div>
-                <div class="stat-desc">Annual average</div>
+        <!-- Three Column Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <!-- Contributions Section -->
+            <div class="card bg-base-200 shadow-xl">
+                <div class="card-body">
+                    <h2 class="card-title">1. Contributions</h2>
+
+                    <div class="form-control">
+                        <label class="label">Initial Capital <span class="opacity-70" id="initialCapitalLabel">($100,000)</span></label>
+                        <input id="initialCapital" type="range" min="0" max="500000" value="100000" class="range"
+                            step="1000" oninput="updateSliderLabel(this, 'initialCapitalLabel', '$')" />
+                        <div class="w-full flex justify-between text-xs px-2">
+                            <span>$0</span>
+                            <span>$250k</span>
+                            <span>$500k</span>
+                        </div>
+                    </div>
+
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="flex items-center gap-2">
+                                <select id="contributionFrequency" class="select select-ghost select-xs" onchange="recalculate()">
+                                    <option value="monthly">Monthly</option>
+                                    <option value="weekly">Weekly</option>
+                                </select>
+                                Contribution <span class="opacity-70" id="monthlyContributionLabel">($2,000)</span>
+                            </span>
+                        </label>
+                        <input id="monthlyContribution" type="range" min="0" max="10000" value="2000" class="range"
+                            step="100" oninput="updateSliderLabel(this, 'monthlyContributionLabel', '$')" />
+                        <div class="w-full flex justify-between text-xs px-2">
+                            <span>$0</span>
+                            <span>$5k</span>
+                            <span>$10k</span>
+                        </div>
+                    </div>
+
+                    <div class="form-control">
+                        <label class="label">Years to Target <span class="opacity-70" id="yearsLabel">10</span></label>
+                        <input id="years" type="range" min="1" max="30" value="10" class="range" step="1" 
+                            oninput="updateSliderLabel(this, 'yearsLabel', '')" />
+                        <div class="w-full flex justify-between text-xs px-2">
+                            <span>1y</span>
+                            <span>15y</span>
+                            <span>30y</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="stat bg-base-100 rounded-box">
-                <div class="stat-title">Volatility</div>
-                <div class="stat-value" id="volatility">18.2%</div>
-                <div class="stat-desc">Standard deviation</div>
+
+            <!-- Asset Allocation Section -->
+            <div class="card bg-base-200 shadow-xl">
+                <div class="card-body">
+                    <div class="flex justify-between items-center">
+                        <h2 class="card-title">2. Asset Allocation</h2>
+                        <button onclick="resetAllocations()" id="resetButton" class="btn btn-ghost btn-xs ml-2 hidden">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Asset allocation sliders -->
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="flex items-center">
+                                ETFs (<span id="etfLabel">35</span>% | $<span id="etfValue">35,000</span>)
+                            </span>
+                            <span class="label-text-alt flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                </svg>
+                                10%
+                            </span>
+                        </label>
+                        <input id="etfAllocation" type="range" min="0" max="100" value="35" class="range" step="1" oninput="updateLabel(this, 'etfLabel')" />
+                    </div>
+
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="flex items-center">
+                                Crypto (<span id="cryptoLabel">35</span>% | $<span id="cryptoValue">35,000</span>)
+                            </span>
+                            <span class="label-text-alt flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                </svg>
+                                25%
+                            </span>
+                        </label>
+                        <input id="cryptoAllocation" type="range" min="0" max="100" value="35" class="range" step="1" oninput="updateLabel(this, 'cryptoLabel')" />
+                    </div>
+
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="flex items-center">
+                                Term Deposits (<span id="termDepositLabel">15</span>% | $<span id="termDepositValue">15,000</span>)
+                            </span>
+                            <span class="label-text-alt flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                </svg>
+                                5%
+                            </span>
+                        </label>
+                        <input id="termDepositAllocation" type="range" min="0" max="100" value="15" class="range" step="1" oninput="updateLabel(this, 'termDepositLabel')" />
+                    </div>
+
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="flex items-center">
+                                Bonds (<span id="bondLabel">10</span>% | $<span id="bondValue">10,000</span>)
+                            </span>
+                            <span class="label-text-alt flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                </svg>
+                                4%
+                            </span>
+                        </label>
+                        <input id="bondAllocation" type="range" min="0" max="100" value="10" class="range" step="1" oninput="updateLabel(this, 'bondLabel')" />
+                    </div>
+
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="flex items-center">
+                                DeFi (<span id="defiLabel">5</span>% | $<span id="defiValue">5,000</span>)
+                            </span>
+                            <span class="label-text-alt flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                </svg>
+                                15%
+                            </span>
+                        </label>
+                        <input id="defiAllocation" type="range" min="0" max="100" value="5" class="range" step="1" oninput="updateLabel(this, 'defiLabel')" />
+                    </div>
+
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="flex items-center">
+                                Stocks (<span id="stocksLabel">0</span>% | $<span id="stocksValue">0</span>)
+                            </span>
+                            <span class="label-text-alt flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                </svg>
+                                12%
+                            </span>
+                        </label>
+                        <input id="stocksAllocation" type="range" min="0" max="100" value="0" class="range" step="1" oninput="updateLabel(this, 'stocksLabel')" />
+                    </div>
+
+                    <div class="alert alert-warning mt-4" id="allocationWarning" style="display: none;">
+                        Total allocation must equal 100%
+                    </div>
+                </div>
             </div>
-            <div class="stat bg-base-100 rounded-box">
-                <div class="stat-title">Sharpe Ratio</div>
-                <div class="stat-value" id="sharpeRatio">1.8</div>
-                <div class="stat-desc">Risk-adjusted return</div>
+
+            <!-- Portfolio Section -->
+            <div class="card bg-base-200 shadow-xl">
+                <div class="card-body">
+                    <div class="flex justify-between items-center">
+                        <h2 class="card-title">3. Portfolio</h2>
+                        <button onclick="copyLink()" class="btn btn-ghost btn-sm gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                            </svg>
+                            Copy Link
+                        </button>
+                    </div>
+
+                    <div class="stats stats-vertical shadow">
+                        <div class="stat">
+                            <div class="stat-title">Total Invested</div>
+                            <div class="stat-value" id="totalInvested">$340,000</div>
+                            <div class="stat-desc">Capital + Contributions</div>
+                        </div>
+
+                        <div class="stat">
+                            <div class="stat-title">Weighted Return</div>
+                            <div class="stat-value" id="weightedReturn">12.5%</div>
+                            <div class="stat-desc">Based on allocation</div>
+                        </div>
+
+                        <div class="stat">
+                            <div class="stat-title">Final Balance</div>
+                            <div class="stat-value" id="finalBalance">$1,234,567</div>
+                            <div class="stat-desc">After <span id="yearsToTarget">10</span> years</div>
+                        </div>
+
+                        <div class="stat">
+                            <div class="stat-title">Target</div>
+                            <div class="stat-value" id="targetLabel">$1,000,000</div>
+                            <div class="form-control">
+                                <input id="targetValue" type="range" min="1000000" max="10000000" value="1000000" 
+                                    class="range" step="100000" 
+                                    oninput="document.getElementById('targetLabel').textContent = '$' + parseInt(this.value).toLocaleString(); recalculate();" />
+                                <div class="w-full flex justify-between text-xs px-2">
+                                    <span>$1M</span>
+                                    <span>$5M</span>
+                                    <span>$10M</span>
+                                </div>
+                            </div>
+                            <div class="stat-desc">Exit goal</div>
+                        </div>
+                    </div>
+
+                    <!-- Target Reached Indicator -->
+                    <div id="targetReached" class="alert alert-success shadow-lg mt-4 hidden">
+                        <div class="flex items-center justify-between w-full">
+                            <div class="flex items-center">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <div>
+                                    <h3 class="font-bold text-xl">Target Reached! 🎉</h3>
+                                    <div class="text-sm flex items-center gap-2">
+                                        <button onclick="copyLink()" class="btn btn-ghost btn-xs">
+                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                                    d="M20 12H4m0 0l6-6m-6 6l6 6" />
+                                            </svg>
+                                            Exit Strategy
+                                        </button>
+                                        <button onclick="copyLink()" class="btn btn-ghost btn-xs">
+                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                            </svg>
+                                            Copy Link
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- P5.js Sketch -->
     <script>
-        // Portfolio Visualization
-        let portfolioSketch = new p5(function(p) {
-            p.setup = function() {
-                let canvas = p.createCanvas(400, 400);
-                canvas.parent('portfolioViz');
-                p.noLoop();
-            };
+        // Portfolio data structure
+        let portfolioData = {
+            etfs: { allocation: 0.35, return: 0.10, color: [79, 70, 229] },
+            stocks: { allocation: 0.00, return: 0.12, color: [59, 130, 246] },
+            crypto: { allocation: 0.35, return: 0.25, color: [239, 68, 68] },
+            termDeposits: { allocation: 0.15, return: 0.05, color: [16, 185, 129] },
+            bonds: { allocation: 0.10, return: 0.04, color: [245, 158, 11] },
+            defi: { allocation: 0.05, return: 0.15, color: [236, 72, 153] }
+        };
 
-            p.draw = function() {
-                p.background(255);
-                drawPieChart(p);
-            };
-        });
+        let results = [];
+        let stackedChart;
 
-        // Projection Visualization
-        let projectionSketch = new p5(function(p) {
-            p.setup = function() {
-                let canvas = p.createCanvas(800, 300);
-                canvas.parent('projectionViz');
-                p.noLoop();
-            };
+        // Create stacked bar chart using ApexCharts
+        function updateAllocationChart() {
+            // Prepare data
+            const years = [];
+            const seriesData = Object.entries(portfolioData).map(([key, asset]) => ({
+                name: key.charAt(0).toUpperCase() + key.slice(1),
+                data: []
+            }));
 
-            p.draw = function() {
-                p.background(255);
-                drawProjection(p);
-            };
-        });
-
-        // Draw Pie Chart
-        function drawPieChart(p) {
-            let data = [
-                { value: 35, color: [79, 70, 229] },  // ETFs
-                { value: 35, color: [236, 72, 153] }, // Crypto
-                { value: 15, color: [16, 185, 129] }, // Term Deposits
-                { value: 10, color: [59, 130, 246] }, // Bonds
-                { value: 5, color: [245, 158, 11] }   // DeFi
-            ];
-
-            let total = data.reduce((sum, item) => sum + item.value, 0);
-            let startAngle = -p.PI/2;
-
-            p.translate(p.width/2, p.height/2);
-            
-            data.forEach(item => {
-                let sliceAngle = (item.value / total) * p.TWO_PI;
-                p.fill(item.color[0], item.color[1], item.color[2]);
-                p.arc(0, 0, 300, 300, startAngle, startAngle + sliceAngle);
-                startAngle += sliceAngle;
-            });
-        }
-
-        // Draw Projection Chart
-        function drawProjection(p) {
-            let initialAmount = 100000;
-            let monthlyContribution = 2000;
-            let years = 10;
-            let expectedReturn = 0.125; // 12.5% annual return
-
-            p.stroke(200);
-            p.line(50, p.height-50, p.width-50, p.height-50); // X axis
-            p.line(50, 50, 50, p.height-50); // Y axis
-
-            let points = [];
-            let amount = initialAmount;
-            
-            for(let year = 0; year <= years; year++) {
-                amount = amount * (1 + expectedReturn) + (monthlyContribution * 12);
-                let x = p.map(year, 0, years, 50, p.width-50);
-                let y = p.map(amount, 0, 1000000, p.height-50, 50);
-                points.push({x, y});
+            for (let i = 0; i < results.length; i++) {
+                years.push(`Year ${i}`);
+                Object.entries(portfolioData).forEach(([key, asset], index) => {
+                    seriesData[index].data.push(Math.round(results[i] * asset.allocation));
+                });
             }
 
-            // Draw line
-            p.stroke(79, 70, 229);
-            p.strokeWeight(2);
-            p.noFill();
-            p.beginShape();
-            points.forEach(point => {
-                p.vertex(point.x, point.y);
+            const options = {
+                chart: {
+                    type: 'bar',
+                    stacked: true,
+                    height: 400,
+                    toolbar: {
+                        show: false
+                    },
+                    background: '#1d232a',
+                    animations: {
+                        enabled: false
+                    }
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        columnWidth: '70%',
+                        dataLabels: {
+                            total: {
+                                enabled: true,
+                                formatter: function (val) {
+                                    return '$' + val.toLocaleString();
+                                },
+                                style: {
+                                    fontSize: '13px',
+                                    fontWeight: 900,
+                                    color: '#ffffff'
+                                }
+                            }
+                        }
+                    },
+                },
+                states: {
+                    hover: {
+                        filter: {
+                            type: 'none'
+                        }
+                    },
+                    active: {
+                        filter: {
+                            type: 'none'
+                        }
+                    }
+                },
+                colors: Object.values(portfolioData).map(asset => 
+                    `rgb(${asset.color.join(',')})`
+                ),
+                dataLabels: {
+                    enabled: true,
+                    formatter: function (val, opts) {
+                        if (val > 0) {
+                            return '$' + val.toLocaleString();
+                        }
+                        return '';
+                    },
+                    style: {
+                        colors: ['#fff']
+                    }
+                },
+                series: seriesData,
+                xaxis: {
+                    categories: years,
+                    labels: {
+                        style: {
+                            colors: '#ffffff'
+                        }
+                    }
+                },
+                yaxis: {
+                    labels: {
+                        style: {
+                            colors: '#ffffff'
+                        },
+                        formatter: function (value) {
+                            return '$' + value.toLocaleString();
+                        }
+                    }
+                },
+                tooltip: {
+                    y: {
+                        formatter: function (value) {
+                            return '$' + value.toLocaleString();
+                        }
+                    }
+                },
+                legend: {
+                    position: 'right',
+                    offsetY: 40,
+                    markers: {
+                        width: 12,
+                        height: 12,
+                        radius: 6
+                    },
+                    labels: {
+                        colors: '#ffffff'
+                    },
+                    formatter: function(seriesName, opts) {
+                        const asset = Object.entries(portfolioData).find(([key]) => 
+                            key.charAt(0).toUpperCase() + key.slice(1) === seriesName
+                        )[1];
+                        return `${seriesName} (${(asset.allocation * 100).toFixed(0)}% | ${(asset.return * 100).toFixed(0)}%)`;
+                    }
+                },
+                grid: {
+                    borderColor: 'rgba(255,255,255,0.1)',
+                    strokeDashArray: 4
+                },
+                theme: {
+                    mode: 'dark'
+                },
+                annotations: {
+                    yaxis: [{
+                        y: 1000000,
+                        borderColor: '#ff4444',
+                        label: {
+                            text: 'Target: $1M',
+                            style: {
+                                color: '#fff',
+                                background: '#ff4444'
+                            }
+                        }
+                    }]
+                }
+            };
+
+            // Destroy previous chart if it exists
+            if (stackedChart) {
+                stackedChart.destroy();
+            }
+
+            // Create new chart
+            stackedChart = new ApexCharts(document.querySelector("#allocationChart"), options);
+            stackedChart.render();
+        }
+
+        function recalculate() {
+            const initialCapital = parseInt(document.getElementById('initialCapital').value);
+            const contribution = parseInt(document.getElementById('monthlyContribution').value);
+            const isMonthly = document.getElementById('contributionFrequency').value === 'monthly';
+            const years = parseInt(document.getElementById('years').value);
+            const target = parseInt(document.getElementById('targetValue').value) || 1000000;
+            
+            // Calculate weighted return
+            let weightedReturn = Object.values(portfolioData).reduce((acc, asset) => {
+                return acc + (asset.allocation * asset.return);
+            }, 0);
+            
+            document.getElementById('weightedReturn').textContent = (weightedReturn * 100).toFixed(1) + '%';
+            
+            // Calculate growth over time
+            results = [];
+            let balance = initialCapital;
+
+            // Calculate annual contribution based on frequency
+            const annualContribution = isMonthly ? contribution * 12 : contribution * 52;
+
+            // If both initial capital and contribution are 0, set all results to 0
+            if (initialCapital === 0 && contribution === 0) {
+                for (let year = 0; year <= years; year++) {
+                    results.push(0);
+                }
+            } else {
+                for (let year = 0; year <= years; year++) {
+                    results.push(balance);
+                    balance = balance * (1 + weightedReturn) + annualContribution;
+                }
+            }
+            
+            // Update stats
+            document.getElementById('totalInvested').textContent = 
+                `$${(initialCapital + annualContribution * years).toLocaleString()}`;
+            document.getElementById('finalBalance').textContent = 
+                `$${Math.round(results[results.length - 1]).toLocaleString()}`;
+            document.getElementById('yearsToTarget').textContent = years;
+
+            // Show/hide target reached indicator
+            document.getElementById('targetReached').classList.toggle('hidden', results[results.length - 1] < target);
+
+            // Update dollar value labels for asset allocations
+            document.getElementById('etfValue').textContent = 
+                Math.round(portfolioData.etfs.allocation * initialCapital).toLocaleString();
+            document.getElementById('stocksValue').textContent = 
+                Math.round(portfolioData.stocks.allocation * initialCapital).toLocaleString();
+            document.getElementById('cryptoValue').textContent = 
+                Math.round(portfolioData.crypto.allocation * initialCapital).toLocaleString();
+            document.getElementById('termDepositValue').textContent = 
+                Math.round(portfolioData.termDeposits.allocation * initialCapital).toLocaleString();
+            document.getElementById('bondValue').textContent = 
+                Math.round(portfolioData.bonds.allocation * initialCapital).toLocaleString();
+            document.getElementById('defiValue').textContent = 
+                Math.round(portfolioData.defi.allocation * initialCapital).toLocaleString();
+
+            // Update chart
+            updateAllocationChart();
+        }
+
+        // Add event listeners to all inputs
+        document.getElementById('initialCapital').addEventListener('input', recalculate);
+        document.getElementById('monthlyContribution').addEventListener('input', recalculate);
+        document.getElementById('years').addEventListener('input', recalculate);
+
+        document.getElementById('etfAllocation').addEventListener('input', updateAllocations);
+        document.getElementById('stocksAllocation').addEventListener('input', updateAllocations);
+        document.getElementById('cryptoAllocation').addEventListener('input', updateAllocations);
+        document.getElementById('termDepositAllocation').addEventListener('input', updateAllocations);
+        document.getElementById('bondAllocation').addEventListener('input', updateAllocations);
+        document.getElementById('defiAllocation').addEventListener('input', updateAllocations);
+
+        // Load repository content with improved markdown rendering
+        async function loadRepoContent() {
+            try {
+                const response = await fetch('README.md');
+                const text = await response.text();
+                
+                // Initialize markdown-it with basic options first
+                const md = window.markdownit({
+                    html: true,
+                    linkify: true,
+                    typographer: true,
+                    breaks: true
+                });
+
+                // Only use plugins if they're available
+                if (window.markdownitAnchor) {
+                    md.use(window.markdownitAnchor, {
+                        permalink: true,
+                        permalinkBefore: true,
+                        permalinkSymbol: '§'
+                    });
+                }
+
+                if (window.markdownitTocDoneRight) {
+                    md.use(window.markdownitTocDoneRight);
+                }
+
+                // Render content
+                const content = md.render(text);
+                
+                // Update content with proper styling
+                const contentDiv = document.getElementById('repoContent');
+                contentDiv.className = 'prose prose-lg dark:prose-invert max-w-none';
+                contentDiv.innerHTML = content;
+
+                // Add syntax highlighting to code blocks if any
+                document.querySelectorAll('pre code').forEach((block) => {
+                    block.className = 'language-' + (block.className || 'plaintext');
+                });
+            } catch (error) {
+                console.error('Error loading README:', error);
+                document.getElementById('repoContent').innerHTML = `
+                    <div class="alert alert-error shadow-lg">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <div>
+                                <h3 class="font-bold">Error loading content</h3>
+                                <div class="text-xs">Please make sure README.md exists in the repository root.</div>
+                            </div>
+                        </div>
+                    </div>`;
+            }
+        }
+
+        // Initialize
+        window.onload = function () {
+            loadRepoContent();
+            recalculate();
+        };
+
+        // Add function to update labels
+        function updateLabel(slider, labelId) {
+            // Update the changed slider's label
+            document.getElementById(labelId).textContent = slider.value;
+            
+            // Update allocations first
+            updateAllocations();
+            
+            // Get initial capital for dollar value calculations
+            const initialCapital = parseInt(document.getElementById('initialCapital').value);
+            
+            // Then update all labels to reflect actual values after rebalancing
+            document.getElementById('etfLabel').textContent = 
+                (portfolioData.etfs.allocation * 100).toFixed(0);
+            document.getElementById('stocksLabel').textContent = 
+                (portfolioData.stocks.allocation * 100).toFixed(0);
+            document.getElementById('cryptoLabel').textContent = 
+                (portfolioData.crypto.allocation * 100).toFixed(0);
+            document.getElementById('termDepositLabel').textContent = 
+                (portfolioData.termDeposits.allocation * 100).toFixed(0);
+            document.getElementById('bondLabel').textContent = 
+                (portfolioData.bonds.allocation * 100).toFixed(0);
+            document.getElementById('defiLabel').textContent = 
+                (portfolioData.defi.allocation * 100).toFixed(0);
+
+            // Update dollar value labels
+            document.getElementById('etfValue').textContent = 
+                Math.round(portfolioData.etfs.allocation * initialCapital).toLocaleString();
+            document.getElementById('stocksValue').textContent = 
+                Math.round(portfolioData.stocks.allocation * initialCapital).toLocaleString();
+            document.getElementById('cryptoValue').textContent = 
+                Math.round(portfolioData.crypto.allocation * initialCapital).toLocaleString();
+            document.getElementById('termDepositValue').textContent = 
+                Math.round(portfolioData.termDeposits.allocation * initialCapital).toLocaleString();
+            document.getElementById('bondValue').textContent = 
+                Math.round(portfolioData.bonds.allocation * initialCapital).toLocaleString();
+            document.getElementById('defiValue').textContent = 
+                Math.round(portfolioData.defi.allocation * initialCapital).toLocaleString();
+
+            // Also update the slider values to match
+            document.getElementById('etfAllocation').value = 
+                (portfolioData.etfs.allocation * 100).toFixed(0);
+            document.getElementById('stocksAllocation').value = 
+                (portfolioData.stocks.allocation * 100).toFixed(0);
+            document.getElementById('cryptoAllocation').value = 
+                (portfolioData.crypto.allocation * 100).toFixed(0);
+            document.getElementById('termDepositAllocation').value = 
+                (portfolioData.termDeposits.allocation * 100).toFixed(0);
+            document.getElementById('bondAllocation').value = 
+                (portfolioData.bonds.allocation * 100).toFixed(0);
+            document.getElementById('defiAllocation').value = 
+                (portfolioData.defi.allocation * 100).toFixed(0);
+
+            // Check if allocations have changed from default
+            checkAllocationsChanged();
+        }
+
+        // Add updateSliderLabel function
+        function updateSliderLabel(slider, labelId, prefix) {
+            const value = parseInt(slider.value).toLocaleString();
+            document.getElementById(labelId).textContent = `(${prefix}${value})`;
+            recalculate();
+        }
+
+        function updateAllocations() {
+            // Get values from sliders
+            const etfAlloc = parseFloat(document.getElementById('etfAllocation').value) / 100;
+            const stocksAlloc = parseFloat(document.getElementById('stocksAllocation').value) / 100;
+            const cryptoAlloc = parseFloat(document.getElementById('cryptoAllocation').value) / 100;
+            const termDepAlloc = parseFloat(document.getElementById('termDepositAllocation').value) / 100;
+            const bondAlloc = parseFloat(document.getElementById('bondAllocation').value) / 100;
+            const defiAlloc = parseFloat(document.getElementById('defiAllocation').value) / 100;
+
+            // Get the currently changed input
+            const activeElement = document.activeElement;
+            const activeValue = activeElement ? parseFloat(activeElement.value) / 100 : null;
+
+            if (activeElement && activeValue !== null) {
+                // Create an array of allocations to adjust
+                const allocations = [
+                    { id: 'etfAllocation', key: 'etfs' },
+                    { id: 'stocksAllocation', key: 'stocks' },
+                    { id: 'cryptoAllocation', key: 'crypto' },
+                    { id: 'termDepositAllocation', key: 'termDeposits' },
+                    { id: 'bondAllocation', key: 'bonds' },
+                    { id: 'defiAllocation', key: 'defi' }
+                ];
+
+                // Get current values of other allocations
+                const otherAllocations = allocations
+                    .filter(({ id }) => id !== activeElement.id)
+                    .map(({ id }) => ({
+                        id,
+                        value: parseFloat(document.getElementById(id).value) / 100
+                    }));
+
+                const totalOthers = otherAllocations.reduce((sum, { value }) => sum + value, 0);
+
+                if (activeValue === 1.0) {
+                    // If active slider is at 100%, set all others to 0
+                    allocations.forEach(({ id, key }) => {
+                        if (activeElement.id === id) {
+                            document.getElementById(id).value = "100";
+                            portfolioData[key].allocation = 1.0;
+                        } else {
+                            document.getElementById(id).value = "0";
+                            portfolioData[key].allocation = 0;
+                        }
+                    });
+                } else if (totalOthers > 0) {
+                    // Adjust other non-zero allocations proportionally
+                    const remainingTotal = 1.0 - activeValue;
+                    const adjustmentFactor = remainingTotal / totalOthers;
+
+                    otherAllocations.forEach(({ id }) => {
+                        const currentValue = parseFloat(document.getElementById(id).value) / 100;
+                        const newValue = currentValue * adjustmentFactor;
+                        document.getElementById(id).value = (newValue * 100).toFixed(0);
+                        const key = allocations.find(a => a.id === id).key;
+                        portfolioData[key].allocation = newValue;
+                    });
+
+                    // Set active slider value
+                    const activeKey = allocations.find(a => a.id === activeElement.id).key;
+                    portfolioData[activeKey].allocation = activeValue;
+                } else {
+                    // If all others are 0, distribute remaining percentage evenly
+                    const remainingValue = 1.0 - activeValue;
+                    const evenShare = remainingValue / (allocations.length - 1);
+
+                    allocations.forEach(({ id, key }) => {
+                        if (activeElement.id === id) {
+                            portfolioData[key].allocation = activeValue;
+                            document.getElementById(id).value = (activeValue * 100).toFixed(0);
+                        } else {
+                            portfolioData[key].allocation = evenShare;
+                            document.getElementById(id).value = (evenShare * 100).toFixed(0);
+                        }
+                    });
+                }
+            }
+
+            recalculate();
+        }
+
+        function copyLink() {
+            // Get all current values
+            const params = new URLSearchParams();
+            
+            // Add portfolio settings
+            params.set('ic', document.getElementById('initialCapital').value);
+            params.set('mc', document.getElementById('monthlyContribution').value);
+            params.set('cf', document.getElementById('contributionFrequency').value);
+            params.set('y', document.getElementById('years').value);
+            
+            // Add allocations
+            params.set('etf', document.getElementById('etfAllocation').value);
+            params.set('stocks', document.getElementById('stocksAllocation').value);
+            params.set('crypto', document.getElementById('cryptoAllocation').value);
+            params.set('td', document.getElementById('termDepositAllocation').value);
+            params.set('bonds', document.getElementById('bondAllocation').value);
+            params.set('defi', document.getElementById('defiAllocation').value);
+            
+            // Create the full URL
+            const url = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(url).then(() => {
+                // Show toast notification
+                const toast = document.createElement('div');
+                toast.className = 'toast toast-end';
+                toast.innerHTML = `
+                    <div class="alert alert-success">
+                        <span>Link copied to clipboard!</span>
+                    </div>
+                `;
+                document.body.appendChild(toast);
+                
+                // Remove toast after 2 seconds
+                setTimeout(() => {
+                    toast.remove();
+                }, 2000);
             });
-            p.endShape();
-
-            // Reset stroke weight
-            p.strokeWeight(1);
         }
 
-        // Update visualizations when inputs change
-        document.getElementById('initialInvestment').addEventListener('input', updateVisualizations);
-        document.getElementById('monthlyContribution').addEventListener('input', updateVisualizations);
+        // Function to load parameters from URL
+        function loadFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            
+            // Load portfolio settings if they exist
+            if (params.has('ic')) {
+                const ic = document.getElementById('initialCapital');
+                ic.value = params.get('ic');
+                updateSliderLabel(ic, 'initialCapitalLabel', '$');
+            }
+            
+            if (params.has('mc')) {
+                const mc = document.getElementById('monthlyContribution');
+                mc.value = params.get('mc');
+                updateSliderLabel(mc, 'monthlyContributionLabel', '$');
+            }
 
-        function updateVisualizations() {
-            portfolioSketch.redraw();
-            projectionSketch.redraw();
-            updateMetrics();
+            if (params.has('cf')) {
+                document.getElementById('contributionFrequency').value = params.get('cf');
+            }
+            
+            if (params.has('y')) {
+                const y = document.getElementById('years');
+                y.value = params.get('y');
+                updateSliderLabel(y, 'yearsLabel', '');
+            }
+            
+            // Load allocations if they exist
+            const allocations = {
+                etf: { id: 'etfAllocation', key: 'etfs' },
+                stocks: { id: 'stocksAllocation', key: 'stocks' },
+                crypto: { id: 'cryptoAllocation', key: 'crypto' },
+                td: { id: 'termDepositAllocation', key: 'termDeposits' },
+                bonds: { id: 'bondAllocation', key: 'bonds' },
+                defi: { id: 'defiAllocation', key: 'defi' }
+            };
+
+            let hasAllocations = false;
+            let total = 0;
+            
+            // First, check if we have any allocation parameters and calculate total
+            for (const [param, config] of Object.entries(allocations)) {
+                if (params.has(param)) {
+                    hasAllocations = true;
+                    total += parseInt(params.get(param));
+                }
+            }
+
+            // If we have allocations, update them all
+            if (hasAllocations) {
+                // If total is not 100%, adjust proportionally
+                const adjustmentFactor = total !== 100 ? 100 / total : 1;
+
+                // Set all allocations from URL and adjust if needed
+                for (const [param, config] of Object.entries(allocations)) {
+                    let value = params.has(param) ? parseInt(params.get(param)) : 0;
+                    if (total !== 100) {
+                        value = Math.round(value * adjustmentFactor);
+                    }
+                    
+                    // Update slider value
+                    document.getElementById(config.id).value = value.toString();
+                    
+                    // Update portfolio data
+                    portfolioData[config.key].allocation = value / 100;
+                }
+
+                // Update all labels and values
+                updateLabel(document.getElementById('etfAllocation'), 'etfLabel');
+            }
+
+            // Recalculate everything
+            recalculate();
         }
 
-        function updateMetrics() {
-            // Simple mock updates - in real app would calculate based on inputs
-            document.getElementById('expectedReturn').textContent = 
-                (12.5 + Math.random()).toFixed(1) + '%';
-            document.getElementById('volatility').textContent = 
-                (18.2 + Math.random()).toFixed(1) + '%';
-            document.getElementById('sharpeRatio').textContent = 
-                (1.8 + Math.random()/2).toFixed(2);
-        }
+        // Add loadFromURL to window.onload
+        window.onload = function () {
+            loadRepoContent();
+            loadFromURL();
+            recalculate();
+        };
     </script>
+
 </body>
-</html> 
+
+</html>
