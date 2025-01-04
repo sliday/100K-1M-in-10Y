@@ -5,7 +5,7 @@ Total Allocation: 40% of portfolio ($40,000 initial + $800 monthly)
 
 ## Core Holdings (30% of Portfolio)
 
-### Bitcoin (BTC)
+### [Bitcoin (BTC)](https://www.google.com/finance/quote/BTC-USD?window=MAX)
 - Allocation: 20% ($20,000)
 - Monthly DCA: $400
 - Storage:
@@ -28,7 +28,7 @@ Total Allocation: 40% of portfolio ($40,000 initial + $800 monthly)
    - Automatic buys
    - Immediate transfers to cold storage
 
-### Ethereum (ETH)
+### [Ethereum (ETH)](https://www.google.com/finance/quote/ETH-USD?window=MAX)
 - Allocation: 10% ($10,000)
 - Monthly DCA: $200
 - Storage:
@@ -54,7 +54,7 @@ Total Allocation: 40% of portfolio ($40,000 initial + $800 monthly)
 
 ## Layer 1 Protocols (7% of Portfolio)
 
-### Solana (SOL)
+### [Solana (SOL)](https://www.google.com/finance/quote/SOL-USD?window=MAX)
 - Allocation: 3% ($3,000)
 - Monthly DCA: $60
 - Strategy:
@@ -63,7 +63,7 @@ Total Allocation: 40% of portfolio ($40,000 initial + $800 monthly)
   * Monitor network health
   * Technical analysis based
 
-### Avalanche (AVAX)
+### [Avalanche (AVAX)](https://www.google.com/finance/quote/AVAX-USD?window=MAX)
 - Allocation: 2% ($2,000)
 - Monthly DCA: $40
 - Strategy:
@@ -72,7 +72,7 @@ Total Allocation: 40% of portfolio ($40,000 initial + $800 monthly)
   * Network growth focus
   * Ecosystem monitoring
 
-### Polkadot (DOT)
+### [Polkadot (DOT)](https://www.google.com/finance/quote/DOT-USD?window=MAX)
 - Allocation: 2% ($2,000)
 - Monthly DCA: $40
 - Strategy:
@@ -83,7 +83,7 @@ Total Allocation: 40% of portfolio ($40,000 initial + $800 monthly)
 
 ## Infrastructure (3% of Portfolio)
 
-### Chainlink (LINK)
+### [Chainlink (LINK)](https://www.google.com/finance/quote/LINK-USD?window=MAX)
 - Allocation: 2% ($2,000)
 - Monthly DCA: $40
 - Strategy:
@@ -92,7 +92,7 @@ Total Allocation: 40% of portfolio ($40,000 initial + $800 monthly)
   * Network usage metrics
   * Price feed adoption
 
-### Polygon (MATIC)
+### [Polygon (MATIC)](https://www.google.com/finance/quote/MATIC-USD?window=MAX)
 - Allocation: 1% ($1,000)
 - Monthly DCA: $20
 - Strategy:
