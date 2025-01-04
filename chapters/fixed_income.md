@@ -1,27 +1,23 @@
 # Fixed Income Strategy
 
 ## Overview
-Total Allocation: 20% of portfolio ($24,000 initial + $500 monthly)
+Total Allocation: 25% of portfolio ($25,000 initial + $500 monthly)
 
-The fixed income portion of our portfolio serves as a stability anchor, providing steady income and capital preservation. This strategy employs a barbell approach, balancing safety and yield through a mix of government securities, term deposits, and high-yield savings. The allocation is structured to maintain liquidity while capturing favorable interest rates across different durations.
+The fixed income portion of our portfolio serves as a stability anchor, providing steady income and capital preservation. This strategy employs a barbell approach, balancing safety and yield through a mix of government bonds (10% of total portfolio) and term deposits (15% of total portfolio). The allocation is structured to maintain liquidity while capturing favorable interest rates across different durations.
 
 ## Barbell Strategy Overview
 ```
 Portfolio Structure:
 
-Safety Component ($24,000 total):
-
-Treasury Allocation ($12,000 - 50%):
-[████] 2-year Treasury    │ 4.5% yield  │ $4,000
-[████] 5-year Treasury    │ 4.7% yield  │ $4,000
+Government Bonds ($10,000 - 40% of fixed income):
+[████] 2-year Treasury    │ 4.5% yield  │ $3,000
+[████] 5-year Treasury    │ 4.7% yield  │ $3,000
 [████] 10-year Treasury   │ 5.0% yield  │ $4,000
 
-Term Deposits ($8,000 - 33%):
-[████] 6-month CD        │ 4.8% yield  │ $4,000
-[████] 12-month CD       │ 5.0% yield  │ $4,000
-
-High-Yield Savings ($4,000 - 17%):
-[████] Emergency Buffer  │ 4.5% yield  │ $4,000
+Term Deposits ($15,000 - 60% of fixed income):
+[████] 6-month CD        │ 4.8% yield  │ $5,000
+[████] 12-month CD       │ 5.0% yield  │ $5,000
+[████] High-Yield Save   │ 4.5% yield  │ $5,000
 
 Risk-Return Profile:
 Treasuries  [██] Risk     [████████] Safety
@@ -44,28 +40,28 @@ Yield
     3m  2y  5y  10y  30y
 
 Weighted Average Yield: 4.75%
-Total Annual Income: $1,140 ($24,000 × 4.75%)
-Monthly Income: $95
+Total Annual Income: $1,187.50 ($25,000 × 4.75%)
+Monthly Income: $98.96
 ```
 
 ## Allocation Breakdown
 ```
-Fixed Income Portfolio ($24,000):
+Fixed Income Portfolio ($25,000):
 
 By Instrument Type:
-Treasury Bonds   [██████] $12,000  50%
-Term Deposits    [████] $8,000     33%
-High-yield Save  [██] $4,000       17%
+Treasury Bonds   [██████] $10,000  40%
+Term Deposits    [████████] $15,000  60%
+High-yield Save  [██] $5,000       20%
 
 By Duration:
-Short-term   [████████] $12,000  50%
-Medium-term  [████] $8,000       33%
-Long-term    [██] $4,000         17%
+Short-term   [████████] $10,000  40%
+Medium-term  [████████] $15,000  60%
+Long-term    [██] $5,000         20%
 
 By Risk Level:
-Ultra-Safe   [████] $4,000     17%
-Very Safe    [████████] $12,000 50%
-Safe         [████████] $8,000  33%
+Ultra-Safe   [████] $3,000     12%
+Very Safe    [████████] $10,000 40%
+Safe         [████████] $12,000 48%
 ```
 
 ## Duration Management
@@ -141,18 +137,18 @@ Immediate   [████] 17% ($4,000 High-yield)
 
 ## Implementation Actions
 
-### Initial Deployment ($24,000)
-1. Week 1: Treasury Setup ($12,000)
-   - Buy 2Y Treasury: $4,000
-   - Buy 5Y Treasury: $4,000
+### Initial Deployment ($25,000)
+1. Week 1: Treasury Setup ($10,000)
+   - Buy 2Y Treasury: $3,000
+   - Buy 5Y Treasury: $3,000
    - Buy 10Y Treasury: $4,000
 
-2. Week 2: Term Deposit Setup ($8,000)
-   - Open 6M CD: $4,000
-   - Open 12M CD: $4,000
+2. Week 2: Term Deposit Setup ($15,000)
+   - Open 6M CD: $5,000
+   - Open 12M CD: $5,000
+   - Open High-Yield Savings: $5,000
 
-3. Week 3: High-Yield Setup ($4,000)
-   - Open high-yield savings: $4,000
+3. Week 3: High-Yield Setup ($5,000)
    - Set up auto-sweep
    - Configure alerts
 
@@ -176,7 +172,7 @@ Immediate   [████] 17% ($4,000 High-yield)
 1. Treasury Limits
    - Single maturity: Max $4,000
    - Duration exposure: Max 10 years
-   - Total allocation: Max $12,000
+   - Total allocation: Max $10,000
 
 2. Bank Limits
    - Single bank: Max $4,000

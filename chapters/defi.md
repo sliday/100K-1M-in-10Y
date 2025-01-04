@@ -1,39 +1,39 @@
 # DeFi Investment Strategy
 
 ## Overview
-Total Allocation: 15% of portfolio ($15,000 initial + $300 monthly)
+Total Allocation: 5% of portfolio ($5,000 initial + $100 monthly)
 
 ## Core Platforms
 
 ### Ethereum DeFi (60% of DeFi allocation)
 1. Aave v3
-   - Allocation: 30% ($4,500)
-   - Monthly DCA: $90
+   - Allocation: 30% ($1,500)
+   - Monthly DCA: $30
    - Strategy:
-     * Supply USDC: 15% ($2,250)
-     * Supply ETH: 10% ($1,500)
-     * Supply WBTC: 5% ($750)
+     * Supply USDC: 15% ($750)
+     * Supply ETH: 10% ($500)
+     * Supply WBTC: 5% ($250)
    - Current Yields:
      * USDC: ~3-4% base
      * ETH: ~3-5% base
      * WBTC: ~2-3% base
 
 2. Curve Finance
-   - Allocation: 20% ($3,000)
-   - Monthly DCA: $60
+   - Allocation: 20% ($1,000)
+   - Monthly DCA: $20
    - Pools:
-     * 3pool (USDC/USDT/DAI): $1,500
-     * stETH pool: $1,500
+     * 3pool (USDC/USDT/DAI): $500
+     * stETH pool: $500
    - Expected Returns:
      * Stablecoin pools: 5-8%
      * ETH pools: 8-12%
 
 3. Lido/Rocket Pool
-   - Allocation: 10% ($1,500)
-   - Monthly DCA: $30
+   - Allocation: 10% ($500)
+   - Monthly DCA: $10
    - Split:
-     * Lido stETH: $1,000
-     * Rocket Pool rETH: $500
+     * Lido stETH: $300
+     * Rocket Pool rETH: $200
    - Current Yields:
      * stETH: ~3.5%
      * rETH: ~4.2%
@@ -41,42 +41,42 @@ Total Allocation: 15% of portfolio ($15,000 initial + $300 monthly)
 ### Layer 2 DeFi (30% of DeFi allocation)
 
 1. Arbitrum
-   - Allocation: 20% ($3,000)
-   - Monthly DCA: $60
+   - Allocation: 20% ($1,000)
+   - Monthly DCA: $20
    - Platforms:
-     * GMX: $1,500 (GLP)
-     * Radiant: $1,500 (USDC)
+     * GMX: $500 (GLP)
+     * Radiant: $500 (USDC)
    - Expected Returns:
      * GLP: 15-20%
      * Lending: 5-8%
 
 2. Optimism
-   - Allocation: 10% ($1,500)
-   - Monthly DCA: $30
+   - Allocation: 10% ($500)
+   - Monthly DCA: $10
    - Platforms:
-     * Velodrome: $750
-     * Aave: $750
+     * Velodrome: $250
+     * Aave: $250
    - Expected Returns:
      * LP: 10-15%
      * Lending: 4-6%
 
 ### Reserve (10% of DeFi allocation)
-- Cash: $1,500
+- Cash: $500
 - Purpose: Opportunity fund
 - Gas reserves
 - Emergency buffer
 
 ## Entry Strategy
 
-### Initial Deployment ($15,000)
+### Initial Deployment ($5,000)
 1. Week 1-2: Ethereum DeFi
-   - Aave setup: $2,250
-   - Curve entry: $1,500
-   - Lido stake: $500
+   - Aave setup: $750
+   - Curve entry: $500
+   - Lido stake: $250
 
 2. Week 3-4: Layer 2
-   - Arbitrum bridge: $1,500
-   - Optimism bridge: $750
+   - Arbitrum bridge: $500
+   - Optimism bridge: $250
    - Monitor gas
 
 3. Week 5-6: Remaining
@@ -84,11 +84,11 @@ Total Allocation: 15% of portfolio ($15,000 initial + $300 monthly)
    - Keep reserve ready
    - Watch opportunities
 
-### Monthly DCA ($300)
-- Week 1: $75 (Ethereum)
-- Week 2: $75 (Ethereum)
-- Week 3: $75 (Layer 2)
-- Week 4: $75 (Layer 2/Reserve)
+### Monthly DCA ($100)
+- Week 1: $25 (Ethereum)
+- Week 2: $25 (Ethereum)
+- Week 3: $25 (Layer 2)
+- Week 4: $25 (Layer 2/Reserve)
 
 ## Risk Management
 

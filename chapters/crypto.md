@@ -1,13 +1,13 @@
 # Cryptocurrency Investment Strategy
 
 ## Overview
-Total Allocation: 40% of portfolio ($40,000 initial + $800 monthly)
+Total Allocation: 35% of portfolio ($35,000 initial + $700 monthly)
 
-## Core Holdings (30% of Portfolio)
+## Core Holdings (26.25% of Portfolio)
 
 ### [Bitcoin (BTC)](https://www.google.com/finance/quote/BTC-USD?window=MAX)
-- Allocation: 20% ($20,000)
-- Monthly DCA: $400
+- Allocation: 17.5% ($17,500)
+- Monthly DCA: $350
 - Storage:
   * Cold: 80% in Ledger
   * Hot: 20% on exchanges
@@ -18,19 +18,19 @@ Total Allocation: 40% of portfolio ($40,000 initial + $800 monthly)
   * Liquidity king
 
 ### Entry Strategy
-1. Initial $20,000
-   - Immediate: $8,000 (40%)
-   - 5% dip: $6,000 (30%)
-   - 10% dip: $6,000 (30%)
-2. Monthly $400
-   - Weekly $100 buys
+1. Initial $17,500
+   - Immediate: $7,000 (40%)
+   - 5% dip: $5,250 (30%)
+   - 10% dip: $5,250 (30%)
+2. Monthly $350
+   - Weekly $87.50 buys
    - Use Coinbase Advanced
    - Automatic buys
    - Immediate transfers to cold storage
 
 ### [Ethereum (ETH)](https://www.google.com/finance/quote/ETH-USD?window=MAX)
-- Allocation: 10% ($10,000)
-- Monthly DCA: $200
+- Allocation: 8.75% ($8,750)
+- Monthly DCA: $175
 - Storage:
   * Staking: 50%
   * Cold: 30%
@@ -42,21 +42,21 @@ Total Allocation: 40% of portfolio ($40,000 initial + $800 monthly)
   * Developer activity
 
 ### Entry Strategy
-1. Initial $10,000
-   - Immediate: $4,000
-   - Staking setup: $3,000
-   - Market dips: $3,000
-2. Monthly $200
-   - Weekly $50 buys
+1. Initial $8,750
+   - Immediate: $3,500
+   - Staking setup: $2,625
+   - Market dips: $2,625
+2. Monthly $175
+   - Weekly $43.75 buys
    - Split between spot/staking
    - Use gas optimizations
    - Track cost basis
 
-## Layer 1 Protocols (7% of Portfolio)
+## Layer 1 Protocols (6.125% of Portfolio)
 
 ### [Solana (SOL)](https://www.google.com/finance/quote/SOL-USD?window=MAX)
-- Allocation: 3% ($3,000)
-- Monthly DCA: $60
+- Allocation: 2.625% ($2,625)
+- Monthly DCA: $52.50
 - Strategy:
   * Staking for 7% APY
   * Ecosystem participation
@@ -64,8 +64,8 @@ Total Allocation: 40% of portfolio ($40,000 initial + $800 monthly)
   * Technical analysis based
 
 ### [Avalanche (AVAX)](https://www.google.com/finance/quote/AVAX-USD?window=MAX)
-- Allocation: 2% ($2,000)
-- Monthly DCA: $40
+- Allocation: 1.75% ($1,750)
+- Monthly DCA: $35
 - Strategy:
   * Subnet validation
   * DeFi opportunities
@@ -73,19 +73,19 @@ Total Allocation: 40% of portfolio ($40,000 initial + $800 monthly)
   * Ecosystem monitoring
 
 ### [Polkadot (DOT)](https://www.google.com/finance/quote/DOT-USD?window=MAX)
-- Allocation: 2% ($2,000)
-- Monthly DCA: $40
+- Allocation: 1.75% ($1,750)
+- Monthly DCA: $35
 - Strategy:
   * Parachain auctions
   * Nomination staking
   * Ecosystem development
   * Technical indicators
 
-## Infrastructure (3% of Portfolio)
+## Infrastructure (2.625% of Portfolio)
 
 ### [Chainlink (LINK)](https://www.google.com/finance/quote/LINK-USD?window=MAX)
-- Allocation: 2% ($2,000)
-- Monthly DCA: $40
+- Allocation: 1.75% ($1,750)
+- Monthly DCA: $35
 - Strategy:
   * Accumulation focus
   * Integration tracking
@@ -93,8 +93,8 @@ Total Allocation: 40% of portfolio ($40,000 initial + $800 monthly)
   * Price feed adoption
 
 ### [Polygon (MATIC)](https://www.google.com/finance/quote/MATIC-USD?window=MAX)
-- Allocation: 1% ($1,000)
-- Monthly DCA: $20
+- Allocation: 0.875% ($875)
+- Monthly DCA: $17.50
 - Strategy:
   * ZK development focus
   * Ecosystem growth
