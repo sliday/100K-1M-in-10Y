@@ -1,5 +1,15 @@
 # From $100k to $1M in 10 Years
 
+Hey there! 👋
+
+This project started from a simple thought: what happens after you achieve your first financial milestone? Once you've saved up your first $100k through hard work and smart financial choices, the next challenge becomes making that money work for you. Should you buy property? Invest in stocks? Try crypto? Move to a tax-friendly country? Buy gold?
+
+*Inspired by [this Twitter thread](https://x.com/stas_kulesh/status/1875537324576317887) about the need for a practical investment guide after reaching initial financial independence.*
+
+The goal here is to provide a practical, honest investment blueprint that could help grow $100k into $1M over about 10 years. It's the guide I wish existed when I first faced these questions. We'll explore everything from traditional ETFs to modern crypto investments, with a strong focus on risk management and practical implementation.
+
+This isn't about get-rich-quick schemes or complex financial instruments. Instead, it's a systematic approach combining proven investment strategies with newer opportunities, all explained in plain English with real examples.
+
 > **IMPORTANT DISCLAIMER**: This document and its contents are for educational and informational purposes only. This is NOT financial advice. The information provided does not constitute investment advice, financial advice, trading advice, or any other sort of advice. You should conduct your own research and consult with a qualified licensed financial advisor before making any investment decisions. By using this information, you agree that you are solely responsible for any investment decisions you make. The authors make no representations as to accuracy, completeness, currentness, suitability, or validity of any information and will not be liable for any errors, omissions, or delays in this information or any losses, injuries, or damages arising from its use.
 
 An investment strategy targeting 10x growth over 10 years through a balanced portfolio of ETFs, cryptocurrencies, DeFi, and fixed income.
