@@ -34,10 +34,27 @@ Most importantly, the journey from $100k to $1M teaches you everything you need 
 
 This guide stops at $1M because the path from $1M to $10M (true "FU money") is a different game entirely. But here's the thing: if you can turn $100k into $1M, you'll have all the skills needed to reach $10M on your own. We genuinely believe that.
 
-An investment strategy targeting 10x growth over 10 years through a balanced portfolio of ETFs, cryptocurrencies, DeFi, and fixed income.
+## The Plan: Step by Step
 
-## Portfolio Allocation
+### 1. What You Have
+You start with:
+- $100,000 in cash
+- Monthly ability to invest $2,000
+- 10-year timeline
+- Basic understanding of finance
 
+### 2. Where You're Going
+Target milestones:
+```
+Year 1: $100k → $130k (30% growth)
+Year 3: $130k → $250k (92% growth)
+Year 5: $250k → $450k (80% growth)
+Year 7: $450k → $700k (56% growth)
+Year 10: $700k → $1M+ (43% growth)
+```
+
+### 3. How to Get There
+Your portfolio will be split into four main components:
 ```
 Core Portfolio ($100,000):
 ETFs:        40% ($40,000) - Growth and dividend focus
@@ -46,57 +63,54 @@ Fixed Income: 10% ($10,000) - Bonds and stable yields
 DeFi:        10% ($10,000) - Yield farming and staking
 
 Monthly Contribution:
-Amount: $2,000
-Split: Proportional to core allocation
+$2,000 split proportionally across these components
 ```
 
-## Core Chapters
-1. [ETFs](chapters/etfs.md) - Index funds and sector ETFs
-2. [Crypto](chapters/crypto.md) - Digital assets strategy
-3. [DeFi](chapters/defi.md) - Decentralized finance yields
-4. [Fixed Income](chapters/fixed_income.md) - Bonds and stable yields
+### 4. Implementation Order
+1. First Month: [Security & Setup](chapters/implementation.md)
+   - Set up hardware wallets
+   - Create exchange accounts
+   - Establish backup procedures
+   - Document everything
 
-## Strategy Chapters
-1. [Implementation](chapters/implementation.md) - Getting started
-2. [Monitoring](chapters/monitoring.md) - Tracking progress
-3. [Risk Management](chapters/risk_management.md) - Protection strategy
-4. [Rebalancing](chapters/rebalancing.md) - Portfolio maintenance
-5. [Tax Optimization](chapters/tax_optimization.md) - Tax efficiency
-6. [Emergency Response](chapters/emergency.md) - Crisis management
+2. Second Month: [Core Investments](chapters/etfs.md)
+   - Deploy ETF portion ($40,000)
+   - Set up crypto storage ($40,000)
+   - Establish fixed income base ($10,000)
 
-## Support Chapters
-1. [Resources](chapters/resources.md) - Tools and links
-2. [Templates](chapters/templates.md) - Portfolio tracking
-3. [Glossary](chapters/glossary.md) - Key terms
+3. Third Month: [Growth Layer](chapters/defi.md)
+   - Start DeFi positions ($10,000)
+   - Set up monitoring systems
+   - Implement risk management
 
-## Getting Started
-1. Read the [Implementation](chapters/implementation.md) chapter
-2. Set up security using the [Emergency](chapters/emergency.md) guide
-3. Start with ETFs following the [ETFs](chapters/etfs.md) strategy
-4. Add crypto per the [Crypto](chapters/crypto.md) chapter
-5. Explore DeFi using the [DeFi](chapters/defi.md) guide
-6. Add fixed income per the [Fixed Income](chapters/fixed_income.md) chapter
+4. Ongoing Management:
+   - [Daily/Weekly Monitoring](chapters/monitoring.md)
+   - [Monthly Rebalancing](chapters/rebalancing.md)
+   - [Quarterly Tax Planning](chapters/tax_optimization.md)
+   - [Annual Strategy Review](chapters/risk_management.md)
 
-## Performance Targets
+### 5. Risk Management
+Your guardrails:
 ```
-Year 1: $100k → $130k (30% growth)
-Year 3: $130k → $250k (92% growth)
-Year 5: $250k → $450k (80% growth)
-Year 7: $450k → $700k (56% growth)
-Year 10: $700k → $1M+ (43% growth)
-
-Monthly: $2,000 contribution
-Total: $240,000 contributed
-Returns: $660,000 generated
+Portfolio-wide stop loss: -20%
+Rebalancing trigger: ±5% drift
+Emergency cash: 5% buffer
+Asset correlation: Keep under 0.7
 ```
 
-## Risk Management
-```
-Stop Loss: -20% portfolio wide
-Rebalance: ±5% allocation drift
-Reserve: 5% cash buffer
-Correlation: <0.7 between assets
-```
+### 6. Detailed Guides
+Each component has its own detailed chapter:
+- [ETF Strategy](chapters/etfs.md) - Core market exposure
+- [Crypto Strategy](chapters/crypto.md) - Digital assets
+- [DeFi Strategy](chapters/defi.md) - Yield generation
+- [Fixed Income](chapters/fixed_income.md) - Stability layer
+
+### 7. Support Tools
+To help you execute:
+- [Templates](chapters/templates.md) - Track everything
+- [Resources](chapters/resources.md) - Tools you'll need
+- [Glossary](chapters/glossary.md) - Key terms explained
+- [Emergency Plan](chapters/emergency.md) - When things go wrong
 
 ## Contributing
 
