@@ -4,26 +4,24 @@
 ```
 Portfolio Structure:
 
-Safety Anchor (40% of Fixed Income):
-[████████] Short-term Gov Bonds  │ 2-3% yield
-[████] High-yield Savings       │ 3-4% yield
-[████] Term Deposits           │ 4-5% yield
-        $8,000 total allocation
+Safety Component ($24,000 total):
 
-Core Position (20% of Fixed Income):
-[████] Medium-term Gov Bonds   │ 4-5% yield
-[██] Corporate Bonds         │ 5-6% yield
-        $4,000 total allocation
+Treasury Allocation ($12,000 - 50%):
+[████] 2-year Treasury    │ 4.5% yield  │ $4,000
+[████] 5-year Treasury    │ 4.7% yield  │ $4,000
+[████] 10-year Treasury   │ 5.0% yield  │ $4,000
 
-Growth Engine (40% of Fixed Income):
-[████████] Long-term Gov Bonds   │ 5-6% yield
-[████] High-yield Corps        │ 6-8% yield
-        $8,000 total allocation
+Term Deposits ($8,000 - 33%):
+[████] 6-month CD        │ 4.8% yield  │ $4,000
+[████] 12-month CD       │ 5.0% yield  │ $4,000
+
+High-Yield Savings ($4,000 - 17%):
+[████] Emergency Buffer  │ 4.5% yield  │ $4,000
 
 Risk-Return Profile:
-Safety    [██] Risk     [████████] Safety
-Core      [████] Risk   [████] Safety
-Growth    [██████] Risk [██] Safety
+Treasuries  [██] Risk     [████████] Safety
+Term Deps   [█] Risk      [█████████] Safety
+High-Yield  [_] Risk      [██████████] Safety
 ```
 
 ## Yield Analysis
@@ -31,40 +29,38 @@ Growth    [██████] Risk [██] Safety
 Current Yield Curve:
 
 Yield
-8% │      Growth Engine
-7% │        ┌─────┐
-6% │        │     └──────
-5% │    ┌───┘
-4% │ ┌──┘   Core Position
-3% │ │
-2% │ │      Safety Anchor
-1% │ └───────────
-0% └─────────────────────
-    3m  1y  2y  5y  10y+
+6% │           10Y Treasury
+5% │      5Y    ┌────
+4% │  2Y  ┌─────┘
+3% │  ┌───┘
+2% │  │
+1% │  │
+0% └──┴───────────────────
+    3m  2y  5y  10y  30y
 
-Weighted Average Yield: 4.8%
-Total Annual Income: $960 ($20,000 × 4.8%)
+Weighted Average Yield: 4.75%
+Total Annual Income: $1,140 ($24,000 × 4.75%)
+Monthly Income: $95
 ```
 
 ## Allocation Breakdown
 ```
-Fixed Income Portfolio ($20,000):
+Fixed Income Portfolio ($24,000):
 
 By Instrument Type:
-Government Bonds  [████████] $8,000  40%
-Corporate Bonds   [████] $4,000      20%
-Term Deposits    [████] $4,000      20%
-High-yield Save  [████] $4,000      20%
+Treasury Bonds   [██████] $12,000  50%
+Term Deposits    [████] $8,000     33%
+High-yield Save  [██] $4,000       17%
 
 By Duration:
-Short-term   [████████] $8,000  40%
-Medium-term  [████] $4,000      20%
-Long-term    [████████] $8,000  40%
+Short-term   [████████] $12,000  50%
+Medium-term  [████] $8,000       33%
+Long-term    [██] $4,000         17%
 
 By Risk Level:
-Low Risk     [████████] $8,000  40%
-Medium Risk  [████] $4,000      20%
-Higher Risk  [████████] $8,000  40%
+Ultra-Safe   [████] $4,000     17%
+Very Safe    [████████] $12,000 50%
+Safe         [████████] $8,000  33%
 ```
 
 ## Duration Management
@@ -72,45 +68,45 @@ Higher Risk  [████████] $8,000  40%
 Interest Rate Sensitivity:
 
 Impact of 1% Rate Change:
-Short-term  │[██] -1% to +1%
-Medium-term │[████] -3% to +3%
-Long-term   │[██████] -5% to +5%
+2Y Treasury  │[██] -2% ($80 on $4,000)
+5Y Treasury  │[████] -4% ($160 on $4,000)
+10Y Treasury │[██████] -6% ($240 on $4,000)
+Term Deps    │[█] -0.5% ($40 on $8,000)
+High-Yield   │[_] 0% ($0 on $4,000)
 
 Duration Targets:
                      Current
 0y──────5y──────10y──────15y
-   [█] Short
-        [█] Medium
-             [█] Long
+   [█] 2Y Treasury
+        [█] 5Y Treasury
+             [█] 10Y Treasury
 
 Duration Rebalancing Triggers:
-Short  │ Target: 2y  │ Range: 1-3y
-Medium │ Target: 5y  │ Range: 4-6y
-Long   │ Target: 10y │ Range: 8-12y
+2Y    │ Target: 2y  │ Range: 1.5-2.5y
+5Y    │ Target: 5y  │ Range: 4.5-5.5y
+10Y   │ Target: 10y │ Range: 9-11y
 ```
 
 ## Income Projection
 ```
 Monthly Income Stream:
 
-Jan [████████] $80
-Feb [████████] $80
-Mar [████████] $80
-Apr [████████] $80
-May [████████] $80
-Jun [████████] $80
-Jul [████████] $80
-Aug [████████] $80
-Sep [████████] $80
-Oct [████████] $80
-Nov [████████] $80
-Dec [████████] $80
+Treasury Income:
+2Y  [███] $15 ($180/year at 4.5%)
+5Y  [███] $16 ($188/year at 4.7%)
+10Y [███] $17 ($200/year at 5.0%)
 
-Annual Summary:
-Total Income:    $960
-Average Monthly: $80
-Yield on Cost:   4.8%
-Real Yield:      2.3%
+Term Deposit Income:
+6M  [████] $16 ($192/year at 4.8%)
+12M [████] $17 ($200/year at 5.0%)
+
+High-Yield Income:
+HYS [███] $15 ($180/year at 4.5%)
+
+Monthly Summary:
+Total Income:    $95 ($1,140/year)
+Real Yield:      2.25% (4.75% - 2.5% inflation)
+Risk-Adj Yield:  4.0% (after volatility adjustment)
 ```
 
 ## Risk Management
@@ -118,135 +114,150 @@ Real Yield:      2.3%
 Fixed Income Risk Matrix:
 
 Risk Type   │Impact │Mitigation
-Interest    │[████] │Duration management
-Credit      │[███]  │Quality screening
-Inflation   │[████] │TIPS allocation
-Liquidity   │[██]   │Ladder strategy
-Reinvestment│[███]  │Barbell strategy
+Interest    │[███]  │Duration ladder
+Credit      │[█]    │Treasury focus
+Inflation   │[███]  │Rate adjustments
+Liquidity   │[█]    │High-yield buffer
+Reinvestment│[██]   │Staggered maturities
 
 Quality Distribution:
-AAA     [████████] 40%
-AA      [████] 20%
-A       [████] 20%
-BBB     [████] 20%
-<BBB    [0%]
+US Treasury [██████] 50%
+FDIC Banks  [██████] 50%
+<AA+        [0%]
 
 Liquidity Profile:
-<1 month   [████████] 40%
-1-6 months [████] 20%
-6-12 months[████] 20%
->12 months [████] 20%
+Immediate   [████] 17% ($4,000 High-yield)
+<6 months   [████] 17% ($4,000 6M CD)
+6-12 months [████] 17% ($4,000 12M CD)
+1-2 years   [████] 17% ($4,000 2Y Treasury)
+2-5 years   [████] 17% ($4,000 5Y Treasury)
+5+ years    [████] 17% ($4,000 10Y Treasury)
 ```
 
 ## Implementation Actions
 
-### Initial Deployment ($15,000)
-1. Week 1: Safe End Setup
-   - Purchase Treasury bonds: $4,000
-   - Open term deposits: $3,000
-   - Setup high-yield savings: $3,000
+### Initial Deployment ($24,000)
+1. Week 1: Treasury Setup ($12,000)
+   - Buy 2Y Treasury: $4,000
+   - Buy 5Y Treasury: $4,000
+   - Buy 10Y Treasury: $4,000
 
-2. Week 2: Risk End Setup
-   - Corporate bond funds: $3,000
-   - Bond ETF positions: $2,000
+2. Week 2: Term Deposit Setup ($8,000)
+   - Open 6M CD: $4,000
+   - Open 12M CD: $4,000
 
-### Monthly Contributions ($300)
-1. Safe End ($200)
-   - Treasury bonds: $80
-   - Term deposits: $60
-   - High-yield savings: $60
+3. Week 3: High-Yield Setup ($4,000)
+   - Open high-yield savings: $4,000
+   - Set up auto-sweep
+   - Configure alerts
 
-2. Risk End ($100)
-   - Corporate bonds: $60
-   - Bond ETFs: $40
+### Monthly Contributions ($500)
+1. Treasury Allocation ($250)
+   - 2Y Treasury: $80
+   - 5Y Treasury: $80
+   - 10Y Treasury: $90
+
+2. Term Deposits ($150)
+   - 6M CD ladder: $75
+   - 12M CD ladder: $75
+
+3. High-Yield ($100)
+   - Emergency buffer: $100
+   - Rebalance at $4,500
 
 ## Risk Management
 
 ### Position Limits
-- Single issuer: Max 2% ($2,000)
-- Single term deposit: Max 1.5% ($1,500)
-- High-yield exposure: Max 5% ($5,000)
-- Duration risk: Max 5 years
+1. Treasury Limits
+   - Single maturity: Max $4,000
+   - Duration exposure: Max 10 years
+   - Total allocation: Max $12,000
+
+2. Bank Limits
+   - Single bank: Max $4,000
+   - Early withdrawal option required
+   - FDIC insurance mandatory
+   - Minimum rate threshold: Top 10%
 
 ### Safety Measures
 1. Credit Risk
-   - Minimum rating: BBB- for corporate bonds
-   - Government bonds: US Treasury only
-   - Banks: FDIC-insured only
-   - Regular credit monitoring
+   - US Treasury only for bonds
+   - FDIC-insured banks only
+   - Regular bank rating checks
+   - Quarterly limit reviews
 
 2. Interest Rate Risk
    - Duration laddering
-   - Regular yield curve analysis
-   - Rate hike impact assessment
-   - Rebalancing triggers
+   - Yield curve monitoring
+   - Rate sensitivity analysis
+   - Monthly rebalancing check
 
 ## Monitoring System
 
 ### Weekly Checks
-1. Yield Analysis
-   - Compare current yields
-   - Check rate trends
-   - Monitor credit spreads
-   - Review duration exposure
+1. Rate Analysis
+   - Treasury yield changes
+   - CD rate comparisons
+   - High-yield rate tracking
+   - Spread analysis
 
 2. Risk Assessment
-   - Credit rating changes
-   - Default risk indicators
-   - Interest rate movements
-   - Liquidity conditions
+   - Duration exposure
+   - Bank health metrics
+   - Market rate trends
+   - Liquidity needs
 
 ### Monthly Reviews
 1. Performance Tracking
-   - Total return calculation
-   - Yield contribution
-   - Risk-adjusted returns
+   - Yield calculations
+   - Duration adjustments
+   - Income verification
    - Rebalancing needs
 
 2. Strategy Alignment
-   - Barbell balance check
-   - Duration adjustment
-   - Yield optimization
-   - New opportunity scan
+   - Ladder structure
+   - Maturity schedule
+   - Rate optimization
+   - Bank diversification
 
 ## Common Mistakes to Avoid
 
 ### Strategy Errors
-1. Yield Chasing
-   - Example: Moving $3,000 to risky bonds for 2% higher yield
-   - Impact: Increased default risk
-   - Better Approach: Maintain barbell balance
-   - Real Numbers: Max 5% in high-yield bonds
+1. Duration Risk
+   - Example: All $12,000 in 10Y Treasury
+   - Impact: -6% on 1% rate rise ($720 loss)
+   - Better: $4,000 each in 2Y, 5Y, 10Y
+   - Real Numbers: Max $4,000 per maturity
 
-2. Duration Risk
-   - Example: All $4,000 in long-term Treasuries
-   - Impact: High interest rate sensitivity
-   - Better Approach: Ladder maturities
-   - Real Numbers: Max $2,000 per duration bucket
+2. Bank Concentration
+   - Example: $8,000 at one bank
+   - Impact: Exceeds safety threshold
+   - Better: Max $4,000 per bank
+   - Real Numbers: Split across 2+ banks
 
 ### Implementation Mistakes
-1. Poor Diversification
-   - Example: $3,000 in single corporate bond
-   - Impact: High issuer risk
-   - Better Approach: Max $2,000 per issuer
-   - Real Numbers: Split $3,000 across min. 3 issuers
+1. Yield Chasing
+   - Example: Unproven bank offering +0.5%
+   - Impact: Increased risk for $20/year
+   - Better: Stick to top-tier banks
+   - Real Numbers: Max 0.3% yield sacrifice
 
-2. Timing Errors
-   - Example: Rushing to lock in high rates
-   - Impact: Missed better opportunities
-   - Better Approach: Ladder entry points
-   - Real Numbers: Split $3,000 CD over 3 months
+2. Liquidity Lock
+   - Example: All $8,000 in 5-year CDs
+   - Impact: High early withdrawal fees
+   - Better: Ladder maturities
+   - Real Numbers: Max $4,000 per term
 
 ## Resources
 
 ### Research Tools
 - [Treasury Direct](https://www.treasurydirect.gov)
-- [FINRA Bond Center](https://www.finra.org/investors/learn-to-invest/types-investments/bonds)
+- [FDIC BankFind](https://banks.data.fdic.gov/bankfind-suite/bankfind)
 - [Bankrate CD Rates](https://www.bankrate.com/banking/cds/cd-rates/)
 - [High Yield Savings Comparison](https://www.bankrate.com/banking/savings/rates/)
 
-### Analysis Platforms
-- [MorningStar Bond Center](https://www.morningstar.com/bonds)
-- [EMMA (Municipal Securities)](https://emma.msrb.org)
-- [Federal Reserve Economic Data](https://fred.stlouisfed.org)
-- [Bond Screener Tools](https://finviz.com/screener.ashx?v=410) 
+### Analysis Tools
+- [Treasury Yield Curve](https://www.treasury.gov/resource-center/data-chart-center/interest-rates/Pages/TextView.aspx?data=yield)
+- [CD Ladder Calculator](https://www.bankrate.com/calculators/cd/cd-ladder-calculator.aspx)
+- [Bond Duration Calculator](https://www.calculatorsoup.com/calculators/financial/bond-duration-calculator.php)
+- [FDIC Insurance Calculator](https://edie.fdic.gov) 
