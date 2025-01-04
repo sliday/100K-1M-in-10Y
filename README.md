@@ -38,6 +38,33 @@ Most importantly, the journey teaches you everything about growing wealth:
 - Investment psychology
 - Financial independence
 
+## Portfolio Allocation
+
+Our strategy employs a barbell approach, balancing growth potential with stability:
+
+```
+Core Growth (70%):
+ETFs:         35% ($35,000 + $700/mo) - Market exposure
+Crypto:       35% ($35,000 + $700/mo) - Digital assets
+
+Stability (25%):
+Term Deps:    15% ($15,000 + $300/mo) - Fixed-rate returns
+Bonds:        10% ($10,000 + $200/mo) - Government securities
+
+Yield Enhancement (5%):
+DeFi:          5% ($5,000 + $100/mo)  - Yield farming
+
+Monthly Investment: $2,000 total
+Initial Capital:    $100,000 total
+```
+
+Each allocation serves a specific purpose:
+- ETFs: Broad market exposure through index funds
+- Crypto: Digital asset appreciation potential
+- Term Deposits: Stable, predictable returns
+- Bonds: Portfolio stabilization
+- DeFi: Enhanced yields through crypto platforms
+
 ## Action: The Implementation Blueprint
 
 ### 1. Phase 1: Foundation (Years 1-2)
@@ -138,27 +165,61 @@ Tools for success:
 
 ## Contributing
 
-Help improve this guide:
-1. Keep it practical - no theory without practice
-2. Use the $100k portfolio as example
-3. Focus on risk management
-4. Include specific steps and numbers
-5. Maintain simplicity and clarity
+This guide is open source and welcomes contributions. Here's how you can help:
 
-Submit improvements if you:
-- Found errors or outdated info
-- Tested strategies successfully
-- Have specific risk improvements
-- Can simplify explanations
+### Ways to Contribute
+1. Keep it practical
+   - No theory without practice
+   - Use the $100k portfolio as example
+   - Focus on risk management
+   - Include specific steps and numbers
+   - Maintain simplicity and clarity
+
+2. Improve Documentation
+   - Fix typos or unclear wording
+   - Add missing explanations
+   - Improve examples
+   - Update outdated information
+
+3. Share Experience
+   - Test strategies and report results
+   - Suggest risk improvements
+   - Simplify complex concepts
+   - Add real-world examples
+
+### Contribution Process
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+### Pull Request Guidelines
+- Keep changes focused and atomic
+- Follow existing formatting
+- Add comments for complex parts
+- Update relevant documentation
+- Test all links and examples
+
+### Issue Reporting
+If you find a problem:
+1. Check existing issues first
+2. Use the issue template
+3. Include specific examples
+4. Suggest a fix if possible
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Important Disclaimer
 
-This is an educational resource, not financial advice. The investment strategy involves substantial risks:
-- Market volatility and potential losses
-- Technical vulnerabilities in crypto/DeFi
-- Regulatory changes
-- Platform/protocol risks
-- Tax law changes
-- Economic events
+This guide involves substantial investment risks. Please read our complete [Risk Disclosure](chapters/disclaimer.md) before proceeding.
 
-**Always do your own research and consult qualified professionals before investing.**
+Key points:
+- Educational resource only
+- No guaranteed returns
+- Multiple risk factors
+- Requires active management
+- Consult professionals
+
+**Always do your own research and understand the risks before investing.**

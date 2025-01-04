@@ -1,7 +1,6 @@
-# Internal documentation and planning
-/internal/
+internal/
 
-# OS-specific files
+# OS files
 .DS_Store
 .DS_Store?
 ._*
@@ -10,9 +9,38 @@
 ehthumbs.db
 Thumbs.db
 
-# Editor directories and files
-.idea/
+# Editor files
 .vscode/
+.idea/
 *.swp
-*.swo
-*~ 
+*~
+*.sublime-workspace
+*.sublime-project
+
+# Temporary files
+*.log
+*.tmp
+*.temp
+.env
+.env.local
+
+# Node (if using any tools)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python (if using any tools)
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+env/
+venv/
+.env/
+.venv/
+
+# Build output
+dist/
+build/
+out/ 
