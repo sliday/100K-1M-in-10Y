@@ -300,19 +300,16 @@
 
                     <!-- Target Reached Toast -->
                     <div id="targetReached" class="toast toast-center toast-bottom z-50 hidden">
-                        <div class="alert bg-success text-success-content shadow-lg">
+                        <div class="alert bg-success text-success-content shadow-xlg border border-green-700/50">
                             <div class="flex flex-col gap-2">
                                 <div class="flex items-center justify-between w-full">
                                     <div class="flex items-center gap-1">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                        <span class="font-medium">Target Reached!</span>
+                                        <span class="font-medium" id="targetReachedMessage"></span>
                                     </div>
                                     <button onclick="hideTargetReached()" class="btn btn-ghost btn-xs btn-square"> × </button>
                                 </div>
                                 <div class="flex gap-1">
-                                    <button onclick="copyLink()" class="btn btn-xs flex-2">SHARE THIS PAGE</button>
+                                    <button onclick="copyLink()" class="btn btn-xs flex-1">SHARE THIS PAGE</button>
                                     <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/exit.md" target="_blank" class="btn btn-xs flex-1">EXIT GRACEFULLY</a>
                                 </div>
                             </div>
@@ -363,6 +360,8 @@
                     });
             }
 
+            const target = parseInt(document.getElementById('targetValue').value);
+
             const options = {
                 chart: {
                     type: 'bar',
@@ -374,6 +373,25 @@
                     background: '#1d232a',
                     animations: {
                         enabled: false
+                    }
+                },
+                title: {
+                    text: calculateYearsUntilTarget(),
+                    align: 'center',
+                    style: {
+                        fontSize: '28px',
+                        fontWeight: 'bold',
+                        color: '#ffffff',
+                        fontFamily: 'system-ui'
+                    },
+                    margin: 20,
+                    offsetY: 10
+                },
+                subtitle: {
+                    text: '',
+                    align: 'left',
+                    style: {
+                        fontSize: '0px'
                     }
                 },
                 responsive: [{
@@ -508,10 +526,10 @@
                 },
                 annotations: {
                     yaxis: [{
-                        y: parseInt(document.getElementById('targetValue').value),
+                        y: target,
                         borderColor: '#ff4444',
                         label: {
-                            text: 'Target: $' + parseInt(document.getElementById('targetValue').value).toLocaleString(),
+                            text: 'Target: $' + target.toLocaleString(),
                             style: {
                                 color: '#fff',
                                 background: '#ff4444'
@@ -571,6 +589,9 @@
                 `$${Math.round(results[results.length - 1]).toLocaleString()}`;
             document.getElementById('yearsToTarget').textContent = years;
 
+            // Update chart
+            updateAllocationChart();
+
             // Show/hide target reached indicator
             document.getElementById('targetReached').classList.toggle('hidden', results[results.length - 1] < target);
 
@@ -589,7 +610,26 @@
                 Math.round(portfolioData.defi.allocation * initialCapital).toLocaleString();
 
             // Update chart
-            updateAllocationChart();
+            if (stackedChart) {
+                stackedChart.updateOptions({
+                    annotations: {
+                        yaxis: [{
+                            y: target,
+                            borderColor: '#ff4444',
+                            label: {
+                                text: 'Target: $' + target.toLocaleString(),
+                                style: {
+                                    color: '#fff',
+                                    background: '#ff4444'
+                                }
+                            }
+                        }]
+                    },
+                    subtitle: {
+                        text: calculateYearsUntilTarget()
+                    }
+                }, false, true);
+            }
         }
 
         // Add event listeners to all inputs
@@ -877,6 +917,8 @@
         // Initialize
         window.onload = function () {
             loadFromURL();
+            const target = parseInt(document.getElementById('targetValue').value);
+            document.getElementById('targetReachedMessage').textContent = `$${target.toLocaleString()} Target Within Reach!`;
             recalculate();
         };
 
@@ -923,27 +965,12 @@
             const target = parseInt(this.value);
             document.getElementById('targetLabel').textContent = '$' + target.toLocaleString();
             
-            // Update target line in chart
-            if (stackedChart) {
-                stackedChart.updateOptions({
-                    annotations: {
-                        yaxis: [{
-                            y: target,
-                            borderColor: '#ff4444',
-                            label: {
-                                text: 'Target: $' + target.toLocaleString(),
-                                style: {
-                                    color: '#fff',
-                                    background: '#ff4444'
-                                }
-                            }
-                        }]
-                    }
-                }, false, true);
-            }
+            // Update chart
+            updateAllocationChart();
             
             // Update target reached indicator with animation
             if (results[results.length - 1] >= target) {
+                document.getElementById('targetReachedMessage').textContent = `$${target.toLocaleString()} Target Within Reach!`;
                 showTargetReached();
             } else {
                 hideTargetReached();
@@ -1000,6 +1027,37 @@
         function hideTargetReached() {
             const toast = document.getElementById('targetReached');
             toast.classList.add('hidden');
+        }
+
+        // Add this function before updateAllocationChart
+        function calculateYearsUntilTarget() {
+            const target = parseInt(document.getElementById('targetValue').value);
+            const finalBalance = results[results.length - 1];
+            
+            if (!finalBalance || finalBalance === 0) return `∞ years to $${target.toLocaleString()}`;
+            
+            // Calculate compound growth rate needed
+            const initialCapital = parseInt(document.getElementById('initialCapital').value);
+            const monthlyContribution = parseInt(document.getElementById('monthlyContribution').value);
+            const isMonthly = document.getElementById('contributionFrequency').value === 'monthly';
+            const annualContribution = isMonthly ? monthlyContribution * 12 : monthlyContribution * 52;
+            
+            // Calculate weighted return
+            let weightedReturn = Object.values(portfolioData).reduce((acc, asset) => {
+                return acc + (asset.allocation * asset.return);
+            }, 0);
+            
+            if (weightedReturn <= 0) return `∞ years to $${target.toLocaleString()}`;
+            
+            // Calculate years needed using compound interest formula with regular contributions
+            let years = 0;
+            let balance = initialCapital;
+            while (balance < target && years < 100) {
+                balance = balance * (1 + weightedReturn) + annualContribution;
+                years++;
+            }
+            
+            return years >= 100 ? `∞ years to $${target.toLocaleString()}` : `${years} years to $${target.toLocaleString()}`;
         }
     </script>
 
