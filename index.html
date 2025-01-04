@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>"100k → 1M in 10Y" Investment Portfolio Calculator</title>
+    <title>"100K → 1M in 10Y" Investment Portfolio Calculator</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -96,8 +96,8 @@
 <body class="bg-base-300 p-4">
     <div class="max-w-7xl mx-auto">
         <a class="m-4" href="https://github.com/sliday/100K-1M-in-10Y">
-            <h1 class="text-4xl font-bold text-center">100k → 1M in 10Y</h1>
-            <h3 class="text-center font-bold">Investment Portfolio Calculator</h2>
+            <h1 class="text-4xl font-bold text-center mb-2">100K → 1M in 10Y: A Practical Investment Journey</h1>
+            <div class="text-center">Read the open-source guide. Contribute to improve it.</div> 
         </a>
 
         <!-- Asset Allocation Chart -->
@@ -401,6 +401,38 @@
                         enabled: false
                     }
                 },
+                responsive: [{
+                    breakpoint: 768,
+                    options: {
+                        legend: {
+                            show: false
+                        },
+                        plotOptions: {
+                            bar: {
+                                columnWidth: '90%'
+                            }
+                        },
+                        xaxis: {
+                            labels: {
+                                show: false
+                            }
+                        },
+                        yaxis: {
+                            labels: {
+                                formatter: function (value) {
+                                    return '$' + (value / 1000).toFixed(0) + 'k';
+                                }
+                            }
+                        },
+                        dataLabels: {
+                            total: {
+                                style: {
+                                    fontSize: '11px'
+                                }
+                            }
+                        }
+                    }
+                }],
                 plotOptions: {
                     bar: {
                         horizontal: false,
@@ -409,6 +441,9 @@
                             total: {
                                 enabled: true,
                                 formatter: function (val) {
+                                    if (window.innerWidth < 768) {
+                                        return '$' + (val / 1000).toFixed(0) + 'k';
+                                    }
                                     return '$' + val.toLocaleString();
                                 },
                                 style: {
@@ -418,7 +453,7 @@
                                 }
                             }
                         }
-                    },
+                    }
                 },
                 states: {
                     hover: {
@@ -433,10 +468,10 @@
                     }
                 },
                 colors: Object.entries(portfolioData)
-                    .filter(([key, asset]) => asset.allocation > 0)  // Only include non-zero allocations
+                    .filter(([key, asset]) => asset.allocation > 0)
                     .map(([key, asset]) => `rgb(${asset.color.join(',')})`),
                 dataLabels: {
-                    enabled: false  // Disable individual bar labels for cleaner look
+                    enabled: false
                 },
                 series: seriesData,
                 xaxis: {
@@ -444,7 +479,10 @@
                     labels: {
                         style: {
                             colors: '#ffffff'
-                        }
+                        },
+                        rotate: -45,
+                        rotateAlways: false,
+                        hideOverlappingLabels: true
                     }
                 },
                 yaxis: {
@@ -453,6 +491,10 @@
                             colors: '#ffffff'
                         },
                         formatter: function (value) {
+                            if (window.innerWidth < 768) {
+                                // Shorter format for mobile
+                                return '$' + (value / 1000).toFixed(0) + 'k';
+                            }
                             return '$' + value.toLocaleString();
                         }
                     }
@@ -586,68 +628,6 @@
         document.getElementById('termDepositAllocation').addEventListener('input', updateAllocations);
         document.getElementById('bondAllocation').addEventListener('input', updateAllocations);
         document.getElementById('defiAllocation').addEventListener('input', updateAllocations);
-
-        // Load repository content with improved markdown rendering
-        async function loadRepoContent() {
-            try {
-                const response = await fetch('README.md');
-                const text = await response.text();
-                
-                // Initialize markdown-it with basic options first
-                const md = window.markdownit({
-                    html: true,
-                    linkify: true,
-                    typographer: true,
-                    breaks: true
-                });
-
-                // Only use plugins if they're available
-                if (window.markdownitAnchor) {
-                    md.use(window.markdownitAnchor, {
-                        permalink: true,
-                        permalinkBefore: true,
-                        permalinkSymbol: '§'
-                    });
-                }
-
-                if (window.markdownitTocDoneRight) {
-                    md.use(window.markdownitTocDoneRight);
-                }
-
-                // Render content
-                const content = md.render(text);
-                
-                // Update content with proper styling
-                const contentDiv = document.getElementById('repoContent');
-                contentDiv.className = 'prose prose-lg dark:prose-invert max-w-none';
-                contentDiv.innerHTML = content;
-
-                // Add syntax highlighting to code blocks if any
-                document.querySelectorAll('pre code').forEach((block) => {
-                    block.className = 'language-' + (block.className || 'plaintext');
-                });
-            } catch (error) {
-                console.error('Error loading README:', error);
-                document.getElementById('repoContent').innerHTML = `
-                    <div class="alert alert-error shadow-lg">
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <div>
-                                <h3 class="font-bold">Error loading content</h3>
-                                <div class="text-xs">Please make sure README.md exists in the repository root.</div>
-                            </div>
-                        </div>
-                    </div>`;
-            }
-        }
-
-        // Initialize
-        window.onload = function () {
-            loadRepoContent();
-            recalculate();
-        };
 
         // Add function to update labels
         function updateLabel(slider, labelId) {
@@ -803,6 +783,7 @@
             params.set('mc', document.getElementById('monthlyContribution').value);
             params.set('cf', document.getElementById('contributionFrequency').value);
             params.set('y', document.getElementById('years').value);
+            params.set('t', document.getElementById('targetValue').value);
             
             // Add allocations
             params.set('etf', document.getElementById('etfAllocation').value);
@@ -822,7 +803,7 @@
                 toast.className = 'toast toast-end';
                 toast.innerHTML = `
                     <div class="alert alert-success">
-                        <span>Link copied to clipboard!</span>
+                        <span>Link copied!</span>
                     </div>
                 `;
                 document.body.appendChild(toast);
@@ -860,7 +841,13 @@
                 y.value = params.get('y');
                 updateSliderLabel(y, 'yearsLabel', '');
             }
-            
+
+            if (params.has('t')) {
+                const t = document.getElementById('targetValue');
+                t.value = params.get('t');
+                document.getElementById('targetLabel').textContent = '$' + parseInt(t.value).toLocaleString();
+            }
+
             // Load allocations if they exist
             const allocations = {
                 etf: { id: 'etfAllocation', key: 'etfs' },
@@ -909,9 +896,8 @@
             recalculate();
         }
 
-        // Add loadFromURL to window.onload
+        // Initialize
         window.onload = function () {
-            loadRepoContent();
             loadFromURL();
             recalculate();
         };
