@@ -69,6 +69,12 @@ Goal: Systematic deployment of capital with proper security and monitoring
      * Link bank account
      * Test with $100 deposit
 
+   - Fixed Income Accounts
+     * Open high-yield savings account
+     * Set up Treasury Direct account
+     * Research bond brokers
+     * Compare CD rates across banks
+
 2. Backup Systems
    - Create seed phrase backups (3 copies)
    - Store in separate secure locations
@@ -76,17 +82,23 @@ Goal: Systematic deployment of capital with proper security and monitoring
    - Test recovery process
 
 ### Week 3: Initial Deployments
-1. ETF Portfolio ($10,000 test)
-   - VGT: $4,000 (40%)
-   - QQQ: $4,000 (40%)
-   - SOXX: $1,000 (10%)
-   - ARKK: $1,000 (10%)
+1. ETF Portfolio ($8,000 test)
+   - VGT: $3,200 (40%)
+   - QQQ: $3,200 (40%)
+   - SOXX: $800 (10%)
+   - ARKK: $800 (10%)
 
-2. Crypto Portfolio ($10,000 test)
-   - BTC: $6,000 (60%)
-   - ETH: $4,000 (40%)
+2. Crypto Portfolio ($8,000 test)
+   - BTC: $4,800 (60%)
+   - ETH: $3,200 (40%)
    - Test cold storage transfers
    - Verify addresses multiple times
+
+3. Fixed Income ($4,000 test)
+   - Treasury bonds: $2,000 (50%)
+   - High-yield savings: $1,000 (25%)
+   - Short-term CDs: $1,000 (25%)
+   - Document rates and terms
 
 ### Week 4: Monitoring Setup
 1. Daily System ($0 budget)
@@ -103,39 +115,51 @@ Goal: Systematic deployment of capital with proper security and monitoring
 
 ## Month 2: Main Deployment
 
-### Week 1-2: ETF Deployment ($30,000)
-1. Core Holdings ($20,000)
-   - VGT: Buy $6,000 more
-   - QQQ: Buy $6,000 more
+### Week 1-2: ETF Deployment ($24,000)
+1. Core Holdings ($16,000)
+   - VGT: Buy $5,000 more
+   - QQQ: Buy $5,000 more
    - Set limit orders for dips
    - Document each trade
 
-2. Specialized ($10,000)
-   - SOXX: Buy $4,000 more
-   - ARKK: Buy $4,000 more
+2. Specialized ($8,000)
+   - SOXX: Buy $3,000 more
+   - ARKK: Buy $3,000 more
    - Set stop losses
    - Configure alerts
 
-### Week 3-4: Crypto Deployment ($40,000)
-1. Core Crypto ($30,000)
-   - BTC: Buy $14,000 more
-   - ETH: Buy $6,000 more
-   - Transfer to cold storage
-   - Verify all transactions
+### Week 3-4: Barbell Strategy Implementation ($56,000)
 
-2. Alternative Chains ($10,000)
-   - SOL: Buy $3,000
-   - AVAX: Buy $2,000
-   - DOT: Buy $2,000
-   - LINK: Buy $2,000
-   - MATIC: Buy $1,000
+1. Growth Side ($32,000)
+   - Core Crypto ($24,000)
+     * BTC: Buy $12,000 more
+     * ETH: Buy $6,000 more
+     * Transfer to cold storage
+   - Alternative Chains ($8,000)
+     * SOL: Buy $2,000
+     * AVAX: Buy $2,000
+     * DOT: Buy $2,000
+     * LINK: Buy $1,000
+     * MATIC: Buy $1,000
 
-## Month 3: DeFi Integration
+2. Safety Side ($24,000)
+   - Government Bonds ($12,000)
+     * 2-year Treasury: $4,000
+     * 5-year Treasury: $4,000
+     * 10-year Treasury: $4,000
+   - Term Deposits ($8,000)
+     * 6-month CD: $4,000
+     * 12-month CD: $4,000
+   - High-Yield Savings ($4,000)
+     * Emergency buffer
+     * Ready for opportunities
 
-### Week 1-2: Stablecoin Setup ($15,000)
+## Month 3: DeFi and Yield Integration
+
+### Week 1-2: Stablecoin and Yield Setup ($12,000)
 1. Initial Conversion
-   - USDC: Buy $7,000
-   - USDT: Buy $5,000
+   - USDC: Buy $5,000
+   - USDT: Buy $4,000
    - DAI: Buy $3,000
    - Test small transfers
 
@@ -145,16 +169,16 @@ Goal: Systematic deployment of capital with proper security and monitoring
    - Monitor for 48 hours
    - Document yields
 
-### Week 3-4: Full DeFi Deployment ($15,000)
+### Week 3-4: Full DeFi Deployment ($16,000)
 1. Lending Protocols ($8,000)
    - Aave: Add $4,000
-   - Compound: Add $3,000
+   - Compound: Add $4,000
    - Document gas costs
    - Track health factors
 
-2. Yield Strategies ($7,000)
+2. Yield Strategies ($8,000)
    - Curve pools: Add $4,000
-   - Liquid staking: Add $3,000
+   - Liquid staking: Add $4,000
    - Monitor daily
    - Record all yields
 
@@ -175,16 +199,74 @@ Goal: Systematic deployment of capital with proper security and monitoring
 
 ### Deployment Errors
 1. Over-Allocation
-   - Example: Investing full $30,000 ETF allocation at once
+   - Example: Investing full $24,000 ETF allocation at once
    - Impact: Poor entry prices, missed opportunities
-   - Better Approach: 3 tranches of $10,000 each
+   - Better Approach: 3 tranches of $8,000 each
    - Real Numbers: 40% immediate, 30% at 5% dip, 30% at 10% dip
 
 2. Platform Risk
-   - Example: Keeping entire $40,000 crypto allocation on exchange
+   - Example: Keeping entire $32,000 crypto allocation on exchange
    - Impact: Exchange risk, potential loss
-   - Better Approach: Max $8,000 (20%) on any exchange
+   - Better Approach: Max $6,400 (20%) on any exchange
    - Real Numbers: Move every $5,000 to cold storage
+
+3. Fixed Income Mistakes
+   - Example: Putting all $24,000 in long-term bonds
+   - Impact: Interest rate risk, lack of liquidity
+   - Better Approach: Ladder maturities, keep some liquid
+   - Real Numbers: Max 40% in any single maturity
+
+## Time Management
+
+### Daily Schedule
+1. Morning (15 minutes)
+   - Check balances
+   - Verify transactions
+   - Review alerts
+   - Track yield rates
+   - Monitor bond prices
+   - Plan day's actions
+
+2. Evening (15 minutes)
+   - Update records
+   - Check pending orders
+   - Verify positions
+   - Record daily yields
+   - Plan tomorrow
+
+### Weekly Schedule
+1. Monday (1 hour)
+   - Full portfolio review
+   - Check all positions
+   - Update spreadsheets
+   - Compare yields across platforms
+   - Review maturity schedule
+   - Plan week ahead
+
+2. Friday (1 hour)
+   - Week performance review
+   - Check rebalancing needs
+   - Update documentation
+   - Track yield changes
+   - Review reinvestment options
+   - Plan next week
+
+### Monthly Schedule
+1. First Week (2 hours)
+   - Complete portfolio analysis
+   - Review asset allocation
+   - Check bond ladder status
+   - Compare yields vs benchmarks
+   - Plan CD rollovers
+   - Rebalance if needed
+
+2. Last Week (2 hours)
+   - Monthly performance report
+   - Tax implications review
+   - Update yield projections
+   - Plan next month's maturities
+   - Research rate trends
+   - Adjust strategy if needed
 
 ## Recovery Procedures
 
@@ -214,32 +296,41 @@ Goal: Systematic deployment of capital with proper security and monitoring
    - Test recovery
    - Update access
 
-## Time Management
+### From Market Events
+1. Interest Rate Shocks (48 hours)
+   - Review bond portfolio duration
+   - Calculate mark-to-market impact
+   - Assess reinvestment opportunities
+   - Adjust ladder strategy if needed
+   - Document rate changes
 
-### Daily Schedule
-1. Morning (15 minutes)
-   - Check balances
-   - Verify transactions
-   - Review alerts
-   - Plan day's actions
+2. Liquidity Events (24 hours)
+   - Check high-yield savings access
+   - Review CD early withdrawal penalties
+   - Calculate emergency liquidity needs
+   - Map alternative funding sources
+   - Document available options
 
-2. Evening (15 minutes)
-   - Update records
-   - Check pending orders
-   - Verify positions
-   - Plan tomorrow
+3. Yield Strategy Issues (72 hours)
+   - Compare current vs expected yields
+   - Review reinvestment options
+   - Calculate breakeven points
+   - Plan reallocation if needed
+   - Document yield changes
 
-### Weekly Schedule
-1. Monday (1 hour)
-   - Full portfolio review
-   - Check all positions
-   - Update spreadsheets
-   - Plan week ahead
+### Documentation Requirements
+1. Fixed Income Records
+   - Purchase dates and prices
+   - Maturity schedules
+   - Interest payment dates
+   - Tax lot information
+   - YTM calculations
 
-2. Friday (1 hour)
-   - Week performance review
-   - Check rebalancing needs
-   - Update documentation
-   - Plan next week
+2. Recovery Checklists
+   - Account access procedures
+   - Emergency contact numbers
+   - Withdrawal processes
+   - Tax implications
+   - Rebalancing thresholds
 
-Remember: The implementation phase sets the foundation for your entire investment journey. Take time to do it right. 
+Remember: The implementation phase sets the foundation for your entire investment journey. Take time to do it right. Regular monitoring and adjustments are key to maintaining the barbell strategy's effectiveness. 

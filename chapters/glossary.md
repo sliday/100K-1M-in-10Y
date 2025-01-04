@@ -1,7 +1,7 @@
 # Investment Plan Glossary
 
 ## Overview
-This glossary provides clear definitions and real examples based on our $100k portfolio. All examples use actual numbers from our investment plan to make concepts more concrete and actionable.
+This glossary provides clear definitions and real examples based on our $100k portfolio. All examples use actual numbers from our investment plan to make concepts more concrete and actionable. Terms are cross-linked to relevant chapters for deeper understanding.
 
 ## Investment Terms
 
@@ -9,17 +9,39 @@ This glossary provides clear definitions and real examples based on our $100k po
 1. DCA (Dollar Cost Averaging)
    - Definition: Regular investment of fixed amounts at set intervals
    - Example: Our $2,000 monthly contribution
-   - Usage: "$2,000 monthly DCA into ETFs ($600), Crypto ($800), DeFi ($300), and Stables ($300)"
+   - Usage: "Monthly DCA split: ETFs ($700), Crypto ($700), Term Deposits ($300), Bonds ($200), DeFi ($100)"
+   - See: [Implementation](implementation.md#monthly-dca)
 
 2. APY (Annual Percentage Yield)
    - Definition: Actual return rate including compound interest
-   - Example: DeFi lending target of 4-6% APY on $8,000 allocation
-   - Usage: "Aave lending at 4.5% APY on $4,000 USDC position"
+   - Example: Term deposit offering 4% APY on $15,000 allocation
+   - Usage: "Compare 4% term deposit APY vs 3.5% bond yield"
+   - See: [Fixed Income](fixed_income.md#yield-comparison)
 
 3. TVL (Total Value Locked)
    - Definition: Total assets deposited in a protocol
    - Example: Minimum $1B TVL requirement for DeFi platforms
    - Usage: "Aave has $5B TVL, meeting our security threshold"
+   - See: [DeFi](defi.md#security-requirements)
+
+### Fixed Income Terms
+1. Bond Ladder
+   - Definition: Staggered bond investments with different maturities
+   - Example: $10,000 split across 3-month, 6-month, 1-year bonds
+   - Strategy: "Regular reinvestment at current rates"
+   - See: [Fixed Income](fixed_income.md#bond-ladder)
+
+2. Term Deposit
+   - Definition: Fixed-term savings with guaranteed return
+   - Example: $15,000 in 12-month term deposit at 4% APY
+   - Usage: "Core stability component of portfolio"
+   - See: [Fixed Income](fixed_income.md#term-deposits)
+
+3. Yield Curve
+   - Definition: Interest rates across different maturities
+   - Example: 2-year bond at 4% vs 10-year at 5%
+   - Application: "Structure ladder based on yield curve"
+   - See: [Fixed Income](fixed_income.md#yield-analysis)
 
 ### Portfolio Management
 1. Rebalancing
@@ -160,17 +182,20 @@ This glossary provides clear definitions and real examples based on our $100k po
 ### Emergency Procedures
 1. Circuit Breaker
    - Definition: Automatic trading halt
-   - Example: -20% crypto market drop
-   - Action: "Pause all buys, review allocations"
+   - Example: -20% portfolio-wide stop loss
+   - Action: "Pause all buys, move to cash position"
+   - See: [Emergency](emergency.md#circuit-breakers)
 
 2. Black Swan Event
    - Definition: Unexpected, high-impact event
    - Example: Exchange hack or protocol failure
-   - Response: "Activate emergency withdrawal plan"
+   - Response: "Execute emergency withdrawal plan"
+   - See: [Emergency](emergency.md#black-swan)
 
 3. Force Majeure
    - Definition: Uncontrollable external event
    - Example: Regulatory ban or natural disaster
-   - Plan: "Emergency contacts and backup procedures"
+   - Plan: "Follow documented contingency procedures"
+   - See: [Emergency](emergency.md#contingency)
 
-Remember: Understanding these terms is crucial for successful implementation of the investment plan. Always refer back to this glossary when encountering unfamiliar terms in other chapters. 
+Remember: Understanding these terms is crucial for successful implementation of the investment plan. Each term links to detailed chapters where you can learn more about practical application. When in doubt, always start with the basic concepts and build up to more advanced strategies. 
