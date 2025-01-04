@@ -1,218 +1,282 @@
 # Emergency Response Plan
 
 ## Overview
+This emergency response plan outlines procedures for handling various crisis scenarios that may affect your journey from $100k to $1M. It provides clear, actionable steps for each type of emergency while maintaining alignment with the overall investment strategy.
 
-This emergency response plan is designed to protect your $100,000 portfolio from various threats including market crashes, security breaches, and technical failures. Think of it as your investment "fire escape plan" - you hope to never need it, but it's crucial to have one ready.
+## Risk Categories
+Please review our complete [Risk Disclosure](disclaimer.md) for detailed risk information.
 
-Key Components:
-- Quick response procedures for different emergency levels
-- Step-by-step recovery protocols
-- Essential contact information
-- Prevention and preparation guidelines
-
-Time is critical during emergencies. This plan helps you:
-- Respond within minutes to critical situations
-- Protect assets from various threats
-- Recover from incidents systematically
-- Prevent future emergencies
-
-Learn more about financial emergency planning on [Ready.gov](https://www.ready.gov/financial-preparedness).
-
-## Quick Response Matrix
+### Market Risks (70% of Portfolio)
 ```
-Severity Levels:
-LOW:    [█] Monitor closely
-MEDIUM: [██] Take action within 24h
-HIGH:   [███] Immediate response
-SEVERE: [████] Emergency protocol
+ETF Portion (35%):
+□ Market crash >20%
+□ Sector collapse
+□ Liquidity crisis
+□ Trading halts
 
-Emergency Contacts:
-1. Hardware Wallet Support
-   - Ledger: support.ledger.com
-   - Trezor: trezor.io/support
-   - Response time: 24-48h
-
-2. Exchange Support (Priority)
-   - Coinbase: 1-888-908-7930
-   - Binance: binance.com/support
-   - Kraken: support.kraken.com
-   - Response time: 2-24h
-
-3. Legal Support
-   - Crypto lawyer: TBD
-   - Tax advisor: TBD
-   - Response time: 24-72h
-
-4. Technical Support
-   - IT security: TBD
-   - Data recovery: TBD
-   - Response time: 4-24h
+Crypto Portion (35%):
+□ Major corrections
+□ Protocol failures
+□ Network attacks
+□ Regulatory changes
 ```
 
-## Emergency Scenarios
-
-### Market Crashes
+### Stability Risks (25% of Portfolio)
 ```
-1. -20% Portfolio Drop ($20,000 loss)
-   □ Check portfolio correlation
-   □ Review stop losses
-   □ Assess market conditions
-   □ Prepare rebalancing plan
-   Timeline: 2-4 hours
+Term Deposits (15%):
+□ Bank failures
+□ Rate crashes
+□ Early withdrawal needs
+□ Institution problems
 
-2. -35% Portfolio Drop ($35,000 loss)
-   □ Halt all new investments
-   □ Move to defensive positions
-   □ Review all positions
-   □ Document situation
-   Timeline: Immediate
-
-3. -50% Portfolio Drop ($50,000 loss)
-   □ Activate crisis protocol
-   □ Move to 60% cash position
-   □ Emergency team meeting
-   □ Full strategy review
-   Timeline: Immediate
+Bonds (10%):
+□ Default events
+□ Rating downgrades
+□ Liquidity issues
+□ Market disruptions
 ```
 
-### Security Breaches
+### DeFi Risks (5% of Portfolio)
 ```
-1. Account Compromise
-   □ Lock all accounts
-   □ Change all passwords
-   □ Contact support
-   □ Document timeline
-   Timeline: 15 minutes
-
-2. Wallet Compromise
-   □ Freeze affected wallets
-   □ Emergency fund transfer
-   □ Contact support
-   □ Create new wallets
-   Timeline: 30 minutes
-
-3. Exchange Issues
-   □ Halt all trading
-   □ Document positions
-   □ Contact support
-   □ Prepare alternatives
-   Timeline: 1 hour
+Protocol Risks:
+□ Smart contract bugs
+□ Hack events
+□ Oracle failures
+□ Governance attacks
 ```
 
-### Technical Problems
+## Phase-Specific Response Plans
+
+### Phase 1: Foundation (Years 1-2)
 ```
-1. Hardware Wallet Issues
-   □ Use backup device
-   □ Verify seed phrase
-   □ Contact support
-   □ Document steps
-   Timeline: 2 hours
+Priority Actions:
+1. Secure infrastructure
+2. Verify backups
+3. Test recovery
+4. Document procedures
 
-2. Software Wallet Issues
-   □ Check backup phrase
-   □ Use alternative wallet
-   □ Verify addresses
-   □ Document process
-   Timeline: 1 hour
-
-3. Network Problems
-   □ Use backup internet
-   □ Check status pages
-   □ Contact provider
-   □ Document outage
-   Timeline: 30 minutes
+Emergency Fund:
+- 6 months expenses
+- Separate account
+- Instant access
+- No investment link
 ```
 
-### Recovery Procedures
+### Phase 2: Acceleration (Years 3-4)
 ```
-1. From Market Crash
-   Step 1: Assess damage
-   Step 2: Document losses
-   Step 3: Review strategy
-   Step 4: Adjust positions
-   Timeline: 24-48 hours
+Priority Actions:
+1. Monitor leverage
+2. Check correlations
+3. Verify hedges
+4. Test exit routes
 
-2. From Security Breach
-   Step 1: Secure accounts
-   Step 2: Document incident
-   Step 3: Contact support
-   Step 4: Create new setup
-   Timeline: 4-12 hours
-
-3. From Technical Issues
-   Step 1: Try alternatives
-   Step 2: Contact support
-   Step 3: Document problem
-   Step 4: Test solutions
-   Timeline: 2-6 hours
+Risk Mitigation:
+- Stop losses active
+- Hedges in place
+- Exit routes clear
+- Backup plans ready
 ```
 
-### Prevention Framework
+### Phase 3: Optimization (Years 5-6)
 ```
-1. Security Rules
-   □ Weekly backup check
-   □ Monthly security audit
-   □ Quarterly drill
-   □ Annual review
+Priority Actions:
+1. Balance protection
+2. Yield security
+3. Risk assessment
+4. Strategy review
 
-2. Documentation Rules
-   □ Keep emergency contacts updated
-   □ Maintain procedure docs
-   □ Update recovery steps
-   □ Test all procedures
-
-3. Testing Schedule
-   □ Monthly: Basic recovery
-   □ Quarterly: Full backup
-   □ Semi-annual: Crisis drill
-   □ Annual: Complete audit
+Safety Measures:
+- Position limits
+- Risk metrics
+- Alert systems
+- Backup strategies
 ```
 
-## Emergency Kit
+### Phase 4: Stabilization (Years 7-8)
 ```
-1. Physical Items
-   □ Hardware wallets (2x)
-   □ Backup devices (2x)
-   □ Seed phrases (secure)
-   □ Emergency contacts
+Priority Actions:
+1. Capital preservation
+2. Risk reduction
+3. Exit planning
+4. Safety checks
 
-2. Digital Access
-   □ Password manager
-   □ 2FA backup codes
-   □ Recovery emails
-   □ Support tickets
-
-3. Documentation
-   □ Account list
-   □ Position details
-   □ Recovery steps
-   □ Contact numbers
+Protection Focus:
+- Reduced exposure
+- Increased hedging
+- Exit preparation
+- Safety buffers
 ```
 
-Remember: In emergencies, stay calm and follow procedures. Better to act methodically than rush and make mistakes.
+### Phase 5: Security (Years 9-10)
+```
+Priority Actions:
+1. Goal protection
+2. Risk elimination
+3. Exit execution
+4. Final security
 
-## Resources
+Safety Priority:
+- Capital safety
+- Risk removal
+- Clean exit
+- Goal achievement
+```
 
-### Emergency Contacts
-- [Coinbase Support](https://help.coinbase.com)
-- [Binance Support](https://www.binance.com/en/support)
-- [Ledger Help](https://support.ledger.com)
-- [MetaMask Support](https://support.metamask.io)
+## Emergency Response Procedures
 
-### Security Tools
-- [Authy](https://authy.com)
-- [LastPass](https://www.lastpass.com)
-- [Yubikey](https://www.yubico.com)
-- [Cryptosteel](https://cryptosteel.com)
+### Market Crash Response
+```
+Immediate Actions:
+1. Assess impact
+2. Check allocations
+3. Review safety
+4. Execute hedges
 
-### Market Monitoring
-- [CoinGecko](https://www.coingecko.com)
-- [TradingView](https://www.tradingview.com)
-- [DeFi Llama](https://defillama.com)
-- [CryptoQuant](https://cryptoquant.com)
+24-Hour Plan:
+□ Calculate losses
+□ Check correlations
+□ Review positions
+□ Plan adjustments
+```
 
-### Education
-- [Crypto Security Guide](https://blog.coinbase.com/security-guidelines-for-storing-cryptocurrency-a5c725b49e32)
-- [DeFi Safety](https://docs.defisafety.com)
-- [Hardware Wallet Guide](https://www.ledger.com/academy)
-- [Emergency Planning](https://www.ready.gov/financial-preparedness) 
+### Technical Emergency
+```
+Immediate Actions:
+1. Secure assets
+2. Check backups
+3. Contact support
+4. Document issue
+
+Recovery Steps:
+□ Verify security
+□ Test systems
+□ Restore access
+□ Update security
+```
+
+### Regulatory Emergency
+```
+Immediate Actions:
+1. Legal review
+2. Asset check
+3. Document status
+4. Plan compliance
+
+Response Plan:
+□ Legal consult
+□ Asset protection
+□ Documentation
+□ Compliance plan
+```
+
+## Emergency Contacts
+
+### Financial Contacts
+```
+Priority List:
+1. Financial Advisor
+2. Tax Professional
+3. Legal Counsel
+4. Insurance Agent
+```
+
+### Technical Support
+```
+Priority List:
+1. Security Team
+2. IT Support
+3. Exchange Help
+4. Wallet Support
+```
+
+### Legal Resources
+```
+Priority List:
+1. Personal Lawyer
+2. Tax Attorney
+3. Compliance Expert
+4. Regulatory Advisor
+```
+
+## Recovery Procedures
+
+### Asset Recovery
+```
+Step-by-Step:
+1. Secure remaining assets
+2. Document losses
+3. Contact authorities
+4. Begin recovery
+
+Timeline:
+Hour 1: Assessment
+Hour 2-4: Security
+Hour 4-24: Recovery
+Day 2+: Resolution
+```
+
+### System Recovery
+```
+Step-by-Step:
+1. Security check
+2. Backup restore
+3. Access recovery
+4. System verify
+
+Timeline:
+Hour 1: Security
+Hour 2-4: Restore
+Hour 4-8: Testing
+Hour 8+: Monitoring
+```
+
+## Prevention Measures
+
+### Security Setup
+```
+Critical Systems:
+□ 2FA everywhere
+□ Hardware wallets
+□ Backup seeds
+□ Access controls
+```
+
+### Monitoring System
+```
+Key Metrics:
+□ Price alerts
+□ Volume alerts
+□ Risk metrics
+□ System health
+```
+
+### Documentation
+```
+Required Records:
+□ Asset inventory
+□ Access details
+□ Recovery info
+□ Contact list
+```
+
+## Emergency Drills
+
+### Quarterly Tests
+```
+Test Schedule:
+□ Market crash drill
+□ Technical failure
+□ Recovery process
+□ Access verification
+```
+
+### Annual Review
+```
+Review Items:
+□ Update contacts
+□ Check procedures
+□ Test recoveries
+□ Update plans
+```
+
+Remember: Stay calm during emergencies. Follow the plan step by step. Document everything. When in doubt, prioritize capital preservation over potential gains. 

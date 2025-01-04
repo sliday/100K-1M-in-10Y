@@ -1,270 +1,348 @@
 # Risk Management Framework
 
 ## Overview
-This framework outlines our comprehensive approach to managing portfolio risks across all asset classes. Using a barbell strategy, we balance growth potential with capital preservation through careful position sizing, stop-loss implementation, continuous monitoring, and clear emergency procedures. The framework is designed to protect against both systematic market risks and asset-specific risks while maintaining the portfolio's long-term growth objectives.
+This risk management framework is designed to protect and grow your portfolio from $100k to $1M over 10 years. It provides comprehensive risk monitoring, mitigation strategies, and response procedures aligned with each investment phase.
 
-## Barbell Strategy Risk Profile
+Please review our complete [Risk Disclosure](disclaimer.md) before proceeding.
+
+## Portfolio Risk Structure
+
+### Core Growth (70%)
 ```
-Portfolio Risk Distribution:
+ETF Portfolio (35%):
+Risk Level: Medium
+- Market risk
+- Sector risk
+- Liquidity risk
+- Currency risk
 
-Growth Side ($56,000 - 56%):
-Risk Level │ Allocation  │ Max Drawdown
-High       │[████████] 40%│    -45%
-Medium     │[████████] 40%│    -35%
-Low        │[████] 20%    │    -20%
-
-Safety Side ($44,000 - 44%):
-Risk Level │ Allocation  │ Max Drawdown
-High       │[██] 10%     │    -15%
-Medium     │[████] 20%   │    -10%
-Low        │[██████████████] 70%│ -5%
-
-Combined Portfolio Risk:
-Risk Level │ Allocation  │ Max Drawdown
-High       │[████] 27%   │    -35%
-Medium     │[██████] 31% │    -25%
-Low        │[████████] 42%│    -15%
+Crypto Portfolio (35%):
+Risk Level: High
+- Volatility risk
+- Protocol risk
+- Network risk
+- Regulatory risk
 ```
 
-## Position Size Management
+### Stability Layer (25%)
 ```
-Maximum Allocation Per Position:
-                                        MAX
-Asset Type  │0%─────25%─────50%─────75%─100%│
-Growth Side:
-ETF Core    │[████████] 16%                 │
-ETF Sector  │[████] 8%                      │
-BTC/ETH     │[████████] 16%                 │
-Alt L1      │[████] 8%                      │
+Term Deposits (15%):
+Risk Level: Low
+- Interest rate risk
+- Institution risk
+- Inflation risk
+- Liquidity risk
 
-Safety Side:
-Treasuries  │[██████] 12%                   │
-Term Deps   │[████] 8%                      │
-High-Yield  │[████] 8%                      │
-DeFi Yield  │[████] 8%                      │
-
-Rebalancing Triggers:
-                     WARNING    CRITICAL
-Asset Type  │ Target │ +/-     │ +/-
-Growth Side:
-ETF Core    │ 16%    │[███] 4% │[████] 8%
-ETF Sector  │ 8%     │[███] 3% │[████] 6%
-BTC/ETH     │ 16%    │[████] 6%│[██████] 12%
-Alt L1      │ 8%     │[███] 4% │[████] 8%
-
-Safety Side:
-Treasuries  │ 12%    │[██] 2%  │[███] 4%
-Term Deps   │ 8%     │[██] 2%  │[███] 4%
-High-Yield  │ 8%     │[██] 2%  │[███] 4%
-DeFi Yield  │ 8%     │[███] 3% │[████] 6%
+Bonds (10%):
+Risk Level: Low-Medium
+- Duration risk
+- Credit risk
+- Market risk
+- Interest rate risk
 ```
 
-## Risk Metrics Dashboard
+### Yield Layer (5%)
 ```
-Daily Monitoring Thresholds:
-Metric          Normal Range        Warning         Critical
-Volatility   [──────|─────] 15-25% [─────] 25-35% [──] >35%
-Beta         [────|─────] 0.8-1.2  [────] 1.2-1.5 [──] >1.5
-Sharpe Ratio [────|─────] 1.5-2.0  [────] 1.0-1.5 [──] <1.0
-Drawdown     [──────|─────] 0-25%  [─────] 25-35% [──] >35%
-Duration     [────|─────] 5-7 yrs  [────] 7-9 yrs [──] >9 yrs
-
-Correlation Heat Map:
-        ETF   BTC   ETH   L1    DeFi  Bond  CD
-ETF   │ 1.0   0.3   0.3   0.4   0.2   0.1   0.0 │
-BTC   │ 0.3   1.0   0.8   0.7   0.6   0.2   0.1 │
-ETH   │ 0.3   0.8   1.0   0.8   0.7   0.2   0.1 │
-L1    │ 0.4   0.7   0.8   1.0   0.8   0.3   0.1 │
-DeFi  │ 0.2   0.6   0.7   0.8   1.0   0.3   0.2 │
-Bond  │ 0.1   0.2   0.2   0.3   0.3   1.0   0.4 │
-CD    │ 0.0   0.1   0.1   0.1   0.2   0.4   1.0 │
-
-Risk Level Indicators:
-LOW RISK    [_█_] Current Level (Safety Side)
-MEDIUM RISK [_█_] Target Level (Combined)
-HIGH RISK   [_█_] Warning Level (Growth Side)
-            0   5   10   15   20
+DeFi Protocols (5%):
+Risk Level: Very High
+- Smart contract risk
+- Protocol risk
+- Oracle risk
+- Governance risk
 ```
 
-## Stop-Loss Framework
+## Phase-Specific Risk Management
+
+### Phase 1: Foundation (Years 1-2)
 ```
-Dynamic Stop-Loss System:
+Focus Areas:
+- Infrastructure security
+- Position sizing
+- Risk monitoring
+- Emergency planning
 
-Growth Side:
-
-ETF Positions:
-Entry Price     [████████████████████] 100%
-Warning Level   [██████████████████] -10%
-Trailing Stop   [████████████████] -15%
-Hard Stop      [████████████████] -20%
-
-Crypto Core (BTC/ETH):
-Entry Price     [████████████████████] 100%
-Warning Level   [██████████████] -25%
-Trailing Stop   [████████████] -30%
-Hard Stop      [██████████] -40%
-
-Alt L1 Positions:
-Entry Price     [████████████████████] 100%
-Warning Level   [████████████] -30%
-Trailing Stop   [██████████] -35%
-Hard Stop      [████████] -45%
-
-Safety Side:
-
-DeFi Yield Positions:
-Entry Price     [████████████████████] 100%
-Warning Level   [███████████] -20%
-Trailing Stop   [█████████] -25%
-Hard Stop      [███████] -30%
-
-Fixed Income Monitoring:
-Duration Target [████████████████████] 7 yrs
-Warning Level   [██████████████████] +2 yrs
-Action Level    [████████████████] +4 yrs
-Maximum Level   [██████████████] +6 yrs
+Key Metrics:
+□ Volatility levels
+□ Correlation matrix
+□ Drawdown limits
+□ Security scores
 ```
 
-## Risk Management Actions
+### Phase 2: Acceleration (Years 3-4)
+```
+Focus Areas:
+- Growth optimization
+- Risk balancing
+- Correlation management
+- Hedge implementation
 
-### Growth Side Position Limits
+Key Metrics:
+□ Growth vs risk
+□ Portfolio beta
+□ Sharpe ratio
+□ Maximum drawdown
+```
 
-#### ETF Allocation ($24,000)
-1. Individual ETF Limits
-   - Core ETFs (VGT, QQQ): Max $8,000 each
-   - Specialized ETFs (SOXX, ARKK): Max $4,000 each
-   - New ETF positions: Start at $2,000
-   - Leveraged ETFs: Not allowed
+### Phase 3: Optimization (Years 5-6)
+```
+Focus Areas:
+- Efficiency improvement
+- Risk reduction
+- Return stability
+- Protection strategies
 
-2. Sector Concentration
-   - Technology: Max $16,000 (67% of ETF allocation)
-   - Single sector: Max $10,000 (42% of ETF allocation)
-   - Emerging themes: Max $4,000 (17% of ETF allocation)
-   - International: Max $6,000 (25% of ETF allocation)
+Key Metrics:
+□ Risk-adjusted returns
+□ Volatility trends
+□ Income stability
+□ Protection costs
+```
 
-#### Crypto Allocation ($32,000)
-1. Core Holdings
-   - Bitcoin: Max $16,000 (50% of crypto)
-   - Ethereum: Max $8,000 (25% of crypto)
-   - Combined minimum: $20,000 (62.5% of crypto)
-   - Hot wallet max: $6,000 (19% of crypto)
+### Phase 4: Stabilization (Years 7-8)
+```
+Focus Areas:
+- Capital preservation
+- Risk minimization
+- Exit planning
+- Safety buffers
 
-2. Alternative Chains
-   - Single L1: Max $2,000 (6.25% of crypto)
-   - Total L1s: Max $8,000 (25% of crypto)
-   - New positions: Max $1,000
-   - Infrastructure: Max $3,000 (9.4% of crypto)
+Key Metrics:
+□ Preservation ratio
+□ Risk exposure
+□ Exit readiness
+□ Buffer adequacy
+```
 
-### Safety Side Position Limits
+### Phase 5: Security (Years 9-10)
+```
+Focus Areas:
+- Goal protection
+- Risk elimination
+- Final positioning
+- Success assurance
 
-#### Fixed Income ($24,000)
-1. Treasury Allocation
-   - Total bonds: Max $12,000 (50% of fixed income)
-   - Single maturity: Max $4,000 (17% of fixed income)
-   - Duration target: 7 years
-   - Minimum rating: AA+
-
-2. Term Deposits
-   - Total CDs: Max $8,000 (33% of fixed income)
-   - Single bank: Max $4,000 (17% of fixed income)
-   - Maximum term: 5 years
-   - Early withdrawal option required
-
-3. High-Yield Savings
-   - Total allocation: Max $4,000 (17% of fixed income)
-   - Single bank: Max $2,000 (8% of fixed income)
-   - Minimum rate: Top 10% of available rates
-   - FDIC insurance required
-
-#### DeFi Yield ($16,000)
-1. Protocol Limits
-   - Single protocol: Max $4,000 (25% of DeFi)
-   - Single chain: Max $8,000 (50% of DeFi)
-   - New protocols: Max $1,000 (6.25% of DeFi)
-   - Minimum in stables: $12,000 (75% of DeFi)
-
-2. Strategy Limits
-   - Lending: Max $8,000 (50% of DeFi)
-   - Liquidity pools: Max $5,000 (31% of DeFi)
-   - Staking: Max $3,000 (19% of DeFi)
-   - Single pool: Max $2,000 (12.5% of DeFi)
+Key Metrics:
+□ Distance to goal
+□ Risk levels
+□ Protection status
+□ Success probability
+```
 
 ## Risk Monitoring System
 
-### Daily Checks
-1. Growth Side Health
-   - Total value vs previous day
-   - Individual position sizes
-   - Stop loss distances
-   - Risk metrics update
+### Daily Monitoring
+```
+Core Metrics:
+□ Portfolio value
+□ Asset allocation
+□ Risk levels
+□ Alert status
 
-2. Safety Side Health
-   - Yield rates tracking
-   - Duration monitoring
-   - Credit quality check
-   - Liquidity assessment
-
-3. Technical Checks
-   - DeFi health factors
-   - Liquidity pool status
-   - Gas prices for actions
-   - Network conditions
+Action Triggers:
+□ 5% daily move
+□ 10% allocation drift
+□ Risk score change
+□ Alert activation
+```
 
 ### Weekly Analysis
-1. Risk Metrics
-   - Volatility per position
-   - Correlation matrix
-   - Beta to benchmarks
-   - Sharpe ratio update
-   - Duration analysis
+```
+Review Areas:
+□ Performance metrics
+□ Risk indicators
+□ Correlation matrix
+□ Strategy alignment
 
-2. Position Reviews
-   - Barbell balance check
-   - Stop loss updates
-   - Strategy alignment
-   - Rebalancing needs
-   - Yield optimization
+Action Items:
+□ Risk assessment
+□ Position review
+□ Strategy check
+□ Adjustment plan
+```
 
-## Emergency Procedures
+### Monthly Deep Dive
+```
+Analysis Focus:
+□ Risk-adjusted returns
+□ Portfolio efficiency
+□ Protection status
+□ Strategy effectiveness
+
+Action Items:
+□ Portfolio rebalance
+□ Risk adjustment
+□ Strategy update
+□ Documentation
+```
+
+## Risk Mitigation Strategies
+
+### Position Sizing
+```
+Maximum Allocations:
+- Single ETF: 10%
+- Crypto asset: 10%
+- DeFi protocol: 2%
+- Institution: 10%
+
+Minimum Holdings:
+- Emergency fund: 6 months
+- Cash buffer: 5%
+- Risk reserve: 3%
+```
+
+### Diversification Rules
+```
+Correlation Limits:
+- Intra-class: <0.8
+- Inter-class: <0.6
+- Portfolio: <0.7
+
+Exposure Limits:
+- Single sector: 20%
+- Geographic: 40%
+- Technology: 30%
+- Protocol: 5%
+```
+
+### Protection Mechanisms
+```
+Stop-Loss Levels:
+- ETFs: -15%
+- Crypto: -25%
+- DeFi: -35%
+
+Recovery Rules:
+- Re-entry plan
+- Position sizing
+- Risk assessment
+- Documentation
+```
+
+## Risk Categories
+
+### Market Risk
+```
+Monitoring:
+□ Volatility levels
+□ Market trends
+□ Correlation matrix
+□ Volume analysis
+
+Mitigation:
+□ Diversification
+□ Position sizing
+□ Stop losses
+□ Hedging
+```
+
+### Technical Risk
+```
+Monitoring:
+□ System health
+□ Security status
+□ Access control
+□ Backup status
+
+Mitigation:
+□ Security setup
+□ Backup systems
+□ Access controls
+□ Emergency plan
+```
+
+### Operational Risk
+```
+Monitoring:
+□ Process compliance
+□ Documentation
+□ Audit trail
+□ Error tracking
+
+Mitigation:
+□ Clear procedures
+□ Regular audits
+□ Staff training
+□ Quality control
+```
+
+## Risk Response Framework
 
 ### Market Events
-1. Growth Side Drop (-20%)
-   - Review all positions
-   - Check correlations
-   - Verify stop losses
-   - Consider rebalancing to safety
+```
+Response Levels:
+1. Monitor (-5%)
+2. Review (-10%)
+3. Adjust (-15%)
+4. Protect (-20%)
 
-2. Safety Side Issues
-   - Monitor interest rates
-   - Check credit quality
-   - Review withdrawal options
-   - Assess yield alternatives
+Action Items:
+□ Assess impact
+□ Review positions
+□ Adjust strategy
+□ Document actions
+```
 
-### Technical Events
-1. DeFi Issues
-   - Check health factors
-   - Prepare exit transactions
-   - Monitor gas prices
-   - Have stables ready
+### Technical Issues
+```
+Response Levels:
+1. Monitor (Low)
+2. Investigate (Medium)
+3. Respond (High)
+4. Emergency (Critical)
 
-2. Platform Issues
-   - Use backup providers
-   - Keep withdrawal limits high
-   - Maintain alternative list
-   - Document procedures
+Action Items:
+□ Secure assets
+□ Contact support
+□ Document issue
+□ Implement fix
+```
 
-Remember: The barbell strategy provides natural risk management through its structure. The safety side acts as a buffer during market stress, while the growth side captures upside potential.
+### Regulatory Changes
+```
+Response Levels:
+1. Monitor (Announcement)
+2. Review (Proposal)
+3. Plan (Implementation)
+4. Act (Enforcement)
 
-## Resources
+Action Items:
+□ Legal review
+□ Risk assessment
+□ Strategy adjustment
+□ Compliance plan
+```
 
-### Risk Tools
-- [Portfolio Visualizer](https://www.portfoliovisualizer.com)
-- [TradingView Alerts](https://www.tradingview.com/alerts/)
-- [Coinglass](https://www.coinglass.com)
-- [DeFi Safety](https://www.defisafety.com)
+## Documentation Requirements
 
-### Risk Education
-- [Investopedia Risk Management](https://www.investopedia.com/risk-management-4689652)
-- [CFA Institute Risk](https://www.cfainstitute.org/en/membership/professional-development/refresher-readings/risk-management)
-- [Risk.net](https://www.risk.net)
-- [DeFi Risk Tools](https://defillama.com/risk) 
+### Risk Records
+```
+Daily Records:
+□ Risk levels
+□ Position sizes
+□ Alert status
+□ Action taken
+
+Weekly Records:
+□ Risk analysis
+□ Strategy review
+□ Position changes
+□ Documentation
+```
+
+### Incident Reports
+```
+Required Details:
+□ Incident type
+□ Impact assessment
+□ Actions taken
+□ Resolution status
+
+Follow-up:
+□ Root cause
+□ Improvements
+□ Prevention
+□ Documentation
+```
+
+Remember: Effective risk management is crucial for achieving your $1M goal. Always prioritize risk management over potential returns. 

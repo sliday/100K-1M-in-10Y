@@ -1,244 +1,260 @@
-# Investment Plan Glossary
+# Investment Strategy Glossary
 
-## Overview
-This glossary provides clear definitions and real examples based on our $100k portfolio. All examples use actual numbers from our investment plan to make concepts more concrete and actionable. Terms are cross-linked to relevant chapters for deeper understanding.
+## Core Terms
 
-## Investment Terms
+### Portfolio Structure
+```
+Asset Allocation:
+The distribution of investments across different asset classes to achieve optimal returns while managing risk.
 
-### Basic Concepts
-1. ETF (Exchange-Traded Fund)
-   - Definition: Investment fund traded on stock exchanges, tracking an index, sector, or asset
-   - Example: VGT tracking technology sector with $10,000 allocation
-   - Usage: "Core ETF holdings provide market exposure with low fees"
-   - See: [ETF Strategy](etfs.md#core-etf-holdings)
+Core Growth (70%):
+- ETFs (35%): Exchange-traded funds tracking market indices
+- Crypto (35%): Digital asset investments
 
-2. DCA (Dollar Cost Averaging)
-   - Definition: Regular investment of fixed amounts at set intervals
-   - Example: Our $2,000 monthly contribution
-   - Usage: "Monthly DCA split: ETFs ($700), Crypto ($700), Term Deposits ($300), Bonds ($200), DeFi ($100)"
-   - See: [Implementation](implementation.md#monthly-dca)
+Stability Layer (25%):
+- Term Deposits (15%): Fixed-term savings accounts
+- Bonds (10%): Government debt securities
 
-3. Expense Ratio
-   - Definition: Annual fee charged by investment funds as a percentage of assets
-   - Example: VGT charges 0.10% ($10 per $10,000 invested)
-   - Usage: "Low-cost ETFs with expense ratios under 0.20%"
-   - See: [ETF Strategy](etfs.md#core-etf-holdings)
+Yield Layer (5%):
+- DeFi: Decentralized finance protocols
+```
 
-4. APY (Annual Percentage Yield)
-   - Definition: Actual return rate including compound interest
-   - Example: Term deposit offering 4% APY on $15,000 allocation
-   - Usage: "Compare 4% term deposit APY vs 3.5% bond yield"
-   - See: [Fixed Income](fixed_income.md#yield-comparison)
+### Investment Phases
+```
+Phase 1: Foundation (Years 1-2)
+Building the investment infrastructure and establishing core positions.
 
-5. TVL (Total Value Locked)
-   - Definition: Total assets deposited in a protocol
-   - Example: Minimum $1B TVL requirement for DeFi platforms
-   - Usage: "Aave has $5B TVL, meeting our security threshold"
-   - See: [DeFi](defi.md#security-requirements)
+Phase 2: Acceleration (Years 3-4)
+Optimizing growth while maintaining risk management.
 
-### Fixed Income Terms
-1. Bond Ladder
-   - Definition: Staggered bond investments with different maturities
-   - Example: $10,000 split across 3-month, 6-month, 1-year bonds
-   - Strategy: "Regular reinvestment at current rates"
-   - See: [Fixed Income](fixed_income.md#bond-ladder)
+Phase 3: Optimization (Years 5-6)
+Fine-tuning the portfolio for maximum efficiency.
 
-2. Term Deposit
-   - Definition: Fixed-term savings with guaranteed return
-   - Example: $15,000 in 12-month term deposit at 4% APY
-   - Usage: "Core stability component of portfolio"
-   - See: [Fixed Income](fixed_income.md#term-deposits)
+Phase 4: Stabilization (Years 7-8)
+Securing gains and reducing portfolio risk.
 
-3. Yield Curve
-   - Definition: Interest rates across different maturities
-   - Example: 2-year bond at 4% vs 10-year at 5%
-   - Application: "Structure ladder based on yield curve"
-   - See: [Fixed Income](fixed_income.md#yield-analysis)
+Phase 5: Security (Years 9-10)
+Protecting accumulated wealth and ensuring goal achievement.
+```
 
-### Portfolio Management
-1. Rebalancing
-   - Definition: Adjusting positions back to target allocations
-   - Example: ETF portion growing from 30% ($30,000) to 35% ($35,000)
-   - Action: "Sell $5,000 of ETFs to return to 30% allocation"
+## Investment Vehicles
 
-2. Position Sizing
-   - Definition: Determining amount to allocate to each investment
-   - Example: VGT allocation of 10% ($10,000) of total portfolio
-   - Rule: "No single ETF position exceeds $10,000 (10%)"
+### ETFs (Exchange-Traded Funds)
+```
+Index ETFs:
+Investment funds traded on stock exchanges, tracking market indices.
 
-3. Stop Loss
-   - Definition: Automatic sell trigger at predetermined price
-   - Example: -15% trailing stop on $5,000 SOXX position
-   - Action: "Sell if SOXX drops 15% from peak ($4,250)"
+Market Cap ETFs:
+Funds weighted by company market capitalization.
 
-## Trading Terminology
+Sector ETFs:
+Funds focusing on specific industry sectors.
 
-### Order Types
-1. Market Order
-   - Definition: Buy/sell immediately at current price
-   - Example: Buying $10,000 of QQQ at market
-   - Usage: "When DCAing monthly $600 into ETFs"
+International ETFs:
+Funds tracking non-domestic markets.
+```
 
-2. Limit Order
-   - Definition: Buy/sell only at specified price or better
-   - Example: Buy $2,000 BTC at $40,000
-   - Usage: "Setting buys 5% below market for monthly crypto DCA"
+### Fixed Income
+```
+Term Deposits:
+Fixed-term savings accounts with guaranteed returns.
 
-3. Stop-Market Order
-   - Definition: Becomes market order when stop price hit
-   - Example: Sell $3,000 SOL if price drops to $80
-   - Usage: "Protection for Layer 1 crypto positions"
+Government Bonds:
+Debt securities issued by government entities.
 
-### Risk Metrics
-1. Sharpe Ratio
-   - Definition: Return per unit of risk (volatility)
-   - Example: Portfolio target Sharpe ratio >1.5
-   - Usage: "ETF portion maintains 1.8 Sharpe ratio"
+Treasury Bills:
+Short-term government securities.
 
-2. Maximum Drawdown
-   - Definition: Largest peak-to-trough decline
-   - Example: 35% max drawdown tolerance on $100,000
-   - Usage: "Stop loss triggers at $65,000 portfolio value"
+Notes and Bonds:
+Longer-term debt instruments.
+```
 
-3. Beta
-   - Definition: Measure of volatility compared to the overall market
-   - Example: ETF portfolio beta of 1.2 means 20% more volatile than market
-   - Usage: "Higher beta for growth phase, lower for preservation"
-   - See: [Risk Management](risk_management.md#volatility-management)
+### Cryptocurrency
+```
+Bitcoin (BTC):
+The first and largest cryptocurrency by market cap.
 
-## DeFi Concepts
+Ethereum (ETH):
+Leading smart contract platform.
 
-### Yield Generation
-1. Liquidity Providing
-   - Definition: Supplying assets to trading pools
-   - Example: $4,000 in Curve stablecoin pools
-   - Returns: "8-12% APY on stablecoin pairs"
+Blockchain:
+Distributed ledger technology underlying cryptocurrencies.
 
-2. Yield Farming
-   - Definition: Earning additional tokens for providing liquidity
-   - Example: $4,000 in Curve plus CRV rewards
-   - Strategy: "Stack base yields with protocol rewards"
+Digital Assets:
+Virtual tokens representing value on blockchain networks.
+```
 
-3. Liquid Staking
-   - Definition: Staking while maintaining liquidity
-   - Example: $2,000 in Lido stETH
-   - Usage: "Earn staking yields while maintaining tradability"
+### DeFi (Decentralized Finance)
+```
+Yield Farming:
+Earning rewards by providing liquidity to DeFi protocols.
 
-### Platform Mechanics
-1. Health Factor
-   - Definition: Collateral value relative to borrowed amount
-   - Example: Minimum 1.5 health factor on Aave
-   - Rule: "Exit position if health factor drops below 1.5"
+Liquidity Pools:
+Token pairs used for decentralized trading.
 
-2. Impermanent Loss
-   - Definition: Loss from price divergence in liquidity pools
-   - Example: ETH/USDC pool with ETH rising 50%
-   - Protection: "Use stable pairs for lower IL risk"
+Smart Contracts:
+Self-executing contracts with terms written in code.
 
-3. Gas Optimization
-   - Definition: Minimizing transaction fees
-   - Example: Batching DeFi transactions
-   - Strategy: "Execute when gas below 50 gwei"
-
-## Tax Terms
-
-### Basic Concepts
-1. Capital Gains
-   - Definition: Profit from investment sales
-   - Example: ETH bought at $2,000, sold at $3,000
-   - Impact: "$1,000 gain on $2,000 investment"
-
-2. Tax-Loss Harvesting
-   - Definition: Selling at loss to offset gains
-   - Example: Selling $5,000 ARKK position at 20% loss
-   - Benefit: "$1,000 loss offsets other gains"
-
-3. Cost Basis
-   - Definition: Original investment amount
-   - Example: $10,000 initial VGT purchase
-   - Tracking: "Record each buy with date and amount"
-
-### Advanced Concepts
-1. HIFO (Highest In, First Out)
-   - Definition: Selling highest cost basis first
-   - Example: BTC bought at $50k, $40k, $30k
-   - Strategy: "Sell $50k lots first for tax efficiency"
-
-2. Wash Sale
-   - Definition: Repurchasing within 30 days of loss
-   - Example: Selling and rebuying VGT within 30 days
-   - Rule: "Wait 30+ days to rebuy after tax loss harvest"
-
-3. Tax Jurisdiction
-   - Definition: Location determining tax treatment
-   - Example: Different crypto tax rules by country
-   - Strategy: "Consider relocation for 0% crypto gains"
+Protocol:
+Set of rules governing DeFi platform operation.
+```
 
 ## Risk Management
 
+### Market Risk
+```
+Volatility:
+Price fluctuation magnitude over time.
+
+Beta:
+Asset's price movement relative to market.
+
+Correlation:
+Relationship between asset price movements.
+
+Drawdown:
+Peak-to-trough decline percentage.
+```
+
 ### Portfolio Metrics
-1. Correlation
-   - Definition: Price movement relationships
-   - Example: BTC/ETH correlation > 0.8
-   - Action: "Reduce allocation if correlation too high"
+```
+Sharpe Ratio:
+Risk-adjusted return measurement.
 
-2. Volatility
-   - Definition: Price movement magnitude
-   - Example: Crypto volatility 3x higher than ETFs
-   - Management: "Higher allocation to less volatile assets"
+Standard Deviation:
+Measure of return volatility.
 
-3. Liquidity
-   - Definition: Ease of buying/selling
-   - Example: Daily volume > $100M requirement
-   - Rule: "Position size < 1% of asset's daily volume"
+Alpha:
+Excess return compared to benchmark.
 
-4. Beta
-   - Definition: Measure of volatility compared to the overall market
-   - Example: ETF portfolio beta of 1.2 means 20% more volatile than market
-   - Usage: "Higher beta for growth phase, lower for preservation"
-   - See: [Risk Management](risk_management.md#volatility-management)
+Risk-Adjusted Return:
+Return accounting for risk taken.
+```
 
-5. R-squared
-   - Definition: Percentage of price movements explained by benchmark
-   - Example: R-squared of 0.95 means 95% correlation with index
-   - Usage: "High R-squared indicates good index tracking"
-   - See: [ETF Strategy](etfs.md#performance-metrics)
+### Risk Controls
+```
+Stop Loss:
+Order to sell at specified loss level.
 
-6. Technical Analysis
-   - Definition: Study of price patterns and market indicators
-   - Example: Using moving averages for entry/exit points
-   - Usage: "Technical analysis for timing rebalancing"
-   - See: [Monitoring](monitoring.md#technical-indicators)
+Position Sizing:
+Investment amount per position.
 
-7. Market Depth
-   - Definition: Volume of orders to buy or sell at various prices
-   - Example: ETF showing strong buy orders at support levels
-   - Usage: "Check market depth before large trades"
-   - See: [Implementation](implementation.md#execution-strategy)
+Diversification:
+Risk reduction through variety.
 
-8. Volume Analysis
-   - Definition: Study of trading volume patterns
-   - Example: Spike in volume during breakout moves
-   - Usage: "Volume confirms price trend changes"
-   - See: [Monitoring](monitoring.md#volume-patterns)
+Rebalancing:
+Returning to target allocations.
+```
 
-### Emergency Procedures
-1. Circuit Breaker
-   - Definition: Automatic trading halt
-   - Example: -20% portfolio-wide stop loss
-   - Action: "Pause all buys, move to cash position"
-   - See: [Emergency](emergency.md#circuit-breakers)
+## Technical Terms
 
-2. Black Swan Event
-   - Definition: Unexpected, high-impact event
-   - Example: Exchange hack or protocol failure
-   - Response: "Execute emergency withdrawal plan"
-   - See: [Emergency](emergency.md#black-swan)
+### Trading
+```
+Market Order:
+Immediate execution at market price.
 
-3. Force Majeure
-   - Definition: Uncontrollable external event
-   - Example: Regulatory ban or natural disaster
-   - Plan: "Follow documented contingency procedures"
-   - See: [Emergency](emergency.md#contingency)
+Limit Order:
+Execution at specified price or better.
 
-Remember: Understanding these terms is crucial for successful implementation of the investment plan. Each term links to detailed chapters where you can learn more about practical application. When in doubt, always start with the basic concepts and build up to more advanced strategies. 
+Slippage:
+Difference between expected and executed price.
+
+Liquidity:
+Ease of asset conversion to cash.
+```
+
+### Analysis
+```
+Technical Analysis:
+Price and volume pattern study.
+
+Fundamental Analysis:
+Underlying value assessment.
+
+Market Sentiment:
+Collective attitude toward market.
+
+Trend Analysis:
+Price movement direction study.
+```
+
+### Performance
+```
+ROI (Return on Investment):
+Profit relative to cost.
+
+CAGR (Compound Annual Growth Rate):
+Smoothed annual return rate.
+
+Yield:
+Income return on investment.
+
+Total Return:
+Combined price and income return.
+```
+
+## Regulatory
+
+### Compliance
+```
+KYC (Know Your Customer):
+Identity verification process.
+
+AML (Anti-Money Laundering):
+Legal framework preventing illegal funds.
+
+Regulatory Framework:
+Rules governing financial activities.
+
+Compliance Requirements:
+Mandatory regulatory obligations.
+```
+
+### Tax Terms
+```
+Capital Gains:
+Profit from investment sales.
+
+Tax Loss Harvesting:
+Offsetting gains with losses.
+
+Cost Basis:
+Original investment amount.
+
+Holding Period:
+Time between buy and sell.
+```
+
+## Emergency Procedures
+
+### Security
+```
+2FA (Two-Factor Authentication):
+Two-step verification process.
+
+Cold Storage:
+Offline cryptocurrency storage.
+
+Backup:
+Data or access recovery system.
+
+Security Protocol:
+Standard security procedures.
+```
+
+### Recovery
+```
+Seed Phrase:
+Wallet recovery word sequence.
+
+Emergency Fund:
+Liquid assets for emergencies.
+
+Recovery Plan:
+Asset recovery procedures.
+
+Incident Response:
+Emergency situation handling.
+```
+
+Remember: Understanding these terms is crucial for successful implementation of the investment strategy. 

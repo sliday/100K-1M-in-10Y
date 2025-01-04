@@ -1,194 +1,251 @@
-# Investment Resources and Tools
-
-## Essential Tools
-
-### Portfolio Management ($250-300/year)
-1. Tracking Software
-   - CoinGecko Portfolio (Free)
-   - Delta App (Pro $60/year)
-   - Custom Google Sheets (Free)
-   - TradingView (Pro $180/year)
-
-2. Analysis Tools
-   - Glassnode (Basic free)
-   - Token Terminal (Free)
-   - ETF Database (Free)
-   - Bloomberg Terminal (Optional)
-
-3. Tax & Accounting
-   - Koinly ($99/year)
-   - CoinTracking ($120/year)
-   - Custom spreadsheet templates
-   - Local tax software
-
-### Security Tools ($150/year)
-1. Password Management
-   - 1Password ($36/year)
-   - Yubikey 2FA ($45-60)
-   - Secure email (ProtonMail $48/year)
-   - Backup solutions
-
-2. Mobile Apps
-   - Portfolio tracking
-   - Authentication apps
-   - Exchange apps
-   - News aggregators
+# Investment Resources
 
 ## Overview
-Total Portfolio: $100,000 initial + $2,000 monthly
-Essential tools and resources for portfolio management
+This document provides a curated list of resources to support your journey from $100k to $1M. These tools and references are organized by investment phase and asset class.
 
-## Portfolio Management
+Please review our complete [Risk Disclosure](disclaimer.md) before using any of these resources.
 
-### ETF Tools ($30,000 Allocation)
-1. Research Platforms
-   - [Portfolio Visualizer](https://www.portfoliovisualizer.com) - Backtest ETF strategies
-   - [ETF.com](https://www.etf.com) - ETF research and comparison
-   - [ETFdb](https://etfdb.com) - ETF screener and analysis
-   - [Morningstar](https://www.morningstar.com) - Fund ratings and research
+## Core Investment Tools
 
-2. Trading Platforms
-   - [Interactive Brokers](https://www.interactivebrokers.com) - Main trading platform
-   - [Fidelity](https://www.fidelity.com) - Backup broker
-   - [Charles Schwab](https://www.schwab.com) - Alternative platform
-   - [Vanguard](https://investor.vanguard.com) - Direct ETF provider
+### Portfolio Management
+```
+Asset Tracking:
+- Portfolio Visualizer: portfoliovisualizer.com
+- Yahoo Finance: finance.yahoo.com
+- Google Finance: google.com/finance
 
-### Crypto Tools ($40,000 Allocation)
-1. Market Analysis
-   - [TradingView](https://www.tradingview.com) - Charts and alerts
-   - [CoinGecko](https://www.coingecko.com) - Price and market data
-   - [Glassnode](https://glassnode.com) - On-chain metrics
-   - [CryptoQuant](https://cryptoquant.com) - Market intelligence
+Performance Analysis:
+- Morningstar: morningstar.com
+- ETF.com: etf.com
+- TradingView: tradingview.com
 
-2. Trading Platforms
-   - [Coinbase](https://www.coinbase.com) - Main exchange
-   - [Binance](https://www.binance.com) - Alternative exchange
-   - [Kraken](https://www.kraken.com) - Backup exchange
-   - [FTX.US](https://ftx.us) - US-regulated exchange
+Risk Management:
+- Risk Metrics Calculator
+- Correlation Matrix Tool
+- Portfolio Optimizer
+```
 
-### DeFi Tools ($15,000 Allocation)
-1. Analytics
-   - [DeFi Llama](https://defillama.com) - TVL and protocol stats
-   - [DeFi Pulse](https://defipulse.com) - Industry metrics
-   - [Token Terminal](https://tokenterminal.com) - Protocol revenues
-   - [DeFi Safety](https://defisafety.com) - Risk assessment
+### Market Research
+```
+ETF Research:
+- ETF Database: etfdb.com
+- VettaFi: vettafi.com
+- ETF Trends: etftrends.com
 
-2. Portfolio Tracking
-   - [Zapper](https://zapper.fi) - DeFi dashboard
-   - [DeBank](https://debank.com) - Portfolio tracker
-   - [Zerion](https://zerion.io) - DeFi interface
-   - [Rotki](https://rotki.com) - Open-source tracker
+Crypto Research:
+- CoinGecko: coingecko.com
+- CryptoCompare: cryptocompare.com
+- Messari: messari.io
 
-## Security & Storage
+Fixed Income:
+- Treasury Direct: treasurydirect.gov
+- FRED Economic Data: fred.stlouisfed.org
+- Bond Screener: finra.org/bonds
+```
 
-### Hardware Security
-1. Cold Storage
-   - [Ledger](https://www.ledger.com) - Hardware wallets
-   - [Trezor](https://trezor.io) - Alternative wallets
-   - [Cryptosteel](https://cryptosteel.com) - Seed backup
-   - [Billfodl](https://billfodl.com) - Metal backup
+## Phase-Specific Resources
 
-2. Authentication
-   - [Yubikey](https://www.yubico.com) - 2FA keys
-   - [Authy](https://authy.com) - 2FA app
-   - [Google Authenticator](https://google.com/authenticator) - Basic 2FA
-   - [LastPass](https://www.lastpass.com) - Password manager
+### Phase 1: Foundation (Years 1-2)
+```
+Education:
+- Investopedia: investopedia.com
+- Khan Academy Finance: khanacademy.org/economics-finance-domain
+- MIT OpenCourseWare: ocw.mit.edu/courses/finance
 
-### Software Security
-1. Wallets
-   - [MetaMask](https://metamask.io) - Web3 wallet
-   - [Trust Wallet](https://trustwallet.com) - Mobile wallet
-   - [Exodus](https://www.exodus.com) - Desktop wallet
-   - [Phantom](https://phantom.app) - Solana wallet
+Setup Guides:
+- Security Best Practices
+- Portfolio Structure Templates
+- Risk Management Framework
+```
 
-2. Security Tools
-   - [Malwarebytes](https://www.malwarebytes.com) - Malware protection
-   - [Brave Browser](https://brave.com) - Secure browsing
-   - [ProtonMail](https://proton.me) - Secure email
-   - [Signal](https://signal.org) - Secure messaging
+### Phase 2: Acceleration (Years 3-4)
+```
+Advanced Tools:
+- Technical Analysis Platform
+- Automated Trading Systems
+- Risk Management Software
 
-## Tax & Compliance
+Strategy Resources:
+- Market Analysis Reports
+- Trading Strategies
+- Portfolio Optimization
+```
 
-### Tax Tools
-1. Crypto Tax
-   - [TokenTax](https://tokentax.co) - Crypto tax software
-   - [CoinTracking](https://cointracking.info) - Portfolio tracking
-   - [Koinly](https://koinly.io) - Tax reporting
-   - [TaxBit](https://taxbit.com) - Enterprise solution
+### Phase 3: Optimization (Years 5-6)
+```
+Efficiency Tools:
+- Tax Optimization Software
+- Yield Comparison Tools
+- Cost Analysis Platform
 
-2. Traditional Tax
-   - [TurboTax](https://turbotax.com) - Tax preparation
-   - [H&R Block](https://www.hrblock.com) - Tax service
-   - [TaxAct](https://www.taxact.com) - Alternative software
-   - [Drake Tax](https://drakesoftware.com) - Professional tool
+Advanced Resources:
+- Academic Research Papers
+- Professional Trading Guides
+- Market Psychology Studies
+```
 
-### Compliance Tools
-1. Transaction Monitoring
-   - [Chainalysis](https://www.chainalysis.com) - Blockchain analysis
-   - [Elliptic](https://www.elliptic.co) - Risk management
-   - [CipherTrace](https://ciphertrace.com) - Compliance tools
-   - [Solidus Labs](https://www.soliduslabs.com) - Market surveillance
+### Phase 4: Stabilization (Years 7-8)
+```
+Protection Tools:
+- Hedging Calculators
+- Risk Assessment Platform
+- Portfolio Insurance Tools
 
-2. Documentation
-   - [Notion](https://www.notion.so) - Documentation platform
-   - [Google Drive](https://drive.google.com) - File storage
-   - [DocuSign](https://www.docusign.com) - Digital signatures
-   - [Dropbox](https://www.dropbox.com) - Backup storage
+Strategy Resources:
+- Capital Preservation Guides
+- Risk Mitigation Strategies
+- Exit Planning Templates
+```
 
-## Market Intelligence
+### Phase 5: Security (Years 9-10)
+```
+Goal Achievement:
+- Milestone Tracking Tools
+- Success Probability Calculator
+- Legacy Planning Resources
 
-### News Sources
-1. Crypto News
-   - [CoinDesk](https://www.coindesk.com) - Industry news
-   - [The Block](https://www.theblock.co) - Research and news
-   - [Decrypt](https://decrypt.co) - Crypto media
-   - [Cointelegraph](https://cointelegraph.com) - News platform
+Final Phase:
+- Exit Strategy Guides
+- Wealth Preservation Tools
+- Long-term Planning Resources
+```
 
-2. Traditional Finance
-   - [Bloomberg](https://www.bloomberg.com) - Financial news
-   - [Reuters](https://www.reuters.com) - Global news
-   - [Financial Times](https://www.ft.com) - Market analysis
-   - [Wall Street Journal](https://www.wsj.com) - Business news
+## Asset Class Resources
 
-### Research Platforms
-1. Crypto Research
-   - [Messari](https://messari.io) - Crypto research
-   - [Dune Analytics](https://dune.com) - On-chain data
-   - [Nansen](https://www.nansen.ai) - Wallet analysis
-   - [IntoTheBlock](https://www.intotheblock.com) - Analytics
+### ETF Investment
+```
+Research Tools:
+- ETF Screener
+- Expense Ratio Calculator
+- Tracking Error Analysis
 
-2. Market Research
-   - [SeekingAlpha](https://seekingalpha.com) - Investment research
-   - [ETF Trends](https://www.etftrends.com) - ETF analysis
-   - [Yahoo Finance](https://finance.yahoo.com) - Market data
-   - [Finviz](https://finviz.com) - Stock screener
+Data Sources:
+- Index Performance Data
+- ETF Holdings Reports
+- Market Sector Analysis
+```
 
-## Education & Learning
+### Fixed Income
+```
+Analysis Tools:
+- Yield Calculator
+- Duration Calculator
+- Bond Ladder Builder
+
+Market Data:
+- Interest Rate Charts
+- Credit Rating Reports
+- Economic Indicators
+```
+
+### Cryptocurrency
+```
+Trading Tools:
+- Price Aggregators
+- Volume Analysis
+- Network Metrics
+
+Security:
+- Hardware Wallets
+- Security Guides
+- Backup Solutions
+```
+
+### DeFi
+```
+Protocol Analysis:
+- DeFi Pulse: defipulse.com
+- DeFi Llama: defillama.com
+- DeFi Rate: defirate.com
+
+Security Tools:
+- Smart Contract Audits
+- Risk Assessment Tools
+- Security Scanners
+```
+
+## Risk Management Tools
+
+### Portfolio Protection
+```
+Risk Analysis:
+- Volatility Calculator
+- Correlation Matrix
+- VaR Calculator
+
+Monitoring Tools:
+- Alert Systems
+- Portfolio Tracker
+- Risk Dashboard
+```
+
+### Security Tools
+```
+Digital Security:
+- Password Managers
+- 2FA Applications
+- Backup Solutions
+
+Asset Security:
+- Cold Storage
+- Multi-sig Setups
+- Recovery Tools
+```
+
+## Educational Resources
+
+### Market Education
+```
+Online Courses:
+- Coursera Finance
+- edX Investment
+- Udemy Trading
+
+Books:
+- Investment Classics
+- Modern Portfolio Theory
+- Risk Management Guides
+```
 
 ### Technical Skills
-1. Trading Education
-   - [Investopedia](https://www.investopedia.com) - Financial education
-   - [TradingView Academy](https://www.tradingview.com/education) - Chart analysis
-   - [Udemy Trading](https://www.udemy.com/topic/stock-trading) - Online courses
-   - [CMT Association](https://cmtassociation.org) - Technical analysis
+```
+Analysis Skills:
+- Technical Analysis
+- Fundamental Analysis
+- Quantitative Methods
 
-2. DeFi Learning
-   - [Finematics](https://finematics.com) - DeFi concepts
-   - [ETH.build](https://eth.build) - Interactive learning
-   - [DeFi MOOC](https://defi-learning.org) - Academic course
-   - [DeFi Prime](https://defiprime.com) - DeFi resources
+Tools Training:
+- Platform Tutorials
+- Software Guides
+- API Documentation
+```
 
-### Investment Strategy
-1. Portfolio Theory
-   - [Bogleheads](https://www.bogleheads.org) - Investment philosophy
-   - [Portfolio Charts](https://portfoliocharts.com) - Asset allocation
-   - [Risk Management Guide](https://www.investopedia.com/risk-management-4689652)
-   - [Asset Allocation Guide](https://www.morningstar.com/asset-allocation)
+## Professional Services
 
-2. Market Psychology
-   - [Trading Psychology 2.0](https://www.amazon.com/dp/1118936817)
-   - [Market Wizards](https://www.amazon.com/dp/1118273052)
-   - [Behavioral Finance](https://www.cfainstitute.org/en/membership/professional-development/refresher-readings/behavioral-finance)
-   - [Risk Psychology](https://www.cmegroup.com/education/courses/trading-psychology)
+### Financial Services
+```
+Advisory:
+- Financial Planners
+- Tax Advisors
+- Legal Counsel
 
-Remember: Good tools support your strategy but don't replace it. Start with the basics and add tools as needed. 
+Support:
+- Account Services
+- Trading Support
+- Technical Support
+```
+
+### Emergency Contacts
+```
+Critical Services:
+- Exchange Support
+- Wallet Recovery
+- Legal Assistance
+
+Documentation:
+- Incident Response
+- Recovery Procedures
+- Emergency Protocols
+```
+
+Remember: Always verify the legitimacy of any resource before use. Keep your security and privacy in mind when accessing online tools. 

@@ -1,193 +1,276 @@
 # Investment Templates
 
 ## Overview
-Total Portfolio: $100,000 initial + $2,000 monthly
-Essential templates for portfolio management and tracking
+This document provides standardized templates for tracking and managing your journey from $100k to $1M. These templates are designed to support each phase of the investment strategy.
 
-## Portfolio Tracker Template
+Please review our complete [Risk Disclosure](disclaimer.md) before using these templates.
 
-### Main Dashboard
-1. Asset Allocation Tracker
-   ```
-   Asset Class | Target % | Target $ | Current $ | Current % | Deviation
-   ETFs       | 30%      | $30,000  | _____     | ____%     | _____%
-   Crypto     | 40%      | $40,000  | _____     | ____%     | _____%
-   DeFi       | 15%      | $15,000  | _____     | ____%     | _____%
-   Cash       | 15%      | $15,000  | _____     | ____%     | _____%
-   ```
+## Portfolio Tracking Templates
 
-2. Monthly Performance
-   ```
-   Month | Starting $ | Deposits | End $ | Return % | vs Target
-   Jan   | $100,000   | $2,000   | _____ | ____%   | _____%
-   Feb   | _____      | $2,000   | _____ | ____%   | _____%
-   ```
-
-### ETF Portfolio ($30,000)
+### Asset Allocation Tracker
 ```
-ETF   | Target % | Target $ | Current $ | Monthly DCA
-VGT   | 10%     | $10,000  | _____     | $200
-QQQ   | 10%     | $10,000  | _____     | $200
-SOXX  | 5%      | $5,000   | _____     | $100
-ARKK  | 5%      | $5,000   | _____     | $100
+Monthly Portfolio Summary:
+
+Core Growth (70%):
+[████████] ETFs    35% │ $______ │ Target: $35,000
+[████████] Crypto  35% │ $______ │ Target: $35,000
+
+Stability (25%):
+[████] Term Deps   15% │ $______ │ Target: $15,000
+[███] Bonds        10% │ $______ │ Target: $10,000
+
+Yield (5%):
+[█] DeFi           5% │ $______ │ Target: $5,000
+
+Total Portfolio Value: $_______
+Monthly Contribution: $2,000
+Progress to Goal: ____%
 ```
 
-### Crypto Portfolio ($40,000)
+### Monthly Performance Log
 ```
-Asset | Target % | Target $ | Current $ | Monthly DCA
-BTC   | 20%     | $20,000  | _____     | $400
-ETH   | 10%     | $10,000  | _____     | $200
-SOL   | 3%      | $3,000   | _____     | $60
-AVAX  | 2%      | $2,000   | _____     | $40
-DOT   | 2%      | $2,000   | _____     | $40
+Date: MM/YYYY
+
+Asset Performance:
+Category     │ Start    │ End      │ Change
+ETFs         │ $______ │ $______ │ ____%
+Crypto       │ $______ │ $______ │ ____%
+Term Deps    │ $______ │ $______ │ ____%
+Bonds        │ $______ │ $______ │ ____%
+DeFi         │ $______ │ $______ │ ____%
+
+Key Metrics:
+□ Total Return: ____%
+□ Volatility: ____%
+□ Sharpe Ratio: ____
+□ Max Drawdown: ____%
 ```
 
-### DeFi Portfolio ($15,000)
+## Phase-Specific Templates
+
+### Phase 1: Foundation (Years 1-2)
 ```
-Protocol | Target % | Target $ | Current $ | Monthly DCA | APY
-Aave     | 30%     | $4,500   | _____     | $90        | ___%
-Curve    | 20%     | $3,000   | _____     | $60        | ___%
-GMX      | 10%     | $1,500   | _____     | $30        | ___%
+Infrastructure Checklist:
+□ Security setup complete
+□ Accounts established
+□ Emergency fund ready
+□ Documentation system
+
+Monthly Goals:
+□ Core positions built
+□ Risk limits set
+□ Monitoring active
+□ Education ongoing
 ```
 
-## Transaction Log Template
+### Phase 2: Acceleration (Years 3-4)
+```
+Growth Tracking:
+□ Performance vs target
+□ Risk vs tolerance
+□ Strategy alignment
+□ Opportunity capture
 
-### Trade Journal
-```
-Date | Asset | Type | Amount | Price | Total | Fee | Platform | Notes
-____ | BTC   | Buy  | 0.5   | $40k  | $20k  | $20 | Coinbase | DCA
-```
-
-### DeFi Operations
-```
-Date | Protocol | Action | Token | Amount | Gas $ | APY | Notes
-____ | Aave    | Supply | USDC  | $2,250 | $15  | 4%  | Initial
-```
-
-### Monthly Summary
-```
-Category | Deposits | Withdrawals | Fees | P/L | Net
-ETFs     | $600    | $0         | $2   | ___ | ___
-Crypto   | $800    | $0         | $8   | ___ | ___
-DeFi     | $300    | $0         | $25  | ___ | ___
+Monthly Goals:
+□ Growth optimization
+□ Risk management
+□ Strategy refinement
+□ Position adjustment
 ```
 
-## Risk Assessment Calculator
-
-### Position Size Calculator
+### Phase 3: Optimization (Years 5-6)
 ```
-Portfolio Value: $100,000
-Risk Per Trade: 2% ($2,000)
+Efficiency Metrics:
+□ Cost reduction
+□ Yield enhancement
+□ Risk optimization
+□ Performance improvement
 
-Asset     | Entry | Stop Loss | Risk $ | Position Size
-BTC       | $40k  | $36k     | $2,000 | 0.5 BTC
-ETH       | $2.5k | $2.25k   | $1,000 | 4 ETH
-VGT       | $400  | $360     | $1,000 | 25 shares
-```
-
-### Risk Exposure Monitor
-```
-Category    | Allocation $ | Risk Level | Stop Gap | Max Loss
-Core ETFs   | $20,000     | Medium     | 10%     | $2,000
-Crypto Core | $30,000     | High       | 20%     | $6,000
-DeFi        | $15,000     | Very High  | 30%     | $4,500
+Monthly Goals:
+□ Process streamlining
+□ Return maximization
+□ Risk minimization
+□ Strategy enhancement
 ```
 
-## Performance Metrics Dashboard
+### Phase 4: Stabilization (Years 7-8)
+```
+Protection Metrics:
+□ Capital preservation
+□ Risk reduction
+□ Income stability
+□ Exit preparation
 
-### Monthly Returns
-```
-Month | ETFs % | Crypto % | DeFi % | Total % | Target %
-Jan   | ____   | ____    | ____   | ____    | 1.25%
-Feb   | ____   | ____    | ____   | ____    | 1.25%
-```
-
-### Risk Metrics
-```
-Metric           | Current | Target | Status
-Sharpe Ratio     | ____    | >1.5   | ____
-Max Drawdown     | ____    | <35%   | ____
-Win Rate         | ____    | >60%   | ____
-Profit Factor    | ____    | >1.5   | ____
+Monthly Goals:
+□ Position protection
+□ Risk mitigation
+□ Income growth
+□ Exit planning
 ```
 
-## Rebalancing Calculator
+### Phase 5: Security (Years 9-10)
+```
+Goal Achievement:
+□ Target proximity
+□ Risk elimination
+□ Position security
+□ Exit readiness
 
-### Threshold Monitor
-```
-Asset | Target $ | Current $ | Deviation | Action Needed
-ETFs  | $30,000  | ____     | ____%     | Yes/No (±5%)
-BTC   | $20,000  | ____     | ____%     | Yes/No (±10%)
-ETH   | $10,000  | ____     | ____%     | Yes/No (±10%)
-```
-
-### Rebalancing Actions
-```
-Asset | Current $ | Target $ | Difference | Action
-VGT   | $11,000  | $10,000  | +$1,000    | Sell $1,000
-USDC  | $14,000  | $15,000  | -$1,000    | Buy $1,000
+Monthly Goals:
+□ Goal alignment
+□ Risk removal
+□ Position securing
+□ Exit execution
 ```
 
-## DeFi Yield Calculator
+## Transaction Templates
 
-### Protocol Returns
+### Trade Log
 ```
-Platform | Principal | APY | Daily $ | Weekly $ | Monthly $
-Aave     | $4,500   | 4%  | $0.49   | $3.46    | $15
-Curve    | $3,000   | 8%  | $0.66   | $4.60    | $20
-```
+Date: DD/MM/YYYY
+Time: HH:MM:SS
 
-### Compound Interest Projector
-```
-Month | Principal | Yield $ | New Principal | Cumulative
-1     | $4,500    | $15    | $4,515        | $15
-2     | $4,515    | $15.05 | $4,530.05     | $30.05
-```
+Trade Details:
+Asset: ____________
+Type: Buy/Sell
+Amount: $________
+Price: $________
+Fees: $________
+Platform: ________
 
-## Tax Estimation Tools
-
-### Transaction Classifier
-```
-Type          | Holding Period | Tax Rate | Example
-Short-term    | <1 year        | Income   | Crypto trades
-Long-term     | >1 year        | Capital  | ETF holds
-DeFi Yield    | N/A           | Income   | Aave interest
+Analysis:
+□ Reason for trade
+□ Risk assessment
+□ Strategy alignment
+□ Expected outcome
 ```
 
-### Annual Summary
+### Rebalancing Log
 ```
-Category    | Gross Profit | Losses | Net | Tax Est.
-ETF ST      | ____        | ____   | ___ | ___
-ETF LT      | ____        | ____   | ___ | ___
-Crypto ST   | ____        | ____   | ___ | ___
-Crypto LT   | ____        | ____   | ___ | ___
-DeFi Income | ____        | ____   | ___ | ___
+Date: DD/MM/YYYY
+
+Pre-Rebalance:
+Asset        │ Current % │ Target % │ Action
+ETFs         │ ______% │ 35%     │ ______
+Crypto       │ ______% │ 35%     │ ______
+Term Deps    │ ______% │ 15%     │ ______
+Bonds        │ ______% │ 10%     │ ______
+DeFi         │ ______% │ 5%      │ ______
+
+Trades Required:
+1. ________________________
+2. ________________________
+3. ________________________
 ```
 
-## Using These Templates
+## Risk Management Templates
 
-### Daily Updates
-1. Update portfolio values
-2. Log any transactions
-3. Check risk metrics
-4. Note any rebalancing needs
+### Risk Assessment Log
+```
+Date: DD/MM/YYYY
 
-### Weekly Tasks
-1. Calculate performance metrics
-2. Update yield tracking
-3. Check tax implications
-4. Plan next week's moves
+Portfolio Risk Metrics:
+□ Volatility: ____%
+□ Beta: ____
+□ Correlation: ____
+□ VaR: $____
+
+Risk Levels:
+Asset        │ Current │ Limit │ Status
+ETFs         │ ______ │ ____ │ ______
+Crypto       │ ______ │ ____ │ ______
+Term Deps    │ ______ │ ____ │ ______
+Bonds        │ ______ │ ____ │ ______
+DeFi         │ ______ │ ____ │ ______
+```
+
+### Incident Report
+```
+Date: DD/MM/YYYY
+Time: HH:MM:SS
+
+Incident Details:
+Type: ____________
+Severity: Low/Medium/High
+Impact: $________
+Duration: ________
+
+Response:
+□ Initial action
+□ Resolution steps
+□ Outcome
+□ Prevention plan
+```
+
+## Documentation Templates
 
 ### Monthly Review
-1. Complete performance dashboard
-2. Run rebalancing calculations
-3. Update tax estimates
-4. Adjust strategies if needed
+```
+Month: MM/YYYY
 
-### Links to Templates
-- [Portfolio Tracker](https://docs.google.com/spreadsheets/create) (Make a copy)
-- [Transaction Log](https://docs.google.com/spreadsheets/create) (Make a copy)
-- [Risk Calculator](https://docs.google.com/spreadsheets/create) (Make a copy)
-- [Tax Estimator](https://docs.google.com/spreadsheets/create) (Make a copy)
+Performance Summary:
+□ Total return: ____%
+□ vs Target: ____%
+□ Risk metrics
+□ Key changes
 
-Remember: These templates are starting points. Customize them based on your needs while maintaining the core tracking requirements. 
+Action Items:
+1. ________________________
+2. ________________________
+3. ________________________
+4. ________________________
+```
+
+### Strategy Review
+```
+Quarter: Q_/YYYY
+
+Strategy Assessment:
+□ Goal progress
+□ Risk alignment
+□ Performance review
+□ Adjustment needs
+
+Updates Required:
+1. ________________________
+2. ________________________
+3. ________________________
+4. ________________________
+```
+
+## Emergency Templates
+
+### Emergency Checklist
+```
+Critical Response:
+□ Assess situation
+□ Secure assets
+□ Document incident
+□ Contact support
+
+Recovery Steps:
+1. ________________________
+2. ________________________
+3. ________________________
+4. ________________________
+```
+
+### Recovery Log
+```
+Incident Date: DD/MM/YYYY
+Resolution Date: DD/MM/YYYY
+
+Impact Assessment:
+□ Assets affected
+□ Value impact
+□ Time cost
+□ Lessons learned
+
+Prevention Plan:
+1. ________________________
+2. ________________________
+3. ________________________
+4. ________________________
+```
+
+Remember: Regular use of these templates helps maintain consistency and discipline in your investment journey. 
