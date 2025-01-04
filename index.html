@@ -316,29 +316,22 @@
                         </div>
                     </div>
 
-                    <!-- Target Reached Indicator -->
-                    <div id="targetReached" class="alert alert-success shadow-lg mt-4 hidden">
-                        <div class="flex items-center justify-between w-full">
-                            <div class="flex items-center">
-                                <svg class="w-8 h-8 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <div>
-                                    <h3 class="font-bold text-xl">Target Reached! 🎉</h3>
-                                    <div class="text-sm flex items-center gap-2">
-                                        <button onclick="copyLink()" class="btn btn-ghost btn-xs">
-                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
-                                            </svg>
-                                            Share
-                                        </button>
-                                        <button onclick="window.location.href='https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/exit.md'" class="btn btn-ghost btn-xs">
-                                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                            </svg>
-                                            Exit Gracefully
-                                        </button>
+                    <!-- Target Reached Toast -->
+                    <div id="targetReached" class="toast toast-center toast-bottom w-full mb-2 hidden">
+                        <div class="alert bg-success text-success-content w-full p-1">
+                            <div class="flex flex-col gap-1">
+                                <div class="flex items-center justify-between w-full px-1">
+                                    <div class="flex items-center gap-1">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        <span class="font-medium">Target Reached! 🎉</span>
                                     </div>
+                                    <button onclick="document.getElementById('targetReached').classList.add('hidden')" class="btn btn-ghost btn-xs btn-square">×</button>
+                                </div>
+                                <div class="flex gap-1 justify-center w-full px-1">
+                                    <button onclick="copyLink()" class="btn btn-xs flex-1">SHARE</button>
+                                    <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/exit.md" target="_blank" class="btn btn-xs flex-1">EXIT GRACEFULLY</a>
                                 </div>
                             </div>
                         </div>
@@ -631,59 +624,38 @@
 
         // Add function to update labels
         function updateLabel(slider, labelId) {
+            if (!slider || !labelId) return;
+
             // Update the changed slider's label
-            document.getElementById(labelId).textContent = slider.value;
-            
-            // Update allocations first
-            updateAllocations();
+            const label = document.getElementById(labelId);
+            if (label) {
+                label.textContent = slider.value;
+            }
             
             // Get initial capital for dollar value calculations
-            const initialCapital = parseInt(document.getElementById('initialCapital').value);
+            const initialCapital = parseInt(document.getElementById('initialCapital').value) || 0;
             
-            // Then update all labels to reflect actual values after rebalancing
-            document.getElementById('etfLabel').textContent = 
-                (portfolioData.etfs.allocation * 100).toFixed(0);
-            document.getElementById('stocksLabel').textContent = 
-                (portfolioData.stocks.allocation * 100).toFixed(0);
-            document.getElementById('cryptoLabel').textContent = 
-                (portfolioData.crypto.allocation * 100).toFixed(0);
-            document.getElementById('termDepositLabel').textContent = 
-                (portfolioData.termDeposits.allocation * 100).toFixed(0);
-            document.getElementById('bondLabel').textContent = 
-                (portfolioData.bonds.allocation * 100).toFixed(0);
-            document.getElementById('defiLabel').textContent = 
-                (portfolioData.defi.allocation * 100).toFixed(0);
-
             // Update dollar value labels
-            document.getElementById('etfValue').textContent = 
-                Math.round(portfolioData.etfs.allocation * initialCapital).toLocaleString();
-            document.getElementById('stocksValue').textContent = 
-                Math.round(portfolioData.stocks.allocation * initialCapital).toLocaleString();
-            document.getElementById('cryptoValue').textContent = 
-                Math.round(portfolioData.crypto.allocation * initialCapital).toLocaleString();
-            document.getElementById('termDepositValue').textContent = 
-                Math.round(portfolioData.termDeposits.allocation * initialCapital).toLocaleString();
-            document.getElementById('bondValue').textContent = 
-                Math.round(portfolioData.bonds.allocation * initialCapital).toLocaleString();
-            document.getElementById('defiValue').textContent = 
-                Math.round(portfolioData.defi.allocation * initialCapital).toLocaleString();
+            const valueLabels = {
+                'etfLabel': 'etfValue',
+                'stocksLabel': 'stocksValue',
+                'cryptoLabel': 'cryptoValue',
+                'termDepositLabel': 'termDepositValue',
+                'bondLabel': 'bondValue',
+                'defiLabel': 'defiValue'
+            };
 
-            // Also update the slider values to match
-            document.getElementById('etfAllocation').value = 
-                (portfolioData.etfs.allocation * 100).toFixed(0);
-            document.getElementById('stocksAllocation').value = 
-                (portfolioData.stocks.allocation * 100).toFixed(0);
-            document.getElementById('cryptoAllocation').value = 
-                (portfolioData.crypto.allocation * 100).toFixed(0);
-            document.getElementById('termDepositAllocation').value = 
-                (portfolioData.termDeposits.allocation * 100).toFixed(0);
-            document.getElementById('bondAllocation').value = 
-                (portfolioData.bonds.allocation * 100).toFixed(0);
-            document.getElementById('defiAllocation').value = 
-                (portfolioData.defi.allocation * 100).toFixed(0);
+            const currentValueLabel = valueLabels[labelId];
+            if (currentValueLabel) {
+                const valueElement = document.getElementById(currentValueLabel);
+                if (valueElement) {
+                    const allocation = parseFloat(slider.value) / 100;
+                    valueElement.textContent = Math.round(allocation * initialCapital).toLocaleString();
+                }
+            }
 
-            // Check if allocations have changed from default
-            checkAllocationsChanged();
+            // Update allocations
+            updateAllocations();
         }
 
         // Add updateSliderLabel function
@@ -704,75 +676,99 @@
 
             // Get the currently changed input
             const activeElement = document.activeElement;
-            const activeValue = activeElement ? parseFloat(activeElement.value) / 100 : null;
+            if (!activeElement || !activeElement.id) return;
 
-            if (activeElement && activeValue !== null) {
-                // Create an array of allocations to adjust
-                const allocations = [
-                    { id: 'etfAllocation', key: 'etfs' },
-                    { id: 'stocksAllocation', key: 'stocks' },
-                    { id: 'cryptoAllocation', key: 'crypto' },
-                    { id: 'termDepositAllocation', key: 'termDeposits' },
-                    { id: 'bondAllocation', key: 'bonds' },
-                    { id: 'defiAllocation', key: 'defi' }
-                ];
+            // Map of slider IDs to portfolio data keys
+            const sliderToPortfolioMap = {
+                'etfAllocation': 'etfs',
+                'stocksAllocation': 'stocks',
+                'cryptoAllocation': 'crypto',
+                'termDepositAllocation': 'termDeposits',
+                'bondAllocation': 'bonds',
+                'defiAllocation': 'defi'
+            };
 
-                // Get current values of other allocations
-                const otherAllocations = allocations
-                    .filter(({ id }) => id !== activeElement.id)
-                    .map(({ id }) => ({
-                        id,
-                        value: parseFloat(document.getElementById(id).value) / 100
-                    }));
+            // Only proceed if we're dealing with an allocation slider
+            if (!sliderToPortfolioMap[activeElement.id]) return;
 
-                const totalOthers = otherAllocations.reduce((sum, { value }) => sum + value, 0);
+            const activeValue = parseFloat(activeElement.value) / 100;
+            const activeKey = sliderToPortfolioMap[activeElement.id];
 
-                if (activeValue === 1.0) {
-                    // If active slider is at 100%, set all others to 0
-                    allocations.forEach(({ id, key }) => {
-                        if (activeElement.id === id) {
-                            document.getElementById(id).value = "100";
-                            portfolioData[key].allocation = 1.0;
-                        } else {
-                            document.getElementById(id).value = "0";
-                            portfolioData[key].allocation = 0;
-                        }
-                    });
-                } else if (totalOthers > 0) {
-                    // Adjust other non-zero allocations proportionally
-                    const remainingTotal = 1.0 - activeValue;
-                    const adjustmentFactor = remainingTotal / totalOthers;
+            // Create array of other allocations
+            const otherSliders = Object.entries(sliderToPortfolioMap)
+                .filter(([sliderId]) => sliderId !== activeElement.id)
+                .map(([sliderId, portfolioKey]) => ({
+                    sliderId,
+                    portfolioKey,
+                    value: parseFloat(document.getElementById(sliderId).value) / 100
+                }));
 
-                    otherAllocations.forEach(({ id }) => {
-                        const currentValue = parseFloat(document.getElementById(id).value) / 100;
-                        const newValue = currentValue * adjustmentFactor;
-                        document.getElementById(id).value = (newValue * 100).toFixed(0);
-                        const key = allocations.find(a => a.id === id).key;
-                        portfolioData[key].allocation = newValue;
-                    });
+            const totalOthers = otherSliders.reduce((sum, { value }) => sum + value, 0);
 
-                    // Set active slider value
-                    const activeKey = allocations.find(a => a.id === activeElement.id).key;
-                    portfolioData[activeKey].allocation = activeValue;
-                } else {
-                    // If all others are 0, distribute remaining percentage evenly
-                    const remainingValue = 1.0 - activeValue;
-                    const evenShare = remainingValue / (allocations.length - 1);
+            if (activeValue === 1.0) {
+                // If active slider is at 100%, set all others to 0
+                portfolioData[activeKey].allocation = 1.0;
+                otherSliders.forEach(({ sliderId, portfolioKey }) => {
+                    document.getElementById(sliderId).value = "0";
+                    portfolioData[portfolioKey].allocation = 0;
+                });
+            } else if (totalOthers > 0) {
+                // Adjust other non-zero allocations proportionally
+                const remainingTotal = 1.0 - activeValue;
+                const adjustmentFactor = remainingTotal / totalOthers;
 
-                    allocations.forEach(({ id, key }) => {
-                        if (activeElement.id === id) {
-                            portfolioData[key].allocation = activeValue;
-                            document.getElementById(id).value = (activeValue * 100).toFixed(0);
-                        } else {
-                            portfolioData[key].allocation = evenShare;
-                            document.getElementById(id).value = (evenShare * 100).toFixed(0);
-                        }
-                    });
-                }
+                portfolioData[activeKey].allocation = activeValue;
+                otherSliders.forEach(({ sliderId, portfolioKey, value }) => {
+                    const newValue = value * adjustmentFactor;
+                    document.getElementById(sliderId).value = (newValue * 100).toFixed(0);
+                    portfolioData[portfolioKey].allocation = newValue;
+                });
+            } else {
+                // If all others are 0, distribute remaining percentage evenly
+                const remainingValue = 1.0 - activeValue;
+                const evenShare = remainingValue / (otherSliders.length || 1); // Prevent division by zero
+
+                portfolioData[activeKey].allocation = activeValue;
+                otherSliders.forEach(({ sliderId, portfolioKey }) => {
+                    document.getElementById(sliderId).value = (evenShare * 100).toFixed(0);
+                    portfolioData[portfolioKey].allocation = evenShare;
+                });
             }
+
+            // Show warning if total allocation is not 100%
+            const totalAllocation = Object.values(portfolioData)
+                .reduce((sum, asset) => sum + asset.allocation, 0);
+            
+            document.getElementById('allocationWarning').style.display = 
+                Math.abs(totalAllocation - 1.0) > 0.001 ? 'block' : 'none';
+
+            // Update all labels to reflect new values
+            Object.entries(sliderToPortfolioMap).forEach(([sliderId, portfolioKey]) => {
+                const label = document.getElementById(sliderId.replace('Allocation', 'Label'));
+                if (label) {
+                    label.textContent = (portfolioData[portfolioKey].allocation * 100).toFixed(0);
+                }
+            });
+
+            // Check if allocations have changed from default
+            checkAllocationsChanged();
 
             recalculate();
         }
+
+        // Add event listeners for both input and change events
+        const allocationSliders = ['etf', 'stocks', 'crypto', 'termDeposit', 'bond', 'defi'];
+        allocationSliders.forEach(type => {
+            const slider = document.getElementById(type + 'Allocation');
+            if (slider) {
+                ['input', 'change'].forEach(eventType => {
+                    slider.addEventListener(eventType, function() {
+                        this.focus(); // Ensure this slider is the active element
+                        updateAllocations();
+                    });
+                });
+            }
+        });
 
         function copyLink() {
             // Get all current values
@@ -800,18 +796,18 @@
             navigator.clipboard.writeText(url).then(() => {
                 // Show toast notification
                 const toast = document.createElement('div');
-                toast.className = 'toast toast-end';
+                toast.className = 'toast toast-center toast-bottom mb-4';
                 toast.innerHTML = `
-                    <div class="alert alert-success">
-                        <span>Link copied!</span>
+                    <div class="alert alert-ghost text-sm py-2 px-4">
+                        <span>Link copied</span>
                     </div>
                 `;
                 document.body.appendChild(toast);
                 
-                // Remove toast after 2 seconds
+                // Remove toast after 1.5 seconds
                 setTimeout(() => {
                     toast.remove();
-                }, 2000);
+                }, 1500);
             });
         }
 
@@ -970,6 +966,47 @@
                 results[results.length - 1] < target
             );
         });
+
+        // Function to check if allocations have changed from default
+        function checkAllocationsChanged() {
+            const hasChanged = 
+                portfolioData.etfs.allocation !== 0.35 ||
+                portfolioData.stocks.allocation !== 0.00 ||
+                portfolioData.crypto.allocation !== 0.35 ||
+                portfolioData.termDeposits.allocation !== 0.15 ||
+                portfolioData.bonds.allocation !== 0.10 ||
+                portfolioData.defi.allocation !== 0.05;
+
+            document.getElementById('resetButton').classList.toggle('hidden', !hasChanged);
+        }
+
+        // Function to reset allocations to default values
+        function resetAllocations() {
+            // Reset portfolio data
+            portfolioData.etfs.allocation = 0.35;
+            portfolioData.stocks.allocation = 0.00;
+            portfolioData.crypto.allocation = 0.35;
+            portfolioData.termDeposits.allocation = 0.15;
+            portfolioData.bonds.allocation = 0.10;
+            portfolioData.defi.allocation = 0.05;
+
+            // Reset sliders and labels
+            document.getElementById('etfAllocation').value = '35';
+            document.getElementById('stocksAllocation').value = '0';
+            document.getElementById('cryptoAllocation').value = '35';
+            document.getElementById('termDepositAllocation').value = '15';
+            document.getElementById('bondAllocation').value = '10';
+            document.getElementById('defiAllocation').value = '5';
+
+            // Update all labels
+            updateLabel(document.getElementById('etfAllocation'), 'etfLabel');
+
+            // Hide reset button
+            document.getElementById('resetButton').classList.add('hidden');
+            
+            // Hide allocation warning
+            document.getElementById('allocationWarning').style.display = 'none';
+        }
     </script>
 
 </body>
