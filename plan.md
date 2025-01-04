@@ -1,26 +1,38 @@
-# Investment Master Plan
+# Investment Master Plan: $100k to $1M in 10 Years
 
-> **IMPORTANT**: This is the master playbook for the "$100k to $1M in 10 Years" investment strategy. It provides a high-level overview and references detailed chapters for specific aspects of the plan. All examples and numbers are based on the original $100k portfolio.
+> **IMPORTANT**: This is the master playbook for growing $100,000 to $1,000,000 in 10 years through a systematic investment strategy. All examples, calculations, and metrics are based on the original $100k portfolio with $2,000 monthly contributions. This plan serves as the central reference, with detailed implementation covered in the respective chapters.
+
+## Core Premise
+```
+Initial Capital:    $100,000
+Monthly Input:     $2,000
+Total Input:       $340,000 ($100k + $2k × 120 months)
+Target Value:      $1,000,000
+Required Growth:   $660,000 (after contributions)
+Timeline:          10 years
+Required CAGR:     ~17%
+Risk Profile:      Aggressive → Conservative
+```
 
 ## Guide Structure
 ```
 Core Chapters:
-[x] ETF Strategy    - Core market exposure
-[x] Crypto Strategy - BTC and ETH allocation
-[x] DeFi Strategy   - Yield opportunities
-[x] Fixed Income    - Barbell approach
+[x] ETF Strategy    - Core market exposure ($40,000)
+[x] Crypto Strategy - BTC and ETH allocation ($40,000)
+[x] DeFi Strategy   - Yield opportunities ($20,000)
+[x] Fixed Income    - Barbell approach ($20,000)
 
 Support Chapters:
-[x] Implementation  - Deployment guide
-[x] Risk Management - Position sizing
-[x] Tax Strategy    - Optimization
+[x] Implementation  - Step-by-step deployment
+[x] Risk Management - Position sizing and hedging
+[x] Tax Strategy    - Optimization framework
 [x] Rebalancing    - Portfolio maintenance
 [x] Monitoring     - Performance tracking
 [x] Emergency      - Crisis procedures
 
 Reference Chapters:
 [x] Resources      - Tools and platforms
-[x] Templates      - Tracking sheets
+[x] Templates      - Portfolio tracking
 [x] Glossary       - Key terms
 ```
 
@@ -248,4 +260,68 @@ Implementation Flow:
    Weekly:   Risk Management Chapter
    Monthly:  Rebalancing Chapter
    Quarterly: Tax Strategy Chapter
+``` 
+
+## Entry Strategy
+```
+Initial Deployment ($100,000):
+
+Phase 1: Security Setup (Week 1)
+[x] Hardware wallets purchased
+[x] 2FA enabled on all accounts
+[x] Backup procedures documented
+[x] Emergency contacts listed
+
+Phase 2: Core ETFs ($40,000 - Week 2)
+[x] US Market:     $20,000 (VTI, VOO)
+[x] International: $10,000 (VXUS)
+[x] Sectors:       $10,000 (VGT, SOXX)
+Entry Method: Dollar-cost averaging over 5 days
+
+Phase 3: Crypto Core ($40,000 - Week 3)
+[x] Bitcoin:  $20,000 (cold storage)
+[x] Ethereum: $20,000 (cold storage)
+Entry Method: 4 tranches of $10,000 each
+
+Phase 4: Growth Layer ($20,000 - Week 4)
+[x] Alt L1s: $12,000 (SOL, AVAX, DOT)
+[x] DeFi:    $8,000 (AAVE, CRV, UNI)
+Entry Method: Limit orders at support levels
+
+Phase 5: Fixed Income ($20,000 - Week 5)
+[x] Safety:  $8,000 (Short-term bonds)
+[x] Core:    $4,000 (Treasury ETFs)
+[x] Growth:  $8,000 (High-yield bonds)
+Entry Method: Ladder approach over 2 weeks
+``` 
+
+## Key Success Factors
+```
+Critical Requirements:
+Factor          | Impact     | Chapter Reference
+Security       | Critical   | Implementation.md
+Monitoring     | High       | Monitoring.md
+Documentation  | High       | Templates.md
+Rebalancing    | Medium     | Rebalancing.md
+
+Success Metrics ($100k Portfolio):
+Stage     | Target    | Monthly Return | Quarterly Review
+$100-140k | Growth    | $1,420 (1.42%) | Risk tolerance high
+$140-250k | Scaling   | $2,130 (1.52%) | Add yield strategies
+$250-415k | Balance   | $3,530 (1.41%) | Reduce risk exposure
+$415k-1M  | Protection| $5,830 (1.41%) | Conservative shift
+
+Risk Management Priorities:
+Portfolio Size | Primary Risk        | Mitigation Strategy
+$100-140k     | Market timing       | DCA + limit orders
+$140-250k     | Concentration       | Regular rebalancing
+$250-415k     | Correlation         | Asset diversification
+$415k-1M      | Drawdown           | Hedging + cash buffer
+
+Common Pitfalls:
+Phase     | Mistake              | Impact          | Prevention
+Entry    | FOMO buying         | Poor entry      | Stick to DCA plan
+Growth   | Over-leveraging     | Forced selling  | Position limits
+Scaling  | Yield chasing       | Protocol risks  | Due diligence
+Mature   | Risk complacency    | Large drawdown  | Regular review
 ``` 

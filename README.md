@@ -2,7 +2,19 @@
 
 > **IMPORTANT DISCLAIMER**: This document and its contents are for educational and informational purposes only. This is NOT financial advice. The information provided does not constitute investment advice, financial advice, trading advice, or any other sort of advice. You should conduct your own research and consult with a qualified licensed financial advisor before making any investment decisions. By using this information, you agree that you are solely responsible for any investment decisions you make. The authors make no representations as to accuracy, completeness, currentness, suitability, or validity of any information and will not be liable for any errors, omissions, or delays in this information or any losses, injuries, or damages arising from its use.
 
-A comprehensive investment strategy designed to grow $100,000 to $1,000,000 over 10 years through a balanced portfolio of ETFs, cryptocurrencies, and fixed income instruments.
+A systematic investment strategy designed to grow $100,000 to $1,000,000 over 10 years through a balanced portfolio of ETFs, cryptocurrencies, and fixed income instruments. The plan includes monthly contributions of $2,000 and follows a risk-adjusted approach that evolves from aggressive growth to wealth preservation.
+
+## Core Strategy
+```
+Initial Capital:    $100,000
+Monthly Input:     $2,000
+Total Input:       $340,000 ($100k + $2k × 120 months)
+Target Value:      $1,000,000
+Required Growth:   $660,000 (after contributions)
+Timeline:          10 years
+Required CAGR:     ~17%
+Risk Profile:      Aggressive → Conservative
+```
 
 ## Portfolio Allocation
 ```
@@ -52,62 +64,44 @@ Monthly Contributions: $2,000
 2. [Templates](chapters/templates.md) - Portfolio tracking sheets
 3. [Glossary](chapters/glossary.md) - Key terms and concepts
 
+## Success Metrics
+```
+Growth Milestones:
+
+Phase 1: $100k → $140k (Years 1-2)
+[████████] Portfolio Growth   │ +40%
+[██████] Risk Tolerance     │ High
+[████] Monthly Return      │ $1,420
+
+Phase 2: $140k → $250k (Years 3-5)
+[██████████] Portfolio Growth │ +79%
+[████] Risk Tolerance       │ Med-High
+[██████] Monthly Return    │ $2,130
+
+Phase 3: $250k → $415k (Years 6-8)
+[████████████] Portfolio Growth │ +66%
+[███] Risk Tolerance         │ Medium
+[████████] Monthly Return    │ $3,530
+
+Phase 4: $415k → $1M (Years 9-10)
+[██████████████] Portfolio Growth │ +141%
+[██] Risk Tolerance           │ Med-Low
+[██████████] Monthly Return   │ $5,830
+```
+
 ## Getting Started
 1. Review the [Investment Plan](plan.md) for strategy overview
 2. Follow the [Implementation](chapters/implementation.md) guide
 3. Set up [Monitoring](chapters/monitoring.md) systems
 4. Regular review of [Risk Management](chapters/risk_management.md)
 
-## Performance Targets
-```
-Growth Milestones:
-
-Phase 1: $100k → $140k
-[████████] Portfolio Growth
-[██████] Risk Tolerance
-[████] Monthly Contribution
-
-Phase 2: $140k → $250k
-[██████████] Portfolio Growth
-[████] Risk Tolerance
-[██████] Monthly Contribution
-
-Phase 3: $250k → $415k
-[████████████] Portfolio Growth
-[███] Risk Tolerance
-[████████] Monthly Contribution
-
-Phase 4: $415k → $1M
-[██████████████] Portfolio Growth
-[██] Risk Tolerance
-[██████████] Monthly Contribution
-```
-
-## Disclaimer
-
-**RISK WARNING AND DISCLAIMER**: Investing involves substantial risk. The information presented in this investment plan is for educational purposes only and does not constitute financial advice. Never invest more than you can afford to lose.
-
-Key risks include but are not limited to:
+## Risk Warning
+This investment strategy involves substantial risk, including:
 - Market volatility and potential loss of principal
 - Technical vulnerabilities in crypto/DeFi protocols
 - Regulatory changes affecting asset classes
 - Platform/protocol security risks
 - Tax law changes
 - Economic and geopolitical events
-
-You must:
-1. Conduct thorough research before making any investment
-2. Consult with qualified financial professionals
-3. Consider your personal circumstances, risk tolerance, and goals
-4. Understand all risks involved
-5. Never rely solely on this or any other investment guide
-
-By using this guide, you acknowledge that:
-- All investments carry risk of loss
-- Past performance does not guarantee future results
-- You are responsible for your own investment decisions
-- The authors are not liable for any losses incurred
-- This is not a get-rich-quick scheme
-- Results may vary significantly from projections
 
 **FINAL REMINDER**: This is NOT financial advice. Use at your own risk. Always do your own research and consult with qualified professionals before investing.
