@@ -96,10 +96,10 @@ Monthly: $2,000 additional investment
 
 ### 2. Core Strategy Chapters
 Each component has detailed implementation:
-- [ETF Strategy](chapters/etfs.md) - Market exposure
-- [Crypto Core](chapters/crypto.md) - Digital assets
-- [Fixed Income](chapters/fixed_income.md) - Stability
-- [DeFi Yield](chapters/defi.md) - Extra returns
+- [ETF Strategy](https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/etfs.md) - Market exposure
+- [Crypto Core](https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/crypto.md) - Digital assets
+- [Fixed Income](https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/fixed_income.md) - Stability
+- [DeFi Yield](https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/defi.md) - Extra returns
 
 ### 3. Risk Management Framework
 Protection is priority:
@@ -110,10 +110,10 @@ Protection is priority:
 
 ### 4. Support Systems
 Tools for success:
-- [Implementation Guide](chapters/implementation.md) - Step by step
-- [Monitoring System](chapters/monitoring.md) - Track progress
-- [Tax Strategy](chapters/tax_optimization.md) - Optimize returns
-- [Emergency Plan](chapters/emergency.md) - When things go wrong
+- [Implementation Guide](https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/implementation.md) - Step by step
+- [Monitoring System](https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/monitoring.md) - Track progress
+- [Tax Strategy](https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/tax_optimization.md) - Optimize returns
+- [Emergency Plan](https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/emergency.md) - When things go wrong
 
 ## Results: The Growth Journey
 
@@ -161,10 +161,10 @@ Tools for success:
 5. Use our [Templates](chapters/templates.md) to track everything
 
 ## Resources for Your Journey
-- [Glossary](chapters/glossary.md) - Key terms explained
-- [Resources](chapters/resources.md) - Tools and platforms
-- [Templates](chapters/templates.md) - Portfolio tracking
-- [Rebalancing](chapters/rebalancing.md) - Maintain balance
+- [Glossary](https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/glossary.md) - Key terms explained
+- [Resources](https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/resources.md) - Tools and platforms
+- [Templates](https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/templates.md) - Portfolio tracking
+- [Rebalancing](https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/rebalancing.md) - Maintain balance
 
 ## Contributing
 
@@ -216,7 +216,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Important Disclaimer
 
-This guide involves substantial investment risks. Please read our complete [Risk Disclosure](chapters/disclaimer.md) before proceeding.
+This guide involves substantial investment risks. Please read our complete [Risk Disclosure](https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/disclaimer.md) before proceeding.
 
 Key points:
 - Educational resource only
