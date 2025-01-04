@@ -40,7 +40,7 @@ Most importantly, the journey teaches you everything about growing wealth:
 
 ## Action: The Implementation Blueprint
 
-### 1. Foundation Phase (Years 1-2)
+### 1. Phase 1: Foundation (Years 1-2)
 Start with security and infrastructure:
 ```
 Month 1: Security Setup
@@ -57,6 +57,11 @@ Bonds:        10% ($10,000) - Government
 DeFi:          5% ($5,000)  - Yield farming
 
 Monthly: $2,000 additional investment
+- ETFs:         $700 (35%)
+- Crypto:       $700 (35%)
+- Term Deps:    $300 (15%)
+- Bonds:        $200 (10%)
+- DeFi:         $100 (5%)
 ```
 
 ### 2. Core Strategy Chapters
@@ -82,30 +87,40 @@ Tools for success:
 
 ## Results: The Growth Journey
 
-### Phase 1: $100k → $130k (Years 1-2)
+### Phase 1: Foundation - $100k → $130k (Years 1-2)
 - Focus: Building infrastructure
 - Risk: Higher but controlled
 - Goal: 30% growth while learning
+- Monthly: $2,000 ($48,000 over 2 years)
+- Expected Result: $130k from $100k initial + $48k contributions + 30% growth
 
-### Phase 2: $130k → $250k (Years 3-4)
+### Phase 2: Acceleration - $130k → $250k (Years 3-4)
 - Focus: Proven strategies
 - Risk: Medium-high
 - Goal: 92% growth with system
+- Monthly: $2,000 ($48,000 over 2 years)
+- Expected Result: $250k from $130k base + $48k contributions + 92% growth
 
-### Phase 3: $250k → $450k (Years 5-6)
+### Phase 3: Optimization - $250k → $450k (Years 5-6)
 - Focus: Optimization
 - Risk: Medium
 - Goal: 80% growth refined
+- Monthly: $2,000 ($48,000 over 2 years)
+- Expected Result: $450k from $250k base + $48k contributions + 80% growth
 
-### Phase 4: $450k → $700k (Years 7-8)
+### Phase 4: Stabilization - $450k → $700k (Years 7-8)
 - Focus: Preservation
 - Risk: Medium-low
 - Goal: 56% balanced growth
+- Monthly: $2,000 ($48,000 over 2 years)
+- Expected Result: $700k from $450k base + $48k contributions + 56% growth
 
-### Phase 5: $700k → $1M+ (Years 9-10)
+### Phase 5: Security - $700k → $1M+ (Years 9-10)
 - Focus: Security
 - Risk: Lower
 - Goal: 43% conservative growth
+- Monthly: $2,000 ($48,000 over 2 years)
+- Expected Result: $1M+ from $700k base + $48k contributions + 43% growth
 
 ## Getting Started
 
