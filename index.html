@@ -317,20 +317,20 @@
                     </div>
 
                     <!-- Target Reached Toast -->
-                    <div id="targetReached" class="toast toast-center toast-bottom w-full mb-2 hidden">
-                        <div class="alert bg-success text-success-content w-full p-1">
-                            <div class="flex flex-col gap-1">
-                                <div class="flex items-center justify-between w-full px-1">
+                    <div id="targetReached" class="toast toast-center toast-bottom z-50 hidden">
+                        <div class="alert bg-success text-success-content shadow-lg">
+                            <div class="flex flex-col gap-2">
+                                <div class="flex items-center justify-between w-full">
                                     <div class="flex items-center gap-1">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
-                                        <span class="font-medium">Target Reached! 🎉</span>
+                                        <span class="font-medium">Target Reached!</span>
                                     </div>
-                                    <button onclick="document.getElementById('targetReached').classList.add('hidden')" class="btn btn-ghost btn-xs btn-square">×</button>
+                                    <button onclick="hideTargetReached()" class="btn btn-ghost btn-xs btn-square"> × </button>
                                 </div>
-                                <div class="flex gap-1 justify-center w-full px-1">
-                                    <button onclick="copyLink()" class="btn btn-xs flex-1">SHARE</button>
+                                <div class="flex gap-1">
+                                    <button onclick="copyLink()" class="btn btn-xs flex-2">SHARE THIS PAGE</button>
                                     <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/exit.md" target="_blank" class="btn btn-xs flex-1">EXIT GRACEFULLY</a>
                                 </div>
                             </div>
@@ -960,11 +960,12 @@
                 }, false, true);
             }
             
-            // Update target reached indicator
-            document.getElementById('targetReached').classList.toggle(
-                'hidden', 
-                results[results.length - 1] < target
-            );
+            // Update target reached indicator with animation
+            if (results[results.length - 1] >= target) {
+                showTargetReached();
+            } else {
+                hideTargetReached();
+            }
         });
 
         // Function to check if allocations have changed from default
@@ -1006,6 +1007,17 @@
             
             // Hide allocation warning
             document.getElementById('allocationWarning').style.display = 'none';
+        }
+
+        // Add these functions for toast animation
+        function showTargetReached() {
+            const toast = document.getElementById('targetReached');
+            toast.classList.remove('hidden');
+        }
+
+        function hideTargetReached() {
+            const toast = document.getElementById('targetReached');
+            toast.classList.add('hidden');
         }
     </script>
 
