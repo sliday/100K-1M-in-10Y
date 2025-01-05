@@ -110,7 +110,14 @@
             <!-- Contributions Section -->
             <div class="card bg-base-200 shadow-xl">
                 <div class="card-body">
-                    <h2 class="card-title">1. Contributions</h2>
+                    <div class="flex justify-between items-center">
+                        <h2 class="card-title">1. Contributions</h2>
+                        <button onclick="resetContributions()" id="resetContributionsButton" class="btn btn-ghost btn-xs ml-2 hidden">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                            </svg>
+                        </button>
+                    </div>
 
                     <div class="form-control">
                         <label class="label">Initial Capital <span class="opacity-70" id="initialCapitalLabel">($100,000)</span></label>
@@ -256,7 +263,7 @@
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
                             </svg>
-                            Copy Link
+                            Share This Page
                         </button>
                     </div>
 
@@ -1111,6 +1118,44 @@
 
             recalculateWithoutChart();
         }
+
+        // Function to check if contributions have changed from initial values
+        function checkContributionsChanged() {
+            const hasChanged = 
+                document.getElementById('initialCapital').value !== initialValues.initialCapital ||
+                document.getElementById('monthlyContribution').value !== initialValues.monthlyContribution ||
+                document.getElementById('years').value !== initialValues.years ||
+                document.getElementById('contributionFrequency').value !== initialValues.contributionFrequency;
+
+            document.getElementById('resetContributionsButton').classList.toggle('hidden', !hasChanged);
+        }
+
+        // Function to reset contributions to initial values
+        function resetContributions() {
+            // Reset all contribution values
+            document.getElementById('initialCapital').value = initialValues.initialCapital;
+            document.getElementById('monthlyContribution').value = initialValues.monthlyContribution;
+            document.getElementById('years').value = initialValues.years;
+            document.getElementById('contributionFrequency').value = initialValues.contributionFrequency;
+
+            // Update all labels
+            updateSliderLabel(document.getElementById('initialCapital'), 'initialCapitalLabel', '$');
+            updateSliderLabel(document.getElementById('monthlyContribution'), 'monthlyContributionLabel', '$');
+            updateSliderLabel(document.getElementById('years'), 'yearsLabel', '');
+
+            // Hide reset button
+            document.getElementById('resetContributionsButton').classList.add('hidden');
+
+            // Recalculate and update chart
+            recalculateWithoutChart();
+            updateAllocationChart();
+        }
+
+        // Add change detection to contribution inputs
+        document.getElementById('initialCapital').addEventListener('input', checkContributionsChanged);
+        document.getElementById('monthlyContribution').addEventListener('input', checkContributionsChanged);
+        document.getElementById('years').addEventListener('input', checkContributionsChanged);
+        document.getElementById('contributionFrequency').addEventListener('change', checkContributionsChanged);
     </script>
 
 </body>
