@@ -290,16 +290,23 @@
                             <div class="stat-title">Target</div>
                             <div class="stat-value" id="targetLabel">$1,000,000</div>
                             <div class="form-control">
+                                <div class="flex items-center justify-between mb-2">
+                                    <label class="label cursor-pointer gap-2">
+                                        <span class="label-text">Inflation adjusted</span>
+                                        <input type="checkbox" class="toggle toggle-sm" id="inflationToggle" onchange="recalculateWithoutChart(); updateChartOnRelease();" />
+                                    </label>
+                                    <span class="text-xs opacity-70" id="inflationRate">3% inflation/year</span>
+                                </div>
                                 <input id="targetValue" type="range" min="1000000" max="10000000" value="1000000" 
                                     class="range" step="100000" 
-                                    oninput="document.getElementById('targetLabel').textContent = '$' + parseInt(this.value).toLocaleString(); recalculate();" />
+                                    oninput="document.getElementById('targetLabel').textContent = '$' + parseInt(this.value).toLocaleString(); recalculateWithoutChart(); updateChartOnRelease();" />
                                 <div class="w-full flex justify-between text-xs px-2">
                                     <span>$1M</span>
                                     <span>$5M</span>
                                     <span>$10M</span>
                                 </div>
                             </div>
-                            <div class="stat-desc">Exit goal</div>
+                            <div class="stat-desc" id="inflationAdjustedTarget">Exit goal</div>
                         </div>
                     </div>
 
@@ -457,6 +464,7 @@
 
         let results = [];
         let stackedChart;
+        let isFirstRender = true;  // Add flag to track first render
 
         // Create stacked bar chart using ApexCharts
         function updateAllocationChart() {
@@ -492,14 +500,14 @@
                     animations: {
                         enabled: true,
                         easing: 'easeinout',
-                        speed: 800,
+                        speed: 1000,
                         animateGradually: {
                             enabled: true,
                             delay: 150
                         },
                         dynamicAnimation: {
                             enabled: true,
-                            speed: 350
+                            speed: 500
                         }
                     }
                 },
@@ -675,6 +683,9 @@
             // Create new chart
             stackedChart = new ApexCharts(document.querySelector("#allocationChart"), options);
             stackedChart.render();
+            
+            // Set flag to false after first render
+            isFirstRender = false;
         }
 
         function recalculateWithoutChart() {
@@ -682,12 +693,29 @@
             const contribution = parseInt(document.getElementById('monthlyContribution').value);
             const isMonthly = document.getElementById('contributionFrequency').value === 'monthly';
             const years = parseInt(document.getElementById('years').value);
-            const target = parseInt(document.getElementById('targetValue').value) || 1000000;
+            const baseTarget = parseInt(document.getElementById('targetValue').value) || 1000000;
+            const isInflationAdjusted = document.getElementById('inflationToggle').checked;
+            const inflationRate = 0.03; // 3% annual inflation
+            
+            // Calculate inflation-adjusted target
+            const target = isInflationAdjusted 
+                ? Math.round(baseTarget * Math.pow(1 + inflationRate, years))
+                : baseTarget;
+            
+            // Update inflation-adjusted target display
+            document.getElementById('inflationAdjustedTarget').textContent = isInflationAdjusted
+                ? `$${target.toLocaleString()} in ${years} years`
+                : 'Exit goal';
             
             // Calculate weighted return
             let weightedReturn = Object.values(portfolioData).reduce((acc, asset) => {
                 return acc + (asset.allocation * asset.return);
             }, 0);
+            
+            // Adjust real return for inflation if needed
+            const effectiveReturn = isInflationAdjusted 
+                ? (1 + weightedReturn) / (1 + inflationRate) - 1 
+                : weightedReturn;
             
             document.getElementById('weightedReturn').textContent = (weightedReturn * 100).toFixed(1) + '%';
             
@@ -706,7 +734,7 @@
             } else {
                 for (let year = 0; year <= years; year++) {
                     results.push(balance);
-                    balance = balance * (1 + weightedReturn) + annualContribution;
+                    balance = balance * (1 + effectiveReturn) + annualContribution;
                 }
             }
             
@@ -885,13 +913,39 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
+            // Reset isFirstRender flag to true on page load
+            isFirstRender = true;
+            
             loadFromURL();
             const target = parseInt(document.getElementById('targetValue').value);
             document.getElementById('targetReachedMessage').textContent = `$${target.toLocaleString()} Target Within Reach!`;
             
-            // Calculate initial values and create chart
+            // Calculate initial values
             recalculateWithoutChart();
-            updateAllocationChart();
+
+            // Create chart with animations
+            const options = {
+                chart: {
+                    animations: {
+                        enabled: true,
+                        easing: 'easeinout',
+                        speed: 800,
+                        animateGradually: {
+                            enabled: true,
+                            delay: 150
+                        },
+                        dynamicAnimation: {
+                            enabled: true,
+                            speed: 350
+                        }
+                    }
+                }
+            };
+            
+            // Force animation on first render
+            if (!stackedChart) {
+                updateAllocationChart();
+            }
         });
 
         // Store initial values when page loads
