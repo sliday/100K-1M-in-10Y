@@ -134,7 +134,7 @@
                         <label class="label">
                             <span class="flex items-center justify-between w-full">
                                 <span>Contribution</span>
-                                <select id="contributionFrequency" class="select select-ghost select-xs" onchange="recalculate()">
+                                <select id="contributionFrequency" class="select select-ghost select-xs" onchange="recalculateWithoutChart(); updateChartOnRelease();">
                                     <option value="monthly">Monthly</option>
                                     <option value="weekly">Weekly</option>
                                 </select>
