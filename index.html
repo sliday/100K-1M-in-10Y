@@ -1154,7 +1154,7 @@
                 : baseTarget;
             
             const targetDisplay = isInflationAdjusted 
-                ? `$${baseTarget.toLocaleString()} ($${inflationAdjustedTarget.toLocaleString()})`
+                ? `$${baseTarget.toLocaleString()} (inflation adjusted to $${inflationAdjustedTarget.toLocaleString()})`
                 : `$${baseTarget.toLocaleString()}`;
             
             if (!finalBalance || finalBalance === 0) {
