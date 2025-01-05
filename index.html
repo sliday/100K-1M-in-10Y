@@ -267,7 +267,8 @@
                         </button>
                     </div>
 
-                    <div class="stats stats-vertical shadow">
+                    <!-- Portfolio Stats -->
+                    <div class="stats stats-vertical shadow mb-2">
                         <div class="stat">
                             <div class="stat-title">Total Invested</div>
                             <div class="stat-value" id="totalInvested">$340,000</div>
@@ -285,47 +286,57 @@
                             <div class="stat-value" id="finalBalance">$1,234,567</div>
                             <div class="stat-desc">After <span id="yearsToTarget">10</span> years</div>
                         </div>
+                    </div>
 
-                        <div class="stat">
-                            <div class="stat-title">Target</div>
-                            <div class="stat-value" id="targetLabel">$1,000,000</div>
-                            <div class="form-control">
-                                <div class="flex items-center justify-between mb-2">
-                                    <label class="label cursor-pointer gap-2">
-                                        <span class="label-text">Inflation adjusted</span>
-                                        <input type="checkbox" class="toggle toggle-sm" id="inflationToggle" onchange="recalculateWithoutChart(); updateChartOnRelease();" />
-                                    </label>
-                                    <div class="flex items-center gap-2">
-                                        <input type="number" id="inflationRate" class="input input-xs w-12 text-right" value="3" min="0" max="100" step="0.1" onchange="recalculateWithoutChart(); updateChartOnRelease();" />
-                                        <span class="text-xs opacity-70">% inflation/year</span>
-                                    </div>
-                                </div>
-                                <input id="targetValue" type="range" min="1000000" max="10000000" value="1000000" 
-                                    class="range" step="100000" 
+                    <!-- Target Card -->
+                    <div class="card bg-base-100 shadow mb-4">
+                        <div class="card-body p-6 pt-4 pb-4">
+                            <h3 class="card-title">Target</h3>
+
+                            <!-- Target Value -->
+                            <div class="text-4xl font-bold" id="targetLabel">$1,000,000</div>
+
+                            <!-- Target Controls -->
+                            <div class="space-y-2">
+                                <!-- Target Slider -->
+                                <input id="targetValue" type="range" min="1000000" max="10000000" value="1000000" class="range"
+                                    step="100000"
                                     oninput="document.getElementById('targetLabel').textContent = '$' + parseInt(this.value).toLocaleString(); recalculateWithoutChart(); updateChartOnRelease();" />
-                                <div class="w-full flex justify-between text-xs px-2">
+                                <div class="w-full flex justify-between text-xs px-2 opacity-70">
                                     <span>$1M</span>
                                     <span>$5M</span>
                                     <span>$10M</span>
                                 </div>
+
+                                <!-- Inflation Toggle -->
+                                <div class="flex items-center gap-3 mt-2">
+                                    <label class="flex items-center gap-3 cursor-pointer">
+                                        <input type="checkbox" class="toggle toggle-xs" id="inflationToggle"
+                                            onchange="recalculateWithoutChart(); updateChartOnRelease();" />
+                                        <span class="text-sm tracking-wider opacity-70">Inflation adjustment</span>
+                                    </label>
+                                    <input type="number" id="inflationRate" class="input input-xs w-12 text-right bg-base-300" value="3"
+                                        min="0" max="100" step="0.1" onchange="recalculateWithoutChart(); updateChartOnRelease();" />
+                                    <span class="text-sm opacity-70">%</span>
+                                </div>
+
+                                <div class="text-sm opacity-70" id="inflationAdjustedTarget"></div>
                             </div>
-                            <div class="stat-desc" id="inflationAdjustedTarget">Exit goal</div>
                         </div>
                     </div>
 
                     <!-- Target Reached Toast -->
-                    <div id="targetReached" class="toast toast-center toast-bottom z-50 hidden">
-                        <div class="alert bg-success text-success-content shadow-xlg border border-green-700/50">
-                            <div class="flex flex-col gap-2">
-                                <div class="flex items-center justify-between w-full">
-                                    <div class="flex items-center gap-1">
-                                        <span class="font-medium" id="targetReachedMessage"></span>
-                                    </div>
-                                    <button onclick="hideTargetReached()" class="btn btn-ghost btn-xs btn-square"> × </button>
-                                </div>
-                                <div class="flex gap-1">
-                                    <button onclick="copyLink()" class="btn btn-xs flex-1">SHARE THIS PAGE</button>
-                                    <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/exit.md" target="_blank" class="btn btn-xs btn-ghost flex-1">EXIT GRACEFULLY</a>
+                    <div id="targetReached" class="toast toast-center toast-bottom mb-8 hidden">
+                        <div class="alert alert-success py-3 px-4">
+                            <div class="flex flex-col gap-3">
+                                <span id="targetReachedMessage" class="text-lg font-bold">$1,000,000 Target Within Reach!</span>
+                                <div class="flex gap-2">                                    
+                                    <button class="btn btn-sm btn-black" onclick="copyLink()">
+                                        Share this page
+                                    </button>
+                                    <button class="btn btn-sm btn-ghost" onclick="hideTargetReached()">
+                                        Dismiss
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -707,8 +718,8 @@
             
             // Update inflation-adjusted target display
             document.getElementById('inflationAdjustedTarget').textContent = isInflationAdjusted
-                ? `$${target.toLocaleString()} in ${years} years`
-                : 'Exit goal';
+                ? `$${target.toLocaleString()} after ${years} years`
+                : '';
             
             // Calculate weighted return
             let weightedReturn = Object.values(portfolioData).reduce((acc, asset) => {
