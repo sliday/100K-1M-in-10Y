@@ -165,6 +165,7 @@ Tools for success:
 - [Resources](https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/resources.md) - Tools and platforms
 - [Templates](https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/templates.md) - Portfolio tracking
 - [Rebalancing](https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/rebalancing.md) - Maintain balance
+- [Inflation](https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/inflation.md) - Understanding inflation impact
 
 ## Contributing
 

@@ -295,7 +295,10 @@
                                         <span class="label-text">Inflation adjusted</span>
                                         <input type="checkbox" class="toggle toggle-sm" id="inflationToggle" onchange="recalculateWithoutChart(); updateChartOnRelease();" />
                                     </label>
-                                    <span class="text-xs opacity-70" id="inflationRate">3% inflation/year</span>
+                                    <div class="flex items-center gap-2">
+                                        <input type="number" id="inflationRate" class="input input-xs w-12 text-right" value="3" min="0" max="100" step="0.1" onchange="recalculateWithoutChart(); updateChartOnRelease();" />
+                                        <span class="text-xs opacity-70">% inflation/year</span>
+                                    </div>
                                 </div>
                                 <input id="targetValue" type="range" min="1000000" max="10000000" value="1000000" 
                                     class="range" step="100000" 
@@ -690,12 +693,12 @@
 
         function recalculateWithoutChart() {
             const initialCapital = parseInt(document.getElementById('initialCapital').value);
-            const contribution = parseInt(document.getElementById('monthlyContribution').value);
+            const baseContribution = parseInt(document.getElementById('monthlyContribution').value);
             const isMonthly = document.getElementById('contributionFrequency').value === 'monthly';
             const years = parseInt(document.getElementById('years').value);
             const baseTarget = parseInt(document.getElementById('targetValue').value) || 1000000;
             const isInflationAdjusted = document.getElementById('inflationToggle').checked;
-            const inflationRate = 0.03; // 3% annual inflation
+            const inflationRate = parseFloat(document.getElementById('inflationRate').value) / 100;
             
             // Calculate inflation-adjusted target
             const target = isInflationAdjusted 
@@ -719,30 +722,35 @@
             
             document.getElementById('weightedReturn').textContent = (weightedReturn * 100).toFixed(1) + '%';
             
-            // Calculate growth over time
+            // Calculate growth over time with inflation-adjusted contributions
             results = [];
             let balance = initialCapital;
-
-            // Calculate annual contribution based on frequency
-            const annualContribution = isMonthly ? contribution * 12 : contribution * 52;
+            let totalInvested = initialCapital;
 
             // If both initial capital and contribution are 0, set all results to 0
-            if (initialCapital === 0 && contribution === 0) {
+            if (initialCapital === 0 && baseContribution === 0) {
                 for (let year = 0; year <= years; year++) {
                     results.push(0);
                 }
+                totalInvested = 0;
             } else {
                 for (let year = 0; year <= years; year++) {
                     results.push(balance);
-                    balance = balance * (1 + effectiveReturn) + annualContribution;
+                    
+                    // Calculate contribution for this year, adjusted for inflation if enabled
+                    const yearlyContribution = isMonthly ? baseContribution * 12 : baseContribution * 52;
+                    const adjustedContribution = isInflationAdjusted
+                        ? yearlyContribution * Math.pow(1 + inflationRate, year)
+                        : yearlyContribution;
+                    
+                    balance = balance * (1 + effectiveReturn) + adjustedContribution;
+                    totalInvested += adjustedContribution;
                 }
             }
             
             // Update stats without updating chart
-            document.getElementById('totalInvested').textContent = 
-                `$${(initialCapital + annualContribution * years).toLocaleString()}`;
-            document.getElementById('finalBalance').textContent = 
-                `$${Math.round(results[results.length - 1]).toLocaleString()}`;
+            document.getElementById('totalInvested').textContent = `$${Math.round(totalInvested).toLocaleString()}`;
+            document.getElementById('finalBalance').textContent = `$${Math.round(results[results.length - 1]).toLocaleString()}`;
             document.getElementById('yearsToTarget').textContent = years;
 
             // Show/hide target reached indicator
@@ -798,6 +806,10 @@
             params.set('cf', document.getElementById('contributionFrequency').value);
             params.set('y', document.getElementById('years').value);
             params.set('t', document.getElementById('targetValue').value);
+            
+            // Add inflation settings
+            params.set('inf', document.getElementById('inflationToggle').checked ? '1' : '0');
+            params.set('ir', document.getElementById('inflationRate').value);
             
             // Add allocations
             params.set('etf', document.getElementById('etfAllocation').value);
@@ -862,14 +874,23 @@
                 document.getElementById('targetLabel').textContent = '$' + parseInt(t.value).toLocaleString();
             }
 
+            // Load inflation settings if they exist
+            if (params.has('inf')) {
+                document.getElementById('inflationToggle').checked = params.get('inf') === '1';
+            }
+            
+            if (params.has('ir')) {
+                document.getElementById('inflationRate').value = params.get('ir');
+            }
+
             // Load allocations if they exist
             const allocations = {
-                etf: { id: 'etfAllocation', key: 'etfs' },
-                stocks: { id: 'stocksAllocation', key: 'stocks' },
-                crypto: { id: 'cryptoAllocation', key: 'crypto' },
-                td: { id: 'termDepositAllocation', key: 'termDeposits' },
-                bonds: { id: 'bondAllocation', key: 'bonds' },
-                defi: { id: 'defiAllocation', key: 'defi' }
+                etf: { id: 'etfAllocation', key: 'etfs', label: 'etfLabel' },
+                stocks: { id: 'stocksAllocation', key: 'stocks', label: 'stocksLabel' },
+                crypto: { id: 'cryptoAllocation', key: 'crypto', label: 'cryptoLabel' },
+                td: { id: 'termDepositAllocation', key: 'termDeposits', label: 'termDepositLabel' },
+                bonds: { id: 'bondAllocation', key: 'bonds', label: 'bondLabel' },
+                defi: { id: 'defiAllocation', key: 'defi', label: 'defiLabel' }
             };
 
             let hasAllocations = false;
@@ -896,19 +917,27 @@
                     }
                     
                     // Update slider value
-                    document.getElementById(config.id).value = value.toString();
+                    const slider = document.getElementById(config.id);
+                    slider.value = value.toString();
                     
                     // Update portfolio data
                     portfolioData[config.key].allocation = value / 100;
+                    
+                    // Update label
+                    const label = document.getElementById(config.label);
+                    if (label) {
+                        label.textContent = value.toString();
+                    }
                 }
-
-                // Update all labels and values
-                updateLabel(document.getElementById('etfAllocation'), 'etfLabel');
             }
 
             // Recalculate everything
             recalculateWithoutChart();
             updateAllocationChart();
+            
+            // Check if contributions or allocations have changed from default
+            checkContributionsChanged();
+            checkAllocationsChanged();
         }
 
         // Initialize
@@ -1113,10 +1142,24 @@
 
         // Add this function before updateAllocationChart
         function calculateYearsUntilTarget() {
-            const target = parseInt(document.getElementById('targetValue').value);
+            const baseTarget = parseInt(document.getElementById('targetValue').value);
             const finalBalance = results[results.length - 1];
+            const isInflationAdjusted = document.getElementById('inflationToggle').checked;
+            const years = parseInt(document.getElementById('years').value);
+            const inflationRate = parseFloat(document.getElementById('inflationRate').value) / 100;
             
-            if (!finalBalance || finalBalance === 0) return `∞ years to $${target.toLocaleString()}`;
+            // Calculate inflation adjusted target
+            const inflationAdjustedTarget = isInflationAdjusted 
+                ? Math.round(baseTarget * Math.pow(1 + inflationRate, years))
+                : baseTarget;
+            
+            const targetDisplay = isInflationAdjusted 
+                ? `$${baseTarget.toLocaleString()} ($${inflationAdjustedTarget.toLocaleString()})`
+                : `$${baseTarget.toLocaleString()}`;
+            
+            if (!finalBalance || finalBalance === 0) {
+                return `∞ years to ${targetDisplay}`;
+            }
             
             // Calculate compound growth rate needed
             const initialCapital = parseInt(document.getElementById('initialCapital').value);
@@ -1129,17 +1172,21 @@
                 return acc + (asset.allocation * asset.return);
             }, 0);
             
-            if (weightedReturn <= 0) return `∞ years to $${target.toLocaleString()}`;
-            
-            // Calculate years needed using compound interest formula with regular contributions
-            let years = 0;
-            let balance = initialCapital;
-            while (balance < target && years < 100) {
-                balance = balance * (1 + weightedReturn) + annualContribution;
-                years++;
+            if (weightedReturn <= 0) {
+                return `∞ years to ${targetDisplay}`;
             }
             
-            return years >= 100 ? `∞ years to $${target.toLocaleString()}` : `${years} years to $${target.toLocaleString()}`;
+            // Calculate years needed using compound interest formula with regular contributions
+            let yearsToTarget = 0;
+            let balance = initialCapital;
+            while (balance < inflationAdjustedTarget && yearsToTarget < 100) {
+                balance = balance * (1 + weightedReturn) + annualContribution;
+                yearsToTarget++;
+            }
+            
+            return yearsToTarget >= 100 
+                ? `∞ years to ${targetDisplay}`
+                : `${yearsToTarget} years to ${targetDisplay}`;
         }
 
         // Add event listeners to all inputs
