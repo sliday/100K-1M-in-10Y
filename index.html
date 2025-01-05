@@ -172,7 +172,7 @@
                     <div class="form-control">
                         <label class="label">
                             <span class="flex items-center">
-                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/etfs.md" target="_blank">ETFs</a>&nbsp;(<span id="etfLabel">35</span>% | $<span id="etfValue">35,000</span>)
+                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/etfs.md" target="_blank">ETFs</a>&nbsp;(<span id="etfLabel">35</span>% / $<span id="etfValue">35,000</span>)
                             </span>
                             <span class="label-text-alt flex items-center">
                                 <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/risk_management.md#core-growth-70" class="text-yellow-500 hover:text-yellow-400">↑10%</a>
@@ -184,7 +184,7 @@
                     <div class="form-control">
                         <label class="label">
                             <span class="flex items-center">
-                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/stocks.md" target="_blank">Stocks</a>&nbsp;(<span id="stocksLabel">0</span>% | $<span id="stocksValue">0</span>)
+                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/stocks.md" target="_blank">Stocks</a>&nbsp;(<span id="stocksLabel">0</span>% / $<span id="stocksValue">0</span>)
                             </span>
                             <span class="label-text-alt flex items-center">
                                 <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/risk_management.md#core-growth-70" class="text-yellow-500 hover:text-yellow-400">↑12%</a>
@@ -196,7 +196,7 @@
                     <div class="form-control">
                         <label class="label">
                             <span class="flex items-center">
-                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/crypto.md" target="_blank">Crypto</a>&nbsp;(<span id="cryptoLabel">35</span>% | $<span id="cryptoValue">35,000</span>)
+                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/crypto.md" target="_blank">Crypto</a>&nbsp;(<span id="cryptoLabel">35</span>% / $<span id="cryptoValue">35,000</span>)
                             </span>
                             <span class="label-text-alt flex items-center">
                                 <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/risk_management.md#core-growth-70" class="text-red-500 hover:text-red-400">↑25%</a>
@@ -208,7 +208,7 @@
                     <div class="form-control">
                         <label class="label">
                             <span class="flex items-center">
-                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/fixed_income.md" target="_blank">Term Deposits</a>&nbsp;(<span id="termDepositLabel">15</span>% | $<span id="termDepositValue">15,000</span>)
+                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/fixed_income.md" target="_blank">Term Deposits</a>&nbsp;(<span id="termDepositLabel">15</span>% / $<span id="termDepositValue">15,000</span>)
                             </span>
                             <span class="label-text-alt flex items-center">
                                 <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/risk_management.md#stability-layer-25" class="text-green-500 hover:text-green-400">↑5%</a>
@@ -220,7 +220,7 @@
                     <div class="form-control">
                         <label class="label">
                             <span class="flex items-center">
-                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/fixed_income.md#government-bonds" target="_blank">Bonds</a>&nbsp;(<span id="bondLabel">10</span>% | $<span id="bondValue">10,000</span>)
+                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/fixed_income.md#government-bonds" target="_blank">Bonds</a>&nbsp;(<span id="bondLabel">10</span>% / $<span id="bondValue">10,000</span>)
                             </span>
                             <span class="label-text-alt flex items-center">
                                 <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/risk_management.md#stability-layer-25" class="text-emerald-500 hover:text-emerald-400">↑4%</a>
@@ -232,7 +232,7 @@
                     <div class="form-control">
                         <label class="label">
                             <span class="flex items-center">
-                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/defi.md" target="_blank">DeFi</a>&nbsp;(<span id="defiLabel">5</span>% | $<span id="defiValue">5,000</span>)
+                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/defi.md" target="_blank">DeFi</a>&nbsp;(<span id="defiLabel">5</span>% / $<span id="defiValue">5,000</span>)
                             </span>
                             <span class="label-text-alt flex items-center">
                                 <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/risk_management.md#yield-layer-5" class="text-rose-500 hover:text-rose-400">↑15%</a>
@@ -370,7 +370,17 @@
                     },
                     background: '#1d232a',
                     animations: {
-                        enabled: false
+                        enabled: true,
+                        easing: 'easeinout',
+                        speed: 800,
+                        animateGradually: {
+                            enabled: true,
+                            delay: 150
+                        },
+                        dynamicAnimation: {
+                            enabled: true,
+                            speed: 350
+                        }
                     }
                 },
                 title: {
@@ -512,7 +522,7 @@
                         const asset = Object.entries(portfolioData).find(([key]) => 
                             key.charAt(0).toUpperCase() + key.slice(1) === seriesName
                         )[1];
-                        return `${seriesName} (${(asset.allocation * 100).toFixed(0)}% | ${(asset.return * 100).toFixed(0)}%)`;
+                        return `${seriesName} (${(asset.allocation * 100).toFixed(0)}% / ${(asset.return * 100).toFixed(0)}%)`;
                     }
                 },
                 grid: {
@@ -547,7 +557,7 @@
             stackedChart.render();
         }
 
-        function recalculate() {
+        function recalculateWithoutChart() {
             const initialCapital = parseInt(document.getElementById('initialCapital').value);
             const contribution = parseInt(document.getElementById('monthlyContribution').value);
             const isMonthly = document.getElementById('contributionFrequency').value === 'monthly';
@@ -580,15 +590,12 @@
                 }
             }
             
-            // Update stats
+            // Update stats without updating chart
             document.getElementById('totalInvested').textContent = 
                 `$${(initialCapital + annualContribution * years).toLocaleString()}`;
             document.getElementById('finalBalance').textContent = 
                 `$${Math.round(results[results.length - 1]).toLocaleString()}`;
             document.getElementById('yearsToTarget').textContent = years;
-
-            // Update chart
-            updateAllocationChart();
 
             // Show/hide target reached indicator
             if (results[results.length - 1] >= target) {
@@ -598,6 +605,10 @@
             }
 
             // Update dollar value labels for asset allocations
+            updateDollarValues(initialCapital);
+        }
+
+        function updateDollarValues(initialCapital) {
             document.getElementById('etfValue').textContent = 
                 Math.round(portfolioData.etfs.allocation * initialCapital).toLocaleString();
             document.getElementById('stocksValue').textContent = 
@@ -610,187 +621,22 @@
                 Math.round(portfolioData.bonds.allocation * initialCapital).toLocaleString();
             document.getElementById('defiValue').textContent = 
                 Math.round(portfolioData.defi.allocation * initialCapital).toLocaleString();
-
-            // Update chart
-            if (stackedChart) {
-                stackedChart.updateOptions({
-                    annotations: {
-                        yaxis: [{
-                            y: target,
-                            borderColor: '#ff4444',
-                            label: {
-                                text: 'Target: $' + target.toLocaleString(),
-                                style: {
-                                    color: '#fff',
-                                    background: '#ff4444'
-                                }
-                            }
-                        }]
-                    },
-                    subtitle: {
-                        text: calculateYearsUntilTarget()
-                    }
-                }, false, true);
-            }
         }
 
-        // Add event listeners to all inputs
-        document.getElementById('initialCapital').addEventListener('input', recalculate);
-        document.getElementById('monthlyContribution').addEventListener('input', recalculate);
-        document.getElementById('years').addEventListener('input', recalculate);
-
-        document.getElementById('etfAllocation').addEventListener('input', updateAllocations);
-        document.getElementById('stocksAllocation').addEventListener('input', updateAllocations);
-        document.getElementById('cryptoAllocation').addEventListener('input', updateAllocations);
-        document.getElementById('termDepositAllocation').addEventListener('input', updateAllocations);
-        document.getElementById('bondAllocation').addEventListener('input', updateAllocations);
-        document.getElementById('defiAllocation').addEventListener('input', updateAllocations);
-
-        // Add function to update labels
-        function updateLabel(slider, labelId) {
-            if (!slider || !labelId) return;
-
-            // Update the changed slider's label
-            const label = document.getElementById(labelId);
-            if (label) {
-                label.textContent = slider.value;
-            }
-            
-            // Get initial capital for dollar value calculations
-            const initialCapital = parseInt(document.getElementById('initialCapital').value) || 0;
-            
-            // Update dollar value labels
-            const valueLabels = {
-                'etfLabel': 'etfValue',
-                'stocksLabel': 'stocksValue',
-                'cryptoLabel': 'cryptoValue',
-                'termDepositLabel': 'termDepositValue',
-                'bondLabel': 'bondValue',
-                'defiLabel': 'defiValue'
-            };
-
-            const currentValueLabel = valueLabels[labelId];
-            if (currentValueLabel) {
-                const valueElement = document.getElementById(currentValueLabel);
-                if (valueElement) {
-                    const allocation = parseFloat(slider.value) / 100;
-                    valueElement.textContent = Math.round(allocation * initialCapital).toLocaleString();
-                }
-            }
-
-            // Update allocations
-            updateAllocations();
+        function updateChartOnRelease() {
+            updateAllocationChart();
         }
 
-        // Add updateSliderLabel function
-        function updateSliderLabel(slider, labelId, prefix) {
-            const value = parseInt(slider.value).toLocaleString();
-            document.getElementById(labelId).textContent = `(${prefix}${value})`;
-            recalculate();
-        }
-
-        function updateAllocations() {
-            // Get values from sliders
-            const etfAlloc = parseFloat(document.getElementById('etfAllocation').value) / 100;
-            const stocksAlloc = parseFloat(document.getElementById('stocksAllocation').value) / 100;
-            const cryptoAlloc = parseFloat(document.getElementById('cryptoAllocation').value) / 100;
-            const termDepAlloc = parseFloat(document.getElementById('termDepositAllocation').value) / 100;
-            const bondAlloc = parseFloat(document.getElementById('bondAllocation').value) / 100;
-            const defiAlloc = parseFloat(document.getElementById('defiAllocation').value) / 100;
-
-            // Get the currently changed input
-            const activeElement = document.activeElement;
-            if (!activeElement || !activeElement.id) return;
-
-            // Map of slider IDs to portfolio data keys
-            const sliderToPortfolioMap = {
-                'etfAllocation': 'etfs',
-                'stocksAllocation': 'stocks',
-                'cryptoAllocation': 'crypto',
-                'termDepositAllocation': 'termDeposits',
-                'bondAllocation': 'bonds',
-                'defiAllocation': 'defi'
-            };
-
-            // Only proceed if we're dealing with an allocation slider
-            if (!sliderToPortfolioMap[activeElement.id]) return;
-
-            const activeValue = parseFloat(activeElement.value) / 100;
-            const activeKey = sliderToPortfolioMap[activeElement.id];
-
-            // Create array of other allocations
-            const otherSliders = Object.entries(sliderToPortfolioMap)
-                .filter(([sliderId]) => sliderId !== activeElement.id)
-                .map(([sliderId, portfolioKey]) => ({
-                    sliderId,
-                    portfolioKey,
-                    value: parseFloat(document.getElementById(sliderId).value) / 100
-                }));
-
-            const totalOthers = otherSliders.reduce((sum, { value }) => sum + value, 0);
-
-            if (activeValue === 1.0) {
-                // If active slider is at 100%, set all others to 0
-                portfolioData[activeKey].allocation = 1.0;
-                otherSliders.forEach(({ sliderId, portfolioKey }) => {
-                    document.getElementById(sliderId).value = "0";
-                    portfolioData[portfolioKey].allocation = 0;
-                });
-            } else if (totalOthers > 0) {
-                // Adjust other non-zero allocations proportionally
-                const remainingTotal = 1.0 - activeValue;
-                const adjustmentFactor = remainingTotal / totalOthers;
-
-                portfolioData[activeKey].allocation = activeValue;
-                otherSliders.forEach(({ sliderId, portfolioKey, value }) => {
-                    const newValue = value * adjustmentFactor;
-                    document.getElementById(sliderId).value = (newValue * 100).toFixed(0);
-                    portfolioData[portfolioKey].allocation = newValue;
-                });
-            } else {
-                // If all others are 0, distribute remaining percentage evenly
-                const remainingValue = 1.0 - activeValue;
-                const evenShare = remainingValue / (otherSliders.length || 1); // Prevent division by zero
-
-                portfolioData[activeKey].allocation = activeValue;
-                otherSliders.forEach(({ sliderId, portfolioKey }) => {
-                    document.getElementById(sliderId).value = (evenShare * 100).toFixed(0);
-                    portfolioData[portfolioKey].allocation = evenShare;
-                });
-            }
-
-            // Show warning if total allocation is not 100%
-            const totalAllocation = Object.values(portfolioData)
-                .reduce((sum, asset) => sum + asset.allocation, 0);
-            
-            document.getElementById('allocationWarning').style.display = 
-                Math.abs(totalAllocation - 1.0) > 0.001 ? 'block' : 'none';
-
-            // Update all labels to reflect new values
-            Object.entries(sliderToPortfolioMap).forEach(([sliderId, portfolioKey]) => {
-                const label = document.getElementById(sliderId.replace('Allocation', 'Label'));
-                if (label) {
-                    label.textContent = (portfolioData[portfolioKey].allocation * 100).toFixed(0);
-                }
-            });
-
-            // Check if allocations have changed from default
-            checkAllocationsChanged();
-
-            recalculate();
-        }
-
-        // Add event listeners for both input and change events
+        // Update allocation event listeners
         const allocationSliders = ['etf', 'stocks', 'crypto', 'termDeposit', 'bond', 'defi'];
         allocationSliders.forEach(type => {
             const slider = document.getElementById(type + 'Allocation');
             if (slider) {
-                ['input', 'change'].forEach(eventType => {
-                    slider.addEventListener(eventType, function() {
-                        this.focus(); // Ensure this slider is the active element
-                        updateAllocations();
-                    });
+                slider.addEventListener('input', function() {
+                    this.focus();
+                    updateAllocationsWithoutChart();
                 });
+                slider.addEventListener('change', updateChartOnRelease);
             }
         });
 
@@ -913,16 +759,20 @@
             }
 
             // Recalculate everything
-            recalculate();
+            recalculateWithoutChart();
+            updateAllocationChart();
         }
 
         // Initialize
-        window.onload = function () {
+        document.addEventListener('DOMContentLoaded', function() {
             loadFromURL();
             const target = parseInt(document.getElementById('targetValue').value);
             document.getElementById('targetReachedMessage').textContent = `$${target.toLocaleString()} Target Within Reach!`;
-            recalculate();
-        };
+            
+            // Calculate initial values and create chart
+            recalculateWithoutChart();
+            updateAllocationChart();
+        });
 
         // Store initial values when page loads
         const initialValues = {
@@ -1116,6 +966,150 @@
             }
             
             return years >= 100 ? `∞ years to $${target.toLocaleString()}` : `${years} years to $${target.toLocaleString()}`;
+        }
+
+        // Add event listeners to all inputs
+        document.getElementById('initialCapital').addEventListener('input', recalculateWithoutChart);
+        document.getElementById('monthlyContribution').addEventListener('input', recalculateWithoutChart);
+        document.getElementById('years').addEventListener('input', recalculateWithoutChart);
+
+        // Add mouseup/touchend listeners for chart updates
+        document.getElementById('initialCapital').addEventListener('change', updateChartOnRelease);
+        document.getElementById('monthlyContribution').addEventListener('change', updateChartOnRelease);
+        document.getElementById('years').addEventListener('change', updateChartOnRelease);
+
+        // Add function to update labels
+        function updateLabel(slider, labelId) {
+            if (!slider || !labelId) return;
+
+            // Update the changed slider's label
+            const label = document.getElementById(labelId);
+            if (label) {
+                label.textContent = slider.value;
+            }
+            
+            // Get initial capital for dollar value calculations
+            const initialCapital = parseInt(document.getElementById('initialCapital').value) || 0;
+            
+            // Update dollar value labels
+            const valueLabels = {
+                'etfLabel': 'etfValue',
+                'stocksLabel': 'stocksValue',
+                'cryptoLabel': 'cryptoValue',
+                'termDepositLabel': 'termDepositValue',
+                'bondLabel': 'bondValue',
+                'defiLabel': 'defiValue'
+            };
+
+            const currentValueLabel = valueLabels[labelId];
+            if (currentValueLabel) {
+                const valueElement = document.getElementById(currentValueLabel);
+                if (valueElement) {
+                    const allocation = parseFloat(slider.value) / 100;
+                    valueElement.textContent = Math.round(allocation * initialCapital).toLocaleString();
+                }
+            }
+
+            // Update allocations without updating chart
+            updateAllocationsWithoutChart();
+        }
+
+        // Add updateSliderLabel function
+        function updateSliderLabel(slider, labelId, prefix) {
+            const value = parseInt(slider.value).toLocaleString();
+            document.getElementById(labelId).textContent = `(${prefix}${value})`;
+            recalculateWithoutChart();
+        }
+
+        function updateAllocationsWithoutChart() {
+            // Get values from sliders
+            const etfAlloc = parseFloat(document.getElementById('etfAllocation').value) / 100;
+            const stocksAlloc = parseFloat(document.getElementById('stocksAllocation').value) / 100;
+            const cryptoAlloc = parseFloat(document.getElementById('cryptoAllocation').value) / 100;
+            const termDepAlloc = parseFloat(document.getElementById('termDepositAllocation').value) / 100;
+            const bondAlloc = parseFloat(document.getElementById('bondAllocation').value) / 100;
+            const defiAlloc = parseFloat(document.getElementById('defiAllocation').value) / 100;
+
+            // Get the currently changed input
+            const activeElement = document.activeElement;
+            if (!activeElement || !activeElement.id) return;
+
+            // Map of slider IDs to portfolio data keys
+            const sliderToPortfolioMap = {
+                'etfAllocation': 'etfs',
+                'stocksAllocation': 'stocks',
+                'cryptoAllocation': 'crypto',
+                'termDepositAllocation': 'termDeposits',
+                'bondAllocation': 'bonds',
+                'defiAllocation': 'defi'
+            };
+
+            // Only proceed if we're dealing with an allocation slider
+            if (!sliderToPortfolioMap[activeElement.id]) return;
+
+            const activeValue = parseFloat(activeElement.value) / 100;
+            const activeKey = sliderToPortfolioMap[activeElement.id];
+
+            // Create array of other allocations
+            const otherSliders = Object.entries(sliderToPortfolioMap)
+                .filter(([sliderId]) => sliderId !== activeElement.id)
+                .map(([sliderId, portfolioKey]) => ({
+                    sliderId,
+                    portfolioKey,
+                    value: parseFloat(document.getElementById(sliderId).value) / 100
+                }));
+
+            const totalOthers = otherSliders.reduce((sum, { value }) => sum + value, 0);
+
+            if (activeValue === 1.0) {
+                // If active slider is at 100%, set all others to 0
+                portfolioData[activeKey].allocation = 1.0;
+                otherSliders.forEach(({ sliderId, portfolioKey }) => {
+                    document.getElementById(sliderId).value = "0";
+                    portfolioData[portfolioKey].allocation = 0;
+                });
+            } else if (totalOthers > 0) {
+                // Adjust other non-zero allocations proportionally
+                const remainingTotal = 1.0 - activeValue;
+                const adjustmentFactor = remainingTotal / totalOthers;
+
+                portfolioData[activeKey].allocation = activeValue;
+                otherSliders.forEach(({ sliderId, portfolioKey, value }) => {
+                    const newValue = value * adjustmentFactor;
+                    document.getElementById(sliderId).value = (newValue * 100).toFixed(0);
+                    portfolioData[portfolioKey].allocation = newValue;
+                });
+            } else {
+                // If all others are 0, distribute remaining percentage evenly
+                const remainingValue = 1.0 - activeValue;
+                const evenShare = remainingValue / (otherSliders.length || 1); // Prevent division by zero
+
+                portfolioData[activeKey].allocation = activeValue;
+                otherSliders.forEach(({ sliderId, portfolioKey }) => {
+                    document.getElementById(sliderId).value = (evenShare * 100).toFixed(0);
+                    portfolioData[portfolioKey].allocation = evenShare;
+                });
+            }
+
+            // Show warning if total allocation is not 100%
+            const totalAllocation = Object.values(portfolioData)
+                .reduce((sum, asset) => sum + asset.allocation, 0);
+            
+            document.getElementById('allocationWarning').style.display = 
+                Math.abs(totalAllocation - 1.0) > 0.001 ? 'block' : 'none';
+
+            // Update all labels to reflect new values
+            Object.entries(sliderToPortfolioMap).forEach(([sliderId, portfolioKey]) => {
+                const label = document.getElementById(sliderId.replace('Allocation', 'Label'));
+                if (label) {
+                    label.textContent = (portfolioData[portfolioKey].allocation * 100).toFixed(0);
+                }
+            });
+
+            // Check if allocations have changed from default
+            checkAllocationsChanged();
+
+            recalculateWithoutChart();
         }
     </script>
 
