@@ -7,10 +7,8 @@
     <title>"100K → 1M in 10Y" Investment Portfolio Calculator</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/markdown-it@13.0.1/dist/markdown-it.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script>
         // Auto-detect system theme
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -310,7 +308,7 @@
                                 </div>
                                 <div class="flex gap-1">
                                     <button onclick="copyLink()" class="btn btn-xs flex-1">SHARE THIS PAGE</button>
-                                    <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/exit.md" target="_blank" class="btn btn-xs flex-1">EXIT GRACEFULLY</a>
+                                    <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/exit.md" target="_blank" class="btn btn-xs btn-ghost flex-1">EXIT GRACEFULLY</a>
                                 </div>
                             </div>
                         </div>
@@ -593,7 +591,11 @@
             updateAllocationChart();
 
             // Show/hide target reached indicator
-            document.getElementById('targetReached').classList.toggle('hidden', results[results.length - 1] < target);
+            if (results[results.length - 1] >= target) {
+                showTargetReached();
+            } else {
+                hideTargetReached();
+            }
 
             // Update dollar value labels for asset allocations
             document.getElementById('etfValue').textContent = 
@@ -1021,7 +1023,63 @@
         // Add these functions for toast animation
         function showTargetReached() {
             const toast = document.getElementById('targetReached');
+            const wasHidden = toast.classList.contains('hidden');
+            
+            // Remove hidden class
             toast.classList.remove('hidden');
+            
+            // Only trigger confetti if toast was previously hidden
+            if (wasHidden) {
+                function shoot() {
+                    // Main burst
+                    confetti({
+                        particleCount: 50,
+                        spread: 60,
+                        origin: { x: 0.5, y: 1 },
+                        colors: ['#FFD700', '#FFA500', '#32CD32', '#00ff00'],
+                        startVelocity: 45,
+                        gravity: 3,
+                        scalar: 1.2,
+                        ticks: 200
+                    });
+
+                    // Some spinning ones
+                    confetti({
+                        particleCount: 15,
+                        spread: 150,
+                        origin: { x: 0.5, y: 1 },
+                        colors: ['#FFD700', '#FFA500'],
+                        startVelocity: 35,
+                        gravity: 3,
+                        scalar: 1,
+                        ticks: 200,
+                        flat: true
+                    });
+
+                    // Add some stars
+                    confetti({
+                        particleCount: 20,
+                        spread: 70,
+                        origin: { x: 0.5, y: 1 },
+                        shapes: ['star'],
+                        colors: ['#FFD700', '#FFA500', '#32CD32', '#00ff00'],
+                        startVelocity: 40,
+                        gravity: 3,
+                        scalar: 1.5,
+                        ticks: 200
+                    });
+                }
+
+                // Shoot multiple times for a continuous effect
+                shoot();
+                setTimeout(shoot, 100);
+                setTimeout(shoot, 200);
+            }
+
+            // Update message
+            const target = parseInt(document.getElementById('targetValue').value);
+            document.getElementById('targetReachedMessage').textContent = 
+                `$${target.toLocaleString()} Target Within Reach!`;
         }
 
         function hideTargetReached() {
