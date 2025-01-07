@@ -20,9 +20,8 @@
         // Listen for system theme changes
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
             document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-            // Redraw charts when theme changes
-            if (growthSketch) growthSketch.redraw();
-            if (stackedBarsSketch) stackedBarsSketch.redraw();
+            // Redraw chart when theme changes
+            updateAllocationChart();
         });
 
         tailwind.config = {
@@ -510,7 +509,7 @@
                     toolbar: {
                         show: false
                     },
-                    background: '#1d232a',
+                    background: isDarkMode() ? '#1d232a' : '#ffffff',
                     animations: {
                         enabled: true,
                         easing: 'easeinout',
@@ -531,7 +530,7 @@
                     style: {
                         fontSize: '28px',
                         fontWeight: 'bold',
-                        color: '#ffffff',
+                        color: isDarkMode() ? '#ffffff' : '#1d232a',
                         fontFamily: 'system-ui'
                     },
                     margin: 20,
@@ -621,7 +620,7 @@
                     categories: years,
                     labels: {
                         style: {
-                            colors: '#ffffff'
+                            colors: isDarkMode() ? '#ffffff' : '#1d232a'
                         },
                         rotate: -45,
                         rotateAlways: false,
@@ -631,7 +630,7 @@
                 yaxis: {
                     labels: {
                         style: {
-                            colors: '#ffffff'
+                            colors: isDarkMode() ? '#ffffff' : '#1d232a'
                         },
                         formatter: function (value) {
                             if (window.innerWidth < 768) {
@@ -658,7 +657,7 @@
                         radius: 6
                     },
                     labels: {
-                        colors: '#ffffff'
+                        colors: isDarkMode() ? '#ffffff' : '#1d232a'
                     },
                     formatter: function(seriesName, opts) {
                         const asset = Object.entries(portfolioData).find(([key]) => 
@@ -668,11 +667,11 @@
                     }
                 },
                 grid: {
-                    borderColor: 'rgba(255,255,255,0.1)',
+                    borderColor: isDarkMode() ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
                     strokeDashArray: 4
                 },
                 theme: {
-                    mode: 'dark'
+                    mode: isDarkMode() ? 'dark' : 'light'
                 },
                 annotations: {
                     yaxis: [{
