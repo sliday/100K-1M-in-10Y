@@ -166,7 +166,11 @@
             <div class="card bg-base-200 shadow-xl">
                 <div class="card-body">
                     <div class="flex justify-between items-center">
-                        <h2 class="card-title">2. Asset Allocation</h2>
+                        <h2 class="card-title">2. Asset Allocation
+                            <button onclick="document.getElementById('scenariosModal').showModal()" class="btn btn-ghost btn-xs btn-circle">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-4 h-4 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </button>
+                        </h2>
                         <button onclick="resetAllocations()" id="resetButton" class="btn btn-ghost btn-xs ml-2 hidden">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -253,6 +257,49 @@
                 </div>
             </div>
 
+            <!-- Return Scenarios Modal -->
+            <dialog id="scenariosModal" class="modal">
+                <div class="modal-box">
+                    <form method="dialog">
+                        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                    </form>
+                    <h3 class="font-bold text-lg mb-4">Return Scenarios</h3>
+                    
+                    <div class="space-y-4">
+                        <!-- Base Case -->
+                        <div>
+                            <div class="font-semibold opacity-80">Base Case <span class="text-xs opacity-70">(shown in stacked bars)</span></div>
+                            <p class="text-sm opacity-70">Expected returns based on <a href="https://www.spglobal.com/spdji/en/indices/equity/sp-500/#overview" target="_blank" class="link">S&P 500 historical data</a> and other market benchmarks:</p>
+                            <ul class="text-sm list-disc list-inside opacity-70 mt-1">
+                                <li>ETFs: +10%</li>
+                                <li>Stocks: +12%</li>
+                                <li>Crypto: +25%</li>
+                                <li>Term Deposits: +5%</li>
+                                <li>Bonds: +4%</li>
+                                <li>DeFi: +15%</li>
+                            </ul>
+                        </div>
+
+                        <!-- Pessimistic -->
+                        <div>
+                            <div class="font-semibold text-error">Pessimistic Scenario <span class="text-xs opacity-70">(red line)</span></div>
+                            <p class="text-sm opacity-70">Lower returns during adverse conditions:</p>
+                            <ul class="text-sm list-disc list-inside opacity-70 mt-1">
+                                <li>ETFs: Bear market (+5%)</li>
+                                <li>Stocks: Market downturn (-10%)</li>
+                                <li>Crypto: Crypto winter (-30%)</li>
+                                <li>Term Deposits: Low rates (+3%)</li>
+                                <li>Bonds: Rising rates (+2%)</li>
+                                <li>DeFi: Protocol risks (-20%)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <form method="dialog" class="modal-backdrop">
+                    <button>close</button>
+                </form>
+            </dialog>
+
             <!-- Portfolio Section -->
             <div class="card bg-base-200 shadow-xl">
                 <div class="card-body">
@@ -325,12 +372,12 @@
                     </div>
 
                     <!-- Target Reached Toast -->
-                    <div id="targetReached" class="toast toast-center toast-bottom mb-8 hidden">
-                        <div class="alert alert-success py-3 px-4">
+                    <div id="targetReached" class="toast toast-center toast-bottom mb-8 hidden z-[9999]">
+                        <div class="alert alert-info py-3 px-4">
                             <div class="flex flex-col gap-3">
                                 <span id="targetReachedMessage" class="text-lg font-bold">$1,000,000 Target Within Reach!</span>
                                 <div class="flex gap-2">                                    
-                                    <button class="btn btn-sm btn-black" onclick="copyLink()">
+                                    <button class="btn btn-sm btn-sky" onclick="copyLink()">
                                         Share this page
                                     </button>
                                     <button class="btn btn-sm btn-ghost" onclick="hideTargetReached()">
@@ -467,39 +514,126 @@
     <script>
         // Portfolio data structure
         let portfolioData = {
-            etfs: { allocation: 0.35, return: 0.10, color: [79, 70, 229] },
-            stocks: { allocation: 0.00, return: 0.12, color: [59, 130, 246] },
-            crypto: { allocation: 0.35, return: 0.25, color: [239, 68, 68] },
-            termDeposits: { allocation: 0.15, return: 0.05, color: [16, 185, 129] },
-            bonds: { allocation: 0.10, return: 0.04, color: [245, 158, 11] },
-            defi: { allocation: 0.05, return: 0.15, color: [236, 72, 153] }
+            etfs: { 
+                allocation: 0.35, 
+                return: 0.10,
+                optimistic: 0.15,  // Bull market scenario
+                pessimistic: 0.05, // Bear market scenario
+                color: [79, 70, 229] 
+            },
+            stocks: { 
+                allocation: 0.00, 
+                return: 0.12,
+                optimistic: 0.20,  // Strong company performance
+                pessimistic: -0.10, // Market downturn
+                color: [59, 130, 246] 
+            },
+            crypto: { 
+                allocation: 0.35, 
+                return: 0.25,
+                optimistic: 0.50,  // Bull market/adoption wave
+                pessimistic: -0.30, // Crypto winter
+                color: [239, 68, 68] 
+            },
+            termDeposits: { 
+                allocation: 0.15, 
+                return: 0.05,
+                optimistic: 0.07,  // High interest rate environment
+                pessimistic: 0.03, // Low interest rate environment
+                color: [16, 185, 129] 
+            },
+            bonds: { 
+                allocation: 0.10, 
+                return: 0.04,
+                optimistic: 0.08,  // Falling interest rates
+                pessimistic: 0.02, // Rising interest rates
+                color: [245, 158, 11] 
+            },
+            defi: { 
+                allocation: 0.05, 
+                return: 0.15,
+                optimistic: 0.30,  // High TVL and protocol success
+                pessimistic: -0.20, // Protocol risks/market downturn
+                color: [236, 72, 153] 
+            }
         };
 
         let results = [];
+        let optimisticResults = [];
+        let pessimisticResults = [];
         let stackedChart;
-        let isFirstRender = true;  // Add flag to track first render
+        let isFirstRender = true;
 
         // Create stacked bar chart using ApexCharts
         function updateAllocationChart() {
             // Prepare data
             const years = [];
             const seriesData = Object.entries(portfolioData)
-                .filter(([key, asset]) => asset.allocation > 0)  // Only include non-zero allocations
+                .filter(([key, asset]) => asset.allocation > 0)
                 .map(([key, asset]) => ({
                     name: key.charAt(0).toUpperCase() + key.slice(1),
                     data: []
                 }));
 
+            // Calculate base case, optimistic, and pessimistic scenarios
+            recalculateScenarios();
+
             for (let i = 0; i < results.length; i++) {
                 years.push(`Year ${i}`);
                 Object.entries(portfolioData)
-                    .filter(([key, asset]) => asset.allocation > 0)  // Only include non-zero allocations
+                    .filter(([key, asset]) => asset.allocation > 0)
                     .forEach(([key, asset], index) => {
                         seriesData[index].data.push(Math.round(results[i] * asset.allocation));
                     });
             }
 
             const target = parseInt(document.getElementById('targetValue').value);
+
+            // Add annotations for optimistic and pessimistic scenarios
+            const annotations = {
+                yaxis: [{
+                    y: target,
+                    borderColor: '#0ea5e9', // sky-500
+                    label: {
+                        text: 'Target: $' + target.toLocaleString(),
+                        style: {
+                            color: '#fff',
+                            background: '#0ea5e9'
+                        }
+                    }
+                }]
+            };
+
+            // Add scenario lines if we have data
+            if (optimisticResults.length > 0) {
+                annotations.yaxis.push({
+                    y: optimisticResults[optimisticResults.length - 1],
+                    borderColor: '#10b981', // emerald-500
+                    label: {
+                        text: 'Optimistic: $' + Math.round(optimisticResults[optimisticResults.length - 1]).toLocaleString(),
+                        style: {
+                            color: '#fff',
+                            background: '#10b981'
+                        }
+                    },
+                    opacity: 0.5
+                });
+            }
+
+            if (pessimisticResults.length > 0) {
+                annotations.yaxis.push({
+                    y: pessimisticResults[pessimisticResults.length - 1],
+                    borderColor: '#ef4444',
+                    label: {
+                        text: 'Pessimistic: $' + Math.round(pessimisticResults[pessimisticResults.length - 1]).toLocaleString(),
+                        style: {
+                            color: '#fff',
+                            background: '#ef4444'
+                        }
+                    },
+                    opacity: 0.5
+                });
+            }
 
             const options = {
                 chart: {
@@ -673,19 +807,7 @@
                 theme: {
                     mode: isDarkMode() ? 'dark' : 'light'
                 },
-                annotations: {
-                    yaxis: [{
-                        y: target,
-                        borderColor: '#ff4444',
-                        label: {
-                            text: 'Target: $' + target.toLocaleString(),
-                            style: {
-                                color: '#fff',
-                                background: '#ff4444'
-                            }
-                        }
-                    }]
-                }
+                annotations: annotations
             };
 
             // Destroy previous chart if it exists
@@ -699,6 +821,53 @@
             
             // Set flag to false after first render
             isFirstRender = false;
+        }
+
+        function recalculateScenarios() {
+            const initialCapital = parseInt(document.getElementById('initialCapital').value);
+            const baseContribution = parseInt(document.getElementById('monthlyContribution').value);
+            const isMonthly = document.getElementById('contributionFrequency').value === 'monthly';
+            const years = parseInt(document.getElementById('years').value);
+            const isInflationAdjusted = document.getElementById('inflationToggle').checked;
+            const inflationRate = parseFloat(document.getElementById('inflationRate').value) / 100;
+
+            // Calculate weighted returns for each scenario
+            let baseReturn = 0, optimisticReturn = 0, pessimisticReturn = 0;
+            Object.values(portfolioData).forEach(asset => {
+                baseReturn += asset.allocation * asset.return;
+                optimisticReturn += asset.allocation * asset.optimistic;
+                pessimisticReturn += asset.allocation * asset.pessimistic;
+            });
+
+            // Adjust for inflation if needed
+            if (isInflationAdjusted) {
+                baseReturn = (1 + baseReturn) / (1 + inflationRate) - 1;
+                optimisticReturn = (1 + optimisticReturn) / (1 + inflationRate) - 1;
+                pessimisticReturn = (1 + pessimisticReturn) / (1 + inflationRate) - 1;
+            }
+
+            // Calculate growth for each scenario
+            results = calculateGrowth(initialCapital, baseContribution, baseReturn, years, isMonthly, isInflationAdjusted, inflationRate);
+            optimisticResults = calculateGrowth(initialCapital, baseContribution, optimisticReturn, years, isMonthly, isInflationAdjusted, inflationRate);
+            pessimisticResults = calculateGrowth(initialCapital, baseContribution, pessimisticReturn, years, isMonthly, isInflationAdjusted, inflationRate);
+        }
+
+        function calculateGrowth(initialCapital, baseContribution, returnRate, years, isMonthly, isInflationAdjusted, inflationRate) {
+            const results = [];
+            let balance = initialCapital;
+            
+            for (let year = 0; year <= years; year++) {
+                results.push(balance);
+                
+                const yearlyContribution = isMonthly ? baseContribution * 12 : baseContribution * 52;
+                const adjustedContribution = isInflationAdjusted
+                    ? yearlyContribution * Math.pow(1 + inflationRate, year)
+                    : yearlyContribution;
+                
+                balance = balance * (1 + returnRate) + adjustedContribution;
+            }
+            
+            return results;
         }
 
         function recalculateWithoutChart() {
