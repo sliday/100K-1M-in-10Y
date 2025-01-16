@@ -528,7 +528,7 @@
                     text: calculateYearsUntilTarget(),
                     align: 'center',
                     style: {
-                        fontSize: '28px',
+                        fontSize: window.innerWidth < 768 ? '16px' : '28px',
                         fontWeight: 'bold',
                         color: isDarkMode() ? '#ffffff' : '#1d232a',
                         fontFamily: 'system-ui'
@@ -1163,8 +1163,12 @@
                 ? Math.round(baseTarget * Math.pow(1 + inflationRate, years))
                 : baseTarget;
             
+            // Create mobile-friendly title
+            const isMobile = window.innerWidth < 768;
             const targetDisplay = isInflationAdjusted 
-                ? `$${baseTarget.toLocaleString()} (inflation adjusted to $${inflationAdjustedTarget.toLocaleString()})`
+                ? isMobile
+                    ? `$${baseTarget.toLocaleString()}\n(adj: $${inflationAdjustedTarget.toLocaleString()})`
+                    : `$${baseTarget.toLocaleString()} (inflation adjusted to $${inflationAdjustedTarget.toLocaleString()})`
                 : `$${baseTarget.toLocaleString()}`;
             
             if (!finalBalance || finalBalance === 0) {
