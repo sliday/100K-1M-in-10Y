@@ -73,6 +73,89 @@
         function isDarkMode() {
             return document.documentElement.getAttribute('data-theme') === 'dark';
         }
+
+        // Add this at the top level of your script section
+        let targetToastPermanentlyDismissed = false;
+        let targetNotificationShownThisSession = false; // New flag to track if notification has been shown
+
+        // Update the hideTargetReached function to permanently dismiss the toast
+        function hideTargetReached() {
+            const toast = document.getElementById('targetReached');
+            toast.classList.add('hidden');
+            
+            // Set the flag to permanently dismiss the toast
+            targetToastPermanentlyDismissed = true;
+            
+            // Optionally store this preference in localStorage to persist across page reloads
+            localStorage.setItem('targetToastDismissed', 'true');
+        }
+
+        // Update the showTargetReached function to only show once per session
+        function showTargetReached() {
+            // Don't show the toast if it's been permanently dismissed or already shown this session
+            if (targetToastPermanentlyDismissed || targetNotificationShownThisSession) {
+                return;
+            }
+            
+            const toast = document.getElementById('targetReached');
+            
+            // Mark as shown this session
+            targetNotificationShownThisSession = true;
+            
+            // Remove hidden class
+            toast.classList.remove('hidden');
+            
+            // Trigger confetti only once per session
+            function shoot() {
+                // Main burst
+                confetti({
+                    particleCount: 50,
+                    spread: 60,
+                    origin: { x: 0.5, y: 1 },
+                    colors: ['#FFD700', '#FFA500', '#32CD32', '#00ff00'],
+                    startVelocity: 45,
+                    gravity: 3,
+                    scalar: 1.2,
+                    ticks: 200
+                });
+
+                // Some spinning ones
+                confetti({
+                    particleCount: 15,
+                    spread: 150,
+                    origin: { x: 0.5, y: 1 },
+                    colors: ['#FFD700', '#FFA500'],
+                    startVelocity: 35,
+                    gravity: 3,
+                    scalar: 1,
+                    ticks: 200,
+                    flat: true
+                });
+
+                // Add some stars
+                confetti({
+                    particleCount: 20,
+                    spread: 70,
+                    origin: { x: 0.5, y: 1 },
+                    shapes: ['star'],
+                    colors: ['#FFD700', '#FFA500', '#32CD32', '#00ff00'],
+                    startVelocity: 40,
+                    gravity: 3,
+                    scalar: 1.5,
+                    ticks: 200
+                });
+            }
+
+            // Shoot multiple times for a continuous effect, but only once per session
+            shoot();
+            setTimeout(shoot, 100);
+            setTimeout(shoot, 200);
+
+            // Update message
+            const target = parseInt(document.getElementById('targetValue').value);
+            document.getElementById('targetReachedMessage').textContent = 
+                `$${target.toLocaleString()} Target Within Reach!`;
+        }
     </script>
     <style>
         .markdown-body {
@@ -185,7 +268,14 @@
                                 <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/etfs.md" target="_blank">ETFs</a>&nbsp;(<span id="etfLabel">35</span>% / $<span id="etfValue">35,000</span>)
                             </span>
                             <span class="label-text-alt flex items-center">
-                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/risk_management.md#core-growth-70" class="text-yellow-500 hover:text-yellow-400">↑10%</a>
+                                <span class="text-yellow-500 hover:text-yellow-400 cursor-pointer return-display" 
+                                      data-asset="etfs" 
+                                      onclick="showReturnEditor(this)">↑10%</span>
+                                <input type="number" class="input input-xs w-14 bg-base-300 ml-1 hidden return-editor" 
+                                       data-asset="etfs" 
+                                       value="10" min="-100" max="1000" step="1" 
+                                       onblur="updateReturnValue(this)" 
+                                       onkeydown="handleReturnKeydown(event, this)">
                             </span>
                         </label>
                         <input id="etfAllocation" type="range" min="0" max="100" value="35" class="range" step="1" oninput="updateLabel(this, 'etfLabel')" />
@@ -197,7 +287,14 @@
                                 <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/stocks.md" target="_blank">Stocks</a>&nbsp;(<span id="stocksLabel">0</span>% / $<span id="stocksValue">0</span>)
                             </span>
                             <span class="label-text-alt flex items-center">
-                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/risk_management.md#core-growth-70" class="text-yellow-500 hover:text-yellow-400">↑12%</a>
+                                <span class="text-yellow-500 hover:text-yellow-400 cursor-pointer return-display" 
+                                      data-asset="stocks" 
+                                      onclick="showReturnEditor(this)">↑12%</span>
+                                <input type="number" class="input input-xs w-14 bg-base-300 ml-1 hidden return-editor" 
+                                       data-asset="stocks" 
+                                       value="12" min="-100" max="1000" step="1" 
+                                       onblur="updateReturnValue(this)" 
+                                       onkeydown="handleReturnKeydown(event, this)">
                             </span>
                         </label>
                         <input id="stocksAllocation" type="range" min="0" max="100" value="0" class="range" step="1" oninput="updateLabel(this, 'stocksLabel')" />
@@ -209,7 +306,14 @@
                                 <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/crypto.md" target="_blank">Crypto</a>&nbsp;(<span id="cryptoLabel">35</span>% / $<span id="cryptoValue">35,000</span>)
                             </span>
                             <span class="label-text-alt flex items-center">
-                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/risk_management.md#core-growth-70" class="text-red-500 hover:text-red-400">↑25%</a>
+                                <span class="text-red-500 hover:text-red-400 cursor-pointer return-display" 
+                                      data-asset="crypto" 
+                                      onclick="showReturnEditor(this)">↑25%</span>
+                                <input type="number" class="input input-xs w-14 bg-base-300 ml-1 hidden return-editor" 
+                                       data-asset="crypto" 
+                                       value="25" min="-100" max="1000" step="1" 
+                                       onblur="updateReturnValue(this)" 
+                                       onkeydown="handleReturnKeydown(event, this)">
                             </span>
                         </label>
                         <input id="cryptoAllocation" type="range" min="0" max="100" value="35" class="range" step="1" oninput="updateLabel(this, 'cryptoLabel')" />
@@ -221,7 +325,14 @@
                                 <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/fixed_income.md" target="_blank">Term Deposits</a>&nbsp;(<span id="termDepositLabel">15</span>% / $<span id="termDepositValue">15,000</span>)
                             </span>
                             <span class="label-text-alt flex items-center">
-                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/risk_management.md#stability-layer-25" class="text-green-500 hover:text-green-400">↑5%</a>
+                                <span class="text-green-500 hover:text-green-400 cursor-pointer return-display" 
+                                      data-asset="termDeposits" 
+                                      onclick="showReturnEditor(this)">↑5%</span>
+                                <input type="number" class="input input-xs w-14 bg-base-300 ml-1 hidden return-editor" 
+                                       data-asset="termDeposits" 
+                                       value="5" min="-100" max="1000" step="1" 
+                                       onblur="updateReturnValue(this)" 
+                                       onkeydown="handleReturnKeydown(event, this)">
                             </span>
                         </label>
                         <input id="termDepositAllocation" type="range" min="0" max="100" value="15" class="range" step="1" oninput="updateLabel(this, 'termDepositLabel')" />
@@ -233,7 +344,14 @@
                                 <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/fixed_income.md#government-bonds" target="_blank">Bonds</a>&nbsp;(<span id="bondLabel">10</span>% / $<span id="bondValue">10,000</span>)
                             </span>
                             <span class="label-text-alt flex items-center">
-                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/risk_management.md#stability-layer-25" class="text-emerald-500 hover:text-emerald-400">↑4%</a>
+                                <span class="text-emerald-500 hover:text-emerald-400 cursor-pointer return-display" 
+                                      data-asset="bonds" 
+                                      onclick="showReturnEditor(this)">↑4%</span>
+                                <input type="number" class="input input-xs w-14 bg-base-300 ml-1 hidden return-editor" 
+                                       data-asset="bonds" 
+                                       value="4" min="-100" max="1000" step="1" 
+                                       onblur="updateReturnValue(this)" 
+                                       onkeydown="handleReturnKeydown(event, this)">
                             </span>
                         </label>
                         <input id="bondAllocation" type="range" min="0" max="100" value="10" class="range" step="1" oninput="updateLabel(this, 'bondLabel')" />
@@ -245,7 +363,14 @@
                                 <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/defi.md" target="_blank">DeFi</a>&nbsp;(<span id="defiLabel">5</span>% / $<span id="defiValue">5,000</span>)
                             </span>
                             <span class="label-text-alt flex items-center">
-                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/risk_management.md#yield-layer-5" class="text-rose-500 hover:text-rose-400">↑15%</a>
+                                <span class="text-rose-500 hover:text-rose-400 cursor-pointer return-display" 
+                                      data-asset="defi" 
+                                      onclick="showReturnEditor(this)">↑15%</span>
+                                <input type="number" class="input input-xs w-14 bg-base-300 ml-1 hidden return-editor" 
+                                       data-asset="defi" 
+                                       value="15" min="-100" max="1000" step="1" 
+                                       onblur="updateReturnValue(this)" 
+                                       onkeydown="handleReturnKeydown(event, this)">
                             </span>
                         </label>
                         <input id="defiAllocation" type="range" min="0" max="100" value="5" class="range" step="1" oninput="updateLabel(this, 'defiLabel')" />
@@ -564,6 +689,16 @@
         let stackedChart;
         let isFirstRender = true;
 
+        // Store initial return values for reset functionality
+        const initialReturns = {
+            etfs: 0.10,
+            stocks: 0.12,
+            crypto: 0.25,
+            termDeposits: 0.05,
+            bonds: 0.04,
+            defi: 0.15
+        };
+
         // Create stacked bar chart using ApexCharts
         function updateAllocationChart() {
             // Prepare data
@@ -645,15 +780,15 @@
                     },
                     background: isDarkMode() ? '#1d232a' : '#ffffff',
                     animations: {
-                        enabled: true,
+                        enabled: isFirstRender, // Only enable animations on first render
                         easing: 'easeinout',
                         speed: 1000,
                         animateGradually: {
-                            enabled: true,
+                            enabled: isFirstRender, // Only enable on first render
                             delay: 150
                         },
                         dynamicAnimation: {
-                            enabled: true,
+                            enabled: isFirstRender, // Only enable on first render
                             speed: 500
                         }
                     }
@@ -998,6 +1133,14 @@
             params.set('bonds', document.getElementById('bondAllocation').value);
             params.set('defi', document.getElementById('defiAllocation').value);
             
+            // Add return values
+            params.set('etf_r', Math.round(portfolioData.etfs.return * 100));
+            params.set('stocks_r', Math.round(portfolioData.stocks.return * 100));
+            params.set('crypto_r', Math.round(portfolioData.crypto.return * 100));
+            params.set('td_r', Math.round(portfolioData.termDeposits.return * 100));
+            params.set('bonds_r', Math.round(portfolioData.bonds.return * 100));
+            params.set('defi_r', Math.round(portfolioData.defi.return * 100));
+            
             // Create the full URL
             const url = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
             
@@ -1110,6 +1253,38 @@
                 }
             }
 
+            // Load return values if they exist
+            const returnParams = {
+                'etf_r': 'etfs',
+                'stocks_r': 'stocks',
+                'crypto_r': 'crypto',
+                'td_r': 'termDeposits',
+                'bonds_r': 'bonds',
+                'defi_r': 'defi'
+            };
+            
+            let hasCustomReturns = false;
+            
+            // Update return values from URL
+            for (const [param, assetKey] of Object.entries(returnParams)) {
+                if (params.has(param)) {
+                    hasCustomReturns = true;
+                    const returnValue = parseInt(params.get(param)) / 100;
+                    portfolioData[assetKey].return = returnValue;
+                    
+                    // Update display elements
+                    document.querySelectorAll(`.return-display[data-asset="${assetKey}"]`).forEach(display => {
+                        const prefix = returnValue >= 0 ? '↑' : '↓';
+                        display.textContent = `${prefix}${Math.abs(returnValue * 100)}%`;
+                    });
+                    
+                    // Update editor elements
+                    document.querySelectorAll(`.return-editor[data-asset="${assetKey}"]`).forEach(editor => {
+                        editor.value = Math.round(returnValue * 100);
+                    });
+                }
+            }
+            
             // Recalculate everything
             recalculateWithoutChart();
             updateAllocationChart();
@@ -1121,6 +1296,14 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
+            // Check if the toast has been permanently dismissed previously
+            if (localStorage.getItem('targetToastDismissed') === 'true') {
+                targetToastPermanentlyDismissed = true;
+            }
+            
+            // Reset the session notification flag on page load
+            targetNotificationShownThisSession = false;
+            
             // Reset isFirstRender flag to true on page load
             isFirstRender = true;
             
@@ -1131,11 +1314,11 @@
             // Calculate initial values
             recalculateWithoutChart();
 
-            // Create chart with animations
+            // Create chart with animations only on first load
             const options = {
                 chart: {
                     animations: {
-                        enabled: true,
+                        enabled: true, // This will be used only for the first render
                         easing: 'easeinout',
                         speed: 800,
                         animateGradually: {
@@ -1150,7 +1333,7 @@
                 }
             };
             
-            // Force animation on first render
+            // Force animation on first render only
             if (!stackedChart) {
                 updateAllocationChart();
             }
@@ -1211,29 +1394,59 @@
             }
         });
 
-        // Function to check if allocations have changed from default
+        // Function to check if allocations or returns have changed from default
         function checkAllocationsChanged() {
-            const hasChanged = 
+            const hasAllocationsChanged = 
                 portfolioData.etfs.allocation !== 0.35 ||
                 portfolioData.stocks.allocation !== 0.00 ||
                 portfolioData.crypto.allocation !== 0.35 ||
                 portfolioData.termDeposits.allocation !== 0.15 ||
                 portfolioData.bonds.allocation !== 0.10 ||
                 portfolioData.defi.allocation !== 0.05;
+                
+            const hasReturnsChanged = 
+                portfolioData.etfs.return !== initialReturns.etfs ||
+                portfolioData.stocks.return !== initialReturns.stocks ||
+                portfolioData.crypto.return !== initialReturns.crypto ||
+                portfolioData.termDeposits.return !== initialReturns.termDeposits ||
+                portfolioData.bonds.return !== initialReturns.bonds ||
+                portfolioData.defi.return !== initialReturns.defi;
 
-            document.getElementById('resetButton').classList.toggle('hidden', !hasChanged);
+            document.getElementById('resetButton').classList.toggle('hidden', !(hasAllocationsChanged || hasReturnsChanged));
         }
 
         // Function to reset allocations to default values
         function resetAllocations() {
-            // Reset portfolio data
+            // Reset portfolio data allocations
             portfolioData.etfs.allocation = 0.35;
             portfolioData.stocks.allocation = 0.00;
             portfolioData.crypto.allocation = 0.35;
             portfolioData.termDeposits.allocation = 0.15;
             portfolioData.bonds.allocation = 0.10;
             portfolioData.defi.allocation = 0.05;
-
+            
+            // Also reset the return values
+            portfolioData.etfs.return = initialReturns.etfs;
+            portfolioData.stocks.return = initialReturns.stocks;
+            portfolioData.crypto.return = initialReturns.crypto;
+            portfolioData.termDeposits.return = initialReturns.termDeposits;
+            portfolioData.bonds.return = initialReturns.bonds;
+            portfolioData.defi.return = initialReturns.defi;
+            
+            // Update all return display elements
+            document.querySelectorAll('.return-display').forEach(display => {
+                const assetKey = display.dataset.asset;
+                const returnValue = portfolioData[assetKey].return;
+                const prefix = returnValue >= 0 ? '↑' : '↓';
+                display.textContent = `${prefix}${Math.abs(returnValue * 100)}%`;
+            });
+            
+            // Update all return editor elements
+            document.querySelectorAll('.return-editor').forEach(editor => {
+                const assetKey = editor.dataset.asset;
+                editor.value = Math.round(portfolioData[assetKey].return * 100);
+            });
+            
             // Reset sliders and labels
             document.getElementById('etfAllocation').value = '35';
             document.getElementById('stocksAllocation').value = '0';
@@ -1244,69 +1457,83 @@
 
             // Update all labels
             updateLabel(document.getElementById('etfAllocation'), 'etfLabel');
+            updateLabel(document.getElementById('stocksAllocation'), 'stocksLabel');
+            updateLabel(document.getElementById('cryptoAllocation'), 'cryptoLabel');
+            updateLabel(document.getElementById('termDepositAllocation'), 'termDepositLabel');
+            updateLabel(document.getElementById('bondAllocation'), 'bondLabel');
+            updateLabel(document.getElementById('defiAllocation'), 'defiLabel');
 
             // Hide reset button
             document.getElementById('resetButton').classList.add('hidden');
             
             // Hide allocation warning
             document.getElementById('allocationWarning').style.display = 'none';
+            
+            // Recalculate and update the chart
+            recalculateWithoutChart();
+            updateAllocationChart();
         }
 
         // Add these functions for toast animation
         function showTargetReached() {
+            // Don't show the toast if it's been permanently dismissed or already shown this session
+            if (targetToastPermanentlyDismissed || targetNotificationShownThisSession) {
+                return;
+            }
+            
             const toast = document.getElementById('targetReached');
-            const wasHidden = toast.classList.contains('hidden');
+            
+            // Mark as shown this session
+            targetNotificationShownThisSession = true;
             
             // Remove hidden class
             toast.classList.remove('hidden');
             
-            // Only trigger confetti if toast was previously hidden
-            if (wasHidden) {
-                function shoot() {
-                    // Main burst
-                    confetti({
-                        particleCount: 50,
-                        spread: 60,
-                        origin: { x: 0.5, y: 1 },
-                        colors: ['#FFD700', '#FFA500', '#32CD32', '#00ff00'],
-                        startVelocity: 45,
-                        gravity: 3,
-                        scalar: 1.2,
-                        ticks: 200
-                    });
+            // Trigger confetti only once per session
+            function shoot() {
+                // Main burst
+                confetti({
+                    particleCount: 50,
+                    spread: 60,
+                    origin: { x: 0.5, y: 1 },
+                    colors: ['#FFD700', '#FFA500', '#32CD32', '#00ff00'],
+                    startVelocity: 45,
+                    gravity: 3,
+                    scalar: 1.2,
+                    ticks: 200
+                });
 
-                    // Some spinning ones
-                    confetti({
-                        particleCount: 15,
-                        spread: 150,
-                        origin: { x: 0.5, y: 1 },
-                        colors: ['#FFD700', '#FFA500'],
-                        startVelocity: 35,
-                        gravity: 3,
-                        scalar: 1,
-                        ticks: 200,
-                        flat: true
-                    });
+                // Some spinning ones
+                confetti({
+                    particleCount: 15,
+                    spread: 150,
+                    origin: { x: 0.5, y: 1 },
+                    colors: ['#FFD700', '#FFA500'],
+                    startVelocity: 35,
+                    gravity: 3,
+                    scalar: 1,
+                    ticks: 200,
+                    flat: true
+                });
 
-                    // Add some stars
-                    confetti({
-                        particleCount: 20,
-                        spread: 70,
-                        origin: { x: 0.5, y: 1 },
-                        shapes: ['star'],
-                        colors: ['#FFD700', '#FFA500', '#32CD32', '#00ff00'],
-                        startVelocity: 40,
-                        gravity: 3,
-                        scalar: 1.5,
-                        ticks: 200
-                    });
-                }
-
-                // Shoot multiple times for a continuous effect
-                shoot();
-                setTimeout(shoot, 100);
-                setTimeout(shoot, 200);
+                // Add some stars
+                confetti({
+                    particleCount: 20,
+                    spread: 70,
+                    origin: { x: 0.5, y: 1 },
+                    shapes: ['star'],
+                    colors: ['#FFD700', '#FFA500', '#32CD32', '#00ff00'],
+                    startVelocity: 40,
+                    gravity: 3,
+                    scalar: 1.5,
+                    ticks: 200
+                });
             }
+
+            // Shoot multiple times for a continuous effect, but only once per session
+            shoot();
+            setTimeout(shoot, 100);
+            setTimeout(shoot, 200);
 
             // Update message
             const target = parseInt(document.getElementById('targetValue').value);
@@ -1553,6 +1780,64 @@
         document.getElementById('monthlyContribution').addEventListener('input', checkContributionsChanged);
         document.getElementById('years').addEventListener('input', checkContributionsChanged);
         document.getElementById('contributionFrequency').addEventListener('change', checkContributionsChanged);
+
+        // Function to show the editor when clicking on the return display
+        function showReturnEditor(displayElement) {
+            // Hide the display
+            displayElement.classList.add('hidden');
+            
+            // Find and show the editor next to this display
+            const editor = displayElement.parentNode.querySelector('.return-editor');
+            editor.classList.remove('hidden');
+            editor.focus();
+            editor.select();
+        }
+
+        // Function to update the return value when editor loses focus
+        function updateReturnValue(editorElement) {
+            const assetKey = editorElement.dataset.asset;
+            const newReturnValue = parseFloat(editorElement.value) / 100;
+            
+            // Update the portfolio data
+            if (portfolioData[assetKey]) {
+                portfolioData[assetKey].return = newReturnValue;
+                
+                // Find and update the display element
+                const displayElement = editorElement.parentNode.querySelector('.return-display');
+                const prefix = newReturnValue >= 0 ? '↑' : '↓';
+                displayElement.textContent = `${prefix}${Math.abs(editorElement.value)}%`;
+                
+                // Hide the editor and show the display
+                editorElement.classList.add('hidden');
+                displayElement.classList.remove('hidden');
+                
+                // Check if returns have changed from default and show reset button
+                checkAllocationsChanged();
+                
+                // Recalculate and update the chart
+                recalculateWithoutChart();
+                updateAllocationChart();
+            }
+        }
+
+        // Handle enter and escape keys in the editor
+        function handleReturnKeydown(event, editorElement) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                updateReturnValue(editorElement);
+            } else if (event.key === 'Escape') {
+                event.preventDefault();
+                
+                // Reset to previous value and hide
+                const assetKey = editorElement.dataset.asset;
+                editorElement.value = Math.round(portfolioData[assetKey].return * 100);
+                editorElement.classList.add('hidden');
+                
+                // Show the display again
+                const displayElement = editorElement.parentNode.querySelector('.return-display');
+                displayElement.classList.remove('hidden');
+            }
+        }
     </script>
 
 </body>
