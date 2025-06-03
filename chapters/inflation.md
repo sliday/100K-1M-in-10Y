@@ -109,4 +109,4 @@ Our portfolio allocation includes several inflation hedges:
 - [Federal Reserve Inflation Resources](https://www.federalreserve.gov/faqs/economy_14419.htm)
 - [Treasury Direct I-Bonds](https://www.treasurydirect.gov/indiv/products/prod_ibonds_glance.htm)
 
-Remember: Inflation is often called the "silent wealth killer." By actively accounting for it in your investment strategy, you're taking an important step toward preserving and growing your wealth in real terms. 
+Remember: Inflation is often called the "silent wealth killer." By actively accounting for it in your investment strategy, you're taking an important step toward preserving and growing your wealth in real terms.
