@@ -74,7 +74,7 @@
             return document.documentElement.getAttribute('data-theme') === 'dark';
         }
 
-        // Add this at the top level of your script section
+        // Flags to manage toast dismissal and notification state
         let targetToastPermanentlyDismissed = false;
         let targetNotificationShownThisSession = false; // New flag to track if notification has been shown
 
@@ -1546,7 +1546,7 @@
             toast.classList.add('hidden');
         }
 
-        // Add this function before updateAllocationChart
+        // Calculate remaining years until the investment target is met
         function calculateYearsUntilTarget() {
             const baseTarget = parseInt(document.getElementById('targetValue').value);
             const finalBalance = results[results.length - 1];
