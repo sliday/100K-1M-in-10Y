@@ -990,18 +990,19 @@
         function calculateGrowth(initialCapital, baseContribution, returnRate, years, isMonthly, isInflationAdjusted, inflationRate) {
             const results = [];
             let balance = initialCapital;
-            
+
             for (let year = 0; year <= years; year++) {
                 results.push(balance);
-                
+                if (year === years) break;
+
                 const yearlyContribution = isMonthly ? baseContribution * 12 : baseContribution * 52;
                 const adjustedContribution = isInflationAdjusted
                     ? yearlyContribution * Math.pow(1 + inflationRate, year)
                     : yearlyContribution;
-                
+
                 balance = balance * (1 + returnRate) + adjustedContribution;
             }
-            
+
             return results;
         }
 
@@ -1050,13 +1051,14 @@
             } else {
                 for (let year = 0; year <= years; year++) {
                     results.push(balance);
-                    
+                    if (year === years) break;
+
                     // Calculate contribution for this year, adjusted for inflation if enabled
                     const yearlyContribution = isMonthly ? baseContribution * 12 : baseContribution * 52;
                     const adjustedContribution = isInflationAdjusted
                         ? yearlyContribution * Math.pow(1 + inflationRate, year)
                         : yearlyContribution;
-                    
+
                     balance = balance * (1 + effectiveReturn) + adjustedContribution;
                     totalInvested += adjustedContribution;
                 }
