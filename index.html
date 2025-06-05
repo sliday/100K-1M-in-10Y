@@ -78,7 +78,7 @@
         let targetToastPermanentlyDismissed = false;
         let targetNotificationShownThisSession = false; // New flag to track if notification has been shown
 
-        // Update the hideTargetReached function to permanently dismiss the toast
+        // Permanently hide the target reached toast
         function hideTargetReached() {
             const toast = document.getElementById('targetReached');
             toast.classList.add('hidden');
@@ -1549,7 +1549,7 @@
             toast.classList.add('hidden');
         }
 
-        // Calculate remaining years until the investment target is met
+        // Determine how many years remain to reach the investment target
         function calculateYearsUntilTarget() {
             const baseTarget = parseInt(document.getElementById('targetValue').value);
             const finalBalance = results[results.length - 1];
