@@ -615,22 +615,6 @@
                         </div>
                     </div>
 
-                    <!-- Target Reached Toast -->
-                    <div id="targetReached" class="toast toast-center toast-bottom mb-8 hidden z-[9999]">
-                        <div class="alert alert-info py-3 px-4">
-                            <div class="flex flex-col gap-3">
-                                <span id="targetReachedMessage" class="text-lg font-bold">$1,000,000 Target Within Reach!</span>
-                                <div class="flex gap-2">                                    
-                                    <button class="btn btn-sm btn-sky" onclick="copyLink()">
-                                        Share this page
-                                    </button>
-                                    <button class="btn btn-sm btn-ghost" onclick="hideTargetReached()">
-                                        Dismiss
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -2000,6 +1984,23 @@
             }
         }
     </script>
+
+    <!-- Target Reached Toast - Positioned at viewport level -->
+    <div id="targetReached" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 hidden z-[9999]">
+        <div class="alert alert-info py-3 px-4 shadow-lg">
+            <div class="flex flex-col gap-3">
+                <span id="targetReachedMessage" class="text-lg font-bold">$1,000,000 Target Within Reach!</span>
+                <div class="flex gap-2">                                    
+                    <button class="btn btn-sm btn-sky" onclick="copyLink()">
+                        Share this page
+                    </button>
+                    <button class="btn btn-sm btn-ghost" onclick="hideTargetReached()">
+                        Dismiss
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 
