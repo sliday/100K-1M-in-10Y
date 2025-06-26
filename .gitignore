@@ -43,4 +43,11 @@ venv/
 # Build output
 dist/
 build/
-out/ 
+out/
+
+# Cache and temporary files
+.channels_cache.json
+.users_cache.json
+*.png
+*.jpg
+*.jpeg 
