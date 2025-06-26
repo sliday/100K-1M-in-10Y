@@ -4,7 +4,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>"100K → 1M in 10Y" Investment Portfolio Calculator</title>
+    <title>100K to 1M in 10Y Investment Portfolio Calculator</title>
+    <!-- Performance: DNS prefetch and preconnect for faster resource loading -->
+    <link rel="dns-prefetch" href="//cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -72,6 +78,19 @@
         // Theme helper function
         function isDarkMode() {
             return document.documentElement.getAttribute('data-theme') === 'dark';
+        }
+
+        // Performance: Debounce utility to prevent excessive function calls
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func.apply(this, args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
         }
 
         // Flags to manage toast dismissal and notification state
@@ -158,23 +177,106 @@
         }
     </script>
     <style>
+        /* CSS Custom Properties for better maintainability */
+        :root {
+            --focus-color: #2563eb;
+            --focus-outline-width: 2px;
+            --focus-outline-offset: 2px;
+            --content-max-width: 980px;
+            --content-padding: 45px;
+            --content-padding-mobile: 15px;
+            --mobile-breakpoint: 767px;
+        }
+        
         .markdown-body {
             box-sizing: border-box;
             min-width: 200px;
-            max-width: 980px;
+            max-width: var(--content-max-width);
             margin: 0 auto;
-            padding: 45px;
+            padding: var(--content-padding);
         }
+        
         @media (max-width: 767px) {
             .markdown-body {
-                padding: 15px;
+                padding: var(--content-padding-mobile);
             }
+        }
+        
+        /* Enhanced focus indicators for accessibility */
+        .range:focus {
+            outline: var(--focus-outline-width) solid var(--focus-color);
+            outline-offset: var(--focus-outline-offset);
+        }
+        
+        .return-display:focus {
+            outline: var(--focus-outline-width) solid var(--focus-color);
+            outline-offset: var(--focus-outline-offset);
+            border-radius: 4px;
+        }
+        
+        /* Ensure sufficient color contrast for return indicators */
+        .text-red-500 {
+            color: #dc2626 !important;
+        }
+        
+        .text-green-500 {
+            color: #16a34a !important;
+        }
+        
+        .text-yellow-500 {
+            color: #ca8a04 !important;
+        }
+        
+        /* Improved loading state for better UX */
+        .chart-loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            opacity: 0.7;
+        }
+        
+        /* Optimized transitions for better performance */
+        .transition-smooth {
+            transition: all 0.2s ease-in-out;
+            will-change: transform, opacity;
+        }
+        
+        /* Prevent layout shift during chart loading */
+        #allocationChart {
+            min-height: 400px;
+            contain: layout style paint;
+        }
+        
+        /* Optimize hover states for better performance */
+        .hover-optimize {
+            transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+            will-change: transform;
+        }
+        
+        .hover-optimize:hover {
+            transform: translateY(-1px);
+        }
+        
+        /* Reduce paint operations for better performance */
+        .card {
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+        
+        /* Improve slider performance */
+        .range {
+            contain: layout style;
         }
     </style>
 </head>
 
 <body class="bg-base-300 p-4">
+    <!-- Live region for screen reader announcements -->
+    <div id="live-region" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+    
     <div class="max-w-7xl mx-auto">
+        <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-primary focus:text-primary-content focus:px-4 focus:py-2 focus:rounded">Skip to main content</a>
         <a class="m-4" href="https://github.com/sliday/100K-1M-in-10Y">
             <h1 class="text-4xl font-bold text-center mb-2">100K → 1M in 10Y: A Practical Investment Journey</h1>
             <div class="text-center">Read the open-source guide. Contribute to improve it.</div> 
@@ -183,28 +285,36 @@
         <!-- Asset Allocation Chart -->
         <div class="card bg-base-100 shadow-xl mb-4 p-2">
             <div class="card-body p-2 sm:p-0">
-                <div id="allocationChart" style="width: 100%; height: 400px;" class="sm:block"></div>
+                <div id="allocationChart" 
+                     class="sm:block transition-smooth" 
+                     style="width: 100%; height: 400px;"
+                     role="img" 
+                     aria-label="Investment growth chart showing portfolio value over time with different asset allocations"
+                     aria-live="polite">
+                </div>
             </div>
         </div>
 
         <!-- Three Column Layout -->
+        <main id="main-content" role="main" aria-label="Investment Calculator">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
             <!-- Contributions Section -->
             <div class="card bg-base-200 shadow-xl">
                 <div class="card-body">
                     <div class="flex justify-between items-center">
                         <h2 class="card-title">1. Contributions</h2>
-                        <button onclick="resetContributions()" id="resetContributionsButton" class="btn btn-ghost btn-xs ml-2 hidden">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <button onclick="resetContributions()" id="resetContributionsButton" class="btn btn-ghost btn-xs ml-2 hidden" aria-label="Reset contributions to default values">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                             </svg>
                         </button>
                     </div>
 
                     <div class="form-control">
-                        <label class="label">Initial Capital <span class="opacity-70" id="initialCapitalLabel">($100,000)</span></label>
+                        <label class="label" for="initialCapital">Initial Capital <span class="opacity-70" id="initialCapitalLabel">($100,000)</span></label>
                         <input id="initialCapital" type="range" min="0" max="500000" value="100000" class="range"
-                            step="1000" oninput="updateSliderLabel(this, 'initialCapitalLabel', '$')" />
+                            step="1000" oninput="updateSliderLabel(this, 'initialCapitalLabel', '$')" 
+                            aria-describedby="initialCapitalLabel" />
                         <div class="w-full flex justify-between text-xs px-2">
                             <span>$0</span>
                             <span>$250k</span>
@@ -224,7 +334,8 @@
                             </span>
                         </label>
                         <input id="monthlyContribution" type="range" min="0" max="10000" value="2000" class="range"
-                            step="100" oninput="updateSliderLabel(this, 'monthlyContributionLabel', '$')" />
+                            step="100" oninput="updateSliderLabel(this, 'monthlyContributionLabel', '$')" 
+                            aria-describedby="monthlyContributionLabel" />
                         <div class="w-full flex justify-between text-xs px-2">
                             <span>$0</span>
                             <span>$5k</span>
@@ -233,9 +344,10 @@
                     </div>
 
                     <div class="form-control">
-                        <label class="label">Years to Target <span class="opacity-70" id="yearsLabel">10</span></label>
+                        <label class="label" for="years">Years to Target <span class="opacity-70" id="yearsLabel">10</span></label>
                         <input id="years" type="range" min="1" max="30" value="10" class="range" step="1" 
-                            oninput="updateSliderLabel(this, 'yearsLabel', '')" />
+                            oninput="updateSliderLabel(this, 'yearsLabel', '')" 
+                            aria-describedby="yearsLabel" />
                         <div class="w-full flex justify-between text-xs px-2">
                             <span>1y</span>
                             <span>15y</span>
@@ -250,12 +362,12 @@
                 <div class="card-body">
                     <div class="flex justify-between items-center">
                         <h2 class="card-title">2. Asset Allocation
-                            <button onclick="document.getElementById('scenariosModal').showModal()" class="btn btn-ghost btn-xs btn-circle">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-4 h-4 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <button onclick="document.getElementById('scenariosModal').showModal()" class="btn btn-ghost btn-xs btn-circle" aria-label="View return scenarios information">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-4 h-4 stroke-current" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             </button>
                         </h2>
-                        <button onclick="resetAllocations()" id="resetButton" class="btn btn-ghost btn-xs ml-2 hidden">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <button onclick="resetAllocations()" id="resetButton" class="btn btn-ghost btn-xs ml-2 hidden" aria-label="Reset asset allocations to default values">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                             </svg>
                         </button>
@@ -270,15 +382,20 @@
                             <span class="label-text-alt flex items-center">
                                 <span class="text-yellow-500 hover:text-yellow-400 cursor-pointer return-display" 
                                       data-asset="etfs" 
-                                      onclick="showReturnEditor(this)">↑10%</span>
+                                      onclick="showReturnEditor(this)"
+                                      onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showReturnEditor(this);}"
+                                      tabindex="0"
+                                      role="button"
+                                      aria-label="ETF expected return: positive 10 percent, click to edit">↑10%</span>
                                 <input type="number" class="input input-xs w-14 bg-base-300 ml-1 hidden return-editor" 
                                        data-asset="etfs" 
                                        value="10" min="-100" max="1000" step="1" 
                                        onblur="updateReturnValue(this)" 
-                                       onkeydown="handleReturnKeydown(event, this)">
+                                       onkeydown="handleReturnKeydown(event, this)"
+                                       aria-label="Edit ETF expected return percentage">
                             </span>
                         </label>
-                        <input id="etfAllocation" type="range" min="0" max="100" value="35" class="range" step="1" oninput="updateLabel(this, 'etfLabel')" />
+                        <input id="etfAllocation" type="range" min="0" max="100" value="35" class="range" step="1" oninput="updateLabel(this, 'etfLabel')" aria-label="ETF allocation percentage" />
                     </div>
 
                     <div class="form-control">
@@ -297,7 +414,7 @@
                                        onkeydown="handleReturnKeydown(event, this)">
                             </span>
                         </label>
-                        <input id="stocksAllocation" type="range" min="0" max="100" value="0" class="range" step="1" oninput="updateLabel(this, 'stocksLabel')" />
+                        <input id="stocksAllocation" type="range" min="0" max="100" value="0" class="range" step="1" oninput="updateLabel(this, 'stocksLabel')" aria-label="Stocks allocation percentage" />
                     </div>
 
                     <div class="form-control">
@@ -316,7 +433,7 @@
                                        onkeydown="handleReturnKeydown(event, this)">
                             </span>
                         </label>
-                        <input id="cryptoAllocation" type="range" min="0" max="100" value="35" class="range" step="1" oninput="updateLabel(this, 'cryptoLabel')" />
+                        <input id="cryptoAllocation" type="range" min="0" max="100" value="35" class="range" step="1" oninput="updateLabel(this, 'cryptoLabel')" aria-label="Crypto allocation percentage" />
                     </div>
 
                     <div class="form-control">
@@ -335,7 +452,7 @@
                                        onkeydown="handleReturnKeydown(event, this)">
                             </span>
                         </label>
-                        <input id="termDepositAllocation" type="range" min="0" max="100" value="15" class="range" step="1" oninput="updateLabel(this, 'termDepositLabel')" />
+                        <input id="termDepositAllocation" type="range" min="0" max="100" value="15" class="range" step="1" oninput="updateLabel(this, 'termDepositLabel')" aria-label="Term deposits allocation percentage" />
                     </div>
 
                     <div class="form-control">
@@ -354,7 +471,7 @@
                                        onkeydown="handleReturnKeydown(event, this)">
                             </span>
                         </label>
-                        <input id="bondAllocation" type="range" min="0" max="100" value="10" class="range" step="1" oninput="updateLabel(this, 'bondLabel')" />
+                        <input id="bondAllocation" type="range" min="0" max="100" value="10" class="range" step="1" oninput="updateLabel(this, 'bondLabel')" aria-label="Bonds allocation percentage" />
                     </div>
 
                     <div class="form-control">
@@ -373,7 +490,7 @@
                                        onkeydown="handleReturnKeydown(event, this)">
                             </span>
                         </label>
-                        <input id="defiAllocation" type="range" min="0" max="100" value="5" class="range" step="1" oninput="updateLabel(this, 'defiLabel')" />
+                        <input id="defiAllocation" type="range" min="0" max="100" value="5" class="range" step="1" oninput="updateLabel(this, 'defiLabel')" aria-label="DeFi allocation percentage" />
                     </div>
 
                     <div class="alert alert-warning mt-4" id="allocationWarning" style="display: none;">
@@ -383,14 +500,14 @@
             </div>
 
             <!-- Return Scenarios Modal -->
-            <dialog id="scenariosModal" class="modal">
+            <dialog id="scenariosModal" class="modal" role="dialog" aria-labelledby="scenarios-title" aria-describedby="scenarios-description">
                 <div class="modal-box">
                     <form method="dialog">
-                        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close modal">✕</button>
                     </form>
-                    <h3 class="font-bold text-lg mb-4">Return Scenarios</h3>
+                    <h3 id="scenarios-title" class="font-bold text-lg mb-4">Return Scenarios</h3>
                     
-                    <div class="space-y-4">
+                    <div id="scenarios-description" class="space-y-4">
                         <!-- Base Case -->
                         <div>
                             <div class="font-semibold opacity-80">Base Case <span class="text-xs opacity-70">(shown in stacked bars)</span></div>
@@ -430,8 +547,8 @@
                 <div class="card-body">
                     <div class="flex justify-between items-center">
                         <h2 class="card-title">3. Portfolio</h2>
-                        <button onclick="copyLink()" class="btn btn-ghost btn-sm gap-2">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <button onclick="copyLink()" class="btn btn-ghost btn-sm gap-2" aria-label="Copy link to share this page">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
                             </svg>
                             Share This Page
@@ -439,7 +556,7 @@
                     </div>
 
                     <!-- Portfolio Stats -->
-                    <div class="stats stats-vertical shadow mb-2">
+                    <div class="stats stats-vertical shadow mb-2" role="group" aria-label="Portfolio statistics">
                         <div class="stat">
                             <div class="stat-title">Total Invested</div>
                             <div class="stat-value" id="totalInvested">$340,000</div>
@@ -472,7 +589,8 @@
                                 <!-- Target Slider -->
                                 <input id="targetValue" type="range" min="1000000" max="10000000" value="1000000" class="range"
                                     step="100000"
-                                    oninput="document.getElementById('targetLabel').textContent = '$' + parseInt(this.value).toLocaleString(); recalculateWithoutChart(); updateChartOnRelease();" />
+                                    oninput="document.getElementById('targetLabel').textContent = '$' + parseInt(this.value).toLocaleString(); recalculateWithoutChart(); updateChartOnRelease();" 
+                                    aria-label="Investment target amount" />
                                 <div class="w-full flex justify-between text-xs px-2 opacity-70">
                                     <span>$1M</span>
                                     <span>$5M</span>
@@ -481,13 +599,14 @@
 
                                 <!-- Inflation Toggle -->
                                 <div class="flex items-center gap-3 mt-2">
-                                    <label class="flex items-center gap-3 cursor-pointer">
+                                    <label class="flex items-center gap-3 cursor-pointer" for="inflationToggle">
                                         <input type="checkbox" class="toggle toggle-xs" id="inflationToggle"
                                             onchange="recalculateWithoutChart(); updateChartOnRelease();" />
                                         <span class="text-sm tracking-wider opacity-70">Inflation adjustment</span>
                                     </label>
                                     <input type="number" id="inflationRate" class="input input-xs w-12 text-right bg-base-300" value="3"
-                                        min="0" max="100" step="0.1" onchange="recalculateWithoutChart(); updateChartOnRelease();" />
+                                        min="0" max="100" step="0.1" onchange="recalculateWithoutChart(); updateChartOnRelease();" 
+                                        aria-label="Inflation rate percentage" />
                                     <span class="text-sm opacity-70">%</span>
                                 </div>
 
@@ -515,16 +634,17 @@
                 </div>
             </div>
         </div>
+        </main>
     </div>
 
     <!-- Chapters Section -->
-    <div class="max-w-7xl mx-auto mt-16 mb-16">
+    <section class="max-w-7xl mx-auto mt-16 mb-16" aria-label="Investment strategy chapters">
         <h2 class="text-2xl font-bold mb-4 text-center">Investment Strategy Chapters</h2>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <!-- Core Growth -->
             <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/etfs.md" target="_blank" 
-               class="card bg-base-200 hover:bg-base-300 transition-all shadow-xl">
+               class="card bg-base-200 hover:bg-base-300 hover-optimize shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title text-yellow-500">ETF Strategy <span class="text-sm opacity-75">↑10%</span></h3>
                     <p class="opacity-80">Core growth through diversified ETF portfolio. Low-cost, market-wide exposure.</p>
@@ -532,7 +652,7 @@
             </a>
 
             <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/stocks.md" target="_blank"
-               class="card bg-base-200 hover:bg-base-300 transition-all shadow-xl">
+               class="card bg-base-200 hover:bg-base-300 hover-optimize shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title text-yellow-500">Stock Picking <span class="text-sm opacity-75">↑12%</span></h3>
                     <p class="opacity-80">Strategic stock selection for enhanced returns. Research-driven approach.</p>
@@ -540,7 +660,7 @@
             </a>
 
             <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/crypto.md" target="_blank"
-               class="card bg-base-200 hover:bg-base-300 transition-all shadow-xl">
+               class="card bg-base-200 hover:bg-base-300 hover-optimize shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title text-red-500">Crypto Core <span class="text-sm opacity-75">↑25%</span></h3>
                     <p class="opacity-80">Bitcoin and Ethereum strategy. Long-term crypto investment approach.</p>
@@ -549,7 +669,7 @@
 
             <!-- Stability Layer -->
             <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/fixed_income.md" target="_blank"
-               class="card bg-base-200 hover:bg-base-300 transition-all shadow-xl">
+               class="card bg-base-200 hover:bg-base-300 hover-optimize shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title text-green-500">Fixed Income <span class="text-sm opacity-75">↑4-5%</span></h3>
                     <p class="opacity-80">Stable returns through bonds and term deposits. Risk mitigation strategy.</p>
@@ -558,7 +678,7 @@
 
             <!-- Yield Layer -->
             <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/defi.md" target="_blank"
-               class="card bg-base-200 hover:bg-base-300 transition-all shadow-xl">
+               class="card bg-base-200 hover:bg-base-300 hover-optimize shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title text-rose-500">DeFi Yield <span class="text-sm opacity-75">↑15%</span></h3>
                     <p class="opacity-80">Advanced DeFi strategies for yield generation. High-risk, high-reward approach.</p>
@@ -567,7 +687,7 @@
 
             <!-- Implementation -->
             <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/implementation.md" target="_blank"
-               class="card bg-base-200 hover:bg-base-300 transition-all shadow-xl">
+               class="card bg-base-200 hover:bg-base-300 hover-optimize shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title text-blue-500">Implementation Guide</h3>
                     <p class="opacity-80">Step-by-step guide to implementing the investment strategy safely.</p>
@@ -576,7 +696,7 @@
 
             <!-- Risk Management -->
             <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/risk_management.md" target="_blank"
-               class="card bg-base-200 hover:bg-base-300 transition-all shadow-xl">
+               class="card bg-base-200 hover:bg-base-300 hover-optimize shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title text-purple-500">Risk Management</h3>
                     <p class="opacity-80">Comprehensive risk management framework and mitigation strategies.</p>
@@ -585,7 +705,7 @@
 
             <!-- Monitoring -->
             <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/monitoring.md" target="_blank"
-               class="card bg-base-200 hover:bg-base-300 transition-all shadow-xl">
+               class="card bg-base-200 hover:bg-base-300 hover-optimize shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title text-indigo-500">Monitoring System</h3>
                     <p class="opacity-80">Tools and methods to track portfolio performance and rebalance.</p>
@@ -594,7 +714,7 @@
 
             <!-- Tax Strategy -->
             <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/tax_optimization.md" target="_blank"
-               class="card bg-base-200 hover:bg-base-300 transition-all shadow-xl">
+               class="card bg-base-200 hover:bg-base-300 hover-optimize shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title text-emerald-500">Tax Strategy</h3>
                     <p class="opacity-80">Tax optimization techniques and considerations for long-term investing.</p>
@@ -605,7 +725,7 @@
         <!-- Additional Resources -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
             <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/glossary.md" target="_blank"
-               class="card bg-base-200 hover:bg-base-300 transition-all shadow-xl">
+               class="card bg-base-200 hover:bg-base-300 hover-optimize shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title">📚 Glossary</h3>
                     <p class="opacity-80">Key terms and concepts explained.</p>
@@ -613,7 +733,7 @@
             </a>
 
             <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/resources.md" target="_blank"
-               class="card bg-base-200 hover:bg-base-300 transition-all shadow-xl">
+               class="card bg-base-200 hover:bg-base-300 hover-optimize shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title">🔗 Resources</h3>
                     <p class="opacity-80">Curated list of tools and learning materials.</p>
@@ -621,14 +741,14 @@
             </a>
 
             <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/templates.md" target="_blank"
-               class="card bg-base-200 hover:bg-base-300 transition-all shadow-xl">
+               class="card bg-base-200 hover:bg-base-300 hover-optimize shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title">📝 Templates</h3>
                     <p class="opacity-80">Ready-to-use portfolio tracking templates.</p>
                 </div>
             </a>
         </div>
-    </div>
+    </section>
 
     <!-- Footer -->
     <footer class="text-center m-4 opacity-50 hover:opacity-70">
@@ -780,15 +900,15 @@
                     },
                     background: isDarkMode() ? '#1d232a' : '#ffffff',
                     animations: {
-                        enabled: isFirstRender, // Only enable animations on first render
+                        enabled: false, // Performance: Disable animations for faster updates
                         easing: 'easeinout',
                         speed: 1000,
                         animateGradually: {
-                            enabled: isFirstRender, // Only enable on first render
+                            enabled: false, // Performance: Disable for faster rendering
                             delay: 150
                         },
                         dynamicAnimation: {
-                            enabled: isFirstRender, // Only enable on first render
+                            enabled: false, // Performance: Disable for faster updates
                             speed: 500
                         }
                     }
@@ -1066,8 +1186,17 @@
             
             // Update stats without updating chart
             document.getElementById('totalInvested').textContent = `$${Math.round(totalInvested).toLocaleString()}`;
-            document.getElementById('finalBalance').textContent = `$${Math.round(results[results.length - 1]).toLocaleString()}`;
+            const finalBalanceValue = `$${Math.round(results[results.length - 1]).toLocaleString()}`;
+            document.getElementById('finalBalance').textContent = finalBalanceValue;
             document.getElementById('yearsToTarget').textContent = years;
+            
+            // Announce final balance change for significant updates
+            const prevBalance = window.lastAnnouncedBalance || 0;
+            const currentBalance = Math.round(results[results.length - 1]);
+            if (Math.abs(currentBalance - prevBalance) > 10000) {
+                announceChange(`Final balance updated to ${finalBalanceValue}`);
+                window.lastAnnouncedBalance = currentBalance;
+            }
 
             // Show/hide target reached indicator
             if (results[results.length - 1] >= target) {
@@ -1094,6 +1223,9 @@
             document.getElementById('defiValue').textContent = 
                 Math.round(portfolioData.defi.allocation * initialCapital).toLocaleString();
         }
+
+        // Performance: Debounced chart update to reduce unnecessary redraws
+        const debouncedChartUpdate = debounce(updateAllocationChart, 250);
 
         function updateChartOnRelease() {
             updateAllocationChart();
@@ -1316,19 +1448,19 @@
             // Calculate initial values
             recalculateWithoutChart();
 
-            // Create chart with animations only on first load
+            // Performance: Create chart with optimized settings
             const options = {
                 chart: {
                     animations: {
-                        enabled: true, // This will be used only for the first render
+                        enabled: false, // Performance: Disable animations for faster rendering
                         easing: 'easeinout',
                         speed: 800,
                         animateGradually: {
-                            enabled: true,
+                            enabled: false,
                             delay: 150
                         },
                         dynamicAnimation: {
-                            enabled: true,
+                            enabled: false,
                             speed: 350
                         }
                     }
@@ -1607,10 +1739,15 @@
         document.getElementById('monthlyContribution').addEventListener('input', recalculateWithoutChart);
         document.getElementById('years').addEventListener('input', recalculateWithoutChart);
 
-        // Add mouseup/touchend listeners for chart updates
+        // Add mouseup/touchend listeners for chart updates  
         document.getElementById('initialCapital').addEventListener('change', updateChartOnRelease);
         document.getElementById('monthlyContribution').addEventListener('change', updateChartOnRelease);
         document.getElementById('years').addEventListener('change', updateChartOnRelease);
+
+        // Performance: Use debounced updates for frequent input events
+        document.getElementById('initialCapital').addEventListener('input', debouncedChartUpdate);
+        document.getElementById('monthlyContribution').addEventListener('input', debouncedChartUpdate);
+        document.getElementById('years').addEventListener('input', debouncedChartUpdate);
 
         // Add function to update labels
         function updateLabel(slider, labelId) {
@@ -1796,6 +1933,18 @@
             editor.select();
         }
 
+        // Function to announce changes to screen readers
+        function announceChange(message) {
+            const liveRegion = document.getElementById('live-region');
+            if (liveRegion) {
+                liveRegion.textContent = message;
+                // Clear after a short delay to avoid repetition
+                setTimeout(() => {
+                    liveRegion.textContent = '';
+                }, 1000);
+            }
+        }
+
         // Function to update the return value when editor loses focus
         function updateReturnValue(editorElement) {
             const assetKey = editorElement.dataset.asset;
@@ -1808,11 +1957,20 @@
                 // Find and update the display element
                 const displayElement = editorElement.parentNode.querySelector('.return-display');
                 const prefix = newReturnValue >= 0 ? '↑' : '↓';
-                displayElement.textContent = `${prefix}${Math.abs(editorElement.value)}%`;
+                const returnText = `${prefix}${Math.abs(editorElement.value)}%`;
+                displayElement.textContent = returnText;
+                
+                // Update ARIA label
+                const assetName = assetKey.charAt(0).toUpperCase() + assetKey.slice(1);
+                const sign = newReturnValue >= 0 ? 'positive' : 'negative';
+                displayElement.setAttribute('aria-label', `${assetName} expected return: ${sign} ${Math.abs(editorElement.value)} percent, click to edit`);
                 
                 // Hide the editor and show the display
                 editorElement.classList.add('hidden');
                 displayElement.classList.remove('hidden');
+                
+                // Announce the change
+                announceChange(`${assetName} return updated to ${returnText}`);
                 
                 // Check if returns have changed from default and show reset button
                 checkAllocationsChanged();
