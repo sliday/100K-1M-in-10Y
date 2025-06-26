@@ -4,11 +4,23 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; connect-src 'self';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <title>"100K → 1M in 10Y" Investment Portfolio Calculator</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.tailwindcss.com" 
+            integrity="sha384-OLBgp1GsljhM2TJ+sbHjaiH9txEUvgdDTAzHv2P24donTt6/529l+9Ua0vFImLlb" 
+            crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css" 
+          integrity="sha384-gUK2Zjv3F8kp5JkDdcEsxQYGmwG4ZREkFnoPD7mz8aK51bCf/M1wagsO4wqKaOzu" 
+          crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts" 
+            integrity="sha384-Hf0cGsweCbozkRP14s5KIue6STJYKaoipB/i1gTdbX+umKD59qA/Szk42FPMuKtB" 
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" 
+            integrity="sha384-HAH79XdRvHr6axVGh4xQWVCp14kcd32bNk4Xu0sHDHtFQ42n6BAM8ykvB47dGz6D" 
+            crossorigin="anonymous"></script>
     <script>
         // Auto-detect system theme
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -265,7 +277,7 @@
                     <div class="form-control">
                         <label class="label">
                             <span class="flex items-center">
-                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/etfs.md" target="_blank">ETFs</a>&nbsp;(<span id="etfLabel">35</span>% / $<span id="etfValue">35,000</span>)
+                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/etfs.md" target="_blank" rel="noopener noreferrer">ETFs</a>&nbsp;(<span id="etfLabel">35</span>% / $<span id="etfValue">35,000</span>)
                             </span>
                             <span class="label-text-alt flex items-center">
                                 <span class="text-yellow-500 hover:text-yellow-400 cursor-pointer return-display" 
@@ -284,7 +296,7 @@
                     <div class="form-control">
                         <label class="label">
                             <span class="flex items-center">
-                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/stocks.md" target="_blank">Stocks</a>&nbsp;(<span id="stocksLabel">0</span>% / $<span id="stocksValue">0</span>)
+                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/stocks.md" target="_blank" rel="noopener noreferrer">Stocks</a>&nbsp;(<span id="stocksLabel">0</span>% / $<span id="stocksValue">0</span>)
                             </span>
                             <span class="label-text-alt flex items-center">
                                 <span class="text-yellow-500 hover:text-yellow-400 cursor-pointer return-display" 
@@ -303,7 +315,7 @@
                     <div class="form-control">
                         <label class="label">
                             <span class="flex items-center">
-                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/crypto.md" target="_blank">Crypto</a>&nbsp;(<span id="cryptoLabel">35</span>% / $<span id="cryptoValue">35,000</span>)
+                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/crypto.md" target="_blank" rel="noopener noreferrer">Crypto</a>&nbsp;(<span id="cryptoLabel">35</span>% / $<span id="cryptoValue">35,000</span>)
                             </span>
                             <span class="label-text-alt flex items-center">
                                 <span class="text-red-500 hover:text-red-400 cursor-pointer return-display" 
@@ -322,7 +334,7 @@
                     <div class="form-control">
                         <label class="label">
                             <span class="flex items-center">
-                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/fixed_income.md" target="_blank">Term Deposits</a>&nbsp;(<span id="termDepositLabel">15</span>% / $<span id="termDepositValue">15,000</span>)
+                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/fixed_income.md" target="_blank" rel="noopener noreferrer">Term Deposits</a>&nbsp;(<span id="termDepositLabel">15</span>% / $<span id="termDepositValue">15,000</span>)
                             </span>
                             <span class="label-text-alt flex items-center">
                                 <span class="text-green-500 hover:text-green-400 cursor-pointer return-display" 
@@ -341,7 +353,7 @@
                     <div class="form-control">
                         <label class="label">
                             <span class="flex items-center">
-                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/fixed_income.md#government-bonds" target="_blank">Bonds</a>&nbsp;(<span id="bondLabel">10</span>% / $<span id="bondValue">10,000</span>)
+                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/fixed_income.md#government-bonds" target="_blank" rel="noopener noreferrer">Bonds</a>&nbsp;(<span id="bondLabel">10</span>% / $<span id="bondValue">10,000</span>)
                             </span>
                             <span class="label-text-alt flex items-center">
                                 <span class="text-emerald-500 hover:text-emerald-400 cursor-pointer return-display" 
@@ -360,7 +372,7 @@
                     <div class="form-control">
                         <label class="label">
                             <span class="flex items-center">
-                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/defi.md" target="_blank">DeFi</a>&nbsp;(<span id="defiLabel">5</span>% / $<span id="defiValue">5,000</span>)
+                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/defi.md" target="_blank" rel="noopener noreferrer">DeFi</a>&nbsp;(<span id="defiLabel">5</span>% / $<span id="defiValue">5,000</span>)
                             </span>
                             <span class="label-text-alt flex items-center">
                                 <span class="text-rose-500 hover:text-rose-400 cursor-pointer return-display" 
@@ -394,7 +406,7 @@
                         <!-- Base Case -->
                         <div>
                             <div class="font-semibold opacity-80">Base Case <span class="text-xs opacity-70">(shown in stacked bars)</span></div>
-                            <p class="text-sm opacity-70">Expected returns based on <a href="https://www.spglobal.com/spdji/en/indices/equity/sp-500/#overview" target="_blank" class="link">S&P 500 historical data</a> and other market benchmarks:</p>
+                            <p class="text-sm opacity-70">Expected returns based on <a href="https://www.spglobal.com/spdji/en/indices/equity/sp-500/#overview" target="_blank" rel="noopener noreferrer" class="link">S&P 500 historical data</a> and other market benchmarks:</p>
                             <ul class="text-sm list-disc list-inside opacity-70 mt-1">
                                 <li>ETFs: +10%</li>
                                 <li>Stocks: +12%</li>
@@ -523,7 +535,7 @@
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <!-- Core Growth -->
-            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/etfs.md" target="_blank" 
+            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/etfs.md" target="_blank" rel="noopener noreferrer" 
                class="card bg-base-200 hover:bg-base-300 transition-all shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title text-yellow-500">ETF Strategy <span class="text-sm opacity-75">↑10%</span></h3>
@@ -531,7 +543,7 @@
                 </div>
             </a>
 
-            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/stocks.md" target="_blank"
+            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/stocks.md" target="_blank" rel="noopener noreferrer"
                class="card bg-base-200 hover:bg-base-300 transition-all shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title text-yellow-500">Stock Picking <span class="text-sm opacity-75">↑12%</span></h3>
@@ -539,7 +551,7 @@
                 </div>
             </a>
 
-            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/crypto.md" target="_blank"
+            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/crypto.md" target="_blank" rel="noopener noreferrer"
                class="card bg-base-200 hover:bg-base-300 transition-all shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title text-red-500">Crypto Core <span class="text-sm opacity-75">↑25%</span></h3>
@@ -548,7 +560,7 @@
             </a>
 
             <!-- Stability Layer -->
-            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/fixed_income.md" target="_blank"
+            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/fixed_income.md" target="_blank" rel="noopener noreferrer"
                class="card bg-base-200 hover:bg-base-300 transition-all shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title text-green-500">Fixed Income <span class="text-sm opacity-75">↑4-5%</span></h3>
@@ -557,7 +569,7 @@
             </a>
 
             <!-- Yield Layer -->
-            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/defi.md" target="_blank"
+            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/defi.md" target="_blank" rel="noopener noreferrer"
                class="card bg-base-200 hover:bg-base-300 transition-all shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title text-rose-500">DeFi Yield <span class="text-sm opacity-75">↑15%</span></h3>
@@ -566,7 +578,7 @@
             </a>
 
             <!-- Implementation -->
-            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/implementation.md" target="_blank"
+            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/implementation.md" target="_blank" rel="noopener noreferrer"
                class="card bg-base-200 hover:bg-base-300 transition-all shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title text-blue-500">Implementation Guide</h3>
@@ -575,7 +587,7 @@
             </a>
 
             <!-- Risk Management -->
-            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/risk_management.md" target="_blank"
+            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/risk_management.md" target="_blank" rel="noopener noreferrer"
                class="card bg-base-200 hover:bg-base-300 transition-all shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title text-purple-500">Risk Management</h3>
@@ -584,7 +596,7 @@
             </a>
 
             <!-- Monitoring -->
-            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/monitoring.md" target="_blank"
+            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/monitoring.md" target="_blank" rel="noopener noreferrer"
                class="card bg-base-200 hover:bg-base-300 transition-all shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title text-indigo-500">Monitoring System</h3>
@@ -593,7 +605,7 @@
             </a>
 
             <!-- Tax Strategy -->
-            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/tax_optimization.md" target="_blank"
+            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/tax_optimization.md" target="_blank" rel="noopener noreferrer"
                class="card bg-base-200 hover:bg-base-300 transition-all shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title text-emerald-500">Tax Strategy</h3>
@@ -604,7 +616,7 @@
 
         <!-- Additional Resources -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/glossary.md" target="_blank"
+            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/glossary.md" target="_blank" rel="noopener noreferrer"
                class="card bg-base-200 hover:bg-base-300 transition-all shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title">📚 Glossary</h3>
@@ -612,7 +624,7 @@
                 </div>
             </a>
 
-            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/resources.md" target="_blank"
+            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/resources.md" target="_blank" rel="noopener noreferrer"
                class="card bg-base-200 hover:bg-base-300 transition-all shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title">🔗 Resources</h3>
@@ -620,7 +632,7 @@
                 </div>
             </a>
 
-            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/templates.md" target="_blank"
+            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/templates.md" target="_blank" rel="noopener noreferrer"
                class="card bg-base-200 hover:bg-base-300 transition-all shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title">📝 Templates</h3>
@@ -632,8 +644,8 @@
 
     <!-- Footer -->
     <footer class="text-center m-4 opacity-50 hover:opacity-70">
-        Made with ❤ by <a href="https://x.com/stas_kulesh" class="link" target="_blank">@stas_kulesh</a> from <a href="https://karmabot.chat" class="link" target="_blank">Karma</a><br />
-        Special thanks to <a href="https://x.com/levelsio" class="link" target="_blank">@levelsio</a>
+        Made with ❤ by <a href="https://x.com/stas_kulesh" class="link" target="_blank" rel="noopener noreferrer">@stas_kulesh</a> from <a href="https://karmabot.chat" class="link" target="_blank" rel="noopener noreferrer">Karma</a><br />
+        Special thanks to <a href="https://x.com/levelsio" class="link" target="_blank" rel="noopener noreferrer">@levelsio</a>
     </footer>
 
     <script>
@@ -701,6 +713,7 @@
 
         // Create stacked bar chart using ApexCharts
         function updateAllocationChart() {
+            try {
             // Prepare data
             const years = [];
             const seriesData = Object.entries(portfolioData)
@@ -956,6 +969,14 @@
             
             // Set flag to false after first render
             isFirstRender = false;
+            } catch (error) {
+                console.error('Error updating allocation chart:', error);
+                // Display error message in chart area
+                const chartElement = document.querySelector("#allocationChart");
+                if (chartElement) {
+                    chartElement.innerHTML = '<div class="text-center p-4 text-error">Chart update failed. Please refresh the page.</div>';
+                }
+            }
         }
 
         function recalculateScenarios() {
@@ -1007,13 +1028,14 @@
         }
 
         function recalculateWithoutChart() {
-            const initialCapital = parseInt(document.getElementById('initialCapital').value);
-            const baseContribution = parseInt(document.getElementById('monthlyContribution').value);
-            const isMonthly = document.getElementById('contributionFrequency').value === 'monthly';
-            const years = parseInt(document.getElementById('years').value);
-            const baseTarget = parseInt(document.getElementById('targetValue').value) || 1000000;
-            const isInflationAdjusted = document.getElementById('inflationToggle').checked;
-            const inflationRate = parseFloat(document.getElementById('inflationRate').value) / 100;
+            try {
+                const initialCapital = parseInt(document.getElementById('initialCapital').value) || 0;
+                const baseContribution = parseInt(document.getElementById('monthlyContribution').value) || 0;
+                const isMonthly = document.getElementById('contributionFrequency').value === 'monthly';
+                const years = parseInt(document.getElementById('years').value) || 10;
+                const baseTarget = parseInt(document.getElementById('targetValue').value) || 1000000;
+                const isInflationAdjusted = document.getElementById('inflationToggle').checked;
+                const inflationRate = parseFloat(document.getElementById('inflationRate').value) / 100 || 0.03;
             
             // Calculate inflation-adjusted target
             const target = isInflationAdjusted 
@@ -1078,6 +1100,13 @@
 
             // Update dollar value labels for asset allocations
             updateDollarValues(initialCapital);
+            } catch (error) {
+                console.error('Error in recalculateWithoutChart:', error);
+                // Set safe fallback values
+                document.getElementById('totalInvested').textContent = '$0';
+                document.getElementById('finalBalance').textContent = '$0';
+                document.getElementById('weightedReturn').textContent = '0%';
+            }
         }
 
         function updateDollarValues(initialCapital) {
@@ -1165,46 +1194,86 @@
             });
         }
 
+        // Function to safely validate URL parameters
+        function validateUrlParam(value, type, min = 0, max = 10000000) {
+            if (!value) return null;
+            
+            if (type === 'number') {
+                const num = parseInt(value);
+                if (isNaN(num) || num < min || num > max) return null;
+                return num;
+            }
+            
+            if (type === 'string') {
+                // Only allow alphanumeric characters and basic symbols
+                const sanitized = value.replace(/[^a-zA-Z0-9\-_]/g, '');
+                return sanitized.length > 0 && sanitized.length < 50 ? sanitized : null;
+            }
+            
+            return null;
+        }
+
         // Function to load parameters from URL
         function loadFromURL() {
             const params = new URLSearchParams(window.location.search);
             
             // Load portfolio settings if they exist
             if (params.has('ic')) {
-                const ic = document.getElementById('initialCapital');
-                ic.value = params.get('ic');
-                updateSliderLabel(ic, 'initialCapitalLabel', '$');
+                const icValue = validateUrlParam(params.get('ic'), 'number', 0, 500000);
+                if (icValue !== null) {
+                    const ic = document.getElementById('initialCapital');
+                    ic.value = icValue;
+                    updateSliderLabel(ic, 'initialCapitalLabel', '$');
+                }
             }
             
             if (params.has('mc')) {
-                const mc = document.getElementById('monthlyContribution');
-                mc.value = params.get('mc');
-                updateSliderLabel(mc, 'monthlyContributionLabel', '$');
+                const mcValue = validateUrlParam(params.get('mc'), 'number', 0, 10000);
+                if (mcValue !== null) {
+                    const mc = document.getElementById('monthlyContribution');
+                    mc.value = mcValue;
+                    updateSliderLabel(mc, 'monthlyContributionLabel', '$');
+                }
             }
 
             if (params.has('cf')) {
-                document.getElementById('contributionFrequency').value = params.get('cf');
+                const cfValue = params.get('cf');
+                if (cfValue === 'monthly' || cfValue === 'weekly') {
+                    document.getElementById('contributionFrequency').value = cfValue;
+                }
             }
             
             if (params.has('y')) {
-                const y = document.getElementById('years');
-                y.value = params.get('y');
-                updateSliderLabel(y, 'yearsLabel', '');
+                const yValue = validateUrlParam(params.get('y'), 'number', 1, 30);
+                if (yValue !== null) {
+                    const y = document.getElementById('years');
+                    y.value = yValue;
+                    updateSliderLabel(y, 'yearsLabel', '');
+                }
             }
 
             if (params.has('t')) {
-                const t = document.getElementById('targetValue');
-                t.value = params.get('t');
-                document.getElementById('targetLabel').textContent = '$' + parseInt(t.value).toLocaleString();
+                const tValue = validateUrlParam(params.get('t'), 'number', 1000000, 10000000);
+                if (tValue !== null) {
+                    const t = document.getElementById('targetValue');
+                    t.value = tValue;
+                    document.getElementById('targetLabel').textContent = '$' + tValue.toLocaleString();
+                }
             }
 
             // Load inflation settings if they exist
             if (params.has('inf')) {
-                document.getElementById('inflationToggle').checked = params.get('inf') === '1';
+                const infValue = params.get('inf');
+                if (infValue === '0' || infValue === '1') {
+                    document.getElementById('inflationToggle').checked = infValue === '1';
+                }
             }
             
             if (params.has('ir')) {
-                document.getElementById('inflationRate').value = params.get('ir');
+                const irValue = validateUrlParam(params.get('ir'), 'number', 0, 100);
+                if (irValue !== null) {
+                    document.getElementById('inflationRate').value = irValue;
+                }
             }
 
             // Load allocations if they exist
@@ -1841,6 +1910,212 @@
                 displayElement.classList.remove('hidden');
             }
         }
+
+        // ===== TEST SUITE =====
+        // Comprehensive test suite for calculator functionality
+        function runCalculatorTests() {
+            console.log('🧪 Starting Calculator Test Suite...\n');
+            let totalTests = 0;
+            let passedTests = 0;
+            
+            // Test helper function
+            function test(name, testFn) {
+                totalTests++;
+                try {
+                    const result = testFn();
+                    if (result) {
+                        console.log(`✅ ${name}`);
+                        passedTests++;
+                    } else {
+                        console.log(`❌ ${name}`);
+                    }
+                } catch (error) {
+                    console.log(`❌ ${name} - Error: ${error.message}`);
+                }
+            }
+
+            // URL Parameter Validation Tests
+            console.log('📋 URL Parameter Validation Tests:');
+            
+            test('validateUrlParam - Valid number', () => {
+                return validateUrlParam('100000', 'number', 0, 500000) === 100000;
+            });
+            
+            test('validateUrlParam - Invalid number (too high)', () => {
+                return validateUrlParam('600000', 'number', 0, 500000) === null;
+            });
+            
+            test('validateUrlParam - Invalid number (too low)', () => {
+                return validateUrlParam('-1000', 'number', 0, 500000) === null;
+            });
+            
+            test('validateUrlParam - Non-numeric string', () => {
+                return validateUrlParam('abc123', 'number', 0, 500000) === null;
+            });
+            
+            test('validateUrlParam - Valid string', () => {
+                return validateUrlParam('monthly', 'string') === 'monthly';
+            });
+            
+            test('validateUrlParam - String with special chars', () => {
+                const result = validateUrlParam('test<script>', 'string');
+                return result === 'testscript' || result === null;
+            });
+
+            // Calculation Function Tests
+            console.log('\n🔢 Calculation Function Tests:');
+            
+            test('calculateGrowth - Basic calculation', () => {
+                const result = calculateGrowth(100000, 2000, 0.10, 1, true, false, 0.03);
+                return result.length === 2 && result[0] === 100000 && result[1] > 100000;
+            });
+            
+            test('calculateGrowth - Zero initial capital', () => {
+                const result = calculateGrowth(0, 2000, 0.10, 1, true, false, 0.03);
+                return result.length === 2 && result[0] === 0;
+            });
+            
+            test('calculateGrowth - Negative return rate', () => {
+                const result = calculateGrowth(100000, 2000, -0.10, 1, true, false, 0.03);
+                return result.length === 2 && result[1] < result[0];
+            });
+
+            // Portfolio Data Validation Tests
+            console.log('\n📊 Portfolio Data Validation Tests:');
+            
+            test('portfolioData - All assets have required properties', () => {
+                for (const [key, asset] of Object.entries(portfolioData)) {
+                    if (!asset.hasOwnProperty('allocation') || 
+                        !asset.hasOwnProperty('return') || 
+                        !asset.hasOwnProperty('color')) {
+                        return false;
+                    }
+                }
+                return true;
+            });
+            
+            test('portfolioData - Allocations are valid numbers', () => {
+                for (const [key, asset] of Object.entries(portfolioData)) {
+                    if (typeof asset.allocation !== 'number' || 
+                        asset.allocation < 0 || 
+                        asset.allocation > 1) {
+                        return false;
+                    }
+                }
+                return true;
+            });
+            
+            test('portfolioData - Returns are reasonable', () => {
+                for (const [key, asset] of Object.entries(portfolioData)) {
+                    if (typeof asset.return !== 'number' || 
+                        asset.return < -1 || 
+                        asset.return > 2) {
+                        return false;
+                    }
+                }
+                return true;
+            });
+
+            // DOM Element Tests
+            console.log('\n🏗️ DOM Element Tests:');
+            
+            test('Required input elements exist', () => {
+                const requiredIds = ['initialCapital', 'monthlyContribution', 'years', 'targetValue'];
+                return requiredIds.every(id => document.getElementById(id) !== null);
+            });
+            
+            test('Required display elements exist', () => {
+                const requiredIds = ['totalInvested', 'finalBalance', 'weightedReturn'];
+                return requiredIds.every(id => document.getElementById(id) !== null);
+            });
+            
+            test('Chart container exists', () => {
+                return document.querySelector('#allocationChart') !== null;
+            });
+
+            // Error Handling Tests
+            console.log('\n🛡️ Error Handling Tests:');
+            
+            test('recalculateWithoutChart handles missing elements gracefully', () => {
+                // Temporarily remove an element
+                const element = document.getElementById('initialCapital');
+                const parent = element.parentNode;
+                const nextSibling = element.nextSibling;
+                parent.removeChild(element);
+                
+                try {
+                    recalculateWithoutChart();
+                    // Restore element
+                    parent.insertBefore(element, nextSibling);
+                    return true;
+                } catch (error) {
+                    // Restore element
+                    parent.insertBefore(element, nextSibling);
+                    return false;
+                }
+            });
+
+            // Integration Tests
+            console.log('\n🔗 Integration Tests:');
+            
+            test('Changing initial capital updates calculations', () => {
+                const initialBalance = document.getElementById('finalBalance').textContent;
+                document.getElementById('initialCapital').value = '200000';
+                recalculateWithoutChart();
+                const newBalance = document.getElementById('finalBalance').textContent;
+                
+                // Reset to original value
+                document.getElementById('initialCapital').value = '100000';
+                recalculateWithoutChart();
+                
+                return initialBalance !== newBalance;
+            });
+            
+            test('Allocation changes affect weighted return', () => {
+                const initialReturn = document.getElementById('weightedReturn').textContent;
+                
+                // Change allocation
+                portfolioData.crypto.allocation = 0.50;
+                portfolioData.etfs.allocation = 0.20;
+                recalculateWithoutChart();
+                const newReturn = document.getElementById('weightedReturn').textContent;
+                
+                // Reset allocations
+                portfolioData.crypto.allocation = 0.35;
+                portfolioData.etfs.allocation = 0.35;
+                recalculateWithoutChart();
+                
+                return initialReturn !== newReturn;
+            });
+
+            // Performance Tests
+            console.log('\n⚡ Performance Tests:');
+            
+            test('recalculateWithoutChart executes quickly', () => {
+                const startTime = performance.now();
+                recalculateWithoutChart();
+                const endTime = performance.now();
+                return (endTime - startTime) < 100; // Should complete in under 100ms
+            });
+
+            // Summary
+            console.log(`\n📊 Test Results: ${passedTests}/${totalTests} tests passed`);
+            
+            if (passedTests === totalTests) {
+                console.log('🎉 All tests passed! Calculator is working correctly.');
+            } else {
+                console.log(`⚠️  ${totalTests - passedTests} test(s) failed. Review the output above.`);
+            }
+            
+            return { totalTests, passedTests, successRate: (passedTests / totalTests * 100).toFixed(1) };
+        }
+
+        // Auto-run tests when page loads (in development)
+        // Uncomment the line below to run tests automatically
+        // document.addEventListener('DOMContentLoaded', () => setTimeout(runCalculatorTests, 1000));
+        
+        // Manual test runner - call runCalculatorTests() in console
+        console.log('💡 Calculator test suite ready! Call runCalculatorTests() to run all tests.');
     </script>
 
 </body>
