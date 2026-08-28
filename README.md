@@ -26,8 +26,15 @@ The challenge? $100k is both a lot and not enough:
 Our goal is clear but challenging: turn $100,000 into $1,000,000 in about 10 years. This means:
 - Starting with $100,000 in capital
 - Contributing $2,000 monthly from income
-- Achieving roughly 17% annual returns
+- Achieving roughly 17% annual returns (16.7%, to be exact)
 - Managing risks to protect your capital
+
+**Be honest about the gap.** The portfolio below blends to about **14.15%** a year, not 16.7%. At $2,000 a month that reaches **$843,000 in 10 years**, and crosses $1M in **year 12**. Closing the gap in 10 years takes one of three things:
+- A higher return: 16.7% instead of 14.15%
+- A higher contribution: about **$2,671 a month** at the same 14.15%
+- More time: **12 years** at $2,000 a month
+
+The [calculator](https://100k1m.com) shows all three. Pick the trade-off you can actually sustain, rather than assuming the returns will show up.
 
 Why $1M? It's not "never work again" money, but it is:
 - A foundation for real financial security
@@ -117,40 +124,51 @@ Tools for success:
 
 ## Results: The Growth Journey
 
-### Phase 1: Foundation - $100k → $130k (Years 1-2)
-- Focus: Building infrastructure
+These figures come from the same model the [calculator](https://100k1m.com) runs: $100,000 of starting capital, $2,000 a month, and the 14.15% blended return of the allocation above, compounded annually. Earlier versions of this table did not add up, so the numbers below are reproducible rather than illustrative.
+
+| End of year | Balance | Contributed to date | Growth to date |
+|---|---|---|---|
+| 0 | $100,000 | $100,000 | $0 |
+| 2 | $181,698 | $148,000 | $33,698 |
+| 4 | $288,153 | $196,000 | $92,153 |
+| 6 | $426,866 | $244,000 | $182,866 |
+| 8 | $607,611 | $292,000 | $315,611 |
+| 10 | $843,127 | $340,000 | $503,127 |
+| 12 | $1,150,009 | $388,000 | $762,009 |
+
+### Phase 1: Foundation - $100k → $182k (Years 1-2)
+- Focus: Building infrastructure, security, and habits
 - Risk: Higher but controlled
-- Goal: 30% growth while learning
 - Monthly: $2,000 ($48,000 over 2 years)
-- Expected Result: $130k from $100k initial + $48k contributions + 30% growth
+- Growth beyond contributions: about $34,000
 
-### Phase 2: Acceleration - $130k → $250k (Years 3-4)
-- Focus: Proven strategies
+### Phase 2: Acceleration - $182k → $288k (Years 3-4)
+- Focus: Proven strategies, less experimentation
 - Risk: Medium-high
-- Goal: 92% growth with system
 - Monthly: $2,000 ($48,000 over 2 years)
-- Expected Result: $250k from $130k base + $48k contributions + 92% growth
+- Growth beyond contributions: about $58,000 in this phase
 
-### Phase 3: Optimization - $250k → $450k (Years 5-6)
-- Focus: Optimization
+### Phase 3: Optimization - $288k → $427k (Years 5-6)
+- Focus: Cost, tax, and rebalancing discipline
 - Risk: Medium
-- Goal: 80% growth refined
 - Monthly: $2,000 ($48,000 over 2 years)
-- Expected Result: $450k from $250k base + $48k contributions + 80% growth
+- Growth beyond contributions: about $91,000 in this phase
 
-### Phase 4: Stabilization - $450k → $700k (Years 7-8)
-- Focus: Preservation
+### Phase 4: Stabilization - $427k → $608k (Years 7-8)
+- Focus: Preservation, trimming the riskiest sleeves
 - Risk: Medium-low
-- Goal: 56% balanced growth
 - Monthly: $2,000 ($48,000 over 2 years)
-- Expected Result: $700k from $450k base + $48k contributions + 56% growth
+- Growth beyond contributions: about $133,000 in this phase
 
-### Phase 5: Security - $700k → $1M+ (Years 9-10)
-- Focus: Security
+### Phase 5: Security - $608k → $843k (Years 9-10)
+- Focus: Security and drawdown protection
 - Risk: Lower
-- Goal: 43% conservative growth
 - Monthly: $2,000 ($48,000 over 2 years)
-- Expected Result: $1M+ from $700k base + $48k contributions + 43% growth
+- Growth beyond contributions: about $188,000 in this phase
+
+**Year 10 lands at $843k, not $1M.** Compounding does the heavy lifting late, so the last stretch is the fastest: $1M arrives in year 12 on these assumptions. Raise the contribution to $2,671 a month, or the return to 16.7%, to land it in 10.
+
+A note on the model: this assumes the portfolio is rebalanced back to the target weights, so the whole balance compounds at the blended rate. Holding a fixed set of assets without rebalancing produces a different, usually more volatile path.
 
 ## Getting Started
 
