@@ -48,6 +48,14 @@ out/
 # Cache and temporary files
 .channels_cache.json
 .users_cache.json
+codedb.snapshot
+.claude/
+
+# Dev screenshots and scratch images stay out of the repo.
+# Images meant to ship (og cards, diagrams) belong in assets/, which is exempt below.
 *.png
 *.jpg
-*.jpeg 
+*.jpeg
+!assets/**/*.png
+!assets/**/*.jpg
+!assets/**/*.jpeg 

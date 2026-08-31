@@ -1,20 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--
+      Content Security Policy.
+      script-src needs 'unsafe-inline' because the page uses inline event handlers
+      and inline script blocks. Removing those is a separate refactor. The policy
+      still blocks external script origins, object embedding and base-tag hijacking.
+      frame-ancestors cannot be set from a meta tag; set it as an HTTP header.
+    -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdn.jsdelivr.net;
+        style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+        img-src 'self' data: https:;
+        font-src 'self' data:;
+        connect-src 'self';
+        object-src 'none';
+        base-uri 'self';
+        form-action 'self';
+    ">
+
     <title>100K to 1M in 10Y Investment Portfolio Calculator</title>
+    <meta name="description" content="Free portfolio calculator and open-source guide for growing $100,000 to $1,000,000. Model ETFs, stocks, crypto, bonds, term deposits and DeFi with your own return assumptions. Educational only, not financial advice.">
+    <link rel="canonical" href="https://100k1m.com/">
+    <meta name="theme-color" content="#0ea5e9">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%88%3C/text%3E%3C/svg%3E">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://100k1m.com/">
+    <meta property="og:title" content="100K → 1M in 10Y: Investment Portfolio Calculator">
+    <meta property="og:description" content="Model the path from $100,000 to $1,000,000. Adjust allocation, returns, contributions and inflation. Educational only, not financial advice.">
+    <meta property="og:image" content="https://github.com/user-attachments/assets/6c1aaf3f-54b2-4d2f-8fa2-82f44742095c">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="100K → 1M in 10Y: Investment Portfolio Calculator">
+    <meta name="twitter:description" content="Model the path from $100,000 to $1,000,000. Educational only, not financial advice.">
+    <meta name="twitter:image" content="https://github.com/user-attachments/assets/6c1aaf3f-54b2-4d2f-8fa2-82f44742095c">
+
     <!-- Performance: DNS prefetch and preconnect for faster resource loading -->
     <link rel="dns-prefetch" href="//cdn.tailwindcss.com">
     <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
-    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <!--
+      Versions are pinned so a CDN release cannot change this page without a commit.
+      cdn.tailwindcss.com serves no Access-Control-Allow-Origin header, so it cannot
+      carry an integrity hash: SRI requires CORS. Version pinning is the available
+      protection there. Replacing the Play CDN with a compiled stylesheet needs a
+      build step and is tracked separately.
+    -->
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.3/dist/full.css" rel="stylesheet" type="text/css"
+        integrity="sha384-gUK2Zjv3F8kp5JkDdcEsxQYGmwG4ZREkFnoPD7mz8aK51bCf/M1wagsO4wqKaOzu"
+        crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@7.0.0/dist/apexcharts.min.js"
+        integrity="sha384-+hxfT+iExRCsHFUrlWam6cWHSCNZg04vcfjwv9UXGl1M8zs+UrU9Me+z+ciPJZFC"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"
+        integrity="sha384-HAH79XdRvHr6axVGh4xQWVCp14kcd32bNk4Xu0sHDHtFQ42n6BAM8ykvB47dGz6D"
+        crossorigin="anonymous"></script>
     <script>
         // Auto-detect system theme
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -80,6 +128,25 @@
             return document.documentElement.getAttribute('data-theme') === 'dark';
         }
 
+        /**
+         * Parse a value into a finite number inside [min, max].
+         * Anything unparseable (empty string, "abc", Infinity, NaN) yields `fallback`.
+         * Every number entering the model goes through here so a bad URL parameter
+         * or a cleared input can no longer turn the whole portfolio into NaN.
+         */
+        function clampNumber(raw, min, max, fallback) {
+            const parsed = typeof raw === 'number' ? raw : parseFloat(raw);
+            if (!Number.isFinite(parsed)) return fallback;
+            return Math.min(max, Math.max(min, parsed));
+        }
+
+        // Read a numeric value straight off an element, with bounds and a fallback.
+        function readNumber(elementId, min, max, fallback) {
+            const el = document.getElementById(elementId);
+            if (!el) return fallback;
+            return clampNumber(el.value, min, max, fallback);
+        }
+
         // Performance: Debounce utility to prevent excessive function calls
         function debounce(func, wait) {
             let timeout;
@@ -97,84 +164,10 @@
         let targetToastPermanentlyDismissed = false;
         let targetNotificationShownThisSession = false; // New flag to track if notification has been shown
 
-        // Permanently hide the target reached toast
-        function hideTargetReached() {
-            const toast = document.getElementById('targetReached');
-            toast.classList.add('hidden');
-            
-            // Set the flag to permanently dismiss the toast
-            targetToastPermanentlyDismissed = true;
-            
-            // Optionally store this preference in localStorage to persist across page reloads
-            localStorage.setItem('targetToastDismissed', 'true');
-        }
-
-        // Update the showTargetReached function to only show once per session
-        function showTargetReached() {
-            // Don't show the toast if it's been permanently dismissed or already shown this session
-            if (targetToastPermanentlyDismissed || targetNotificationShownThisSession) {
-                return;
-            }
-            
-            const toast = document.getElementById('targetReached');
-            
-            // Mark as shown this session
-            targetNotificationShownThisSession = true;
-            
-            // Remove hidden class
-            toast.classList.remove('hidden');
-            
-            // Trigger confetti only once per session
-            function shoot() {
-                // Main burst
-                confetti({
-                    particleCount: 50,
-                    spread: 60,
-                    origin: { x: 0.5, y: 1 },
-                    colors: ['#FFD700', '#FFA500', '#32CD32', '#00ff00'],
-                    startVelocity: 45,
-                    gravity: 3,
-                    scalar: 1.2,
-                    ticks: 200
-                });
-
-                // Some spinning ones
-                confetti({
-                    particleCount: 15,
-                    spread: 150,
-                    origin: { x: 0.5, y: 1 },
-                    colors: ['#FFD700', '#FFA500'],
-                    startVelocity: 35,
-                    gravity: 3,
-                    scalar: 1,
-                    ticks: 200,
-                    flat: true
-                });
-
-                // Add some stars
-                confetti({
-                    particleCount: 20,
-                    spread: 70,
-                    origin: { x: 0.5, y: 1 },
-                    shapes: ['star'],
-                    colors: ['#FFD700', '#FFA500', '#32CD32', '#00ff00'],
-                    startVelocity: 40,
-                    gravity: 3,
-                    scalar: 1.5,
-                    ticks: 200
-                });
-            }
-
-            // Shoot multiple times for a continuous effect, but only once per session
-            shoot();
-            setTimeout(shoot, 100);
-            setTimeout(shoot, 200);
-
-            // Update message
-            const target = parseInt(document.getElementById('targetValue').value);
-            document.getElementById('targetReachedMessage').textContent = 
-                `$${target.toLocaleString()} Target Within Reach!`;
-        }
+        // showTargetReached / hideTargetReached / dismissTargetReached are defined
+        // once, in the main script below. They used to be declared here as well; the
+        // later declarations silently replaced these, which quietly disabled the
+        // "permanently dismiss" behaviour behind the toast's Dismiss button.
     </script>
     <style>
         /* CSS Custom Properties for better maintainability */
@@ -277,23 +270,36 @@
     
     <div class="max-w-7xl mx-auto">
         <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-primary focus:text-primary-content focus:px-4 focus:py-2 focus:rounded">Skip to main content</a>
-        <a class="m-4" href="https://github.com/sliday/100K-1M-in-10Y">
+        <div class="m-4">
             <h1 class="text-4xl font-bold text-center mb-2">100K → 1M in 10Y: A Practical Investment Journey</h1>
-            <div class="text-center">Read the open-source guide. Contribute to improve it.</div> 
-        </a>
+            <div class="text-center">
+                <a class="link" href="https://github.com/sliday/100K-1M-in-10Y" target="_blank" rel="noopener noreferrer">Read the open-source guide</a>. Contribute to improve it.
+            </div>
+        </div>
 
         <!-- Asset Allocation Chart -->
         <div class="card bg-base-100 shadow-xl mb-4 p-2">
             <div class="card-body p-2 sm:p-0">
-                <div id="allocationChart" 
-                     class="sm:block transition-smooth" 
+                <div id="allocationChart"
+                     class="sm:block transition-smooth"
                      style="width: 100%; height: 400px;"
-                     role="img" 
+                     role="img"
                      aria-label="Investment growth chart showing portfolio value over time with different asset allocations"
                      aria-live="polite">
                 </div>
+                <!-- Same figures as the chart, for screen readers. Filled by updateChartDataTable. -->
+                <div id="chartDataTable" class="sr-only"></div>
             </div>
         </div>
+
+        <p class="text-xs opacity-70 text-center mb-4 max-w-3xl mx-auto">
+            <strong>Educational tool, not financial advice.</strong>
+            Every figure here is a projection from assumptions you choose, not a forecast.
+            Real returns vary, and assets such as crypto and DeFi can lose most or all of their value.
+            Read the
+            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/disclaimer.md" target="_blank" rel="noopener noreferrer" class="link">full risk disclosure</a>
+            and speak to a licensed adviser before investing.
+        </p>
 
         <!-- Three Column Layout -->
         <main id="main-content" role="main" aria-label="Investment Calculator">
@@ -377,7 +383,7 @@
                     <div class="form-control">
                         <label class="label">
                             <span class="flex items-center">
-                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/etfs.md" target="_blank">ETFs</a>&nbsp;(<span id="etfLabel">35</span>% / $<span id="etfValue">35,000</span>)
+                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/etfs.md" target="_blank" rel="noopener noreferrer">ETFs</a>&nbsp;(<span id="etfLabel">35</span>% / $<span id="etfValue">35,000</span>)
                             </span>
                             <span class="label-text-alt flex items-center">
                                 <span class="text-yellow-500 hover:text-yellow-400 cursor-pointer return-display" 
@@ -395,18 +401,22 @@
                                        aria-label="Edit ETF expected return percentage">
                             </span>
                         </label>
-                        <input id="etfAllocation" type="range" min="0" max="100" value="35" class="range" step="1" oninput="updateLabel(this, 'etfLabel')" aria-label="ETF allocation percentage" />
+                        <input id="etfAllocation" type="range" min="0" max="100" value="35" class="range" step="1" aria-label="ETF allocation percentage" />
                     </div>
 
                     <div class="form-control">
                         <label class="label">
                             <span class="flex items-center">
-                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/stocks.md" target="_blank">Stocks</a>&nbsp;(<span id="stocksLabel">0</span>% / $<span id="stocksValue">0</span>)
+                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/stocks.md" target="_blank" rel="noopener noreferrer">Stocks</a>&nbsp;(<span id="stocksLabel">0</span>% / $<span id="stocksValue">0</span>)
                             </span>
                             <span class="label-text-alt flex items-center">
                                 <span class="text-yellow-500 hover:text-yellow-400 cursor-pointer return-display" 
                                       data-asset="stocks" 
-                                      onclick="showReturnEditor(this)">↑12%</span>
+                                      onclick="showReturnEditor(this)"
+                                      onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showReturnEditor(this);}"
+                                      tabindex="0"
+                                      role="button"
+                                      aria-label="Stocks expected return: positive 12 percent, click to edit">↑12%</span>
                                 <input type="number" class="input input-xs w-14 bg-base-300 ml-1 hidden return-editor" 
                                        data-asset="stocks" 
                                        value="12" min="-100" max="1000" step="1" 
@@ -414,18 +424,22 @@
                                        onkeydown="handleReturnKeydown(event, this)">
                             </span>
                         </label>
-                        <input id="stocksAllocation" type="range" min="0" max="100" value="0" class="range" step="1" oninput="updateLabel(this, 'stocksLabel')" aria-label="Stocks allocation percentage" />
+                        <input id="stocksAllocation" type="range" min="0" max="100" value="0" class="range" step="1" aria-label="Stocks allocation percentage" />
                     </div>
 
                     <div class="form-control">
                         <label class="label">
                             <span class="flex items-center">
-                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/crypto.md" target="_blank">Crypto</a>&nbsp;(<span id="cryptoLabel">35</span>% / $<span id="cryptoValue">35,000</span>)
+                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/crypto.md" target="_blank" rel="noopener noreferrer">Crypto</a>&nbsp;(<span id="cryptoLabel">35</span>% / $<span id="cryptoValue">35,000</span>)
                             </span>
                             <span class="label-text-alt flex items-center">
                                 <span class="text-red-500 hover:text-red-400 cursor-pointer return-display" 
                                       data-asset="crypto" 
-                                      onclick="showReturnEditor(this)">↑25%</span>
+                                      onclick="showReturnEditor(this)"
+                                      onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showReturnEditor(this);}"
+                                      tabindex="0"
+                                      role="button"
+                                      aria-label="Crypto expected return: positive 25 percent, click to edit">↑25%</span>
                                 <input type="number" class="input input-xs w-14 bg-base-300 ml-1 hidden return-editor" 
                                        data-asset="crypto" 
                                        value="25" min="-100" max="1000" step="1" 
@@ -433,18 +447,22 @@
                                        onkeydown="handleReturnKeydown(event, this)">
                             </span>
                         </label>
-                        <input id="cryptoAllocation" type="range" min="0" max="100" value="35" class="range" step="1" oninput="updateLabel(this, 'cryptoLabel')" aria-label="Crypto allocation percentage" />
+                        <input id="cryptoAllocation" type="range" min="0" max="100" value="35" class="range" step="1" aria-label="Crypto allocation percentage" />
                     </div>
 
                     <div class="form-control">
                         <label class="label">
                             <span class="flex items-center">
-                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/fixed_income.md" target="_blank">Term Deposits</a>&nbsp;(<span id="termDepositLabel">15</span>% / $<span id="termDepositValue">15,000</span>)
+                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/fixed_income.md" target="_blank" rel="noopener noreferrer">Term Deposits</a>&nbsp;(<span id="termDepositLabel">15</span>% / $<span id="termDepositValue">15,000</span>)
                             </span>
                             <span class="label-text-alt flex items-center">
                                 <span class="text-green-500 hover:text-green-400 cursor-pointer return-display" 
                                       data-asset="termDeposits" 
-                                      onclick="showReturnEditor(this)">↑5%</span>
+                                      onclick="showReturnEditor(this)"
+                                      onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showReturnEditor(this);}"
+                                      tabindex="0"
+                                      role="button"
+                                      aria-label="Term deposits expected return: positive 5 percent, click to edit">↑5%</span>
                                 <input type="number" class="input input-xs w-14 bg-base-300 ml-1 hidden return-editor" 
                                        data-asset="termDeposits" 
                                        value="5" min="-100" max="1000" step="1" 
@@ -452,18 +470,22 @@
                                        onkeydown="handleReturnKeydown(event, this)">
                             </span>
                         </label>
-                        <input id="termDepositAllocation" type="range" min="0" max="100" value="15" class="range" step="1" oninput="updateLabel(this, 'termDepositLabel')" aria-label="Term deposits allocation percentage" />
+                        <input id="termDepositAllocation" type="range" min="0" max="100" value="15" class="range" step="1" aria-label="Term deposits allocation percentage" />
                     </div>
 
                     <div class="form-control">
                         <label class="label">
                             <span class="flex items-center">
-                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/fixed_income.md#government-bonds" target="_blank">Bonds</a>&nbsp;(<span id="bondLabel">10</span>% / $<span id="bondValue">10,000</span>)
+                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/fixed_income.md#government-bonds" target="_blank" rel="noopener noreferrer">Bonds</a>&nbsp;(<span id="bondLabel">10</span>% / $<span id="bondValue">10,000</span>)
                             </span>
                             <span class="label-text-alt flex items-center">
                                 <span class="text-emerald-500 hover:text-emerald-400 cursor-pointer return-display" 
                                       data-asset="bonds" 
-                                      onclick="showReturnEditor(this)">↑4%</span>
+                                      onclick="showReturnEditor(this)"
+                                      onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showReturnEditor(this);}"
+                                      tabindex="0"
+                                      role="button"
+                                      aria-label="Bonds expected return: positive 4 percent, click to edit">↑4%</span>
                                 <input type="number" class="input input-xs w-14 bg-base-300 ml-1 hidden return-editor" 
                                        data-asset="bonds" 
                                        value="4" min="-100" max="1000" step="1" 
@@ -471,18 +493,22 @@
                                        onkeydown="handleReturnKeydown(event, this)">
                             </span>
                         </label>
-                        <input id="bondAllocation" type="range" min="0" max="100" value="10" class="range" step="1" oninput="updateLabel(this, 'bondLabel')" aria-label="Bonds allocation percentage" />
+                        <input id="bondAllocation" type="range" min="0" max="100" value="10" class="range" step="1" aria-label="Bonds allocation percentage" />
                     </div>
 
                     <div class="form-control">
                         <label class="label">
                             <span class="flex items-center">
-                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/defi.md" target="_blank">DeFi</a>&nbsp;(<span id="defiLabel">5</span>% / $<span id="defiValue">5,000</span>)
+                                <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/defi.md" target="_blank" rel="noopener noreferrer">DeFi</a>&nbsp;(<span id="defiLabel">5</span>% / $<span id="defiValue">5,000</span>)
                             </span>
                             <span class="label-text-alt flex items-center">
                                 <span class="text-rose-500 hover:text-rose-400 cursor-pointer return-display" 
                                       data-asset="defi" 
-                                      onclick="showReturnEditor(this)">↑15%</span>
+                                      onclick="showReturnEditor(this)"
+                                      onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showReturnEditor(this);}"
+                                      tabindex="0"
+                                      role="button"
+                                      aria-label="DeFi expected return: positive 15 percent, click to edit">↑15%</span>
                                 <input type="number" class="input input-xs w-14 bg-base-300 ml-1 hidden return-editor" 
                                        data-asset="defi" 
                                        value="15" min="-100" max="1000" step="1" 
@@ -490,7 +516,7 @@
                                        onkeydown="handleReturnKeydown(event, this)">
                             </span>
                         </label>
-                        <input id="defiAllocation" type="range" min="0" max="100" value="5" class="range" step="1" oninput="updateLabel(this, 'defiLabel')" aria-label="DeFi allocation percentage" />
+                        <input id="defiAllocation" type="range" min="0" max="100" value="5" class="range" step="1" aria-label="DeFi allocation percentage" />
                     </div>
 
                     <div class="alert alert-warning mt-4" id="allocationWarning" style="display: none;">
@@ -511,7 +537,7 @@
                         <!-- Base Case -->
                         <div>
                             <div class="font-semibold opacity-80">Base Case <span class="text-xs opacity-70">(shown in stacked bars)</span></div>
-                            <p class="text-sm opacity-70">Expected returns based on <a href="https://www.spglobal.com/spdji/en/indices/equity/sp-500/#overview" target="_blank" class="link">S&P 500 historical data</a> and other market benchmarks:</p>
+                            <p class="text-sm opacity-70">Expected returns based on <a href="https://www.spglobal.com/spdji/en/indices/equity/sp-500/#overview" target="_blank" rel="noopener noreferrer" class="link">S&P 500 historical data</a> and other market benchmarks:</p>
                             <ul class="text-sm list-disc list-inside opacity-70 mt-1">
                                 <li>ETFs: +10%</li>
                                 <li>Stocks: +12%</li>
@@ -565,13 +591,15 @@
 
                         <div class="stat">
                             <div class="stat-title">Weighted Return</div>
-                            <div class="stat-value" id="weightedReturn">12.5%</div>
+                            <!-- Placeholders match the default portfolio, so nothing
+                                 misleading shows before the script runs. -->
+                            <div class="stat-value" id="weightedReturn">14.2%</div>
                             <div class="stat-desc">Based on allocation</div>
                         </div>
 
                         <div class="stat">
                             <div class="stat-title">Final Balance</div>
-                            <div class="stat-value" id="finalBalance">$1,234,567</div>
+                            <div class="stat-value" id="finalBalance">$843,127</div>
                             <div class="stat-desc">After <span id="yearsToTarget">10</span> years</div>
                         </div>
                     </div>
@@ -589,7 +617,6 @@
                                 <!-- Target Slider -->
                                 <input id="targetValue" type="range" min="1000000" max="10000000" value="1000000" class="range"
                                     step="100000"
-                                    oninput="document.getElementById('targetLabel').textContent = '$' + parseInt(this.value).toLocaleString(); recalculateWithoutChart(); updateChartOnRelease();" 
                                     aria-label="Investment target amount" />
                                 <div class="w-full flex justify-between text-xs px-2 opacity-70">
                                     <span>$1M</span>
@@ -627,7 +654,7 @@
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <!-- Core Growth -->
-            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/etfs.md" target="_blank" 
+            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/etfs.md" target="_blank" rel="noopener noreferrer" 
                class="card bg-base-200 hover:bg-base-300 hover-optimize shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title text-yellow-500">ETF Strategy <span class="text-sm opacity-75">↑10%</span></h3>
@@ -635,7 +662,7 @@
                 </div>
             </a>
 
-            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/stocks.md" target="_blank"
+            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/stocks.md" target="_blank" rel="noopener noreferrer"
                class="card bg-base-200 hover:bg-base-300 hover-optimize shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title text-yellow-500">Stock Picking <span class="text-sm opacity-75">↑12%</span></h3>
@@ -643,7 +670,7 @@
                 </div>
             </a>
 
-            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/crypto.md" target="_blank"
+            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/crypto.md" target="_blank" rel="noopener noreferrer"
                class="card bg-base-200 hover:bg-base-300 hover-optimize shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title text-red-500">Crypto Core <span class="text-sm opacity-75">↑25%</span></h3>
@@ -652,7 +679,7 @@
             </a>
 
             <!-- Stability Layer -->
-            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/fixed_income.md" target="_blank"
+            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/fixed_income.md" target="_blank" rel="noopener noreferrer"
                class="card bg-base-200 hover:bg-base-300 hover-optimize shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title text-green-500">Fixed Income <span class="text-sm opacity-75">↑4-5%</span></h3>
@@ -661,7 +688,7 @@
             </a>
 
             <!-- Yield Layer -->
-            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/defi.md" target="_blank"
+            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/defi.md" target="_blank" rel="noopener noreferrer"
                class="card bg-base-200 hover:bg-base-300 hover-optimize shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title text-rose-500">DeFi Yield <span class="text-sm opacity-75">↑15%</span></h3>
@@ -670,7 +697,7 @@
             </a>
 
             <!-- Implementation -->
-            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/implementation.md" target="_blank"
+            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/implementation.md" target="_blank" rel="noopener noreferrer"
                class="card bg-base-200 hover:bg-base-300 hover-optimize shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title text-blue-500">Implementation Guide</h3>
@@ -679,7 +706,7 @@
             </a>
 
             <!-- Risk Management -->
-            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/risk_management.md" target="_blank"
+            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/risk_management.md" target="_blank" rel="noopener noreferrer"
                class="card bg-base-200 hover:bg-base-300 hover-optimize shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title text-purple-500">Risk Management</h3>
@@ -688,7 +715,7 @@
             </a>
 
             <!-- Monitoring -->
-            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/monitoring.md" target="_blank"
+            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/monitoring.md" target="_blank" rel="noopener noreferrer"
                class="card bg-base-200 hover:bg-base-300 hover-optimize shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title text-indigo-500">Monitoring System</h3>
@@ -697,7 +724,7 @@
             </a>
 
             <!-- Tax Strategy -->
-            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/tax_optimization.md" target="_blank"
+            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/tax_optimization.md" target="_blank" rel="noopener noreferrer"
                class="card bg-base-200 hover:bg-base-300 hover-optimize shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title text-emerald-500">Tax Strategy</h3>
@@ -708,7 +735,7 @@
 
         <!-- Additional Resources -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/glossary.md" target="_blank"
+            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/glossary.md" target="_blank" rel="noopener noreferrer"
                class="card bg-base-200 hover:bg-base-300 hover-optimize shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title">📚 Glossary</h3>
@@ -716,7 +743,7 @@
                 </div>
             </a>
 
-            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/resources.md" target="_blank"
+            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/resources.md" target="_blank" rel="noopener noreferrer"
                class="card bg-base-200 hover:bg-base-300 hover-optimize shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title">🔗 Resources</h3>
@@ -724,7 +751,7 @@
                 </div>
             </a>
 
-            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/templates.md" target="_blank"
+            <a href="https://github.com/sliday/100K-1M-in-10Y/blob/main/chapters/templates.md" target="_blank" rel="noopener noreferrer"
                class="card bg-base-200 hover:bg-base-300 hover-optimize shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title">📝 Templates</h3>
@@ -736,8 +763,8 @@
 
     <!-- Footer -->
     <footer class="text-center m-4 opacity-50 hover:opacity-70">
-        Made with ❤ by <a href="https://x.com/staskulesh" class="link" target="_blank">@staskulesh</a> from <a href="https://karmabot.chat" class="link" target="_blank">Karma</a><br />
-        Special thanks to <a href="https://x.com/levelsio" class="link" target="_blank">@levelsio</a>
+        Made with ❤ by <a href="https://x.com/staskulesh" class="link" target="_blank" rel="noopener noreferrer">@staskulesh</a> from <a href="https://karmabot.chat" class="link" target="_blank" rel="noopener noreferrer">Karma</a><br />
+        Special thanks to <a href="https://x.com/levelsio" class="link" target="_blank" rel="noopener noreferrer">@levelsio</a>
     </footer>
 
     <script>
@@ -787,11 +814,33 @@
             }
         };
 
+        // Slider element id <-> portfolioData key, in display order
+        const SLIDER_TO_ASSET = {
+            etfAllocation: 'etfs',
+            stocksAllocation: 'stocks',
+            cryptoAllocation: 'crypto',
+            termDepositAllocation: 'termDeposits',
+            bondAllocation: 'bonds',
+            defiAllocation: 'defi'
+        };
+        const ASSET_TO_SLIDER = Object.fromEntries(
+            Object.entries(SLIDER_TO_ASSET).map(([sliderId, assetKey]) => [assetKey, sliderId])
+        );
+
+        // Default allocation percentages, used by the reset button and change detection
+        const DEFAULT_ALLOCATION_PCT = {
+            etfs: 35,
+            stocks: 0,
+            crypto: 35,
+            termDeposits: 15,
+            bonds: 10,
+            defi: 5
+        };
+
         let results = [];
         let optimisticResults = [];
         let pessimisticResults = [];
         let stackedChart;
-        let isFirstRender = true;
 
         // Store initial return values for reset functionality
         const initialReturns = {
@@ -826,7 +875,9 @@
                     });
             }
 
-            const target = parseInt(document.getElementById('targetValue').value);
+            // Use the same target the stats card compares against: inflated into future
+            // dollars when the inflation toggle is on, so the line matches the numbers.
+            const target = readInputs().target;
 
             // Add annotations for optimistic and pessimistic scenarios
             const annotations = {
@@ -1057,140 +1108,124 @@
             // Create new chart
             stackedChart = new ApexCharts(document.querySelector("#allocationChart"), options);
             stackedChart.render();
-            
-            // Set flag to false after first render
-            isFirstRender = false;
         }
 
-        function recalculateScenarios() {
-            const initialCapital = parseInt(document.getElementById('initialCapital').value);
-            const baseContribution = parseInt(document.getElementById('monthlyContribution').value);
-            const isMonthly = document.getElementById('contributionFrequency').value === 'monthly';
-            const years = parseInt(document.getElementById('years').value);
+        /**
+         * Read and validate every calculator input in one place.
+         *
+         * Inflation model: money is expressed in nominal (future) dollars end to end.
+         * Returns stay nominal, contributions grow with inflation, and the target is
+         * grown into future dollars. The previous code discounted the return AND
+         * inflated the target AND inflated the contributions, which charged inflation
+         * twice and understated a default 10-year projection by about 24%.
+         *
+         * Every calculation path reads from here, so the stats card, the chart series
+         * and the chart title cannot disagree.
+         */
+        function readInputs() {
             const isInflationAdjusted = document.getElementById('inflationToggle').checked;
-            const inflationRate = parseFloat(document.getElementById('inflationRate').value) / 100;
+            const inflationRate = readNumber('inflationRate', 0, 100, 3) / 100;
+            const years = Math.round(readNumber('years', 1, 30, 10));
+            const baseTarget = Math.round(readNumber('targetValue', 1000, 100000000, 1000000));
 
-            // Calculate weighted returns for each scenario
-            let baseReturn = 0, optimisticReturn = 0, pessimisticReturn = 0;
-            Object.values(portfolioData).forEach(asset => {
-                baseReturn += asset.allocation * asset.return;
-                optimisticReturn += asset.allocation * asset.optimistic;
-                pessimisticReturn += asset.allocation * asset.pessimistic;
-            });
-
-            // Adjust for inflation if needed
-            if (isInflationAdjusted) {
-                baseReturn = (1 + baseReturn) / (1 + inflationRate) - 1;
-                optimisticReturn = (1 + optimisticReturn) / (1 + inflationRate) - 1;
-                pessimisticReturn = (1 + pessimisticReturn) / (1 + inflationRate) - 1;
-            }
-
-            // Calculate growth for each scenario
-            results = calculateGrowth(initialCapital, baseContribution, baseReturn, years, isMonthly, isInflationAdjusted, inflationRate);
-            optimisticResults = calculateGrowth(initialCapital, baseContribution, optimisticReturn, years, isMonthly, isInflationAdjusted, inflationRate);
-            pessimisticResults = calculateGrowth(initialCapital, baseContribution, pessimisticReturn, years, isMonthly, isInflationAdjusted, inflationRate);
+            return {
+                initialCapital: Math.round(readNumber('initialCapital', 0, 500000, 100000)),
+                contribution: Math.round(readNumber('monthlyContribution', 0, 10000, 2000)),
+                periodsPerYear: document.getElementById('contributionFrequency').value === 'weekly' ? 52 : 12,
+                years,
+                isInflationAdjusted,
+                inflationRate,
+                baseTarget,
+                target: isInflationAdjusted
+                    ? Math.round(baseTarget * Math.pow(1 + inflationRate, years))
+                    : baseTarget
+            };
         }
 
-        function calculateGrowth(initialCapital, baseContribution, returnRate, years, isMonthly, isInflationAdjusted, inflationRate) {
-            const results = [];
-            let balance = initialCapital;
+        /**
+         * Weighted portfolio return for one scenario.
+         * `scenario` is 'return', 'optimistic' or 'pessimistic'.
+         * Always nominal. Do not discount inflation here; readInputs already handles it
+         * by growing the target instead.
+         */
+        function weightedReturnFor(scenario) {
+            return Object.values(portfolioData).reduce(
+                (acc, asset) => acc + asset.allocation * clampNumber(asset[scenario], -1, 10, 0),
+                0
+            );
+        }
 
-            for (let year = 0; year <= years; year++) {
-                results.push(balance);
-                if (year === years) break;
+        /**
+         * Project year-by-year balances in nominal dollars.
+         * Index 0 is the starting balance, so the array has years + 1 entries.
+         */
+        function projectGrowth(settings, returnRate) {
+            const balances = [];
+            let balance = settings.initialCapital;
+            let totalInvested = settings.initialCapital;
+            const yearlyContribution = settings.contribution * settings.periodsPerYear;
 
-                const yearlyContribution = isMonthly ? baseContribution * 12 : baseContribution * 52;
-                const adjustedContribution = isInflationAdjusted
-                    ? yearlyContribution * Math.pow(1 + inflationRate, year)
+            for (let year = 0; year <= settings.years; year++) {
+                balances.push(balance);
+                if (year === settings.years) break;
+
+                const adjustedContribution = settings.isInflationAdjusted
+                    ? yearlyContribution * Math.pow(1 + settings.inflationRate, year)
                     : yearlyContribution;
 
                 balance = balance * (1 + returnRate) + adjustedContribution;
+                totalInvested += adjustedContribution;
             }
 
-            return results;
+            return { balances, totalInvested };
+        }
+
+        function recalculateScenarios() {
+            const settings = readInputs();
+            results = projectGrowth(settings, weightedReturnFor('return')).balances;
+            optimisticResults = projectGrowth(settings, weightedReturnFor('optimistic')).balances;
+            pessimisticResults = projectGrowth(settings, weightedReturnFor('pessimistic')).balances;
         }
 
         function recalculateWithoutChart() {
-            const initialCapital = parseInt(document.getElementById('initialCapital').value);
-            const baseContribution = parseInt(document.getElementById('monthlyContribution').value);
-            const isMonthly = document.getElementById('contributionFrequency').value === 'monthly';
-            const years = parseInt(document.getElementById('years').value);
-            const baseTarget = parseInt(document.getElementById('targetValue').value) || 1000000;
-            const isInflationAdjusted = document.getElementById('inflationToggle').checked;
-            const inflationRate = parseFloat(document.getElementById('inflationRate').value) / 100;
-            
-            // Calculate inflation-adjusted target
-            const target = isInflationAdjusted 
-                ? Math.round(baseTarget * Math.pow(1 + inflationRate, years))
-                : baseTarget;
-            
-            // Update inflation-adjusted target display
-            document.getElementById('inflationAdjustedTarget').textContent = isInflationAdjusted
-                ? `$${target.toLocaleString()} after ${years} years`
+            const settings = readInputs();
+
+            // Show what the target is worth in future dollars when inflation is on
+            document.getElementById('inflationAdjustedTarget').textContent = settings.isInflationAdjusted
+                ? `$${settings.target.toLocaleString()} after ${settings.years} years`
                 : '';
-            
-            // Calculate weighted return
-            let weightedReturn = Object.values(portfolioData).reduce((acc, asset) => {
-                return acc + (asset.allocation * asset.return);
-            }, 0);
-            
-            // Adjust real return for inflation if needed
-            const effectiveReturn = isInflationAdjusted 
-                ? (1 + weightedReturn) / (1 + inflationRate) - 1 
-                : weightedReturn;
-            
+
+            const weightedReturn = weightedReturnFor('return');
             document.getElementById('weightedReturn').textContent = (weightedReturn * 100).toFixed(1) + '%';
-            
-            // Calculate growth over time with inflation-adjusted contributions
-            results = [];
-            let balance = initialCapital;
-            let totalInvested = initialCapital;
 
-            // If both initial capital and contribution are 0, set all results to 0
-            if (initialCapital === 0 && baseContribution === 0) {
-                for (let year = 0; year <= years; year++) {
-                    results.push(0);
-                }
-                totalInvested = 0;
-            } else {
-                for (let year = 0; year <= years; year++) {
-                    results.push(balance);
-                    if (year === years) break;
+            const projection = projectGrowth(settings, weightedReturn);
+            results = projection.balances;
 
-                    // Calculate contribution for this year, adjusted for inflation if enabled
-                    const yearlyContribution = isMonthly ? baseContribution * 12 : baseContribution * 52;
-                    const adjustedContribution = isInflationAdjusted
-                        ? yearlyContribution * Math.pow(1 + inflationRate, year)
-                        : yearlyContribution;
+            const finalBalance = Math.round(results[results.length - 1]);
 
-                    balance = balance * (1 + effectiveReturn) + adjustedContribution;
-                    totalInvested += adjustedContribution;
-                }
-            }
-            
-            // Update stats without updating chart
-            document.getElementById('totalInvested').textContent = `$${Math.round(totalInvested).toLocaleString()}`;
-            const finalBalanceValue = `$${Math.round(results[results.length - 1]).toLocaleString()}`;
+            document.getElementById('totalInvested').textContent =
+                `$${Math.round(projection.totalInvested).toLocaleString()}`;
+            const finalBalanceValue = `$${finalBalance.toLocaleString()}`;
             document.getElementById('finalBalance').textContent = finalBalanceValue;
-            document.getElementById('yearsToTarget').textContent = years;
-            
+            document.getElementById('yearsToTarget').textContent = settings.years;
+
             // Announce final balance change for significant updates
             const prevBalance = window.lastAnnouncedBalance || 0;
-            const currentBalance = Math.round(results[results.length - 1]);
-            if (Math.abs(currentBalance - prevBalance) > 10000) {
+            if (Math.abs(finalBalance - prevBalance) > 10000) {
                 announceChange(`Final balance updated to ${finalBalanceValue}`);
-                window.lastAnnouncedBalance = currentBalance;
+                window.lastAnnouncedBalance = finalBalance;
             }
 
             // Show/hide target reached indicator
-            if (results[results.length - 1] >= target) {
+            if (finalBalance >= settings.target) {
                 showTargetReached();
             } else {
                 hideTargetReached();
             }
 
             // Update dollar value labels for asset allocations
-            updateDollarValues(initialCapital);
+            updateDollarValues(settings.initialCapital);
+            updateChartDataTable(settings);
         }
 
         function updateDollarValues(initialCapital) {
@@ -1208,6 +1243,60 @@
                 Math.round(portfolioData.defi.allocation * initialCapital).toLocaleString();
         }
 
+        function formatMoney(value) {
+            return '$' + Math.round(clampNumber(value, -1e15, 1e15, 0)).toLocaleString();
+        }
+
+        /**
+         * Mirror the chart into a visually hidden table.
+         * The chart itself is an SVG carrying role="img" and one fixed label, so a
+         * screen reader user got the caption and none of the numbers. Built with DOM
+         * calls rather than innerHTML so there is no markup injection surface.
+         */
+        function updateChartDataTable(settings) {
+            const container = document.getElementById('chartDataTable');
+            if (!container || !results.length) return;
+
+            const assets = Object.entries(portfolioData).filter(([, asset]) => asset.allocation > 0);
+
+            const table = document.createElement('table');
+            const caption = document.createElement('caption');
+            caption.textContent =
+                `Projected portfolio value by year. Starting capital ${formatMoney(settings.initialCapital)}, ` +
+                `target ${formatMoney(settings.target)}` +
+                (settings.isInflationAdjusted ? ' in future dollars.' : '.');
+            table.appendChild(caption);
+
+            const thead = document.createElement('thead');
+            const headRow = document.createElement('tr');
+            ['Year', 'Total']
+                .concat(assets.map(([key]) => key.charAt(0).toUpperCase() + key.slice(1)))
+                .forEach(text => {
+                    const th = document.createElement('th');
+                    th.scope = 'col';
+                    th.textContent = text;
+                    headRow.appendChild(th);
+                });
+            thead.appendChild(headRow);
+            table.appendChild(thead);
+
+            const tbody = document.createElement('tbody');
+            results.forEach((total, year) => {
+                const row = document.createElement('tr');
+                [String(year), formatMoney(total)]
+                    .concat(assets.map(([, asset]) => formatMoney(total * asset.allocation)))
+                    .forEach(text => {
+                        const td = document.createElement('td');
+                        td.textContent = text;
+                        row.appendChild(td);
+                    });
+                tbody.appendChild(row);
+            });
+            table.appendChild(tbody);
+
+            container.replaceChildren(table);
+        }
+
         // Performance: Debounced chart update to reduce unnecessary redraws
         const debouncedChartUpdate = debounce(updateAllocationChart, 250);
 
@@ -1215,112 +1304,140 @@
             updateAllocationChart();
         }
 
-        // Update allocation event listeners
-        const allocationSliders = ['etf', 'stocks', 'crypto', 'termDeposit', 'bond', 'defi'];
-        allocationSliders.forEach(type => {
-            const slider = document.getElementById(type + 'Allocation');
-            if (slider) {
-                slider.addEventListener('input', function() {
-                    this.focus();
-                    updateAllocationsWithoutChart();
-                });
-                slider.addEventListener('change', updateChartOnRelease);
-            }
+        // Allocation sliders drive rebalancing while dragging, and a full chart redraw
+        // on release. The source element is passed explicitly so the handler no longer
+        // depends on document.activeElement (and no longer needs a focus() workaround).
+        Object.keys(SLIDER_TO_ASSET).forEach(sliderId => {
+            const slider = document.getElementById(sliderId);
+            if (!slider) return;
+            slider.addEventListener('input', function () {
+                updateAllocationsWithoutChart(this);
+            });
+            slider.addEventListener('change', updateChartOnRelease);
         });
 
-        function copyLink() {
-            // Get all current values
+        // Short-lived status toast. Built with DOM calls, not innerHTML.
+        let activeToast = null;
+        function showToast(message) {
+            if (activeToast) activeToast.remove();
+
+            const toast = document.createElement('div');
+            toast.className = 'toast toast-center toast-bottom mb-4';
+            const alert = document.createElement('div');
+            alert.className = 'alert alert-ghost text-sm py-2 px-4';
+            const span = document.createElement('span');
+            span.textContent = message;
+            alert.appendChild(span);
+            toast.appendChild(alert);
+            document.body.appendChild(toast);
+
+            activeToast = toast;
+            setTimeout(() => {
+                toast.remove();
+                if (activeToast === toast) activeToast = null;
+            }, 1800);
+        }
+
+        // Build the shareable URL from the model, not from the DOM.
+        // The allocation sliders and portfolioData now hold the same integers, so a
+        // copied link reproduces exactly what the sender saw.
+        function buildShareUrl() {
             const params = new URLSearchParams();
-            
-            // Add portfolio settings
-            params.set('ic', document.getElementById('initialCapital').value);
-            params.set('mc', document.getElementById('monthlyContribution').value);
+
+            params.set('ic', String(Math.round(readNumber('initialCapital', 0, 500000, 100000))));
+            params.set('mc', String(Math.round(readNumber('monthlyContribution', 0, 10000, 2000))));
             params.set('cf', document.getElementById('contributionFrequency').value);
-            params.set('y', document.getElementById('years').value);
-            params.set('t', document.getElementById('targetValue').value);
-            
-            // Add inflation settings
+            params.set('y', String(Math.round(readNumber('years', 1, 30, 10))));
+            params.set('t', String(Math.round(readNumber('targetValue', 1000000, 10000000, 1000000))));
+
             params.set('inf', document.getElementById('inflationToggle').checked ? '1' : '0');
-            params.set('ir', document.getElementById('inflationRate').value);
-            
-            // Add allocations
-            params.set('etf', document.getElementById('etfAllocation').value);
-            params.set('stocks', document.getElementById('stocksAllocation').value);
-            params.set('crypto', document.getElementById('cryptoAllocation').value);
-            params.set('td', document.getElementById('termDepositAllocation').value);
-            params.set('bonds', document.getElementById('bondAllocation').value);
-            params.set('defi', document.getElementById('defiAllocation').value);
-            
-            // Add return values
-            params.set('etf_r', Math.round(portfolioData.etfs.return * 100));
-            params.set('stocks_r', Math.round(portfolioData.stocks.return * 100));
-            params.set('crypto_r', Math.round(portfolioData.crypto.return * 100));
-            params.set('td_r', Math.round(portfolioData.termDeposits.return * 100));
-            params.set('bonds_r', Math.round(portfolioData.bonds.return * 100));
-            params.set('defi_r', Math.round(portfolioData.defi.return * 100));
-            
-            // Create the full URL
-            const url = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
-            
-            // Copy to clipboard
-            navigator.clipboard.writeText(url).then(() => {
-                // Show toast notification
-                const toast = document.createElement('div');
-                toast.className = 'toast toast-center toast-bottom mb-4';
-                toast.innerHTML = `
-                    <div class="alert alert-ghost text-sm py-2 px-4">
-                        <span>Link copied</span>
-                    </div>
-                `;
-                document.body.appendChild(toast);
-                
-                // Remove toast after 1.5 seconds
-                setTimeout(() => {
-                    toast.remove();
-                }, 1500);
+            params.set('ir', String(readNumber('inflationRate', 0, 100, 3)));
+
+            const allocationParam = {
+                etfs: 'etf', stocks: 'stocks', crypto: 'crypto',
+                termDeposits: 'td', bonds: 'bonds', defi: 'defi'
+            };
+            const returnParam = {
+                etfs: 'etf_r', stocks: 'stocks_r', crypto: 'crypto_r',
+                termDeposits: 'td_r', bonds: 'bonds_r', defi: 'defi_r'
+            };
+
+            Object.entries(allocationParam).forEach(([assetKey, name]) => {
+                params.set(name, String(Math.round(portfolioData[assetKey].allocation * 100)));
             });
+            Object.entries(returnParam).forEach(([assetKey, name]) => {
+                params.set(name, String(Math.round(portfolioData[assetKey].return * 100)));
+            });
+
+            return `${window.location.origin}${window.location.pathname}?${params.toString()}`;
+        }
+
+        function copyLink() {
+            const url = buildShareUrl();
+
+            // Put the state in the address bar too, so a reload or a manual copy
+            // keeps the portfolio. Previously only the clipboard carried it.
+            try {
+                window.history.replaceState(null, '', url);
+            } catch (e) {
+                // Some sandboxed contexts block history writes; copying still works.
+            }
+
+            // navigator.clipboard is unavailable on insecure origins and can be denied.
+            // The old code had no rejection handler, so the button did nothing at all
+            // and gave no feedback.
+            if (!navigator.clipboard || !navigator.clipboard.writeText) {
+                showToast('Link is in the address bar, ready to copy');
+                return;
+            }
+
+            navigator.clipboard.writeText(url)
+                .then(() => showToast('Link copied'))
+                .catch(() => showToast('Copy blocked. Link is in the address bar'));
         }
 
         // Function to load parameters from URL
         function loadFromURL() {
             const params = new URLSearchParams(window.location.search);
             
-            // Load portfolio settings if they exist
-            if (params.has('ic')) {
-                const ic = document.getElementById('initialCapital');
-                ic.value = params.get('ic');
-                updateSliderLabel(ic, 'initialCapitalLabel', '$');
-            }
-            
-            if (params.has('mc')) {
-                const mc = document.getElementById('monthlyContribution');
-                mc.value = params.get('mc');
-                updateSliderLabel(mc, 'monthlyContributionLabel', '$');
-            }
+            // Every parameter below is attacker-supplied. Clamp each one to the same
+            // bounds as its control, and fall back to the current value when the input
+            // is missing or unparseable, so a hand-edited link cannot produce NaN.
+            const setFromParam = (name, elementId, min, max, labelId, prefix) => {
+                if (!params.has(name)) return;
+                const el = document.getElementById(elementId);
+                const current = clampNumber(el.value, min, max, min);
+                el.value = Math.round(clampNumber(params.get(name), min, max, current));
+                if (labelId) updateSliderLabel(el, labelId, prefix);
+            };
+
+            setFromParam('ic', 'initialCapital', 0, 500000, 'initialCapitalLabel', '$');
+            setFromParam('mc', 'monthlyContribution', 0, 10000, 'monthlyContributionLabel', '$');
+            setFromParam('y', 'years', 1, 30, 'yearsLabel', '');
 
             if (params.has('cf')) {
-                document.getElementById('contributionFrequency').value = params.get('cf');
-            }
-            
-            if (params.has('y')) {
-                const y = document.getElementById('years');
-                y.value = params.get('y');
-                updateSliderLabel(y, 'yearsLabel', '');
+                // Only the two options the select actually offers
+                const cf = params.get('cf');
+                if (cf === 'monthly' || cf === 'weekly') {
+                    document.getElementById('contributionFrequency').value = cf;
+                }
             }
 
             if (params.has('t')) {
                 const t = document.getElementById('targetValue');
-                t.value = params.get('t');
-                document.getElementById('targetLabel').textContent = '$' + parseInt(t.value).toLocaleString();
+                const value = Math.round(clampNumber(params.get('t'), 1000000, 10000000, 1000000));
+                t.value = value;
+                document.getElementById('targetLabel').textContent = '$' + value.toLocaleString();
             }
 
             // Load inflation settings if they exist
             if (params.has('inf')) {
                 document.getElementById('inflationToggle').checked = params.get('inf') === '1';
             }
-            
+
             if (params.has('ir')) {
-                document.getElementById('inflationRate').value = params.get('ir');
+                document.getElementById('inflationRate').value =
+                    clampNumber(params.get('ir'), 0, 100, 3);
             }
 
             // Load allocations if they exist
@@ -1334,41 +1451,25 @@
             };
 
             let hasAllocations = false;
-            let total = 0;
-            
-            // First, check if we have any allocation parameters and calculate total
+            const requested = {};
+
+            // Collect the requested percentages, each clamped to 0..100
             for (const [param, config] of Object.entries(allocations)) {
                 if (params.has(param)) {
                     hasAllocations = true;
-                    total += parseInt(params.get(param));
+                    requested[config.key] = Math.round(clampNumber(params.get(param), 0, 100, 0));
+                } else {
+                    requested[config.key] = 0;
                 }
             }
 
-            // If we have allocations, update them all
-            if (hasAllocations) {
-                // If total is not 100%, adjust proportionally
-                const adjustmentFactor = total !== 100 ? 100 / total : 1;
+            const total = Object.values(requested).reduce((sum, v) => sum + v, 0);
 
-                // Set all allocations from URL and adjust if needed
-                for (const [param, config] of Object.entries(allocations)) {
-                    let value = params.has(param) ? parseInt(params.get(param)) : 0;
-                    if (total !== 100) {
-                        value = Math.round(value * adjustmentFactor);
-                    }
-                    
-                    // Update slider value
-                    const slider = document.getElementById(config.id);
-                    slider.value = value.toString();
-                    
-                    // Update portfolio data
-                    portfolioData[config.key].allocation = value / 100;
-                    
-                    // Update label
-                    const label = document.getElementById(config.label);
-                    if (label) {
-                        label.textContent = value.toString();
-                    }
-                }
+            // A link where every allocation is zero (or all of them unparseable) used to
+            // divide by zero here, producing Infinity and then NaN allocations. Skip the
+            // rescale in that case and keep the page defaults.
+            if (hasAllocations && total > 0) {
+                applyAllocationPercents(normalizeToHundred(requested));
             }
 
             // Load return values if they exist
@@ -1381,26 +1482,15 @@
                 'defi_r': 'defi'
             };
             
-            let hasCustomReturns = false;
-            
-            // Update return values from URL
+            // Update return values from URL, bounded to the same range the editors allow
             for (const [param, assetKey] of Object.entries(returnParams)) {
-                if (params.has(param)) {
-                    hasCustomReturns = true;
-                    const returnValue = parseInt(params.get(param)) / 100;
-                    portfolioData[assetKey].return = returnValue;
-                    
-                    // Update display elements
-                    document.querySelectorAll(`.return-display[data-asset="${assetKey}"]`).forEach(display => {
-                        const prefix = returnValue >= 0 ? '↑' : '↓';
-                        display.textContent = `${prefix}${Math.abs(returnValue * 100)}%`;
-                    });
-                    
-                    // Update editor elements
-                    document.querySelectorAll(`.return-editor[data-asset="${assetKey}"]`).forEach(editor => {
-                        editor.value = Math.round(returnValue * 100);
-                    });
-                }
+                if (!params.has(param)) continue;
+                const fallbackPct = Math.round(portfolioData[assetKey].return * 100);
+                const percent = Math.round(
+                    clampNumber(params.get(param), RETURN_MIN_PCT, RETURN_MAX_PCT, fallbackPct)
+                );
+                portfolioData[assetKey].return = percent / 100;
+                renderReturn(assetKey, percent);
             }
             
             // Recalculate everything
@@ -1415,43 +1505,26 @@
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             // Check if the toast has been permanently dismissed previously
-            if (localStorage.getItem('targetToastDismissed') === 'true') {
-                targetToastPermanentlyDismissed = true;
+            try {
+                if (localStorage.getItem('targetToastDismissed') === 'true') {
+                    targetToastPermanentlyDismissed = true;
+                }
+            } catch (e) {
+                // Storage blocked; the toast simply stays available this session.
             }
-            
+
             // Reset the session notification flag on page load
             targetNotificationShownThisSession = false;
-            
-            // Reset isFirstRender flag to true on page load
-            isFirstRender = true;
-            
+
             loadFromURL();
-            const target = parseInt(document.getElementById('targetValue').value);
-            document.getElementById('targetReachedMessage').textContent = `$${target.toLocaleString()} Target Within Reach!`;
-            
+
+            const target = Math.round(readNumber('targetValue', 1000000, 10000000, 1000000));
+            document.getElementById('targetReachedMessage').textContent =
+                `$${target.toLocaleString()} Target Within Reach!`;
+
             // Calculate initial values
             recalculateWithoutChart();
 
-            // Performance: Create chart with optimized settings
-            const options = {
-                chart: {
-                    animations: {
-                        enabled: false, // Performance: Disable animations for faster rendering
-                        easing: 'easeinout',
-                        speed: 800,
-                        animateGradually: {
-                            enabled: false,
-                            delay: 150
-                        },
-                        dynamicAnimation: {
-                            enabled: false,
-                            speed: 350
-                        }
-                    }
-                }
-            };
-            
-            // Force animation on first render only
             if (!stackedChart) {
                 updateAllocationChart();
             }
@@ -1472,23 +1545,29 @@
             targetValue: '1000000'
         };
 
-        // Function to reset a slider to its initial value
+        // Double-click a slider to put it back to its starting value
         function resetSlider(event) {
             const slider = event.target;
             const initialValue = initialValues[slider.id];
-            if (initialValue) {
-                slider.value = initialValue;
-                if (slider.id === 'targetValue') {
-                    document.getElementById('targetLabel').textContent = '$' + parseInt(initialValue).toLocaleString();
-                } else if (slider.id.includes('Allocation')) {
-                    updateLabel(slider, slider.id.replace('Allocation', 'Label'));
-                } else {
-                    const labelId = slider.id + 'Label';
-                    updateSliderLabel(slider, labelId, slider.id === 'initialCapital' || slider.id === 'monthlyContribution' ? '$' : '');
-                }
-                recalculateWithoutChart();
-                updateAllocationChart();
+            if (initialValue === undefined) return;
+
+            slider.value = initialValue;
+
+            if (SLIDER_TO_ASSET[slider.id]) {
+                // Allocations always total 100%, so restoring one slider means the
+                // others absorb the difference. Pass the element explicitly.
+                updateAllocationsWithoutChart(slider);
+            } else if (slider.id === 'targetValue') {
+                document.getElementById('targetLabel').textContent =
+                    '$' + parseInt(initialValue, 10).toLocaleString();
+            } else {
+                const prefix = (slider.id === 'initialCapital' || slider.id === 'monthlyContribution') ? '$' : '';
+                updateSliderLabel(slider, slider.id + 'Label', prefix);
             }
+
+            checkContributionsChanged();
+            recalculateWithoutChart();
+            updateAllocationChart();
         }
 
         // Add double-click listeners to all sliders
@@ -1496,99 +1575,51 @@
             slider.addEventListener('dblclick', resetSlider);
         });
 
-        // Update target chart immediately when target changes
-        document.getElementById('targetValue').addEventListener('input', function() {
-            const target = parseInt(this.value);
+        // Target slider.
+        // recalculateWithoutChart owns the target-reached decision, so the toast can no
+        // longer disagree with the stats card. It also used to compare against the raw
+        // target while the card compared against the inflation-adjusted one.
+        const targetSlider = document.getElementById('targetValue');
+        targetSlider.addEventListener('input', function () {
+            const target = Math.round(clampNumber(this.value, 1000000, 10000000, 1000000));
             document.getElementById('targetLabel').textContent = '$' + target.toLocaleString();
-            
-            // Update chart
-            updateAllocationChart();
-            
-            // Update target reached indicator with animation
-            if (results[results.length - 1] >= target) {
-                document.getElementById('targetReachedMessage').textContent = `$${target.toLocaleString()} Target Within Reach!`;
-                showTargetReached();
-            } else {
-                hideTargetReached();
-            }
+            document.getElementById('targetReachedMessage').textContent =
+                `$${target.toLocaleString()} Target Within Reach!`;
+            recalculateWithoutChart();
+            debouncedChartUpdate();
         });
+        targetSlider.addEventListener('change', updateChartOnRelease);
 
-        // Function to check if allocations or returns have changed from default
+        // Function to check if allocations or returns have changed from default.
+        // Compares whole percentages so floating point noise cannot leave the reset
+        // button stuck visible after a reset.
         function checkAllocationsChanged() {
-            const hasAllocationsChanged = 
-                portfolioData.etfs.allocation !== 0.35 ||
-                portfolioData.stocks.allocation !== 0.00 ||
-                portfolioData.crypto.allocation !== 0.35 ||
-                portfolioData.termDeposits.allocation !== 0.15 ||
-                portfolioData.bonds.allocation !== 0.10 ||
-                portfolioData.defi.allocation !== 0.05;
-                
-            const hasReturnsChanged = 
-                portfolioData.etfs.return !== initialReturns.etfs ||
-                portfolioData.stocks.return !== initialReturns.stocks ||
-                portfolioData.crypto.return !== initialReturns.crypto ||
-                portfolioData.termDeposits.return !== initialReturns.termDeposits ||
-                portfolioData.bonds.return !== initialReturns.bonds ||
-                portfolioData.defi.return !== initialReturns.defi;
+            const allocationsChanged = Object.entries(DEFAULT_ALLOCATION_PCT).some(
+                ([assetKey, percent]) => Math.round(portfolioData[assetKey].allocation * 100) !== percent
+            );
 
-            document.getElementById('resetButton').classList.toggle('hidden', !(hasAllocationsChanged || hasReturnsChanged));
+            const returnsChanged = Object.entries(initialReturns).some(
+                ([assetKey, rate]) =>
+                    Math.round(portfolioData[assetKey].return * 100) !== Math.round(rate * 100)
+            );
+
+            document.getElementById('resetButton')
+                .classList.toggle('hidden', !(allocationsChanged || returnsChanged));
         }
 
-        // Function to reset allocations to default values
+        // Function to reset allocations and returns to default values
         function resetAllocations() {
-            // Reset portfolio data allocations
-            portfolioData.etfs.allocation = 0.35;
-            portfolioData.stocks.allocation = 0.00;
-            portfolioData.crypto.allocation = 0.35;
-            portfolioData.termDeposits.allocation = 0.15;
-            portfolioData.bonds.allocation = 0.10;
-            portfolioData.defi.allocation = 0.05;
-            
-            // Also reset the return values
-            portfolioData.etfs.return = initialReturns.etfs;
-            portfolioData.stocks.return = initialReturns.stocks;
-            portfolioData.crypto.return = initialReturns.crypto;
-            portfolioData.termDeposits.return = initialReturns.termDeposits;
-            portfolioData.bonds.return = initialReturns.bonds;
-            portfolioData.defi.return = initialReturns.defi;
-            
-            // Update all return display elements
-            document.querySelectorAll('.return-display').forEach(display => {
-                const assetKey = display.dataset.asset;
-                const returnValue = portfolioData[assetKey].return;
-                const prefix = returnValue >= 0 ? '↑' : '↓';
-                display.textContent = `${prefix}${Math.abs(returnValue * 100)}%`;
-            });
-            
-            // Update all return editor elements
-            document.querySelectorAll('.return-editor').forEach(editor => {
-                const assetKey = editor.dataset.asset;
-                editor.value = Math.round(portfolioData[assetKey].return * 100);
-            });
-            
-            // Reset sliders and labels
-            document.getElementById('etfAllocation').value = '35';
-            document.getElementById('stocksAllocation').value = '0';
-            document.getElementById('cryptoAllocation').value = '35';
-            document.getElementById('termDepositAllocation').value = '15';
-            document.getElementById('bondAllocation').value = '10';
-            document.getElementById('defiAllocation').value = '5';
+            applyAllocationPercents({ ...DEFAULT_ALLOCATION_PCT });
 
-            // Update all labels
-            updateLabel(document.getElementById('etfAllocation'), 'etfLabel');
-            updateLabel(document.getElementById('stocksAllocation'), 'stocksLabel');
-            updateLabel(document.getElementById('cryptoAllocation'), 'cryptoLabel');
-            updateLabel(document.getElementById('termDepositAllocation'), 'termDepositLabel');
-            updateLabel(document.getElementById('bondAllocation'), 'bondLabel');
-            updateLabel(document.getElementById('defiAllocation'), 'defiLabel');
+            Object.entries(initialReturns).forEach(([assetKey, rate]) => {
+                const percent = Math.round(rate * 100);
+                portfolioData[assetKey].return = percent / 100;
+                renderReturn(assetKey, percent);
+            });
 
-            // Hide reset button
             document.getElementById('resetButton').classList.add('hidden');
-            
-            // Hide allocation warning
             document.getElementById('allocationWarning').style.display = 'none';
-            
-            // Recalculate and update the chart
+
             recalculateWithoutChart();
             updateAllocationChart();
         }
@@ -1660,210 +1691,203 @@
                 `$${target.toLocaleString()} Target Within Reach!`;
         }
 
+        // Hide the toast for now. The recalculation path calls this every time the
+        // projection falls below target, so it must not persist anything.
         function hideTargetReached() {
             const toast = document.getElementById('targetReached');
-            toast.classList.add('hidden');
+            if (toast) toast.classList.add('hidden');
         }
 
-        // Determine how many years remain to reach the investment target
+        // Hide the toast and remember that choice across reloads.
+        // Only the Dismiss button calls this.
+        function dismissTargetReached() {
+            hideTargetReached();
+            targetToastPermanentlyDismissed = true;
+            try {
+                localStorage.setItem('targetToastDismissed', 'true');
+            } catch (e) {
+                // Storage can be blocked (private mode, cookie settings).
+                // The in-memory flag still suppresses the toast for this session.
+            }
+        }
+
+        /**
+         * Years until the target is reached, using the same nominal model as the stats
+         * card and the chart series.
+         *
+         * With inflation on, the target grows each year alongside the balance, so this
+         * answers "when do I hold the equivalent of $X in today's money". The old code
+         * raced a flat-contribution balance against a target frozen at the slider
+         * horizon, and used a return rate the stats card had already discounted, so the
+         * title and the card disagreed whenever inflation was enabled.
+         */
         function calculateYearsUntilTarget() {
-            const baseTarget = parseInt(document.getElementById('targetValue').value);
-            const finalBalance = results[results.length - 1];
-            const isInflationAdjusted = document.getElementById('inflationToggle').checked;
-            const years = parseInt(document.getElementById('years').value);
-            const inflationRate = parseFloat(document.getElementById('inflationRate').value) / 100;
-            
-            // Calculate inflation adjusted target
-            const inflationAdjustedTarget = isInflationAdjusted 
-                ? Math.round(baseTarget * Math.pow(1 + inflationRate, years))
-                : baseTarget;
-            
-            // Create mobile-friendly title
+            const settings = readInputs();
             const isMobile = window.innerWidth < 768;
-            const targetDisplay = isInflationAdjusted 
+
+            const targetDisplay = settings.isInflationAdjusted
                 ? isMobile
-                    ? `$${baseTarget.toLocaleString()}\n(adj: $${inflationAdjustedTarget.toLocaleString()})`
-                    : `$${baseTarget.toLocaleString()} (inflation adjusted to $${inflationAdjustedTarget.toLocaleString()})`
-                : `$${baseTarget.toLocaleString()}`;
-            
-            if (!finalBalance || finalBalance === 0) {
-                return `∞ years to ${targetDisplay}`;
+                    ? `$${settings.baseTarget.toLocaleString()}\n(adj: $${settings.target.toLocaleString()})`
+                    : `$${settings.baseTarget.toLocaleString()} (inflation adjusted to $${settings.target.toLocaleString()})`
+                : `$${settings.baseTarget.toLocaleString()}`;
+
+            const returnRate = weightedReturnFor('return');
+            const yearlyContribution = settings.contribution * settings.periodsPerYear;
+            const MAX_YEARS = 100;
+
+            let balance = settings.initialCapital;
+            let year = 0;
+
+            while (year < MAX_YEARS) {
+                const targetThisYear = settings.isInflationAdjusted
+                    ? settings.baseTarget * Math.pow(1 + settings.inflationRate, year)
+                    : settings.baseTarget;
+                if (balance >= targetThisYear) break;
+
+                const contribution = settings.isInflationAdjusted
+                    ? yearlyContribution * Math.pow(1 + settings.inflationRate, year)
+                    : yearlyContribution;
+
+                balance = balance * (1 + returnRate) + contribution;
+                year++;
             }
-            
-            // Calculate compound growth rate needed
-            const initialCapital = parseInt(document.getElementById('initialCapital').value);
-            const monthlyContribution = parseInt(document.getElementById('monthlyContribution').value);
-            const isMonthly = document.getElementById('contributionFrequency').value === 'monthly';
-            const annualContribution = isMonthly ? monthlyContribution * 12 : monthlyContribution * 52;
-            
-            // Calculate weighted return
-            let weightedReturn = Object.values(portfolioData).reduce((acc, asset) => {
-                return acc + (asset.allocation * asset.return);
-            }, 0);
-            
-            if (weightedReturn <= 0) {
-                return `∞ years to ${targetDisplay}`;
-            }
-            
-            // Calculate years needed using compound interest formula with regular contributions
-            let yearsToTarget = 0;
-            let balance = initialCapital;
-            while (balance < inflationAdjustedTarget && yearsToTarget < 100) {
-                balance = balance * (1 + weightedReturn) + annualContribution;
-                yearsToTarget++;
-            }
-            
-            return yearsToTarget >= 100 
+
+            return year >= MAX_YEARS
                 ? `∞ years to ${targetDisplay}`
-                : `${yearsToTarget} years to ${targetDisplay}`;
+                : `${year} ${year === 1 ? 'year' : 'years'} to ${targetDisplay}`;
         }
 
-        // Add event listeners to all inputs
-        document.getElementById('initialCapital').addEventListener('input', recalculateWithoutChart);
-        document.getElementById('monthlyContribution').addEventListener('input', recalculateWithoutChart);
-        document.getElementById('years').addEventListener('input', recalculateWithoutChart);
+        // Contribution sliders.
+        // Their inline oninput already calls updateSliderLabel, which recalculates the
+        // stats. Registering recalculateWithoutChart here as well ran the whole
+        // projection twice per pointer move, so only the chart work is wired up:
+        // debounced while dragging, once more on release.
+        ['initialCapital', 'monthlyContribution', 'years'].forEach(id => {
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.addEventListener('input', debouncedChartUpdate);
+            el.addEventListener('input', checkContributionsChanged);
+            el.addEventListener('change', updateChartOnRelease);
+        });
 
-        // Add mouseup/touchend listeners for chart updates  
-        document.getElementById('initialCapital').addEventListener('change', updateChartOnRelease);
-        document.getElementById('monthlyContribution').addEventListener('change', updateChartOnRelease);
-        document.getElementById('years').addEventListener('change', updateChartOnRelease);
-
-        // Performance: Use debounced updates for frequent input events
-        document.getElementById('initialCapital').addEventListener('input', debouncedChartUpdate);
-        document.getElementById('monthlyContribution').addEventListener('input', debouncedChartUpdate);
-        document.getElementById('years').addEventListener('input', debouncedChartUpdate);
-
-        // Add function to update labels
-        function updateLabel(slider, labelId) {
-            if (!slider || !labelId) return;
-
-            // Update the changed slider's label
-            const label = document.getElementById(labelId);
-            if (label) {
-                label.textContent = slider.value;
-            }
-            
-            // Get initial capital for dollar value calculations
-            const initialCapital = parseInt(document.getElementById('initialCapital').value) || 0;
-            
-            // Update dollar value labels
-            const valueLabels = {
-                'etfLabel': 'etfValue',
-                'stocksLabel': 'stocksValue',
-                'cryptoLabel': 'cryptoValue',
-                'termDepositLabel': 'termDepositValue',
-                'bondLabel': 'bondValue',
-                'defiLabel': 'defiValue'
-            };
-
-            const currentValueLabel = valueLabels[labelId];
-            if (currentValueLabel) {
-                const valueElement = document.getElementById(currentValueLabel);
-                if (valueElement) {
-                    const allocation = parseFloat(slider.value) / 100;
-                    valueElement.textContent = Math.round(allocation * initialCapital).toLocaleString();
-                }
-            }
-
-            // Update allocations without updating chart
-            updateAllocationsWithoutChart();
-        }
-
-        // Add updateSliderLabel function
+        // Update a contribution slider's bracketed label, then refresh the stats.
+        // applyAllocationPercents handles the allocation labels, so the old updateLabel
+        // helper (which also re-triggered rebalancing, doubling the work per event)
+        // is gone.
         function updateSliderLabel(slider, labelId, prefix) {
-            const value = parseInt(slider.value).toLocaleString();
-            document.getElementById(labelId).textContent = `(${prefix}${value})`;
+            const label = document.getElementById(labelId);
+            if (!slider || !label) return;
+            const value = Math.round(clampNumber(slider.value, -1e12, 1e12, 0));
+            label.textContent = `(${prefix}${value.toLocaleString()})`;
             recalculateWithoutChart();
         }
 
-        function updateAllocationsWithoutChart() {
-            // Get values from sliders
-            const etfAlloc = parseFloat(document.getElementById('etfAllocation').value) / 100;
-            const stocksAlloc = parseFloat(document.getElementById('stocksAllocation').value) / 100;
-            const cryptoAlloc = parseFloat(document.getElementById('cryptoAllocation').value) / 100;
-            const termDepAlloc = parseFloat(document.getElementById('termDepositAllocation').value) / 100;
-            const bondAlloc = parseFloat(document.getElementById('bondAllocation').value) / 100;
-            const defiAlloc = parseFloat(document.getElementById('defiAllocation').value) / 100;
+        /**
+         * Scale a set of integer percentages so they sum to exactly 100.
+         *
+         * `lockedKey` keeps one slider at the value the user just chose and spreads the
+         * remainder across the rest, in proportion to where they already sit. Largest
+         * remainder distribution means the visible numbers add up to 100 exactly.
+         *
+         * The old code wrote rounded values to the sliders but stored unrounded floats
+         * in portfolioData. The two drifted, so the "must equal 100%" warning could
+         * never fire, and a copied link did not reproduce the sender's portfolio.
+         */
+        function normalizeToHundred(percents, lockedKey) {
+            const keys = Object.keys(percents);
+            const locked = lockedKey && keys.includes(lockedKey) ? lockedKey : null;
+            const lockedValue = locked ? Math.round(clampNumber(percents[locked], 0, 100, 0)) : 0;
+            const others = keys.filter(key => key !== locked);
+            const budget = 100 - lockedValue;
 
-            // Get the currently changed input
-            const activeElement = document.activeElement;
-            if (!activeElement || !activeElement.id) return;
+            const result = {};
+            if (locked) result[locked] = lockedValue;
 
-            // Map of slider IDs to portfolio data keys
-            const sliderToPortfolioMap = {
-                'etfAllocation': 'etfs',
-                'stocksAllocation': 'stocks',
-                'cryptoAllocation': 'crypto',
-                'termDepositAllocation': 'termDeposits',
-                'bondAllocation': 'bonds',
-                'defiAllocation': 'defi'
-            };
-
-            // Only proceed if we're dealing with an allocation slider
-            if (!sliderToPortfolioMap[activeElement.id]) return;
-
-            const activeValue = parseFloat(activeElement.value) / 100;
-            const activeKey = sliderToPortfolioMap[activeElement.id];
-
-            // Create array of other allocations
-            const otherSliders = Object.entries(sliderToPortfolioMap)
-                .filter(([sliderId]) => sliderId !== activeElement.id)
-                .map(([sliderId, portfolioKey]) => ({
-                    sliderId,
-                    portfolioKey,
-                    value: parseFloat(document.getElementById(sliderId).value) / 100
-                }));
-
-            const totalOthers = otherSliders.reduce((sum, { value }) => sum + value, 0);
-
-            if (activeValue === 1.0) {
-                // If active slider is at 100%, set all others to 0
-                portfolioData[activeKey].allocation = 1.0;
-                otherSliders.forEach(({ sliderId, portfolioKey }) => {
-                    document.getElementById(sliderId).value = "0";
-                    portfolioData[portfolioKey].allocation = 0;
-                });
-            } else if (totalOthers > 0) {
-                // Adjust other non-zero allocations proportionally
-                const remainingTotal = 1.0 - activeValue;
-                const adjustmentFactor = remainingTotal / totalOthers;
-
-                portfolioData[activeKey].allocation = activeValue;
-                otherSliders.forEach(({ sliderId, portfolioKey, value }) => {
-                    const newValue = value * adjustmentFactor;
-                    document.getElementById(sliderId).value = (newValue * 100).toFixed(0);
-                    portfolioData[portfolioKey].allocation = newValue;
-                });
-            } else {
-                // If all others are 0, distribute remaining percentage evenly
-                const remainingValue = 1.0 - activeValue;
-                const evenShare = remainingValue / (otherSliders.length || 1); // Prevent division by zero
-
-                portfolioData[activeKey].allocation = activeValue;
-                otherSliders.forEach(({ sliderId, portfolioKey }) => {
-                    document.getElementById(sliderId).value = (evenShare * 100).toFixed(0);
-                    portfolioData[portfolioKey].allocation = evenShare;
-                });
+            if (budget <= 0 || others.length === 0) {
+                others.forEach(key => { result[key] = 0; });
+                return result;
             }
 
-            // Show warning if total allocation is not 100%
-            const totalAllocation = Object.values(portfolioData)
-                .reduce((sum, asset) => sum + asset.allocation, 0);
-            
-            document.getElementById('allocationWarning').style.display = 
-                Math.abs(totalAllocation - 1.0) > 0.001 ? 'block' : 'none';
+            const otherTotal = others.reduce(
+                (sum, key) => sum + Math.max(0, clampNumber(percents[key], 0, 100, 0)), 0);
 
-            // Update all labels to reflect new values
-            Object.entries(sliderToPortfolioMap).forEach(([sliderId, portfolioKey]) => {
-                const label = document.getElementById(sliderId.replace('Allocation', 'Label'));
-                if (label) {
-                    label.textContent = (portfolioData[portfolioKey].allocation * 100).toFixed(0);
-                }
+            // Spread evenly when every other slider sits at zero
+            const exact = {};
+            others.forEach(key => {
+                const value = Math.max(0, clampNumber(percents[key], 0, 100, 0));
+                exact[key] = otherTotal > 0
+                    ? (value / otherTotal) * budget
+                    : budget / others.length;
             });
 
-            // Check if allocations have changed from default
-            checkAllocationsChanged();
+            let assigned = 0;
+            others.forEach(key => {
+                result[key] = Math.floor(exact[key]);
+                assigned += result[key];
+            });
 
+            const byRemainder = others
+                .map(key => ({ key, remainder: exact[key] - Math.floor(exact[key]) }))
+                .sort((a, b) => b.remainder - a.remainder);
+
+            let leftover = budget - assigned;
+            for (let i = 0; i < byRemainder.length && leftover > 0; i++, leftover--) {
+                result[byRemainder[i].key] += 1;
+            }
+
+            return result;
+        }
+
+        // Write integer percentages to the sliders, the model and the labels together,
+        // so all three always agree.
+        function applyAllocationPercents(percents) {
+            Object.entries(percents).forEach(([assetKey, percent]) => {
+                const sliderId = ASSET_TO_SLIDER[assetKey];
+                if (!sliderId || !portfolioData[assetKey]) return;
+
+                const slider = document.getElementById(sliderId);
+                if (slider) slider.value = String(percent);
+
+                portfolioData[assetKey].allocation = percent / 100;
+
+                const label = document.getElementById(sliderId.replace('Allocation', 'Label'));
+                if (label) label.textContent = String(percent);
+            });
+        }
+
+        // Read the current slider positions as integer percentages
+        function readAllocationPercents() {
+            const percents = {};
+            Object.entries(SLIDER_TO_ASSET).forEach(([sliderId, assetKey]) => {
+                const slider = document.getElementById(sliderId);
+                percents[assetKey] = Math.round(clampNumber(slider && slider.value, 0, 100, 0));
+            });
+            return percents;
+        }
+
+        /**
+         * Rebalance the other sliders after one of them moved.
+         * `sourceSlider` is the element the event fired on. The old code inferred this
+         * from document.activeElement, which meant programmatic changes silently
+         * skipped rebalancing and needed a focus() call as a workaround.
+         */
+        function updateAllocationsWithoutChart(sourceSlider) {
+            const slider = sourceSlider && SLIDER_TO_ASSET[sourceSlider.id]
+                ? sourceSlider
+                : (document.activeElement && SLIDER_TO_ASSET[document.activeElement.id]
+                    ? document.activeElement
+                    : null);
+            if (!slider) return;
+
+            const activeKey = SLIDER_TO_ASSET[slider.id];
+            applyAllocationPercents(normalizeToHundred(readAllocationPercents(), activeKey));
+
+            const totalPercent = Object.values(SLIDER_TO_ASSET)
+                .reduce((sum, key) => sum + Math.round(portfolioData[key].allocation * 100), 0);
+            document.getElementById('allocationWarning').style.display =
+                totalPercent === 100 ? 'none' : 'block';
+
+            checkAllocationsChanged();
             recalculateWithoutChart();
         }
 
@@ -1900,9 +1924,7 @@
         }
 
         // Add change detection to contribution inputs
-        document.getElementById('initialCapital').addEventListener('input', checkContributionsChanged);
-        document.getElementById('monthlyContribution').addEventListener('input', checkContributionsChanged);
-        document.getElementById('years').addEventListener('input', checkContributionsChanged);
+        // The three sliders are wired above; the frequency select is the remaining one.
         document.getElementById('contributionFrequency').addEventListener('change', checkContributionsChanged);
 
         // Function to show the editor when clicking on the return display
@@ -1929,40 +1951,62 @@
             }
         }
 
-        // Function to update the return value when editor loses focus
+        // Bounds for a hand-entered expected return, in percent.
+        // Mirrors the min/max on the number inputs.
+        const RETURN_MIN_PCT = -100;
+        const RETURN_MAX_PCT = 1000;
+
+        // Write a return percentage to both the display span and its editor input.
+        function renderReturn(assetKey, percent) {
+            const prefix = percent >= 0 ? '↑' : '↓';
+            const assetName = assetKey.charAt(0).toUpperCase() + assetKey.slice(1);
+            const sign = percent >= 0 ? 'positive' : 'negative';
+            const text = `${prefix}${Math.abs(percent)}%`;
+
+            document.querySelectorAll(`.return-display[data-asset="${assetKey}"]`).forEach(display => {
+                display.textContent = text;
+                display.setAttribute(
+                    'aria-label',
+                    `${assetName} expected return: ${sign} ${Math.abs(percent)} percent, click to edit`
+                );
+            });
+            document.querySelectorAll(`.return-editor[data-asset="${assetKey}"]`).forEach(editor => {
+                editor.value = percent;
+            });
+
+            return text;
+        }
+
+        // Function to update the return value when editor loses focus.
+        // An empty or unparseable entry keeps the previous value instead of
+        // writing NaN into the portfolio and killing every downstream number.
         function updateReturnValue(editorElement) {
             const assetKey = editorElement.dataset.asset;
-            const newReturnValue = parseFloat(editorElement.value) / 100;
-            
-            // Update the portfolio data
-            if (portfolioData[assetKey]) {
-                portfolioData[assetKey].return = newReturnValue;
-                
-                // Find and update the display element
-                const displayElement = editorElement.parentNode.querySelector('.return-display');
-                const prefix = newReturnValue >= 0 ? '↑' : '↓';
-                const returnText = `${prefix}${Math.abs(editorElement.value)}%`;
-                displayElement.textContent = returnText;
-                
-                // Update ARIA label
-                const assetName = assetKey.charAt(0).toUpperCase() + assetKey.slice(1);
-                const sign = newReturnValue >= 0 ? 'positive' : 'negative';
-                displayElement.setAttribute('aria-label', `${assetName} expected return: ${sign} ${Math.abs(editorElement.value)} percent, click to edit`);
-                
-                // Hide the editor and show the display
-                editorElement.classList.add('hidden');
-                displayElement.classList.remove('hidden');
-                
-                // Announce the change
-                announceChange(`${assetName} return updated to ${returnText}`);
-                
-                // Check if returns have changed from default and show reset button
-                checkAllocationsChanged();
-                
-                // Recalculate and update the chart
-                recalculateWithoutChart();
-                updateAllocationChart();
-            }
+            if (!portfolioData[assetKey]) return;
+
+            const previousPct = Math.round(portfolioData[assetKey].return * 100);
+            const percent = Math.round(
+                clampNumber(editorElement.value, RETURN_MIN_PCT, RETURN_MAX_PCT, previousPct)
+            );
+
+            portfolioData[assetKey].return = percent / 100;
+
+            const returnText = renderReturn(assetKey, percent);
+            const assetName = assetKey.charAt(0).toUpperCase() + assetKey.slice(1);
+
+            // Hide the editor and show the display
+            const displayElement = editorElement.parentNode.querySelector('.return-display');
+            editorElement.classList.add('hidden');
+            if (displayElement) displayElement.classList.remove('hidden');
+
+            announceChange(`${assetName} return updated to ${returnText}`);
+
+            // Check if returns have changed from default and show reset button
+            checkAllocationsChanged();
+
+            // Recalculate and update the chart
+            recalculateWithoutChart();
+            updateAllocationChart();
         }
 
         // Handle enter and escape keys in the editor
@@ -1994,7 +2038,7 @@
                     <button class="btn btn-sm btn-sky" onclick="copyLink()">
                         Share this page
                     </button>
-                    <button class="btn btn-sm btn-ghost" onclick="hideTargetReached()">
+                    <button class="btn btn-sm btn-ghost" onclick="dismissTargetReached()">
                         Dismiss
                     </button>
                 </div>
